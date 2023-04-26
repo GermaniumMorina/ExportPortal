@@ -1,0 +1,94 @@
+.form-div {
+  border: 2px solid rgba(0, 0, 0, 0.282);
+  border-radius: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 40px;
+  margin-top: 70px;
+  padding-bottom: 70px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+h2 {
+  padding-bottom: 20px;
+  float: left;
+}
+.forgot-password {
+  float: right;
+  padding: 5px;
+  font-size: 12px !important;
+}
+.sign-up-prompt {
+  text-align: center;
+  padding: 5px;
+  margin-top: 15px;
+  font-size: 13px !important;
+}
+
+.sign-in-button {
+  margin-top: 20px;
+  border-radius: 50px !important;
+  width: 100%;
+}
+
+.activate-button {
+  margin-top: 10px;
+  border-radius: 50px !important;
+  width: 70%;
+}
+
+@media only screen and (max-width: 650px) {
+  .form-div {
+    width: fit-content;
+    border: 2px solid rgba(0, 0, 0, 0.282);
+    border-radius: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 40px;
+    margin-top: 120px;
+    padding-bottom: 70px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .form-div {
+    width: fit-content;
+    border: 2px solid rgba(0, 0, 0, 0.282);
+    border-radius: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 40px;
+    margin-top: 120px;
+    padding-bottom: 70px;
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .form-div {
+    width: 90%;
+    border: 2px solid rgba(0, 0, 0, 0.282);
+    border-radius: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 40px;
+    margin-top: 120px;
+    padding-bottom: 70px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .form-div {
+    width: 95%;
+    border: 2px solid rgba(0, 0, 0, 0.282);
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 40px;
+    margin-top: 90px;
+    padding-bottom: 70px;
+    text-align: center;
+  }
+}
