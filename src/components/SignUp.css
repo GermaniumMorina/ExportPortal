@@ -1,0 +1,17 @@
+.sign-up-button{
+    margin-top: 20px;
+    border-radius: 50px !important;
+    width: 100%;
+
+}
+.ReCAPTCHA{
+ display: flex;
+ justify-content: center;
+
+}
+.gender{
+  margin-right: 30px;
+}
+#form{
+  border-radius: 20px ;
+}
