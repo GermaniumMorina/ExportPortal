@@ -1,0 +1,96 @@
+  /* Hide the default file input styles */
+  input[type="file"] {
+    display: none;
+  }
+
+  /* Style the custom file input button */
+  .custom-file-input {
+    display: inline-block;
+    background-color: #427bd1bb;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* Style the file name label */
+  .file-name {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .add-new-company-form-div{
+ 
+    border: 2px solid rgba(0, 0, 0, 0.282);
+    border-radius: 20px;
+   padding-left: 60px;
+   padding-right: 60px;
+    padding-top: 40px;
+    margin-top: 70px;
+    padding-bottom: 70px;
+ margin-bottom: 40px;
+}
+
+#add-new-company-base{
+    width:40%;
+}
+h2{ 
+    padding-bottom: 20px;
+    float: left;
+}
+.form-checkbox{
+    padding-left: 25px;
+    float: left;
+}
+
+
+
+
+.submit-button{
+    margin-top: 20px;
+    border-radius: 50px !important;
+    width: 100%;
+
+}
+
+
+
+@media only screen and (max-width: 800px) {
+       
+#add-new-company-base{
+    width:80%;
+}
+            
+  }  
+
+  @media only screen and (max-width: 350px) {
+
+    #add-new-company-base{
+        width:90%;
+    }
+    .add-new-company-form-div{
+ 
+        border: 2px solid rgba(0, 0, 0, 0.282);
+        border-radius: 20px;
+       padding-left: 20px;
+       padding-right: 20px;
+     
+    }
+    
+      
+}  
+@media only screen and (max-width: 1000px) {
+
+    #add-new-company-base{
+        width:60%;
+    }
+      
+}  
+
+@media only screen and (max-width: 600px) {
+
+    #add-new-company-base{
+        width:95%;
+    }
+      
+}  
