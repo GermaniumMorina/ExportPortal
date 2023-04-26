@@ -9,7 +9,7 @@ const Import = () => {
         <div>Buying Request</div>
         <div>Add request free</div>
       </div>
-      s
+
       <div>
         {importItems.map((importItem) => {
           return (
