@@ -5,65 +5,58 @@ import "./SignIn.css";
 
 import { Link } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./checkIfLoggedIn";
 
 export const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [, setList] = useState([]);
+let token = null;
+  const getCSRFToken = async () => {
+    await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+  
+    token = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('XSRF-TOKEN'))
+    .split('=')[1];
+  
+  localStorage.setItem('token', token);
+  
 
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8000/api/users")
-  //     .then((response) => {
-  //       setList(response.data);
-  //       console.log(response);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-//     // Get CSRF token
-//     const token = await axios.get("http://localhost:8000/sanctum/csrf-cookie");
-// const csrfToken = token.data;
-
-
-    // Extract token from response
-
-    // Send login request
-    const data = ({
-      email,
-      password,
-    });
-    
-    // localStorage.setItem("token", csrfToken);
-
-    await axios.post("http://127.0.0.1:8000/api/login", data, {
-        headers: {
-          "Content-Type": "application/json",
-          
-          "Accept": "*/*",
-       
-        },
-      }).then(function(response) {
-        console.log(response)
-        alert('Form Submitted')
-          });
-    
-    // Check if user is logged in and redirect to home page
-    if (checkIfLoggedIn()) {
-      navigate("/");
-    }
+    return token;
   };
+  
+  console.log(token);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+  
+    const navigate = useNavigate();
+  
+   const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  return (
+  const token = await getCSRFToken();
+
+  const data = JSON.stringify({
+    email,
+    password,
+  });
+
+  await axios.post('http://localhost:8000/api/login', data, {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': token,
+    },
+  });
+
+  localStorage.setItem('token', token);
+if(checkIfLoggedIn()){
+  navigate('/');
+};
+};
+
+
+return (
     <div className="d-flex justify-content-center">
       <div className="form-div" id="base">
         <h2 className="welcome">Welcome</h2>
