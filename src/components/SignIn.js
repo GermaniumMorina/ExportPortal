@@ -13,37 +13,50 @@ import { checkIfLoggedIn } from "./checkIfLoggedIn";
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [list, setList] = useState([]);
+  const [, setList] = useState([]);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/user")
-      .then((response) => {
-        setList(response.data);
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8000/api/users")
+  //     .then((response) => {
+  //       setList(response.data);
+  //       console.log(response);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Get CSRF token
-    await axios.get("http://localhost:8000/user/");
+//     // Get CSRF token
+//     const token = await axios.get("http://localhost:8000/sanctum/csrf-cookie");
+// const csrfToken = token.data;
+
+
+    // Extract token from response
 
     // Send login request
-    const response = await axios.post("http://localhost:8000/api/login", {
+    const data = ({
       email,
       password,
     });
-    console.log("response", response);
-    // Set cookie
-    // document.cookie = `token=${response.data.token}; path=/`;
-    localStorage.setItem("token", response.data.token);
-    console.log("token:", response.data.token);
-    // Redirect to homepage
+    
+    // localStorage.setItem("token", csrfToken);
+
+    await axios.post("http://127.0.0.1:8000/api/login", data, {
+        headers: {
+          "Content-Type": "application/json",
+          
+          "Accept": "*/*",
+       
+        },
+      }).then(function(response) {
+        console.log(response)
+        alert('Form Submitted')
+          });
+    
     // Check if user is logged in and redirect to home page
     if (checkIfLoggedIn()) {
       navigate("/");
@@ -57,10 +70,9 @@ export const SignIn = () => {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
-            required
+              required
               type="email"
               placeholder="Enter email or username"
-              
               name="email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -68,7 +80,7 @@ export const SignIn = () => {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control
-            required
+              required
               type="password"
               placeholder="Password"
               value={password}
