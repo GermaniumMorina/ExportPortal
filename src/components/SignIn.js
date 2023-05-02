@@ -5,49 +5,50 @@ import "./SignIn.css";
 
 import { Link } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { checkIfLoggedIn } from "./checkIfLoggedIn";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [list, setList] = useState([]);
+
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/user")
-      .then((response) => {
-        setList(response.data);
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    // Get CSRF token
-    await axios.get("http://localhost:8000/user/");
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+      axios
+        .post("http://localhost:8000/api/login", {
+          email,
+          password
+        })
+        .then((response) => {
+          console.log(response);
+          //set response in local storage
+          //  localStorage.setItem('user', JSON.stringify(response.data))
+          if (response.status === 200) {
+            localStorage.setItem('userName', response.data.user.name)
+            localStorage.setItem('userEmail', response.data.user.email)
+            localStorage.setItem('userLoggedIn', true)
+            window.alert("Login Successful");
+            navigate("/dashboard");
 
-    // Send login request
-    const response = await axios.post("http://localhost:8000/api/login", {
-      email,
-      password,
+          }
+          
+          
+
+        })
+        .catch(function (error) {
+          console.error(error);
+            window.alert("Authentication Failed");
+
+        });
     });
-    console.log("response", response);
-    // Set cookie
-    // document.cookie = `token=${response.data.token}; path=/`;
-    localStorage.setItem("token", response.data.token);
-    console.log("token:", response.data.token);
-    // Redirect to homepage
-    // Check if user is logged in and redirect to home page
-    if (checkIfLoggedIn()) {
-      navigate("/");
-    }
+
   };
 
   return (
@@ -57,10 +58,10 @@ export const SignIn = () => {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
-            required
+              required
               type="email"
               placeholder="Enter email or username"
-              
+
               name="email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -68,7 +69,7 @@ export const SignIn = () => {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control
-            required
+              required
               type="password"
               placeholder="Password"
               value={password}

@@ -2,7 +2,7 @@
 import './App.css';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
-import {Main} from './components/Main';
+import Main from './components/Main';
 import { ForgotPassword } from './components/ForgotPassword';
 import { useRoutes, Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./components/checkIfLoggedIn";
@@ -14,7 +14,11 @@ console.log(document.cookie);
 const routes = [
   {
     path: "/",
-    element: checkIfLoggedIn() ? <Main /> : <Navigate to="/SignIn" />,
+    element: checkIfLoggedIn() ? <Navigate to="/dashboard" /> : <Navigate to="/SignIn" />,
+  },
+  {
+    path: "/dashboard",
+    element: <Main /> ,
   },
   {
     path: "/SignIn",
@@ -43,10 +47,7 @@ const routes = [
 function App() {
   const routing = useRoutes(routes);
 
-  return (<div className="App">
-
-    {routing}
-  </div>);
+  return <div className="App">{routing}</div>;
 }
 
 export default App;
