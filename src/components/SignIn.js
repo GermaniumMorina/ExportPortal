@@ -5,15 +5,14 @@ import "./SignIn.css";
 
 import { Link } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { checkIfLoggedIn } from "./checkIfLoggedIn";
-import { redirect } from "react-router-dom";
+
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [list, setList] = useState([]);
+
 
   const navigate = useNavigate();
 
@@ -31,21 +30,22 @@ export const SignIn = () => {
           console.log(response);
           //set response in local storage
           //  localStorage.setItem('user', JSON.stringify(response.data))
-          if (response.status == 200) {
+          if (response.status === 200) {
             localStorage.setItem('userName', response.data.user.name)
             localStorage.setItem('userEmail', response.data.user.email)
             localStorage.setItem('userLoggedIn', true)
+            window.alert("Login Successful");
             navigate("/dashboard");
+
           }
           
-          if (response.status == 401) {
-            // Unauthenticated
-            console.log(response);
-          }
+          
 
         })
         .catch(function (error) {
           console.error(error);
+            window.alert("Authentication Failed");
+
         });
     });
 

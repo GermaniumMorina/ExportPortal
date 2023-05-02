@@ -40,7 +40,7 @@ const handleSubmit = (ev) => {
       console.log(response);
       //set response in local storage
       //  localStorage.setItem('user', JSON.stringify(response.data))
-      if (response.status == 200) {
+      if (response.status === 200) {
         localStorage.clear();
         window.location.href = '/';
       }
