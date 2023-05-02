@@ -14,7 +14,11 @@ console.log(document.cookie);
 const routes = [
   {
     path: "/",
-    element: checkIfLoggedIn() ? <Main /> : <Navigate to="/SignIn" />,
+    element: checkIfLoggedIn() ? <Navigate to="/dashboard" /> : <Navigate to="/SignIn" />,
+  },
+  {
+    path: "/dashboard",
+    element: <Main /> ,
   },
   {
     path: "/SignIn",
