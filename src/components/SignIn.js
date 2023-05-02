@@ -5,67 +5,52 @@ import "./SignIn.css";
 
 import { Link } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./checkIfLoggedIn";
 
 export const SignIn = () => {
-let token = null;
-  const getCSRFToken = async () => {
-    await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-  
-    token = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('XSRF-TOKEN'))
-    .split('=')[1];
-  
-  localStorage.setItem('token', token);
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [list, setList] = useState([]);
 
-    return token;
+  const navigate = useNavigate();
+
+
+
+  const handleSubmit = (ev) => {
+      ev.preventDefault();
+
+   
+          axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+              axios
+                  .post("http://localhost:8000/api/login", {
+                    email,
+                    password
+                  })
+                  .then((response) => {
+                       //set response in local storage
+                       localStorage.setItem('user', JSON.stringify(response.data))
+                  })
+                  .catch(function (error) {
+                      console.error(error);
+                  });
+          });
+      
   };
-  
-  console.log(token);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-  
-    const navigate = useNavigate();
-  
-   const handleSubmit = async (e) => {
-  e.preventDefault();
 
-  const token = await getCSRFToken();
-
-  const data = JSON.stringify({
-    email,
-    password,
-  });
-
-  await axios.post('http://localhost:8000/api/login', data, {
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': token,
-    },
-  });
-
-  localStorage.setItem('token', token);
-if(checkIfLoggedIn()){
-  navigate('/');
-};
-};
-
-
-return (
+  return (
     <div className="d-flex justify-content-center">
       <div className="form-div" id="base">
         <h2 className="welcome">Welcome</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
-              required
+            required
               type="email"
               placeholder="Enter email or username"
+              
               name="email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -73,7 +58,7 @@ return (
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control
-              required
+            required
               type="password"
               placeholder="Password"
               value={password}

@@ -1,7 +1,7 @@
 import React from "react";
 import { checkIfLoggedIn } from "./checkIfLoggedIn";
 import {SignIn} from "./SignIn";
-export const Main = () => {
+const Main = () => {
   const isLoggedIn = checkIfLoggedIn();
   return (
 
@@ -14,3 +14,4 @@ export const Main = () => {
     </div>
   )
 }
+export default Main;
