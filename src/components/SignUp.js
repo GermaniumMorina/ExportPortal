@@ -15,65 +15,119 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
-  const [country, setCountry] = useState([]);
-  const [countryList, setCountryList] = useState("");
+  const [countryList, setCountryList] = useState([]);
+  const [country, setCountry] = useState("");
   const [gender, setGender] = useState("");
   const [agreementss, setAgreementss] = useState(false);
- 
-  const [captcha, setCaptcha] = useState("");
+  const [captcha, setCaptcha] = useState(null);
 
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const handleCaptchaChange = (value) => {
+    setCaptcha(value);
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const data = JSON.stringify({
-      name,
-      surname,
-      email,
-      password,
-      passwordAgain,
-      phone_number,
-      countryList,
-     
-      gender,
-      agreementss,
-      
-    });
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/register/",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error.response.data);
+    const errors = validate();
+    if (Object.keys(errors).length === 0) {
+      const data = JSON.stringify({
+        name,
+        surname,
+        email,
+        password,
+        passwordAgain,
+        phone_number,
+        country,
+        gender,
+        agreementss,
+        captcha,
+      });
+      console.log("country", countryList);
+      console.log("country1", country);
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/api/register/",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+
+        console.log(response.data);
+        navigate("/AddNewCompany");
+      } catch (error) {
+        console.log(error.response.data);
+      }
+
+      console.log(document.cookie);
+    } else {
+      setErrors(errors);
     }
   };
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
-    setCountry(ApiCountry.data.data);
+    setCountryList(ApiCountry.data.data);
     console.log(ApiCountry);
   };
   useEffect(() => {
     getCountry();
   }, []);
 
-  const [errors, setErrors] = useState({});
-
   const handleAgreementCheck = (e) => {
     setAgreementss(e.target.checked);
   };
-  function handleCountryChange(event) {
-    setCountryList(event.target.value);
-   
-  }
+  const handleCountryChange = (e) => {
+    setCountry(e.target.value);
+    console.log("target", e.target.value);
+  };
+
+  const validate = () => {
+    let errors = {};
+
+    if (!name) {
+      errors.name = "Name is required";
+    }
+    if (!surname) {
+      errors.surname = "Surname is required";
+    }
+    if (!email) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "Email is invalid";
+    }
+    if (!password) {
+      errors.password = "Password is required";
+    } else if (password.length < 5) {
+      errors.password = "Password must be at least 6 characters long";
+    }
+    if (password !== passwordAgain) {
+      errors.passwordAgain = "Passwords do not match";
+    }
+    if (!phone_number) {
+      errors.phone_number = "Number is required";
+    } else if (!/^\d{5}$/.test(phone_number)) {
+      errors.phone_number = "Number must have 10 digits";
+    }
+    if (!country) {
+      errors.country = "Country is required";
+    }
+    if (!gender) {
+      errors.gender = "Gender is required";
+    }
+    if (!agreementss) {
+      errors.agreementss = "You must accept the terms and conditions";
+    }
+    if (!captcha) {
+      errors.captcha = "Please complete the reCAPTCHA verification";
+    }
+    return errors;
+  };
+
   return (
     <div className="container ">
       <Form
@@ -93,10 +147,12 @@ export const SignUp = () => {
               value={name}
               placeholder="Name "
               className="mb-2"
-              // onChange={handleChange}
               onChange={(e) => setName(e.target.value)}
             />
-            
+
+            {errors.name && (
+              <Form.Text className="text-danger">{errors.name}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <Form.Control
@@ -106,9 +162,10 @@ export const SignUp = () => {
               value={surname}
               className="mb-2"
               onChange={(e) => setSurname(e.target.value)}
-              // onChange={handleChange}
             />
-            
+            {errors.surname && (
+              <Form.Text className="text-danger">{errors.surname}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <Form.Control
@@ -118,9 +175,10 @@ export const SignUp = () => {
               className="mb-2"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
-              // onChange={handleChange}
             />
-           
+            {errors.email && (
+              <Form.Text className="text-danger">{errors.email}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <Form.Control
@@ -130,9 +188,10 @@ export const SignUp = () => {
               value={password}
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              // onChange={handleChange}
             />
-           
+            {errors.password && (
+              <Form.Text className="text-danger">{errors.password}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <Form.Control
@@ -142,9 +201,12 @@ export const SignUp = () => {
               className="mb-2"
               value={passwordAgain}
               onChange={(e) => setPasswordAgain(e.target.value)}
-              // onChange={handleChange}
             />
-           
+            {errors.passwordAgain && (
+              <Form.Text className="text-danger">
+                {errors.passwordAgain}
+              </Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <Form.Control
@@ -154,46 +216,57 @@ export const SignUp = () => {
               name="phone_number"
               value={phone_number}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              // onChange={handleChange}
             />
-            
+            {errors.phone_number && (
+              <Form.Text className="text-danger">
+                {errors.phone_number}
+              </Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <Form.Select
               className="mb-2"
               name="country"
-              value={countryList}
+              value={country}
               onChange={handleCountryChange}
             >
-              <option value="">Select Country</option>
-
-              {country.map((c) => (
-                <option value={c.country}>{c.country}</option>
+              <option>Select country</option>
+              {countryList.map((country) => (
+                <option key={country.id} value={country.country}>
+                  {country.country}
+                </option>
               ))}
+              {errors.country && (
+                <Form.Text className="text-danger">{errors.country}</Form.Text>
+              )}
             </Form.Select>
-            
-
-            
           </Form.Group>
           <Form.Group>
             <Form.Label className="gender">Gender </Form.Label>
             <Form.Check
-              name="Male"
-              inline
               type="radio"
-              label="Male"
-              onChange={(e) => setGender(e.target.value)}
-              // onChange={handleChange}
-            />
-            <Form.Check
               name="gender"
-              onChange={(e) => setGender(e.target.value)}
-              // onChange={handleChange}
+              id="male"
+              label="Male"
               inline
-              type="radio"
-              label="Female"
+              value="male"
+              checked={gender === "male"}
+              onChange={(e) => setGender(e.target.value)}
             />
-           
+
+            <Form.Check
+              type="radio"
+              name="gender"
+              id="female"
+              label="Female"
+              inline
+              value="female"
+              checked={gender === "female"}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            {errors.gender && (
+              <Form.Text className="text-danger">{errors.gender}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <Form.Check
@@ -203,33 +276,32 @@ export const SignUp = () => {
               onChange={handleAgreementCheck}
               className="mb-2"
             />
-
-           
+            {errors.agreementss && (
+              <Form.Text className="text-danger">
+                {errors.agreementss}
+              </Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
             <ReCAPTCHA
               className="justify-content-center d-flex "
               sitekey="6LfQG6IlAAAAAI3gpbAOJm40Ql1BwD7G9DhtAQh1"
-              // onChange={handleCaptchaChange}
+              onChange={handleCaptchaChange}
+              value={captcha}
             />
             {errors.captcha && (
               <Form.Text className="text-danger">{errors.captcha}</Form.Text>
             )}
           </Form.Group>
           <Form.Group>
-            <Button
-              variant="info"
-              className="sign-up-button"
-              type="submit"
-             
-            >
+            <Button variant="info" className="sign-up-button" type="submit">
               Sign Up
             </Button>
           </Form.Group>
           <div className="d-flex justify-content-center">
             <p className="mt-3 ">
               If you have an account
-              <Link className=" p-2" to={"/components/modifyItem"}>
+              <Link className=" p-2" to={"/SignIn"}>
                 Sign In
               </Link>
             </p>

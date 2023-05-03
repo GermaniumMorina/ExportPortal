@@ -1,20 +1,37 @@
+
+import { useRoutes, Navigate } from "react-router-dom";
 import {SignUp} from "./components/SignUp";
-import { EditItem } from "./components/EditItem";
-// import { ModifyItem} from "./components/ModifyItem";
-import { Routes, Route } from "react-router-dom";
-import { ModifyItem } from "./components/ModifyItem";
+import { SignIn } from "./components/SignIn";
+import { Companies } from "./components/Companies";
+import { AddNewCompany } from "./components/AddNewCompany";
+
+
+
+  
+
+    const routes = [
+      {
+        path: "/",
+        element: <SignUp />,
+      },
+      {
+        path: "/Company",
+        element: <Companies />,
+      },
+      {
+      path: "/SignIn",
+      element: <SignIn />
+      },
+       {
+    path: "/AddNewCompany",
+    element: <AddNewCompany />,
+  },
+    ];
 
 function App() {
-  return (
-    <div>
-      <Routes>
-       <Route path="/" element={<SignUp />} />
-       
-        <Route path="/components/modifyItem" element={<ModifyItem />} />
-         <Route path="/components/edit" element={<EditItem />} />
-      </Routes>
-    </div>
-  );
+  const routing = useRoutes(routes);
+
+  return <div className="App">{routing}</div>;
 }
 
 export default App;
