@@ -29,7 +29,7 @@ export const SignUp = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
+    await axios.get("http://127.0.0.1:8000/sanctum/csrf-cookie")
     const errors = validate();
     if (Object.keys(errors).length === 0) {
       const data = JSON.stringify({
@@ -44,11 +44,10 @@ export const SignUp = () => {
         agreementss,
         captcha,
       });
-      console.log("country", countryList);
-      console.log("country1", country);
+
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/register/",
+          "http://127.0.0.1:8000/api/register",
           data,
           {
             headers: {
@@ -57,14 +56,17 @@ export const SignUp = () => {
             },
           }
         );
-
-        console.log(response.data);
+console.log(response);
+      if (response.status === 200) {
+        localStorage.setItem('userLoggedIn', true);
+      
+        } 
         navigate("/AddNewCompany");
       } catch (error) {
         console.log(error.response.data);
       }
 
-      console.log(document.cookie);
+
     } else {
       setErrors(errors);
     }
@@ -72,7 +74,7 @@ export const SignUp = () => {
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
     setCountryList(ApiCountry.data.data);
-    console.log(ApiCountry);
+   
   };
   useEffect(() => {
     getCountry();
@@ -83,7 +85,7 @@ export const SignUp = () => {
   };
   const handleCountryChange = (e) => {
     setCountry(e.target.value);
-    console.log("target", e.target.value);
+   
   };
 
   const validate = () => {

@@ -25,29 +25,25 @@ const [countryList, setCountryList] = useState([]);
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
     setCountryList(ApiCountry.data.data);
-    console.log(ApiCountry);
   };
   useEffect(() => {
     getCountry();
   }, []);
   const handleCountryChange = (e) => {
     setCountry(e.target.value);
-    console.log(e.target.value);
   };
+
 
 
   const handleChange = (event) => {
     const newValue = event.target.name;
     if (selectedValues.includes(newValue)) {
-      setSelectedValues(selectedValues.filter((value) => value !== newValue));
+      setSelectedValues(selectedValues.replace(newValue, ""));
     } else {
-      setSelectedValues([...selectedValues, newValue]);
+      setSelectedValues(selectedValues + newValue);
     }
   };
-
-
-
-
+  
   const handleSubmit = async (e)  => {
     e.preventDefault();
     await axios.get("http://localhost:8000/sanctum/csrf-cookie");
@@ -238,9 +234,10 @@ const [countryList, setCountryList] = useState([]);
           name="6"
         />
       </FormGroup>
-      <button onClick={() => console.log(" ",selectedValues)}>Submit</button>
+      
     </div>
             <Button className="submit-button" variant="info" type="submit">
+            
               Submit
             </Button>
           </Form>
