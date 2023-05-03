@@ -72,7 +72,7 @@ export const SignIn = () => {
               required
               type="password"
               placeholder="Password"
-              value={password}
+           
               name="password"
               onChange={(e) => setPassword(e.target.value)}
             />

@@ -3,37 +3,73 @@ import Form from "react-bootstrap/Form";
 import React from "react";
 import "./AddNewCompany.css";
 import { useState } from "react";
-
+import axios from "axios";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
+import { useEffect } from "react";
 export const AddNewCompany = () => {
-  const [formValues, setFormValues] = useState({
+ const [name, setName] = useState("");
+  const [type, setCompanyType] = useState("");
+  const [TIN , setTIN] = useState("");
+  const [web_address , setWebsite] = useState("");
+  const [taxpayer_office , setTaxPayerOffice] = useState("");
+  const [keywords , setKeywords] = useState("");
+  const [category_id , setCategory] = useState("");
+  const [more_info , setInfo] = useState("");
+  const [subcategory_id , setSubCategory]= useState("");
+const [selectedValues, setSelectedValues] = useState([]);
+const [countryList, setCountryList] = useState([]);
+  const [country, setCountry] = useState("");
 
-    company_name: "",
-    company_type: "",
-    company_info: "",
-    taxpayer_id: "",
-    taxpayer_office: "",
-    keywords: "",
-    category: "",
-    sub_category: "",
-    country: "",
-    webiste: "",
+  const getCountry = async () => {
+    const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
+    setCountryList(ApiCountry.data.data);
+    console.log(ApiCountry);
+  };
+  useEffect(() => {
+    getCountry();
+  }, []);
+  const handleCountryChange = (e) => {
+    setCountry(e.target.value);
+    console.log(e.target.value);
+  };
 
-  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (event) => {
+    const newValue = event.target.name;
+    if (selectedValues.includes(newValue)) {
+      setSelectedValues(selectedValues.filter((value) => value !== newValue));
+    } else {
+      setSelectedValues([...selectedValues, newValue]);
+    }
+  };
+
+
+
+
+  const handleSubmit = async (e)  => {
     e.preventDefault();
-    console.log(formValues);
+    await axios.get("http://localhost:8000/sanctum/csrf-cookie");
+
+    const response = await axios.post(`http://localhost:8000/api/company`, {
+      name,
+      type,
+      TIN,
+      web_address,
+      taxpayer_office,
+      keywords,
+      category_id,  
+      more_info,
+      subcategory_id,
+      country,
+    });
+    console.log("response", response);
+    const activity = JSON.stringify({ selectedValues });
+    // send `data` to API endpoint using fetch or Axios
+    console.log(activity);  
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-  
-    setFormValues({ ...formValues, [name]: value });
-  };
   return (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
@@ -44,9 +80,9 @@ export const AddNewCompany = () => {
               <Form.Control
                 type="text"
                 placeholder="Company Name"
-                onChange={handleChange}
-                value={formValues["company_name"]}
-                name="company_name"
+                onChange={(e) => setName(e.target.value)}          
+                value={name}
+                name="name"
               />
             </Form.Group>
 
@@ -55,10 +91,11 @@ export const AddNewCompany = () => {
               required
                 type="text"
                 placeholder="Company Type"
-                onChange={handleChange}
-                value={formValues["company_type"]}
-                name="company_type"
-              />
+                onChange={(e) => setCompanyType(e.target.value)}                
+                value={type}
+                name="type"
+             
+                            />
             </Form.Group>
 
             <Form.Group
@@ -70,9 +107,10 @@ export const AddNewCompany = () => {
                 rows={3}
                 type="text"
                 placeholder="More information about the company"
-                onChange={handleChange}
-                value={formValues["company_info"]}
-                name="company_info"
+                onChange={(e) => setInfo(e.target.value)}     
+                value={more_info}
+                name="more_info"
+                
               />
             </Form.Group>
 
@@ -80,17 +118,18 @@ export const AddNewCompany = () => {
               <Form.Control
                 type="number"
                 placeholder="Taxpayer ID number"
-                onChange={handleChange}
-                value={formValues["taxpayer_id"]}
-                name="taxpayer_id"
+                onChange={(e) => setTIN(e.target.value)}    
+                value={TIN}
+                name="TIN"
+              
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Control
                 type="text"
                 placeholder="Taxpayer Office"
-                onChange={handleChange}
-                value={formValues["taxpayer_office"]}
+                onChange={(e) => setTaxPayerOffice(e.target.value)}
+                value={taxpayer_office}
                 name="taxpayer_office"
               />
             </Form.Group>
@@ -99,16 +138,16 @@ export const AddNewCompany = () => {
               <Form.Control
                 type="text"
                 placeholder="KeyWords"
-                onChange={handleChange}
-                value={formValues["keywords"]}
+                onChange={(e) => setKeywords(e.target.value)}               
+                 value={keywords}
                 name="keywords"
               />
             </Form.Group>
 
             <Form.Select
-              value={formValues["category"]}
-              onChange={handleChange}
-              name="category"
+              value={category_id}
+              onChange={(e) => setCategory(e.target.value)}
+              name="category_id"
             >
               <option value={""}>Category</option>
               <option value={"Transport"}>Transport</option>
@@ -119,9 +158,9 @@ export const AddNewCompany = () => {
             </Form.Select>
             <br />
             <Form.Select
-              value={formValues["sub_category"]}
-              onChange={handleChange}
-              name="sub_category"
+              value={subcategory_id}
+              onChange={(e) => setSubCategory(e.target.value)}
+              name="subcategory_id"
             >
               <option value={""}>Sub-Category</option>
               <option value={"Transport"}>Transport</option>
@@ -131,66 +170,76 @@ export const AddNewCompany = () => {
               <option value={"Trade"}>Trade</option>
             </Form.Select>
             <br />
+            <Form.Group>
             <Form.Select
-              value={formValues["country"]}
-              onChange={handleChange}
+              className="mb-2"
               name="country"
+              value={country}
+              onChange={handleCountryChange}
             >
-              <option value={""}>Country</option>
-              <option value={"Kosovo"}>Republic of Kosovo</option>
-              <option value={"Albania"}>Albania</option>
-              <option value={"North Macedionia"}>North Macedonia</option>
-              <option value={"Serbia"}>Serbia</option>
-              <option value={"Montenegro"}>Montenegro</option>
+              <option>Select country</option>
+              {countryList.map((country) => (
+                <option key={country.id} value={country.country}>
+                  {country.country}
+                </option>
+              ))}
             </Form.Select>
+          </Form.Group>
             <br />
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
               <Form.Control
                 type="text"
                 placeholder="Web Adress"
-                onChange={handleChange}
-                value={formValues["webiste"]}
-                name="webiste"
+                onChange={(e) => setWebsite(e.target.value)}
+                name="web_address"
+                value={web_address}
               />
             </Form.Group>
             <h5>Activity Area</h5>
 
-            <div className="d-flex justify-content-center" >
-              <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  onChange={handleChange}
-                  label="Exporter"
-                />
-                <FormControlLabel
-                  control={<Checkbox />}
-                  onChange={handleChange}
-                  label="Importer"
-                />
-                <FormControlLabel
-                  control={<Checkbox />}
-                  onChange={handleChange}
-                  label="Servicer"
-                />
-              </FormGroup>
-              <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  onChange={handleChange}
-                  label="Retailer"
-                />
-                <FormControlLabel
-                  control={<Checkbox />}
-                  onChange={handleChange}
-                  label="Wholesaler"
-                />
-                <FormControlLabel
-                  control={<Checkbox />}
-                  onChange={handleChange}
-                  label="Manifacturer"
-                />
-              </FormGroup>
-            </div>
+            <div className="d-flex justify-content-center">
+      <FormGroup>
+        <FormControlLabel
+          control={<Checkbox />}
+          onChange={handleChange}
+          label="Exporter"
+          name="1"
+        />
+        <FormControlLabel
+          control={<Checkbox />}
+          onChange={handleChange}
+          label="Importer"
+          name="2"
+        />
+        <FormControlLabel
+          control={<Checkbox />}
+          onChange={handleChange}
+          label="Servicer"
+          name="3"
+        />
+      </FormGroup>
+      <FormGroup>
+        <FormControlLabel
+          control={<Checkbox />}
+          onChange={handleChange}
+          label="Retailer"
+          name="4"
+        />
+        <FormControlLabel
+          control={<Checkbox />}
+          onChange={handleChange}
+          label="Wholesaler"
+          name="5"
+        />
+        <FormControlLabel
+          control={<Checkbox />}
+          onChange={handleChange}
+          label="Manufacturer"
+          name="6"
+        />
+      </FormGroup>
+      <button onClick={() => console.log(" ",selectedValues)}>Submit</button>
+    </div>
             <Button className="submit-button" variant="info" type="submit">
               Submit
             </Button>
