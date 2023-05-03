@@ -102,17 +102,15 @@ export const SignUp = () => {
     }
     if (!password) {
       errors.password = "Password is required";
-    } else if (password.length < 5) {
-      errors.password = "Password must be at least 6 characters long";
+    } else if (password.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
     }
     if (password !== passwordAgain) {
       errors.passwordAgain = "Passwords do not match";
     }
     if (!phone_number) {
       errors.phone_number = "Number is required";
-    } else if (!/^\d{5}$/.test(phone_number)) {
-      errors.phone_number = "Number must have 10 digits";
-    }
+    } 
     if (!country) {
       errors.country = "Country is required";
     }
