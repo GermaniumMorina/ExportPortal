@@ -42,7 +42,7 @@ export const SignUp = () => {
         country,
         gender,
         agreementss,
-        captcha,
+        
       });
 
       try {
@@ -53,11 +53,12 @@ export const SignUp = () => {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
+              Authorization: 'Bearer <token>',
             },
           }
         );
 console.log(response);
-      if (response.status === 200) {
+      if (response.status === 201) {
         localStorage.setItem('userLoggedIn', true);
       
         } 
