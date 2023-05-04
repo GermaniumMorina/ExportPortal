@@ -29,6 +29,7 @@ export const SignUp = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+     axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
     const errors = validate();
     if (Object.keys(errors).length === 0) {
@@ -47,24 +48,26 @@ export const SignUp = () => {
       console.log("country", countryList);
       console.log("country1", country);
       try {
-        const response = await axios.post(
-          "http://127.0.0.1:8000/api/register/",
+        axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+        axios.post(
+          "http://127.0.0.1:8000/api/register",
           data,
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
+              
             },
           }
-        );
+        )});
 
-        console.log(response.data);
         navigate("/AddNewCompany");
       } catch (error) {
         console.log(error.response.data);
       }
-
+ 
       console.log(document.cookie);
+  
     } else {
       setErrors(errors);
     }
@@ -230,7 +233,7 @@ export const SignUp = () => {
             >
               <option>Select country</option>
               {countryList.map((country) => (
-                <option key={country.id} value={country.country}>
+                <option key={country.id} value={country.id}>
                   {country.country}
                 </option>
               ))}
