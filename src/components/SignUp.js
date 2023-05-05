@@ -29,7 +29,8 @@ export const SignUp = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    await axios.get("http://127.0.0.1:8000/sanctum/csrf-cookie")
+     axios.get("http://localhost:8000/sanctum/csrf-cookie");
+
     const errors = validate();
     if (Object.keys(errors).length === 0) {
       const data = JSON.stringify({
@@ -46,31 +47,38 @@ export const SignUp = () => {
       });
 
       try {
-        const response = await axios.post(
+        axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+        const response = axios.post(
           "http://127.0.0.1:8000/api/register",
           data,
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
+              
             },
           }
         );
-console.log(response);
-      if (response.status === 201) {
-        localStorage.setItem('userLoggedIn', true);
+        if (response.status === 201) {
+          localStorage.setItem('userLoggedIn', true);
+        
+          } 
+          navigate("/AddNewCompany");
+        })
+        
       
-        } 
-        navigate("/AddNewCompany");
-      } catch (error) {
+     } catch (error) {
         console.log(error.response.data);
       }
 
-
+    
     } else {
       setErrors(errors);
     }
+
+ 
   };
+
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
     setCountryList(ApiCountry.data.data);
@@ -232,7 +240,7 @@ console.log(response);
             >
               <option>Select country</option>
               {countryList.map((country) => (
-                <option key={country.id} value={country.country}>
+                <option key={country.id} value={country.id}>
                   {country.country}
                 </option>
               ))}
