@@ -43,7 +43,7 @@ const ExportItem = () => {
                 <p> views{exportProduct.views}</p>
               </div>
               <div>
-                <p>{exportProduct.keywords}</p>{" "}
+                <p>{exportProduct.keywords}</p>
               </div>
               <div>
                 <h4>{exportProduct.name}</h4>
@@ -59,7 +59,7 @@ const ExportItem = () => {
                 <Button>Buy</Button>
               </div>
               <div>
-                <Button onClick={handleNavigateItem}></Button>
+                <Button onClick={handleNavigateItem}>Go Back</Button>
               </div>
             </div>
           );

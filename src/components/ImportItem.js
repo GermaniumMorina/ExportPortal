@@ -29,24 +29,36 @@ const ImportItem = () => {
   const handleNavigateItem = () => {
     navigate("/Import");
   };
+
+  // const views = axios.post("http://127.0.0.1:8000/api/view");
   return (
     <div>
       <div>
         {importProduct.map((importProduct) => {
+          const createdAtDate = new Date(importProduct.created_at);
+          const formattedDate = createdAtDate
+            .toLocaleDateString("en-US", {
+              year: "numeric",
+              day: "numeric",
+              month: "short",
+            })
+            .split("/")
+            .reverse()
+            .join(" ");
           return (
             <div key={importProduct.id}>
               <div>
                 <p>{importProduct.country}</p>
                 <p>Buying</p>
                 <div>{importProduct.price}</div>
-                <div>date</div>
+                <div>{formattedDate}</div>
                 <p> views{importProduct.views}</p>
+                <h4>{importProduct.name}</h4>
               </div>
               <div>
                 <p>{importProduct.keywords}</p>{" "}
               </div>
               <div>
-                <h4>{importProduct.name}</h4>
                 <p>{importProduct.description}</p>
                 <div>
                   <Image src={importProduct.imageURL} fluid />
@@ -59,7 +71,7 @@ const ImportItem = () => {
                 <Button>Buy</Button>
               </div>
               <div>
-                <Button onClick={handleNavigateItem}></Button>
+                <Button onClick={handleNavigateItem}>Go Back</Button>
               </div>
             </div>
           );

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import moment from "moment";
 import Button from "react-bootstrap/Button";
 
 const Import = () => {
@@ -17,8 +18,32 @@ const Import = () => {
       "http://127.0.0.1:8000/api/ilist",
       data
     );
+
     setImportProducts(apiImportProducts.data.data);
   };
+  const handleView = async (id) => {
+    try {
+      const response = await axios.post(`http://127.0.0.1:8000/api/view/${id}`);
+      console.log("View request successful:", response);
+    } catch (error) {
+      console.error("Error viewing product:", error);
+    }
+  };
+  const formatDate = (date) => {
+    const now = moment();
+    const created = moment(date);
+    const diffInHours = now.diff(created, "hours");
+    if (diffInHours < 24) {
+      return `${diffInHours} hours ago`;
+    } else if (diffInHours < 24 * 7) {
+      return `${Math.floor(diffInHours / 24)} days ago`;
+    } else if (diffInHours < 24 * 30) {
+      return `${Math.floor(diffInHours / (24 * 7))} weeks ago`;
+    } else {
+      return `${Math.floor(diffInHours / (24 * 30))} months ago`;
+    }
+  };
+  // const date = axios.get("http://127.0.0.1:8000/api/date/" + id);
   useEffect(() => {
     getImportProducts();
   }, []);
@@ -40,28 +65,33 @@ const Import = () => {
         </div>
       </div>
       <div>
-        <div>
-          {importProducts.map((importProduct) => {
-            return (
-              <div key={importProduct.id}>
-                <div>
-                  <h4>{importProduct.name}</h4>
-                  <p>{importProduct.description}</p>
-                  <p>{importProduct.country}</p>
-                  <p>{importProduct.info}</p>
-                  <label for="">time</label>
-                </div>
-                <div>
-                  <div>{importProduct.price}</div>
-                  <p>{importProduct.keywords}</p>
-                  <Button
-                    onClick={() => handleNavigateItem(importProduct.id)}
-                  ></Button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <table>
+          <tbody>
+            {importProducts.map((importProduct) => {
+              return (
+                <tr key={importProduct.id}>
+                  <td>{importProduct.name}</td>
+                  <td>{importProduct.description}</td>
+                  <td>{importProduct.country}</td>
+                  <td>{importProduct.type}</td>
+                  <td>{importProduct.keywords}</td>
+                  <td>{importProduct.price}</td>
+                  <td>{formatDate(importProduct.created_at)}</td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        handleNavigateItem(importProduct.id);
+                        handleView(importProduct.id);
+                      }}
+                    >
+                      View More
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
