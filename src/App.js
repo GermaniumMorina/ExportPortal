@@ -41,7 +41,22 @@ const routes = [
     path: "/AddNewItem",
     element:<AddNewItem />,
   },
-  
+  {
+    path: "/Import",
+    element: <Import />,
+    },
+    {
+    path: "/ImportItem/:id",
+    element: <ImportItem />,
+    },
+    {
+    path: "/Export",
+    element: <Export />,
+    },
+    {
+    path: "/ExportItem/:id",
+    element: <ExportItem />,
+    },
 ];
 
 function App() {
@@ -51,4 +66,3 @@ function App() {
 }
 
 export default App;
-
