@@ -8,6 +8,10 @@ import { useRoutes, Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./components/checkIfLoggedIn";
 import { AddNewCompany } from './components/AddNewCompany.js';
 import { AddNewItem } from './components/AddNewItem';
+import  Import  from './components/Import';
+import  ImportItem  from './components/ImportItem';
+import  Export from './components/Export';
+import  ExportItem  from './components/ExportItem';
 
 console.log(document.cookie);
 
