@@ -8,25 +8,37 @@ export const AddNewItem = () => {
   const [name, setItemName] = useState("");
   const [description, setItemDescription] = useState("");
   const [price, setItemPrice] = useState();
-
-  const [category, setItemQuantity] = useState("");
-  const [type, setType] = useState("");
+  const [category_id, setCategory] = useState();
+    const [type, setType] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
-    const response = await axios.post(`http://localhost:8000/api/${type}`, {
+    const data =JSON.stringify({
       name,
       description,
       price,
-      category,
+      category_id,
       type,
+      imageURL,
+      company_id: 1,
+    });
+    console.log(data);
+    const response = await axios.post(`http://localhost:8000/api/add`, {
+      name,
+      description,
+      price,
+      category_id,
+      type,
+      imageURL,
+      company_id: 1,
     });
     console.log("response", response);
+ 
   };
 
-  const [fileName, setFileName] = useState("");
+  const [imageURL, setFileName] = useState("");
 
   const handleFileSelect = (event) => {
     setFileName(event.target.files[0].name);
@@ -70,29 +82,36 @@ export const AddNewItem = () => {
                 name="price"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-              <Form.Control
-                type="text"
-                placeholder="Item category"
-                onChange={(e) => setItemQuantity(e.target.value)}
-                value={category}
-                name="category"
-              />
-            </Form.Group>
-
+            <Form.Select
+              value={category_id}
+              onChange={(e) => setCategory(e.target.value)}
+              name="category_id"
+            >
+              <option value={""}>Category</option>
+              <option value={1}>Fashion</option>
+              <option value={2}>Accesories</option>
+              <option value={3}>Home</option>
+              <option value={4}>Sporting</option>
+              <option value={5}>Health</option>
+              <option value={6}>Medical</option>
+              <option value={7}>Pets</option>
+              
+            </Form.Select>
+<br/>
             <Form.Select
               value={type}
               onChange={(e) => setType(e.target.value)}
               name="type"
             >
               <option value="">Type</option>
-              <option value="importItem">Import Item</option>
-              <option value="exportItem">Export Item</option>
+              <option value="import">Import Item</option>
+              <option value="export">Export Item</option>
             </Form.Select>
             <br />
             <Button type="submit" variant="primary">
               Submit
             </Button>
+             {/* Uncomment below to add file upload functionality */ }
             <br />
             <br />
             <input
@@ -105,7 +124,7 @@ export const AddNewItem = () => {
               Choose a file
             </label>
             <br />
-            <span className="file-name">{fileName}</span>
+            <span className="file-name">File added: {imageURL}</span>
           </Form>
         </div>
       </div>
