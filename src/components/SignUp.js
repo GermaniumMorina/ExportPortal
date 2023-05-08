@@ -40,7 +40,7 @@ export const SignUp = () => {
         password,
         passwordAgain,
         phone_number,
-        country,
+        country_id : country,
         gender,
         agreementss,
         
@@ -59,11 +59,14 @@ export const SignUp = () => {
             },
           }
         );
+       console.log(response);
         if (response.status === 201) {
           localStorage.setItem('userLoggedIn', true);
-        
-          } 
           navigate("/AddNewCompany");
+          window.alert("Welcome to the system");
+          } 
+       
+    
         })
         
       

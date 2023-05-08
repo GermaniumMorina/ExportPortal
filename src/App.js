@@ -12,7 +12,8 @@ import  Import  from './components/Import';
 import  ImportItem  from './components/ImportItem';
 import  Export from './components/Export';
 import  ExportItem  from './components/ExportItem';
-
+import Companies from './components/Companies';
+import Company from './components/Company';
 console.log(document.cookie);
 
 const routes = [
@@ -61,6 +62,14 @@ const routes = [
     path: "/ExportItem/:id",
     element: <ExportItem />,
     },
+    {
+      path: "/Companies",
+      element: <Companies />,
+      },
+    {
+    path: "/Companies/:id",
+    element: <Company />,
+    }
 ];
 
 function App() {
