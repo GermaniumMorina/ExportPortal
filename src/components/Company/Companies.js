@@ -40,7 +40,7 @@ const Companies = () => {
   };
   
   const handleShowMore = (id) => {
-    navigate(`/company/${id}`);
+    navigate(`/companies/${id}`);
   };
   
   return (
