@@ -2,16 +2,20 @@
 import './App.css';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
+
 import Main from './components/Main';
+
 import { ForgotPassword } from './components/ForgotPassword';
 import { useRoutes, Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./components/checkIfLoggedIn";
 import { AddNewCompany } from './components/AddNewCompany.js';
 import { AddNewItem } from './components/AddNewItem';
+
 import  Import  from './components/Import';
 import  ImportItem  from './components/ImportItem';
 import  Export from './components/Export';
 import  ExportItem  from './components/ExportItem';
+import  CompanyListing from './components/CompanyListing';
 
 console.log(document.cookie);
 
@@ -60,6 +64,11 @@ const routes = [
     {
     path: "/ExportItem/:id",
     element: <ExportItem />,
+    },
+
+    {
+      path: "/CompanyListing",
+      element: <CompanyListing />,
     },
 ];
 
