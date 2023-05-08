@@ -4,9 +4,9 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 
 
-import { checkIfLoggedIn } from "./checkIfLoggedIn";
+import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
 
-import { SignIn } from "./SignIn";
+import { SignIn } from "./Authentication/SignIn";
 const Main = () => {
   const isLoggedIn = checkIfLoggedIn();
   return (

@@ -1,23 +1,25 @@
 
 import './App.css';
-import { SignIn } from './components/SignIn';
-import { SignUp } from './components/SignUp';
+import { useRoutes, Navigate } from "react-router-dom";
+
+import { SignIn } from './components/Authentication/SignIn';
+import { SignUp } from './components/Authentication/SignUp';
+import { ForgotPassword } from './components/Authentication/ForgotPassword';
 
 import Main from './components/Main';
 
-import { ForgotPassword } from './components/ForgotPassword';
-import { useRoutes, Navigate } from "react-router-dom";
-import { checkIfLoggedIn } from "./components/checkIfLoggedIn";
-import { AddNewCompany } from './components/AddNewCompany.js';
-import { AddNewItem } from './components/AddNewItem';
 
-import  Import  from './components/Import';
-import  ImportItem  from './components/ImportItem';
-import  Export from './components/Export';
-import  ExportItem  from './components/ExportItem';
-import Companies from './components/Companies';
-import Company from './components/Company';
-import  CompanyListing from './components/CompanyListing';
+
+import { AddNewCompany } from './components/Company/AddNewCompany';
+import { AddNewItem } from './components/Products/AddNewItem';
+import { checkIfLoggedIn } from './components/Authentication/checkIfLoggedIn';
+import  Import  from './components/Products/Import';
+import  ImportItem  from './components/Products/ImportItem';
+import  Export from './components/Products/Export';
+import  ExportItem  from './components/Products/ExportItem';
+import Companies from './components/Company/Companies';
+import Company from './components/Company/Company';
+import  CompanyListing from './components/Company/CompanyListing';
 
 console.log(document.cookie);
 
