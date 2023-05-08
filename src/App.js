@@ -2,18 +2,23 @@
 import './App.css';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
+
 import Main from './components/Main';
+
 import { ForgotPassword } from './components/ForgotPassword';
 import { useRoutes, Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./components/checkIfLoggedIn";
 import { AddNewCompany } from './components/AddNewCompany.js';
 import { AddNewItem } from './components/AddNewItem';
+
 import  Import  from './components/Import';
 import  ImportItem  from './components/ImportItem';
 import  Export from './components/Export';
 import  ExportItem  from './components/ExportItem';
 import Companies from './components/Companies';
 import Company from './components/Company';
+import  CompanyListing from './components/CompanyListing';
+
 console.log(document.cookie);
 
 const routes = [
@@ -69,7 +74,12 @@ const routes = [
     {
     path: "/Companies/:id",
     element: <Company />,
-    }
+    },
+
+    {
+      path: "/CompanyListing",
+      element: <CompanyListing />,
+    },
 ];
 
 function App() {
