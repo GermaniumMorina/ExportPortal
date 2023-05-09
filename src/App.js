@@ -20,6 +20,8 @@ import  ExportItem  from './components/Products/ExportItem';
 import Companies from './components/Company/Companies';
 import Company from './components/Company/Company';
 import  CompanyListing from './components/Company/CompanyListing';
+import ExportList from './components/Products/ExportList';
+import ProductList from './components/Products/ProductList';
 
 console.log(document.cookie);
 
@@ -81,6 +83,18 @@ const routes = [
     {
       path: "/CompanyListing",
       element: <CompanyListing />,
+    },
+    {
+      path: "/ProductList",
+      element: <ProductList />,
+    },
+    {
+      path: "/ExportList",
+      element: <ExportList />,
+    },
+    {
+      path: "/ExportList/:id",
+      element: <ExportList />,
     },
 ];
 
