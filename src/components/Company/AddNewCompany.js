@@ -25,6 +25,7 @@ export const AddNewCompany = () => {
   const [selectedValues, setSelectedValues] = useState([]);
   const [countryList, setCountryList] = useState([]);
   const [country, setCountry] = useState("");
+  const [budged , setBudged] = useState();
 
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
@@ -61,6 +62,7 @@ export const AddNewCompany = () => {
       more_info,
       subcategory_id,
       country,
+      budged
     });
     console.log("response", response);
     const activity = JSON.stringify({ selectedValues });
@@ -120,6 +122,15 @@ export const AddNewCompany = () => {
                 name="TIN"
               />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Control
+                type="number"
+                placeholder="Compant Budged"
+                onChange={(e) => setBudged(e.target.value)}
+                value={budged}
+                name="budged"
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Control
                 type="text"
@@ -145,12 +156,14 @@ export const AddNewCompany = () => {
               onChange={(e) => setCategory(e.target.value)}
               name="category_id"
             >
-              <option value={""}>Category</option>
-              <option value={"Transport"}>Transport</option>
-              <option value={"Export"}>Export</option>
-              <option value={"Sales"}>Sales</option>
-              <option value={"Import"}>Import</option>
-              <option value={"Trade"}>Trade</option>
+        <option value={0}>Category</option>
+              <option value={1}>Fashion</option>
+              <option value={2}>Accesories</option>
+              <option value={3}>Home</option>
+              <option value={4}>Sporting</option>
+              <option value={5}>Health</option>
+              <option value={6}>Medical</option>
+              <option value={7}>Pets</option>
             </Form.Select>
             <br />
             <Form.Select
@@ -158,12 +171,14 @@ export const AddNewCompany = () => {
               onChange={(e) => setSubCategory(e.target.value)}
               name="subcategory_id"
             >
-              <option value={""}>Sub-Category</option>
-              <option value={"Transport"}>Transport</option>
-              <option value={"Export"}>Export</option>
-              <option value={"Sales"}>Sales</option>
-              <option value={"Import"}>Import</option>
-              <option value={"Trade"}>Trade</option>
+              <option value={0}>Sub-Category</option>
+              <option value={1}>Fashion</option>
+              <option value={2}>Accesories</option>
+              <option value={3}>Home</option>
+              <option value={4}>Sporting</option>
+              <option value={5}>Health</option>
+              <option value={6}>Medical</option>
+              <option value={7}>Pets</option>
             </Form.Select>
             <br />
             <Form.Group>
