@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import moment from "moment";
-const Export = () => {
+const ProductList = () => {
   const navigate = useNavigate();
   const [exportProducts, setExportProducts] = useState([]);
   const getExportProducts = async () => {
@@ -24,13 +24,10 @@ const Export = () => {
   const handleNavigateItem = (id) => {
     navigate("/ExportItem/" + id);
   };
-  const handleNavigateAddReq = () => {
-    navigate("/AddNewItem");
-    window.location.reload();
-  };
+
   const handleView = async (id) => {
     try {
-      const response = await axios.post(`http://127.0.0.1:8000/api/view/${id}`);
+      const response = await axios.get(`http://127.0.0.1:8000/api/view/${id}`);
       console.log("View request successful:", response);
     } catch (error) {
       console.error("Error viewing product:", error);
@@ -52,32 +49,26 @@ const Export = () => {
   };
   return (
     <div>
-      <div>
-        <div>Sales offer</div>
-        <div>
-          <Button onClick={handleNavigateAddReq} variant="success">
-            Add request free
-          </Button>
-        </div>
+      <div className="d-flex justify-content-center  mt-4 text-primary">
+        <h1>   Export List</h1>
       </div>
       <div>
         <div>
           {exportProducts.map((exportProduct) => {
             return (
-              <div key={exportProduct.id}>
-                <div>
-                  <h4>{exportProduct.name}</h4>
-                  <p>{exportProduct.description}</p>
-                  <p>{exportProduct.country}</p>
-                  <td>{exportProduct.type}</td>
-                  <td>{exportProduct.keywords}</td>
-                  <td>{exportProduct.price}</td>
-                  <td>{formatDate(exportProduct.created_at)}</td>
+              <div
+                key={exportProduct.id}
+                className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark  rounded"
+              >
+                <div className="">
+                  <p>country: {exportProduct.country}</p>
+                  <p>price: {exportProduct.price}</p>
+                  <p>name: {exportProduct.name}</p>
+                  <p>description: {exportProduct.description}</p>
+                  <p>created at: {formatDate(exportProduct.created_at)}</p>
                 </div>
-                <div>
-                  <div>{exportProduct.price}</div>
-                  <p>{exportProduct.keywords}</p>
 
+                <div className="d-flex justify-content-center">
                   <Button
                     onClick={() => {
                       handleNavigateItem(exportProduct.id);
@@ -96,4 +87,4 @@ const Export = () => {
   );
 };
 
-export default Export;
+export default ProductList;
