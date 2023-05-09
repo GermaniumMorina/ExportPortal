@@ -78,3 +78,4 @@ Install all these packages :
 ### npm install @fontsource/roboto
 ### npm install @mui/icons-material
 ### npm install axios   
+### npm install react-icons --save
