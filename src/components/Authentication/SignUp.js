@@ -7,6 +7,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 
 import "./SignUp.css";
+axios.defaults.withCredentials = true;
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -21,6 +22,8 @@ export const SignUp = () => {
   const [agreementss, setAgreementss] = useState(false);
   const [captcha, setCaptcha] = useState(null);
 
+  
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const handleCaptchaChange = (value) => {
@@ -29,8 +32,7 @@ export const SignUp = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-     axios.get("http://localhost:8000/sanctum/csrf-cookie");
-
+  
     const errors = validate();
     if (Object.keys(errors).length === 0) {
       const data = JSON.stringify({
@@ -40,46 +42,45 @@ export const SignUp = () => {
         password,
         passwordAgain,
         phone_number,
-        country_id : country,
+        country_id: country,
         gender,
         agreementss,
-        
       });
-
+  
       try {
-        axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-        const response = axios.post(
+        // Request the CSRF cookie first
+        await axios.get("http://localhost:8000/sanctum/csrf-cookie");
+  
+        // Get the CSRF token from the cookie
+        const csrfToken = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("XSRF-TOKEN"))
+          .split("=")[1];
+  
+        // Include the CSRF token in the headers
+        const response = await axios.post(
           "http://127.0.0.1:8000/api/register",
           data,
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              
+              "X-XSRF-TOKEN": csrfToken, // Add this line
             },
           }
         );
-       console.log(response);
+        console.log(response);
         if (response.status === 201) {
-          localStorage.setItem('userLoggedIn', true);
+          localStorage.setItem("userLoggedIn", true);
           navigate("/AddNewCompany");
           window.alert("Welcome to the system");
-          } 
-       
-    
-        })
-        
-      
-     } catch (error) {
+        }
+      } catch (error) {
         console.log(error.response.data);
       }
-
-    
     } else {
       setErrors(errors);
     }
-
- 
   };
 
   const getCountry = async () => {
