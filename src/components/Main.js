@@ -1,12 +1,10 @@
-import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-
-
+import NavBar from "./Navigation/NavBar";
+import NotAllowed from "./Authentication/NotAllowed";
 import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
 
-import { SignIn } from "./Authentication/SignIn";
 const Main = () => {
   const isLoggedIn = checkIfLoggedIn();
   return (
@@ -14,6 +12,7 @@ const Main = () => {
     <div>
       {isLoggedIn ? (
         <>
+        <NavBar />
           <div>You are Logged in</div>
           <Form onSubmit={handleSubmit}>
             <Button className="sign-in-button" variant="info" type="submit">
@@ -22,8 +21,8 @@ const Main = () => {
           </Form>
         </>
       ) : (
-        <SignIn />
-      )}
+        <NotAllowed />
+)}
     </div>
 
   )

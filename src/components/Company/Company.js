@@ -11,11 +11,11 @@ const Company = () => {
     setCompany(response.data.data);
     console.log(response.data.data);
   };
-
   useEffect(() => {
     getCompany();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
   return (
     <div>
        {company.length === 0 ? (

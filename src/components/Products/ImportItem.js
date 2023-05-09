@@ -25,7 +25,7 @@ const ImportItem = () => {
   let { id } = useParams();
   useEffect(() => {
     getImportProduct(id);
-  }, []);
+  });
   const handleNavigateItem = () => {
     navigate("/Import");
   };

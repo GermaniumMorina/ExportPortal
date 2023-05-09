@@ -25,7 +25,7 @@ const ExportItem = () => {
   let { id } = useParams();
   useEffect(() => {
     getExportProduct(id);
-  }, []);
+  });
   const handleNavigateItem = () => {
     navigate("/Export");
   };

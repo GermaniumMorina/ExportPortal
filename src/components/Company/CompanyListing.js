@@ -65,7 +65,7 @@ const CompanyListing = () => {
                 />
                 </div>
               </td>
-              <td scope="row">{company.name}</td>
+              <th scope="row">{company.name}</th>
               <td>{company.keywords}</td>
               <td>{company.country}</td>
               <td>{company.more_info}</td>

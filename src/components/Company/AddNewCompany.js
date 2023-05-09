@@ -8,8 +8,11 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useEffect } from "react";
+import NotAllowed from "../Authentication/NotAllowed";
+import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
 
 export const AddNewCompany = () => {
+  const isLoggedIn = checkIfLoggedIn();
   const [name, setName] = useState("");
   const [type, setCompanyType] = useState("");
   const [TIN, setTIN] = useState("");
@@ -66,6 +69,7 @@ export const AddNewCompany = () => {
   };
 
   return (
+    isLoggedIn ? (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
         <div className="add-new-company-form-div">
@@ -238,5 +242,8 @@ export const AddNewCompany = () => {
         </div>
       </div>
     </div>
+    ) : (
+      <NotAllowed />
+    )
   );
 };
