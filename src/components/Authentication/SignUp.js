@@ -29,7 +29,6 @@ export const SignUp = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-     axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
     const errors = validate();
     if (Object.keys(errors).length === 0) {
