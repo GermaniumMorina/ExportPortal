@@ -7,160 +7,165 @@ import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 
 import "./SignUp.css";
+axios.defaults.withCredentials = true;
 
 export const SignUp = () => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordAgain, setPasswordAgain] = useState("");
-  const [phone_number, setPhoneNumber] = useState("");
-  const [countryList, setCountryList] = useState([]);
-  const [country, setCountry] = useState("");
-  const [gender, setGender] = useState("");
-  const [agreementss, setAgreementss] = useState(false);
-  const [captcha, setCaptcha] = useState(null);
-
-  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const [formValues, setFormValues] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    passwordAgain: "",
+    phone_number: "",
+    country_id: "",
+    gender: "",
+    agreementss: false,
+    captcha: null,
+  });
+  const [countryList, setCountryList] = useState([]);
+  const [errors, setErrors] = useState({});
+
   const handleCaptchaChange = (value) => {
-    setCaptcha(value);
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      captcha: value,
+    }));
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-     axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
     const errors = validate();
     if (Object.keys(errors).length === 0) {
-      const data = JSON.stringify({
-        name,
-        surname,
-        email,
-        password,
-        passwordAgain,
-        phone_number,
-        country_id : country,
-        gender,
-        agreementss,
-        
-      });
+      const data = JSON.stringify(formValues);
 
       try {
-        axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-        const response = axios.post(
+        // Request the CSRF cookie first
+        await axios.get("http://localhost:8000/sanctum/csrf-cookie");
+
+        // Get the CSRF token from the cookie
+        const csrfToken = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("XSRF-TOKEN"))
+          .split("=")[1];
+
+        // Include the CSRF token in the headers
+        const response = await axios.post(
           "http://127.0.0.1:8000/api/register",
           data,
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              
+              "X-XSRF-TOKEN": csrfToken, // Add this line
             },
           }
         );
-       console.log(response);
+        console.log(response);
         if (response.status === 201) {
-          localStorage.setItem('userLoggedIn', true);
+          localStorage.setItem("userLoggedIn", true);
           navigate("/AddNewCompany");
           window.alert("Welcome to the system");
-          } 
-       
-    
-        })
-        
-      
-     } catch (error) {
+        }
+      } catch (error) {
         console.log(error.response.data);
       }
-
-    
     } else {
       setErrors(errors);
     }
-
- 
   };
 
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
     setCountryList(ApiCountry.data.data);
-   
   };
+
   useEffect(() => {
     getCountry();
   }, []);
 
   const handleAgreementCheck = (e) => {
-    setAgreementss(e.target.checked);
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      agreementss: e.target.checked,
+    }));
   };
+
   const handleCountryChange = (e) => {
-    setCountry(e.target.value);
-   
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      country_id: e.target.value,
+    }));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
 
   const validate = () => {
     let errors = {};
 
-    if (!name) {
+    if (!formValues.name) {
       errors.name = "Name is required";
     }
-    if (!surname) {
+    if (!formValues.surname) {
       errors.surname = "Surname is required";
     }
-    if (!email) {
+    if (!formValues.email) {
       errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
+    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
       errors.email = "Email is invalid";
     }
-    if (!password) {
+    if (!formValues.password) {
       errors.password = "Password is required";
-    } else if (password.length < 8) {
+    } else if (formValues.password.length < 8) {
       errors.password = "Password must be at least 8 characters long";
     }
-    if (password !== passwordAgain) {
+    if (formValues.password !== formValues.passwordAgain) {
       errors.passwordAgain = "Passwords do not match";
     }
-    if (!phone_number) {
+    if (!formValues.phone_number) {
       errors.phone_number = "Number is required";
-    } 
-    if (!country) {
-      errors.country = "Country is required";
     }
-    if (!gender) {
+    if (!formValues.country_id) {
+      errors._id = "Country is required";
+    }
+    if (!formValues.gender) {
       errors.gender = "Gender is required";
     }
-    if (!agreementss) {
+    if (!formValues.agreementss) {
       errors.agreementss = "You must accept the terms and conditions";
     }
-    if (!captcha) {
+    if (!formValues.captcha) {
       errors.captcha = "Please complete the reCAPTCHA verification";
     }
     return errors;
   };
-
   return (
-    <div className="container ">
+    <div className="container">
       <Form
         onSubmit={handleRegister}
-        className="justify-content-center mt-5  mb-5"
+        className="justify-content-center mt-5 mb-5"
       >
-        <Form.Group
+        <div
           id="form"
-          className=" col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto  form p-5  border border-dark  "
-          controlId="exampleForm.ControlInput1"
+          className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-5 border border-dark"
         >
           <h5 className="p-2">Sign Up For Free</h5>
           <Form.Group>
             <Form.Control
               type="text"
               name="name"
-              value={name}
-              placeholder="Name "
+              value={formValues.name}
+              placeholder="Name"
               className="mb-2"
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleInputChange}
             />
-
             {errors.name && (
               <Form.Text className="text-danger">{errors.name}</Form.Text>
             )}
@@ -169,10 +174,10 @@ export const SignUp = () => {
             <Form.Control
               type="text"
               name="surname"
-              placeholder=" Surname*"
-              value={surname}
+              placeholder="Surname"
+              value={formValues.surname}
               className="mb-2"
-              onChange={(e) => setSurname(e.target.value)}
+              onChange={handleInputChange}
             />
             {errors.surname && (
               <Form.Text className="text-danger">{errors.surname}</Form.Text>
@@ -181,11 +186,11 @@ export const SignUp = () => {
           <Form.Group>
             <Form.Control
               type="email"
-              placeholder="E-mail*"
-              value={email}
+              placeholder="E-mail"
+              value={formValues.email}
               className="mb-2"
               name="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleInputChange}
             />
             {errors.email && (
               <Form.Text className="text-danger">{errors.email}</Form.Text>
@@ -196,9 +201,9 @@ export const SignUp = () => {
               type="password"
               placeholder="Password"
               className="mb-2"
-              value={password}
+              value={formValues.password}
               name="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleInputChange}
             />
             {errors.password && (
               <Form.Text className="text-danger">{errors.password}</Form.Text>
@@ -210,8 +215,8 @@ export const SignUp = () => {
               placeholder="Password (again)"
               name="passwordAgain"
               className="mb-2"
-              value={passwordAgain}
-              onChange={(e) => setPasswordAgain(e.target.value)}
+              value={formValues.passwordAgain}
+              onChange={handleInputChange}
             />
             {errors.passwordAgain && (
               <Form.Text className="text-danger">
@@ -221,12 +226,12 @@ export const SignUp = () => {
           </Form.Group>
           <Form.Group>
             <Form.Control
-              type="number"
+              type="tel"
               placeholder="Phone Number"
               className="mb-2"
               name="phone_number"
-              value={phone_number}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={formValues.phone_number}
+              onChange={handleInputChange}
             />
             {errors.phone_number && (
               <Form.Text className="text-danger">
@@ -237,9 +242,9 @@ export const SignUp = () => {
           <Form.Group>
             <Form.Select
               className="mb-2"
-              name="country"
-              value={country}
-              onChange={handleCountryChange}
+              name="country_id"
+              value={formValues.country_id}
+              onChange={handleInputChange}
             >
               <option>Select country</option>
               {countryList.map((country) => (
@@ -247,13 +252,13 @@ export const SignUp = () => {
                   {country.country}
                 </option>
               ))}
-              {errors.country && (
-                <Form.Text className="text-danger">{errors.country}</Form.Text>
-              )}
             </Form.Select>
+            {errors.country && (
+              <Form.Text className="text-danger">{errors.country}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group>
-            <Form.Label className="gender">Gender </Form.Label>
+            <Form.Label className="gender">Gender</Form.Label>
             <Form.Check
               type="radio"
               name="gender"
@@ -261,8 +266,8 @@ export const SignUp = () => {
               label="Male"
               inline
               value="male"
-              checked={gender === "male"}
-              onChange={(e) => setGender(e.target.value)}
+              checked={formValues.gender === "male"}
+              onChange={handleInputChange}
             />
 
             <Form.Check
@@ -272,8 +277,8 @@ export const SignUp = () => {
               label="Female"
               inline
               value="female"
-              checked={gender === "female"}
-              onChange={(e) => setGender(e.target.value)}
+              checked={formValues.gender === "female"}
+              onChange={handleInputChange}
             />
             {errors.gender && (
               <Form.Text className="text-danger">{errors.gender}</Form.Text>
@@ -283,7 +288,7 @@ export const SignUp = () => {
             <Form.Check
               type="checkbox"
               label="I have read and understood Membership Classification Text"
-              checked={agreementss}
+              checked={formValues.agreementss}
               onChange={handleAgreementCheck}
               className="mb-2"
             />
@@ -295,10 +300,10 @@ export const SignUp = () => {
           </Form.Group>
           <Form.Group>
             <ReCAPTCHA
-              className="justify-content-center d-flex "
+              className="justify-content-center d-flex"
               sitekey="6LfQG6IlAAAAAI3gpbAOJm40Ql1BwD7G9DhtAQh1"
               onChange={handleCaptchaChange}
-              value={captcha}
+              value={formValues.captcha}
             />
             {errors.captcha && (
               <Form.Text className="text-danger">{errors.captcha}</Form.Text>
@@ -310,14 +315,14 @@ export const SignUp = () => {
             </Button>
           </Form.Group>
           <div className="d-flex justify-content-center">
-            <p className="mt-3 ">
+            <p className="mt-3">
               If you have an account
-              <Link className=" p-2" to={"/SignIn"}>
+              <Link className="p-2" to={"/SignIn"}>
                 Sign In
               </Link>
             </p>
           </div>
-        </Form.Group>
+        </div>
       </Form>
     </div>
   );
