@@ -102,76 +102,44 @@ export const SignUp = () => {
 
   const validate = () => {
     let errors = {};
-  
-    switch (!name) {
-      case true:
-        errors.name = "Name is required";
-        break;
+
+    if (!name) {
+      errors.name = "Name is required";
     }
-  
-    switch (!surname) {
-      case true:
-        errors.surname = "Surname is required";
-        break;
+    if (!surname) {
+      errors.surname = "Surname is required";
     }
-  
-    switch (!email) {
-      case true:
-        errors.email = "Email is required";
-        break;
-      case !/\S+@\S+\.\S+/.test(email):
-        errors.email = "Email is invalid";
-        break;
+    if (!email) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "Email is invalid";
     }
-  
-    switch (!password) {
-      case true:
-        errors.password = "Password is required";
-        break;
-      case password.length < 8:
-        errors.password = "Password must be at least 8 characters long";
-        break;
+    if (!password) {
+      errors.password = "Password is required";
+    } else if (password.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
     }
-  
-    switch (password !== passwordAgain) {
-      case true:
-        errors.passwordAgain = "Passwords do not match";
-        break;
+    if (password !== passwordAgain) {
+      errors.passwordAgain = "Passwords do not match";
     }
-  
-    switch (!phone_number) {
-      case true:
-        errors.phone_number = "Number is required";
-        break;
+    if (!phone_number) {
+      errors.phone_number = "Number is required";
+    } 
+    if (!country) {
+      errors.country = "Country is required";
     }
-  
-    switch (!country) {
-      case true:
-        errors.country = "Country is required";
-        break;
+    if (!gender) {
+      errors.gender = "Gender is required";
     }
-  
-    switch (!gender) {
-      case true:
-        errors.gender = "Gender is required";
-        break;
+    if (!agreementss) {
+      errors.agreementss = "You must accept the terms and conditions";
     }
-  
-    switch (!agreementss) {
-      case true:
-        errors.agreementss = "You must accept the terms and conditions";
-        break;
+    if (!captcha) {
+      errors.captcha = "Please complete the reCAPTCHA verification";
     }
-  
-    switch (!captcha) {
-      case true:
-        errors.captcha = "Please complete the reCAPTCHA verification";
-        break;
-    }
-  
     return errors;
   };
-  
+
   return (
     <div className="container ">
       <Form
