@@ -3,8 +3,11 @@ import "./AddNewItem.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { useNavigate } from "react-router";
+
 
 export const AddNewItem = () => {
+const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
@@ -33,12 +36,16 @@ export const AddNewItem = () => {
       company_id: 1,
     });
     console.log("response", response);
+    if(response.status === 200) {
+      navigate("/Export");
+    }
   };
 
   const handleFileSelect = (event) => {
     setFormValues((prevValues) => ({ ...prevValues, imageURL: event.target.files[0].name }));
   };
 
+  
   return (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
