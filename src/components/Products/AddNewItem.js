@@ -3,46 +3,58 @@ import "./AddNewItem.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { useNavigate } from "react-router";
+
 
 export const AddNewItem = () => {
-  const [name, setItemName] = useState("");
-  const [description, setItemDescription] = useState("");
-  const [price, setItemPrice] = useState();
-  const [category_id, setCategory] = useState();
-    const [type, setType] = useState("");
+const navigate = useNavigate();
+  const [formValues, setFormValues] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category_id: "",
+    type: "",
+    imageURL: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
-    const data =JSON.stringify({
-      name,
-      description,
-      price,
-      category_id,
-      type,
-      imageURL,
+    const data = JSON.stringify({
+      ...formValues,
       company_id: 1,
     });
     console.log(data);
     const response = await axios.post(`http://localhost:8000/api/add`, {
-      name,
-      description,
-      price,
-      category_id,
-      type,
-      imageURL,
+      ...formValues,
       company_id: 1,
     });
     console.log("response", response);
- 
+    if(response.status === 200 && formValues.type === "export") {
+      window.alert("Item added successfully");
+      navigate("/Export");
+      
+    }
+    else if(response.status === 200 && formValues.type === "import") {
+      window.alert("Item added successfully");
+      navigate("/Import");
+    }
+    else {
+      window.alert("Something went wrong");
+    }
   };
-
-  const [imageURL, setFileName] = useState("");
 
   const handleFileSelect = (event) => {
-    setFileName(event.target.files[0].name);
+    setFormValues((prevValues) => ({ ...prevValues, imageURL: event.target.files[0].name }));
   };
+
+  
   return (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
@@ -53,8 +65,8 @@ export const AddNewItem = () => {
               <Form.Control
                 type="text"
                 placeholder="Item Name"
-                onChange={(e) => setItemName(e.target.value)}
-                value={name}
+                onChange={handleChange}
+                value={formValues.name}
                 name="name"
               />
             </Form.Group>
@@ -67,8 +79,8 @@ export const AddNewItem = () => {
                 rows={3}
                 type="text"
                 placeholder="Item Description"
-                onChange={(e) => setItemDescription(e.target.value)}
-                value={description}
+                onChange={handleChange}
+                value={formValues.description}
                 name="description"
               />
             </Form.Group>
@@ -77,14 +89,14 @@ export const AddNewItem = () => {
               <Form.Control
                 type="number"
                 placeholder="Item Price"
-                onChange={(e) => setItemPrice(e.target.value)}
-                value={price}
+                onChange={handleChange}
+                value={formValues.price}
                 name="price"
               />
             </Form.Group>
             <Form.Select
-              value={category_id}
-              onChange={(e) => setCategory(e.target.value)}
+              value={formValues.category_id}
+              onChange={handleChange}
               name="category_id"
             >
               <option value={""}>Category</option>
@@ -95,12 +107,11 @@ export const AddNewItem = () => {
               <option value={5}>Health</option>
               <option value={6}>Medical</option>
               <option value={7}>Pets</option>
-              
             </Form.Select>
-<br/>
+            <br />
             <Form.Select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
+              value={formValues.type}
+              onChange={handleChange}
               name="type"
             >
               <option value="">Type</option>
@@ -111,7 +122,6 @@ export const AddNewItem = () => {
             <Button type="submit" variant="primary">
               Submit
             </Button>
-             {/* Uncomment below to add file upload functionality */ }
             <br />
             <br />
             <input
@@ -119,15 +129,15 @@ export const AddNewItem = () => {
               id="myfile"
               name="myfile"
               onChange={handleFileSelect}
-            />
-            <label htmlFor="myfile" className="custom-file-input">
-              Choose a file
-            </label>
-            <br />
-            <span className="file-name">File added: {imageURL}</span>
-          </Form>
-        </div>
-      </div>
-    </div>
-  );
+/>
+<label htmlFor="myfile" className="custom-file-input">
+Choose a file
+</label>
+<br />
+<span className="file-name">File added: {formValues.imageURL}</span>
+</Form>
+</div>
+</div>
+</div>
+);
 };

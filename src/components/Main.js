@@ -7,13 +7,14 @@ import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
 
 const Main = () => {
   const isLoggedIn = checkIfLoggedIn();
+  const user = JSON.stringify(localStorage.getItem('userName'));
   return (
 
     <div>
       {isLoggedIn ? (
         <>
         <NavBar />
-          <div>You are Logged in</div>
+          <div>You are Logged in {user}</div>
           <Form onSubmit={handleSubmit}>
             <Button className="sign-in-button" variant="info" type="submit">
               Logout
