@@ -10,8 +10,10 @@ import Checkbox from "@mui/material/Checkbox";
 import { useEffect } from "react";
 import NotAllowed from "../Authentication/NotAllowed";
 import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
+import { useNavigate } from "react-router";
 
 export const AddNewCompany = () => {
+  const navigate = useNavigate();
   const isLoggedIn = checkIfLoggedIn();
   const [formValues, setFormValues] = useState({
     name: "",
@@ -56,10 +58,16 @@ export const AddNewCompany = () => {
     await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
     const response = await axios.post(`http://localhost:8000/api/company`, formValues);
-    console.log("response", response);
+ if (response.status === 201) {
+     
+      window.alert("Company added successfully");
+    navigate ("/companies");
+    }
+
     const activity = JSON.stringify({ selectedValues: formValues.selectedValues });
     // send `data` to API endpoint using fetch or Axios
     console.log(activity);
+   
   };
 
   return isLoggedIn ? (

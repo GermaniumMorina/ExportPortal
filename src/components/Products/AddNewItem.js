@@ -36,8 +36,17 @@ const navigate = useNavigate();
       company_id: 1,
     });
     console.log("response", response);
-    if(response.status === 200) {
+    if(response.status === 200 && formValues.type === "export") {
+      window.alert("Item added successfully");
       navigate("/Export");
+      
+    }
+    else if(response.status === 200 && formValues.type === "import") {
+      window.alert("Item added successfully");
+      navigate("/Import");
+    }
+    else {
+      window.alert("Something went wrong");
     }
   };
 
