@@ -11,26 +11,12 @@ const ImportItem = () => {
   const navigate = useNavigate();
   const [importProduct, setImportProduct] = useState([]);
   //calling the GET method to get the "import" data
-  const getImportProduct = async () => {
-    const data = {
-      headers: {
-        Accept: "application/json",
-      },
-    };
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/ilist/" + id,
-      data
-    );
-    const apiImportProducts = response.data.data;
-    setImportProduct(apiImportProducts);
-  };
-  let { id } = useParams();
-  useEffect(() => {
-    getImportProduct(id);
-  });
-  const handleNavigateItem = () => {
-    navigate("/Import");
-  };
+ const getImportProduct = async () => {
+   const data = {
+     headers: {
+       Accept: "application/json",
+     },
+   };
 
    const response = await axios.get(
      "http://127.0.0.1:8000/api/elist/" + id,

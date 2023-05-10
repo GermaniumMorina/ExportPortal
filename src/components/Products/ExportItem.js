@@ -28,8 +28,6 @@ const ExportItem = () => {
   useEffect(() => {
     getExportProduct(id);
   });
-  const handleNavigateItem = () => {
-  }, []);
   const handleBack = () => {
     navigate("/Export");
   };
