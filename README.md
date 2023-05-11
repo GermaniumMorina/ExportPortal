@@ -70,12 +70,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 Install all these packages :
-### npm install react-router-dom
-### npm install react-google-recaptcha
-### npm install react-bootstrap  
-### npm install @mui/material @emotion/react @emotion/styled
-### npm install @mui/material @mui/styled-engine-sc styled-components
-### npm install @fontsource/roboto
-### npm install @mui/icons-material
-### npm install axios   
-### npm install react-icons --save
+### `npm install react-router-dom`
+### `npm install react-google-recaptcha`
+### `npm install react-bootstrap` 
+### `npm install @mui/material @emotion/react @emotion/styled`
+### `npm install @mui/material @mui/styled-engine-sc styled-components`
+### `npm install @fontsource/roboto`
+### `npm install @mui/icons-material`
+### `npm install axios`   
+### `npm install react-icons --save`
