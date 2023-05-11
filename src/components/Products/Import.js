@@ -7,15 +7,14 @@ import Button from "react-bootstrap/Button";
 const Import = () => {
   const navigate = useNavigate();
   const [importProducts, setImportProducts] = useState([]);
-  //calling the GET method to get the "import" data
-   const getImportProducts = async () => {
+  const getImportProducts = async () => {
      const data = {
        headers: {
          Accept: "application/json",
        },
      };
      const apiImportProducts = await axios.get(
-       "http://127.0.0.1:8000/api/elist",
+       "http://127.0.0.1:8000/api/ilist",
        data
      );
      setImportProducts(apiImportProducts.data.data);
@@ -63,8 +62,7 @@ const Import = () => {
             return (
               <div
                 key={importProduct.id}
-                className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark  rounded"
-              >
+                className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark  rounded">
                 <div>
                   <p>country: {importProduct.country}</p>
                   <p>price: {importProduct.price}</p>
