@@ -12,9 +12,11 @@ import { BsCurrencyExchange } from "react-icons/bs";
 function NavBar() {
   const isLoggedIn = checkIfLoggedIn();
   const user = localStorage.getItem("userName");
-  const tokens = localStorage.getItem("tokens");
+    const tokens = localStorage.getItem("tokens");
+  const userId = localStorage.getItem("userId");
+
   const handleTokens = async () => {
-    const response = await axios.get("http://localhost:8000/api/token/11");
+const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
     console.log(response.data.amount);
     localStorage.setItem("tokens", response.data.amount);
   };
@@ -39,6 +41,7 @@ function NavBar() {
             <Nav.Link href="/AddNewItem">Add New Product</Nav.Link>
             <Nav.Link href="/Import">Import</Nav.Link>
             <Nav.Link href="/Export">Export</Nav.Link>
+            <Nav.Link href="/buy">Buy TEST</Nav.Link>
           </Nav>
 
           <Nav>

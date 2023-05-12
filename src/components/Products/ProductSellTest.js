@@ -3,20 +3,22 @@ import axios from "axios";
 import NavBar from "../Navigation/NavBar";
 
 export const ProductSellTest = () => {
-  const price = 120;
+  const price = 3;
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(localStorage.getItem("tokens"));
-
+let userId = localStorage.getItem("userId");
   const handleBuy = async () => {
     console.log("Buy button clicked");
-    
-    if (tokens < price) {
+
+
+if (tokens < price) {
       alert("Not enough tokens!");
       return;
     }
+    else{
     setLoading(true);
     try {
-      await axios.put("http://localhost:8000/api/updateToken/11", {
+      await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
         amount: tokens - price,
       });
       setLoading(false);
@@ -25,12 +27,35 @@ export const ProductSellTest = () => {
       setLoading(false);
       // Handle error
     }
-    const response = await axios.get("http://localhost:8000/api/token/11");
+    const response = await axios.get(`http://localhost:8000/api/token/{userId}`);
     setTokens(response.data.amount);
   };
 
-
-
+  };
+  const handleChat = async () => {
+    if (tokens < 10) {
+      alert("You should have at least 10 tokens to chat with the owner!");
+    } else {
+      const confirmChat = window.confirm("Chat with the owner? This will take 10 tokens from your account.");
+    
+      if (confirmChat) {
+        setLoading(true);
+        try {
+          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
+            amount: tokens - 10,
+          });
+          setLoading(false);
+          // Handle success or redirect to a success page
+        } catch (error) {
+          setLoading(false);
+          // Handle error
+        }
+        const response = await axios.get(`http://localhost:8000/api/token/{userId}`);
+        setTokens(response.data.amount);
+      }
+    }
+    
+  }
   return (
     <div>
       <NavBar />
@@ -56,6 +81,7 @@ export const ProductSellTest = () => {
           <br />
 
           <button onClick={handleBuy}>Buy</button>
+          <button onClick={handleChat}>Chat with owner</button>
         </div>
       )}
     </div>

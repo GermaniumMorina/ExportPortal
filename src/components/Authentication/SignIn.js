@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const token = document.cookie;
 
 
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const SignIn = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+     axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
       axios
         .post("http://localhost:8000/api/login", {
           email,
@@ -34,6 +35,9 @@ export const SignIn = () => {
             localStorage.setItem('userName', response.data.user.name)
             localStorage.setItem('userEmail', response.data.user.email)
             localStorage.setItem('userLoggedIn', true)
+            localStorage.setItem('userId', response.data.user.id)
+            localStorage.setItem('userRole', response.data.user.role)
+            localStorage.setItem('token' , token)
             window.alert("Login Successful");
             navigate("/dashboard");
 
