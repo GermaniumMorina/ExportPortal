@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import Button from "react-bootstrap/Button";
-
+import NavBar from "../Navigation/NavBar";
 const Import = () => {
   const navigate = useNavigate();
   const [importProducts, setImportProducts] = useState([]);
@@ -15,7 +15,7 @@ const Import = () => {
        },
      };
      const apiImportProducts = await axios.get(
-       "http://127.0.0.1:8000/api/elist",
+       "http://127.0.0.1:8000/api/ilist",
        data
      );
      setImportProducts(apiImportProducts.data.data);
@@ -54,6 +54,7 @@ const Import = () => {
 
   return (
     <div>
+      <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
         <h1> Import List</h1>
       </div>

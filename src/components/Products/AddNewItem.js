@@ -15,6 +15,7 @@ const navigate = useNavigate();
     category_id: "",
     type: "",
     imageURL: "",
+    subcategory_id: "",
   });
 
   const handleChange = (e) => {
@@ -100,6 +101,21 @@ const navigate = useNavigate();
               name="category_id"
             >
               <option value={""}>Category</option>
+              <option value={1}>Fashion</option>
+              <option value={2}>Accesories</option>
+              <option value={3}>Home</option>
+              <option value={4}>Sporting</option>
+              <option value={5}>Health</option>
+              <option value={6}>Medical</option>
+              <option value={7}>Pets</option>
+            </Form.Select>
+            <br />
+            <Form.Select
+              value={formValues.subcategory_id}
+              onChange={handleChange}
+              name="subcategory_id"
+            >
+              <option value={""}>Sub-Category</option>
               <option value={1}>Fashion</option>
               <option value={2}>Accesories</option>
               <option value={3}>Home</option>

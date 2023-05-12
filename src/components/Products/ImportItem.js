@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useParams } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import moment from "moment";
-
+import NavBar from "../Navigation/NavBar";
 const ImportItem = () => {
   const navigate = useNavigate();
   const [importProduct, setImportProduct] = useState([]);
@@ -51,6 +51,7 @@ const ImportItem = () => {
   
   return (
     <div>
+      <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
         <h1>Import Details</h1>
       </div>

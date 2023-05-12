@@ -3,41 +3,43 @@ import axios from "axios";
 import NavBar from "../Navigation/NavBar";
 
 export const ProductSellTest = () => {
-  const price = 3;
+  const price = 43;
   const [loading, setLoading] = useState(false);
-  const [tokens, setTokens] = useState(localStorage.getItem("tokens"));
-let userId = localStorage.getItem("userId");
+  const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
+
+  let userId = localStorage.getItem("userId");
+  const bilance = tokens - price;
   const handleBuy = async () => {
     console.log("Buy button clicked");
 
-
-if (tokens < price) {
+    if (tokens < price) {
       alert("Not enough tokens!");
       return;
-    }
-    else{
-    setLoading(true);
-    try {
-      await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
-        amount: tokens - price,
-      });
-      setLoading(false);
-      // Handle success or redirect to a success page
-    } catch (error) {
-      setLoading(false);
-      // Handle error
-    }
-    const response = await axios.get(`http://localhost:8000/api/token/{userId}`);
-    setTokens(response.data.amount);
-  };
+    } else {
+      setLoading(true);
+      try {
+        await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
+          amount: bilance,
+        });
+        setLoading(false);
+        // Handle success or redirect to a success page
+      } catch (error) {
+        setLoading(false);
+        // Handle error
+      }
+      const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
 
+      setTokens(response.data.amount);
+    }
   };
   const handleChat = async () => {
     if (tokens < 10) {
       alert("You should have at least 10 tokens to chat with the owner!");
     } else {
-      const confirmChat = window.confirm("Chat with the owner? This will take 10 tokens from your account.");
-    
+      const confirmChat = window.confirm(
+        "Chat with the owner? This will take 10 tokens from your account."
+      );
+
       if (confirmChat) {
         setLoading(true);
         try {
@@ -50,12 +52,13 @@ if (tokens < price) {
           setLoading(false);
           // Handle error
         }
-        const response = await axios.get(`http://localhost:8000/api/token/{userId}`);
+        const response = await axios.get(
+          `http://localhost:8000/api/token/{userId}`
+        );
         setTokens(response.data.amount);
       }
     }
-    
-  }
+  };
   return (
     <div>
       <NavBar />
@@ -64,9 +67,8 @@ if (tokens < price) {
           <p>Loading...</p>
         </div>
       ) : (
-
         <div>
-            <p>{tokens}</p>
+          <p>{tokens}</p>
           <h1>This is a test site</h1>
           <br />
           <h2>Product Name: Test</h2>

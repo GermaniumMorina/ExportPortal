@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
+import NavBar from "../Navigation/NavBar";
 const ExportItem = () => {
   const navigate = useNavigate();
   const [exportProduct, setExportProduct] = useState([]);
@@ -48,6 +49,7 @@ const ExportItem = () => {
 
   return (
     <div>
+      <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
         <h1>Export Details</h1>
       </div>
