@@ -19,7 +19,7 @@ const ImportItem = () => {
    };
 
    const response = await axios.get(
-     "http://127.0.0.1:8000/api/elist/" + id,
+     "http://127.0.0.1:8000/api/ilist/" + id,
      data
    );
    const apiImportProducts = response.data.data;
@@ -28,7 +28,7 @@ const ImportItem = () => {
  let { id } = useParams();
  useEffect(() => {
    getImportProduct(id);
- }, []);
+ });
  const handleBack = () => {
    navigate("/Import");
  };
