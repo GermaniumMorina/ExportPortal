@@ -75,15 +75,16 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
     </div>
   ) : (
     <div>
-      <Navbar bg="light" variant="light">
+      <Navbar bg="light" variant="light" className="custom-navbar">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/" className="logo">
             <img
               src={logo}
               alt="logo"
               width="70"
               height="70"
               className="d-inline-block align-top"
+
             />
           </Navbar.Brand>
 
@@ -94,6 +95,7 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
             <Nav.Link href="/Import">Import</Nav.Link>
             <Nav.Link href="/Export">Export</Nav.Link>
             <Nav.Link href="/SignUp">Sign Up</Nav.Link>
+            <Nav.Link href="/SignIn">Sign In</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
