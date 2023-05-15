@@ -10,6 +10,7 @@ const ProductList = () => {
   const [exportProducts, setExportProducts] = useState([]);
   const [categories , setCategories] = useState([]);
   const [selectedCategories , setSelectedCategories] = useState([]);
+  
   const getExportProducts = async () => {
     const data = {
       headers: {
