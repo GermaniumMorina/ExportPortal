@@ -39,31 +39,31 @@
     }, []);
 
     const handleCheckboxChange = (event) => {
-      const { checked, name } = event.target;
+      const { checked, id } = event.target;
       if (checked) {
-        setSelectedCategories([...selectedCategories, name]);
+        setSelectedCategories([...selectedCategories, parseInt(id)]);
       } else {
-        setSelectedCategories(selectedCategories.filter(category => category !== name));
+        setSelectedCategories(selectedCategories.filter(category => category !== parseInt(id)));
       }
     };
 
     const filteredCompanies = selectedCategories.length > 0 
-      ? companyList.filter(company => selectedCategories.includes(company.category_name)) 
-      : companyList;
+  ? companyList.filter(company => selectedCategories.includes(company.category)) 
+  : companyList;
 
     return (
       <div className="container">
         <div className="d-flex justify-content-center mt-4">
         {categories.map(category => (
             <Form.Check 
-              type="checkbox" 
-              id={`category-${category.name}`} 
-              label={category.name} 
-              name={category.name} 
-              onChange={handleCheckboxChange} 
-              className="m-2"
+            type="checkbox" 
+            id={category.id.toString()} 
+            label={category.name} 
+            name={category.name} 
+            onChange={handleCheckboxChange} 
+            className="m-2"
             />
-        ))}
+            ))}
         </div>
 
         <table className="table table-striped table-bordered table-hover">
