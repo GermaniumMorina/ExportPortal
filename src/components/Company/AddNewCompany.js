@@ -28,6 +28,7 @@ export const AddNewCompany = () => {
     selectedValues: [],
     country: "",
     budged: "",
+    profile_picture:"null.jpg",
   });
   const [countryList, setCountryList] = useState([]);
 
