@@ -48,7 +48,7 @@
     };
 
     const filteredCompanies = selectedCategories.length > 0 
-  ? companyList.filter(company => selectedCategories.includes(company.category)) 
+  ? companyList.filter(company => selectedCategories.includes(company.category_id)) 
   : companyList;
 
     return (
