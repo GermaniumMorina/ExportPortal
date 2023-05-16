@@ -21,6 +21,13 @@ import Companies from './components/Company/Companies';
 import Company from './components/Company/Company';
 import  CompanyListing from './components/Company/CompanyListing';
 import { ProductSellTest } from './components/Products/ProductSellTest';
+import { Error400 } from './components/Error/400';
+import { Error401 } from './components/Error/401';
+import { Error403 } from './components/Error/403';
+import { Error404 } from './components/Error/404';
+import { Error500 } from './components/Error/500';
+import { Error502 } from './components/Error/502';
+import { Error503 } from './components/Error/503';
 
 
 console.log(document.cookie);
@@ -87,7 +94,42 @@ const routes = [
     {
       path: "/Buy",
       element: <ProductSellTest />,
+    },
+    {
+      path: "/error/400",
+      element: < Error400/>,
+    },
+    {
+      path: "/error/401",
+      element: < Error401/>,
+    },
+    {
+      path: "/error/403",
+      element: < Error403/>,
+    },
+    {
+      path: "/error/404",
+      element: < Error404/>,
+    },
+    {
+      path: "/error/500",
+      element: < Error500/>,
+    },
+    {
+      path: "/error/502",
+      element: < Error502/>,
+      
+    },
+    {
+      path: "*",
+      element: <Navigate to="/error/404" />,
+    },
+    {
+      path: '/error/503',
+      element: <Error503 />,
     }
+
+
   
   
 ];
