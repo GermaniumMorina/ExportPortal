@@ -28,7 +28,8 @@ import { Error404 } from './components/Error/404';
 import { Error500 } from './components/Error/500';
 import { Error502 } from './components/Error/502';
 import { Error503 } from './components/Error/503';
-
+import Footer from './components/Footer/Footer';
+import { Support } from './components/Support/Support';
 
 console.log(document.cookie);
 
@@ -127,6 +128,10 @@ const routes = [
     {
       path: '/error/503',
       element: <Error503 />,
+    },
+    {
+      path: "/support",
+      element: <Support />,
     }
 
 
@@ -137,7 +142,10 @@ const routes = [
 function App() {
   const routing = useRoutes(routes);
 
-  return <div className="App">{routing}</div>;
+  return <div className="App">{routing}
+  
+  <Footer />
+</div>;
 }
 
 export default App;

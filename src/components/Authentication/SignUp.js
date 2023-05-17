@@ -99,6 +99,8 @@ export const SignUp = () => {
     }));
   };
 
+  console.log(handleCountryChange);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues((prevValues) => ({
