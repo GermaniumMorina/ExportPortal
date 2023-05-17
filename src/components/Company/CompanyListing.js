@@ -2,7 +2,8 @@
   import React, { useState, useEffect } from 'react';
   import Form from "react-bootstrap/Form";
   import 'bootstrap/dist/css/bootstrap.min.css';
-
+  import NavBar from '../Navigation/NavBar';
+  
   const CompanyListing = () => {
     const [companyList, setCompanyList] = useState([]);
     const [categories , setCategories] = useState([]);
@@ -53,6 +54,7 @@
 
     return (
       <div className="container">
+        <NavBar />
         <div className="d-flex justify-content-center mt-4">
         {categories.map(category => (
             <Form.Check 

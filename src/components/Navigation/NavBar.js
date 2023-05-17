@@ -37,6 +37,7 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
 
           <Nav className="me-auto">
             <Nav.Link href="/Companies">Companies</Nav.Link>
+            <Nav.Link href="/companyListing">Company List</Nav.Link>
             <Nav.Link href="/AddNewCompany">Add new company</Nav.Link>
             <Nav.Link href="/AddNewItem">Add New Product</Nav.Link>
             <Nav.Link href="/Import">Import</Nav.Link>
@@ -90,12 +91,14 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
 
           <Nav className="me-auto">
             <Nav.Link href="/Companies">Companies</Nav.Link>
+            <Nav.Link href="/companyListing">Companies List</Nav.Link>
             <Nav.Link href="/AddNewCompany">Add new company</Nav.Link>
             <Nav.Link href="/AddNewItem">Add New Product</Nav.Link>
             <Nav.Link href="/Import">Import</Nav.Link>
             <Nav.Link href="/Export">Export</Nav.Link>
             <Nav.Link href="/SignUp">Sign Up</Nav.Link>
             <Nav.Link href="/SignIn">Sign In</Nav.Link>
+
           </Nav>
         </Container>
       </Navbar>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import NavBar from "../Navigation/NavBar";
 
 const Company = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const Company = () => {
   
   return (
     <div>
+      <NavBar />
        {company.length === 0 ? (
         <p>Loading...</p>
       ) : (

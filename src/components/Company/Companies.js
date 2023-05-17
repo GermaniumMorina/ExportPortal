@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../Navigation/NavBar";
    
 const Companies = () => {
   const [companyList, setCompanyList] = useState([]);
@@ -45,6 +46,7 @@ const Companies = () => {
   
   return (
     <div>
+      <NavBar />
       {companyList.map((company) => (
         <div style={tableStyle}>
           <table>

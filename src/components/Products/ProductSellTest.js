@@ -4,11 +4,12 @@ import NavBar from "../Navigation/NavBar";
 
 export const ProductSellTest = () => {
   const price = 43;
+  const chatprice = 10;
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
 
   let userId = localStorage.getItem("userId");
-  const bilance = tokens - price;
+  
   const handleBuy = async () => {
     console.log("Buy button clicked");
 
@@ -18,18 +19,16 @@ export const ProductSellTest = () => {
     } else {
       setLoading(true);
       try {
-        await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
-          amount: bilance,
-        });
+        const response = await axios.post(`http://localhost:8000/api/updateToken/${userId}/${price}`);
         setLoading(false);
         // Handle success or redirect to a success page
+     console.log(response);
+        setTokens(response.data.token.amount);
       } catch (error) {
         setLoading(false);
         // Handle error
       }
-      const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
-
-      setTokens(response.data.amount);
+    
     }
   };
   const handleChat = async () => {
@@ -43,9 +42,7 @@ export const ProductSellTest = () => {
       if (confirmChat) {
         setLoading(true);
         try {
-          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
-            amount: tokens - 10,
-          });
+          await axios.post(`http://localhost:8000/api/updateToken/${userId}/${chatprice}`);
           setLoading(false);
           // Handle success or redirect to a success page
         } catch (error) {

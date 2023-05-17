@@ -20,7 +20,7 @@ export const SignUp = () => {
     phone_number: "",
     country_id: "",
     gender: "",
-    agreementss: false,
+    agreements: false,
     captcha: null,
   });
   const [countryList, setCountryList] = useState([]);
@@ -88,7 +88,7 @@ export const SignUp = () => {
   const handleAgreementCheck = (e) => {
     setFormValues((prevValues) => ({
       ...prevValues,
-      agreementss: e.target.checked,
+      agreements: e.target.checked,
     }));
   };
 
@@ -138,8 +138,8 @@ export const SignUp = () => {
     if (!formValues.gender) {
       errors.gender = "Gender is required";
     }
-    if (!formValues.agreementss) {
-      errors.agreementss = "You must accept the terms and conditions";
+    if (!formValues.agreements) {
+      errors.agreements = "You must accept the terms and conditions";
     }
     if (!formValues.captcha) {
       errors.captcha = "Please complete the reCAPTCHA verification";
@@ -288,13 +288,13 @@ export const SignUp = () => {
             <Form.Check
               type="checkbox"
               label="I have read and understood Membership Classification Text"
-              checked={formValues.agreementss}
+              checked={formValues.agreements}
               onChange={handleAgreementCheck}
               className="mb-2"
             />
-            {errors.agreementss && (
+            {errors.agreements && (
               <Form.Text className="text-danger">
-                {errors.agreementss}
+                {errors.agreements}
               </Form.Text>
             )}
           </Form.Group>
@@ -324,6 +324,6 @@ export const SignUp = () => {
           </div>
         </div>
       </Form>
-    </div>
-  );
+    </div>
+  );
 };
