@@ -31,10 +31,7 @@ const Main = () => {
       });
   };
   
-  const csrfToken = document.cookie
-  .split("; ")
-  .find((row) => row.startsWith("XSRF-TOKEN"))
-  .split("=")[1];
+  const csrfToken = document.cookie;
 
 
   const isLoggedIn = checkIfLoggedIn();
