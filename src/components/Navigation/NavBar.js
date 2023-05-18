@@ -12,11 +12,13 @@ import { BsCurrencyExchange } from "react-icons/bs";
 function NavBar() {
   const isLoggedIn = checkIfLoggedIn();
   const user = localStorage.getItem("userName");
-    const tokens = localStorage.getItem("tokens");
+  const tokens = localStorage.getItem("tokens");
   const userId = localStorage.getItem("userId");
 
   const handleTokens = async () => {
-const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
+    const response = await axios.get(
+      `http://localhost:8000/api/token/${userId}`
+    );
     console.log(response.data.amount);
     localStorage.setItem("tokens", response.data.amount);
   };
@@ -36,12 +38,21 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
           </Navbar.Brand>
 
           <Nav className="me-auto">
-            <Nav.Link href="/Companies">Companies</Nav.Link>
-            <Nav.Link href="/companyListing">Company List</Nav.Link>
-            <Nav.Link href="/AddNewCompany">Add new company</Nav.Link>
-            <Nav.Link href="/AddNewItem">Add New Product</Nav.Link>
-            <Nav.Link href="/Import">Import</Nav.Link>
-            <Nav.Link href="/Export">Export</Nav.Link>
+            <NavDropdown title={<span className="ms-2">Company</span>}>
+              <NavDropdown.Item href="/Companies">Companies</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/companyListing">Company List</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/AddNewCompany">Add new company</NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title={<span className="ms-2">Product</span>}>
+            <NavDropdown.Item href="/AddNewItem">Add New Product</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/Import">Import</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
+            </NavDropdown>
+            
             <Nav.Link href="/buy">Buy TEST</Nav.Link>
           </Nav>
 
@@ -58,7 +69,9 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
                       height="40"
                       className="rounded-circle"
                     />
-                    <span className="ms-2">{user}  ·   <BsCurrencyExchange /> {tokens}</span>
+                    <span className="ms-2">
+                      {user} · <BsCurrencyExchange /> {tokens}
+                    </span>
                   </>
                 }
                 className="flex-grow-0"
@@ -69,7 +82,6 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
                 <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
               </NavDropdown>
             )}
-             
           </Nav>
         </Container>
       </Navbar>
@@ -85,20 +97,29 @@ const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
               width="70"
               height="70"
               className="d-inline-block align-top"
-
             />
           </Navbar.Brand>
 
           <Nav className="me-auto">
-            <Nav.Link href="/Companies">Companies</Nav.Link>
-            <Nav.Link href="/companyListing">Companies List</Nav.Link>
-            <Nav.Link href="/AddNewCompany">Add new company</Nav.Link>
-            <Nav.Link href="/AddNewItem">Add New Product</Nav.Link>
-            <Nav.Link href="/Import">Import</Nav.Link>
-            <Nav.Link href="/Export">Export</Nav.Link>
+            <NavDropdown title={<span className="ms-2">Company</span>}>
+              <NavDropdown.Item href="/Companies">Companies</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/companyListing">Company List</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/AddNewCompany">Add new company</NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title={<span className="ms-2">Product</span>}>
+            <NavDropdown.Item href="/AddNewItem">Add New Product</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/Import">Import</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
+            </NavDropdown>
+            
+            <Nav.Link href="/buy">Buy TEST</Nav.Link>
+        
             <Nav.Link href="/SignUp">Sign Up</Nav.Link>
             <Nav.Link href="/SignIn">Sign In</Nav.Link>
-
           </Nav>
         </Container>
       </Navbar>
