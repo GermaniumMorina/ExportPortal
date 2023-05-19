@@ -1,0 +1,81 @@
+.company-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+  object-fit: cover;
+}
+
+.search {
+  width: 100%;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  padding: 10px;
+}
+
+.input-bar {
+  width: 6%;
+  content: attr(placeholder);
+  padding: 10px 10px 10px 17px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 16px;
+  transition: 0.4s;
+  margin-left: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0px;
+  box-shadow: inset 0px 30px 22px -13px rgba(0, 0, 0, 0.1);
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s, padding 0.4s;
+}
+
+.showFilters {
+  height: 300px; /* Update with the desired height of the filters */
+  padding: 20px; /* Update with the desired padding around the filters */
+}
+
+
+
+
+
+.filter-button {
+  width: 6%;
+  content: attr(placeholder);
+  padding: 10px 10px 10px 17px;
+  border: 1px solid #32abf6;
+  background-color: #85e1ff;
+  border-radius: 50px;
+  font-size: 16px;
+  transition: 0.4s;
+  margin-left: 10px;
+}
+
+.input-bar:focus {
+  outline: none;
+  width: 20%;
+  border-radius: 10px;
+  content: "";
+  margin-left: 20px;
+}
+
+.input-bar:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.293);
+}

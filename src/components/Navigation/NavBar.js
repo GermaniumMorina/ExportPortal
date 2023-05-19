@@ -9,6 +9,9 @@ import React from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
 import { BsCurrencyExchange } from "react-icons/bs";
+import { useEffect } from "react";
+
+
 function NavBar() {
   const isLoggedIn = checkIfLoggedIn();
   const user = localStorage.getItem("userName");
@@ -22,7 +25,11 @@ function NavBar() {
     console.log(response.data.amount);
     localStorage.setItem("tokens", response.data.amount);
   };
-  handleTokens();
+
+  useEffect(() => {
+    handleTokens();
+  }, []);
+
   return isLoggedIn ? (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
@@ -40,8 +47,6 @@ function NavBar() {
           <Nav className="me-auto">
             <NavDropdown title={<span className="ms-2">Company</span>}>
               <NavDropdown.Item href="/Companies">Companies</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/companyListing">Company List</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/AddNewCompany">Add new company</NavDropdown.Item>
             </NavDropdown>

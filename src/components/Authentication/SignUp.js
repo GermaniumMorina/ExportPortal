@@ -65,6 +65,10 @@ export const SignUp = () => {
         console.log(response);
         if (response.status === 201) {
           localStorage.setItem("userLoggedIn", true);
+          localStorage.setItem('userName', formValues.name);
+          localStorage.setItem('userSurname', formValues.surname);
+          localStorage.setItem('userEmail', formValues.email);
+          localStorage.setItem('userId', response.data.user.id);
           navigate("/AddNewCompany");
           window.alert("Welcome to the system");
         }
@@ -75,6 +79,8 @@ export const SignUp = () => {
       setErrors(errors);
     }
   };
+
+
 
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
