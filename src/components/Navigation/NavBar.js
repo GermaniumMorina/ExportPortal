@@ -58,7 +58,7 @@ function NavBar() {
             <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
             </NavDropdown>
             
-            <Nav.Link href="/buy">Buy TEST</Nav.Link>
+            <Nav.Link href="/Marketplace">Marketplace</Nav.Link>
           </Nav>
 
           <Nav>
