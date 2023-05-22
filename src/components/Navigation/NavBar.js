@@ -28,6 +28,7 @@ function NavBar() {
 
   useEffect(() => {
     handleTokens();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isLoggedIn ? (

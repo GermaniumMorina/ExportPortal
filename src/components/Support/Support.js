@@ -79,7 +79,7 @@ export const Support = () => {
                 id="button-addon2"
                 onClick={handleSubmit}
               >
-                Button
+                Submit
               </Button>
             </Form>
           </div>
