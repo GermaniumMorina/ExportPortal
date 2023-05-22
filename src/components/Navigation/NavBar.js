@@ -28,6 +28,7 @@ function NavBar() {
 
   useEffect(() => {
     handleTokens();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isLoggedIn ? (
@@ -58,7 +59,7 @@ function NavBar() {
             <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
             </NavDropdown>
             
-            <Nav.Link href="/buy">Buy TEST</Nav.Link>
+            <Nav.Link href="/Marketplace">Marketplace</Nav.Link>
           </Nav>
 
           <Nav>

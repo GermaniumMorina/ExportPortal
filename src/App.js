@@ -31,6 +31,7 @@ import { Error503 } from './components/Error/503';
 import Footer from './components/Footer/Footer';
 import { Support } from './components/Support/Support';
 import NewsletterCreator from './components/Newsletter/NewsletterCreator';
+import { Marketplace } from './components/Marketplace/Marketplace';
 
 console.log(document.cookie);
 
@@ -137,6 +138,10 @@ const routes = [
     {
       path: "/newsletteradmin",
       element: <NewsletterCreator />,
+    },
+    {
+      path: "/Marketplace",
+      element:<Marketplace />,
     }
 
 
