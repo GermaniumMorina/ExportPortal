@@ -2,7 +2,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import NavBar from "./Navigation/NavBar";
-import NotAllowed from "./Authentication/NotAllowed";
 import { Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
 
