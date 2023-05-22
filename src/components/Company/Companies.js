@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect,} from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Navigation/NavBar";
 import "./Companies.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+
 
 const Companies = () => {
   const [companyList, setCompanyList] = useState([]);
@@ -15,28 +17,29 @@ const Companies = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
-  const filtersRef = useRef(null);
 
-  const getCompanies = async () => {
-    const response = await axios.get("http://127.0.0.1:8000/api/CompanyList");
-    setCompanyList(response.data.data);
-  };
-
-  const getCategories = async () => {
-    const response = await axios.get("http://127.0.0.1:8000/api/category");
-    setCategories(response.data.data);
-  };
-
-  const getCountries = async () => {
-    const response = await axios.get("http://127.0.0.1:8000/api/country");
-    setCountryList(response.data.data);
-  };
+  
+  
 
   useEffect(() => {
-    getCompanies();
-    getCategories();
-    getCountries();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [companiesResponse, categoriesResponse, countriesResponse] = await Promise.all([
+          axios.get("http://127.0.0.1:8000/api/CompanyList"),
+          axios.get("http://127.0.0.1:8000/api/category"),
+          axios.get("http://127.0.0.1:8000/api/country")
+        ]);
+  
+        setCompanyList(companiesResponse.data.data);
+        setCategories(categoriesResponse.data.data);
+        setCountryList(countriesResponse.data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
 
   const filteredCompanies = companyList.filter((company) =>
     company.name.toLowerCase().includes(searchTerm.toLowerCase())
