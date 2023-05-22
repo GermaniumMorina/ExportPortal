@@ -30,6 +30,7 @@ import { Error502 } from './components/Error/502';
 import { Error503 } from './components/Error/503';
 import Footer from './components/Footer/Footer';
 import { Support } from './components/Support/Support';
+import NewsletterCreator from './components/Newsletter/NewsletterCreator';
 
 console.log(document.cookie);
 
@@ -132,6 +133,10 @@ const routes = [
     {
       path: "/support",
       element: <Support />,
+    },
+    {
+      path: "/newsletteradmin",
+      element: <NewsletterCreator />,
     }
 
 

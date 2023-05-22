@@ -3,7 +3,9 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import NavBar from "./Navigation/NavBar";
 import NotAllowed from "./Authentication/NotAllowed";
+import { Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
+
 
 const Main = () => {
   const handleSubmit = (ev) => {
@@ -44,13 +46,13 @@ const Main = () => {
         <NavBar />
           <div>You are Logged in {user}</div>
           <Form onSubmit={handleSubmit}>
-            <Button className="sign-in-button" variant="info" type="submit" >
+            <Button className="sign-in-button" variant="info" type="submit" style={{ width: "10%" }}>
               Logout
             </Button>
           </Form>
         </>
       ) : (
-        <NotAllowed />
+        <Navigate to = "/SignIn"></Navigate>
 )}
     </div>
 
