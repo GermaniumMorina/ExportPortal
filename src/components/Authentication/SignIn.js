@@ -38,6 +38,9 @@ export const SignIn = () => {
             localStorage.setItem('userId', response.data.user.id)
             localStorage.setItem('userRole', response.data.user.role)
             localStorage.setItem('token' , token)
+            localStorage.setItem('userGender', response.data.user.gender)
+            localStorage.setItem('userSurname', response.data.user.surname)
+            localStorage.setItem('userPhone', response.data.user.phone_number)
             window.alert("Login Successful");
             navigate("/dashboard");
 
