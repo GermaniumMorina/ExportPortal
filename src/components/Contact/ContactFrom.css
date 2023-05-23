@@ -1,0 +1,41 @@
+/* ContactFrom.css */
+#add-new-company-base {
+    max-width: 700px;
+    margin: auto;
+    padding: 3rem;
+    border: 0px solid #007bff;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 0px 15px rgba(0, 123, 255, 0.5);
+}
+
+.add-new-company-form-div h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+    text-transform: uppercase;
+}
+
+.add-new-company-form-div h5 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.add-new-company-form-div .mb-3 {
+    margin-bottom: 2rem !important;
+}
+
+.add-new-company-form-div .mb-3 .form-control {
+        border: none;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+}
+
+#button-addon2 {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    width: 50%;
+    font-size: 1.2rem;
+    padding: 0.75rem;
+}

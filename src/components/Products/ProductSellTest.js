@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import NavBar from "../Navigation/NavBar";
+import { useNavigate, Navigate } from "react-router";
 
 export const ProductSellTest = () => {
   const price = 43;
@@ -27,8 +28,8 @@ export const ProductSellTest = () => {
             amount: chatprice,
           }
           );
-          setLoading(false);
-          // Handle success or redirect to a success page
+          
+          Navigate("/ContactFrom");
         } catch (error) {
           setLoading(false);
           // Handle error
@@ -37,6 +38,7 @@ export const ProductSellTest = () => {
           `http://localhost:8000/api/token/{userId}`
         );
         setTokens(response.data.amount);
+        console.log(response);
       }
     }
   };

@@ -7,9 +7,15 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
 import NavBar from "../Navigation/NavBar";
+
 const ExportItem = () => {
   const navigate = useNavigate();
   const [exportProduct, setExportProduct] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
+  const chatprice =tokens - 10;
+  let userId = localStorage.getItem("userId");
 
   const getExportProduct = async () => {
     const data = {
@@ -47,6 +53,37 @@ const ExportItem = () => {
     }
   };
 
+  const handleChat = async () => {
+    if (tokens < 10) {
+      alert("You should have at least 10 tokens to chat with the owner!");
+    } else {
+      const confirmChat = window.confirm(
+        "Chat with the owner? This will take 10 tokens from your account."
+      );
+
+      if (confirmChat) {
+        setLoading(true);
+        try {
+          await axios.put(`http://localhost:8000/api/updateToken/${userId}`,
+          {
+            amount: chatprice,
+          }
+          );
+          setLoading(false);
+          navigate("/ContactFrom");
+        } catch (error) {
+          setLoading(false);
+          // Handle error
+        }
+        const response = await axios.get(
+          `http://localhost:8000/api/token/{userId}`
+        );
+        setTokens(response.data.amount);
+        console.log(response);
+      }
+    }
+  };
+
   return (
     <div>
       <NavBar />
@@ -77,7 +114,8 @@ const ExportItem = () => {
                   </a>
                 </div>
                 <div className="d-flex justify-content-center btn-lg">
-                  <Button onClick={handleBack}>Back</Button>
+                  <Button className="mx-3"  onClick={handleBack}>Back</Button>
+                  <Button onClick={handleChat}>Chat with owner</Button>
                 </div>
               </div>
             );

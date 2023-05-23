@@ -32,6 +32,7 @@ import Footer from './components/Footer/Footer';
 import { Support } from './components/Support/Support';
 import NewsletterCreator from './components/Newsletter/NewsletterCreator';
 import { Marketplace } from './components/Marketplace/Marketplace';
+import { ContactFrom } from './components/Contact/ContactFrom';
 
 console.log(document.cookie);
 
@@ -142,8 +143,12 @@ const routes = [
     {
       path: "/Marketplace",
       element:<Marketplace />,
-    }
-
+    },
+    {
+      path: "/ContactFrom",
+      element: <ContactFrom />,
+    } 
+  
 
   
   
