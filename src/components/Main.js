@@ -9,30 +9,11 @@ import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
 const Main = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
-  
-    axios
-      .post("http://localhost:8000/api/logout", null, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          'x-csrf-token': csrfToken,
-        }
-      })
-      .then((response) => {
-        console.log(response);
-        // Set response in local storage
-        // localStorage.setItem('user', JSON.stringify(response.data))
-        if (response.status === 200) {
-          localStorage.clear();
-          window.location.href = '/';
-        }
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    localStorage.clear();
+    window.location.href = '/';
   };
   
-  const csrfToken = document.cookie;
+ 
 
 
   const isLoggedIn = checkIfLoggedIn();
