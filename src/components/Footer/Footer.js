@@ -11,15 +11,15 @@ const Footer = () => {
   
       <div id="container">
         <footer className="footer-distributed" id="footer">
-          <div class="footer-left">
+          <div className="footer-left">
             <img src={logo} className="logoFooter" alt="logo"></img>
 
-            <p class="footer-company-name">Protecht © 2023</p>
+            <p className="footer-company-name">Protecht © 2023</p>
           </div>
 
-          <div class="footer-center">
+          <div className="footer-center">
             <div>
-              <i class="fa fa-map-marker"></i>
+              <i className="fa fa-map-marker"></i>
               <p>
                 <span>Rr.Uke Bytyqi Nr.7</span>
                 <span> Prizren, Kosovo</span>
@@ -28,32 +28,32 @@ const Footer = () => {
             </div>
 
             <div>
-              <i class="fa fa-phone"></i>
+              <i className="fa fa-phone"></i>
               <p>+383 49 123 123</p>
             </div>
 
             <div>
-              <i class="fa fa-envelope"></i>
+              <i className="fa fa-envelope"></i>
               <p>
                 <a href="mailto:info@protecht.ch">Email support</a>
               </p>
             </div>
             <div>
-              <i class="fa fa-envelope"></i>
+              <i className="fa fa-envelope"></i>
 
               <p>info@protecht.ch</p>
             </div>
           </div>
 
-          <div class="footer-right">
+          <div className="footer-right">
             <ul className="list-unstyled">
-              <p class="footer-links">
+              <p className="footer-links">
                 <li>
                   <a href="/Support">Contact Support</a>
                 </li>
                 <br></br>
                 <li>
-                  <a href="/" class="link-1">
+                  <a href="/" className="link-1">
                     Home
                   </a>
                 </li>
@@ -70,7 +70,7 @@ const Footer = () => {
               </p>
             </ul>
           </div>
-          <div class="footer-newsletter">
+          <div className="footer-newsletter">
             <Newsletter />
           </div>
         </footer>
