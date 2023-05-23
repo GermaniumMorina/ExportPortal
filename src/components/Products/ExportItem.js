@@ -28,7 +28,8 @@ const ExportItem = () => {
   let { id } = useParams();
   useEffect(() => {
     getExportProduct(id);
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const handleBack = () => {
     navigate("/Export");
   };
