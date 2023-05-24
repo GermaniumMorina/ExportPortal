@@ -75,13 +75,14 @@ const ImportItem = () => {
             return (
               <div key={importProduct.id}>
                 <div>
-                  <p>country: {importProduct.country}</p>
-                  <p>price: {importProduct.price}</p>
-                  <p>name: {importProduct.name}</p>
-                  <p>description: {importProduct.description}</p>
-                  <p>created at: {formatDate(importProduct.created_at)}</p>
-                  <p>views: {importProduct.views}</p>
-                  <p>category: {importProduct.category_name}</p>
+                  <p>Name: {importProduct.name}</p>
+                  <p>Country: {importProduct.country}</p>
+                  <p>Price: {importProduct.price}</p>
+                  
+                  <p>Description: {importProduct.description}</p>
+                  <p>Added: {formatDate(importProduct.created_at)}</p>
+                  <p>Views: {importProduct.views}</p>
+                  <p>Category: {importProduct.category_name}</p>
                   <a href="https://www.facebook.com/" className="m-2">
                     <FaFacebook />
                   </a>

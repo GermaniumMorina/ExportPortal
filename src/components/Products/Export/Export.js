@@ -128,11 +128,12 @@ const ProductList = () => {
                 className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark  rounded"
               >
                 <div>
-                  <p>country: {exportProduct.country}</p>
-                  <p>price: {exportProduct.price}</p>
-                  <p>name: {exportProduct.name}</p>
-                  <p>description: {exportProduct.description}</p>
-                  <p>created at: {formatDate(exportProduct.created_at)}</p>
+                  <p>Name: {exportProduct.name}</p>
+                  <p>Country: {exportProduct.country}</p>
+                  <p>Price: {exportProduct.price}</p>
+                  
+                  <p>Description: {exportProduct.description}</p>
+                  <p>Added: {formatDate(exportProduct.created_at)}</p>
                 </div>
 
                 <div className="d-flex justify-content-center">

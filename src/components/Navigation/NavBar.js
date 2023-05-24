@@ -41,12 +41,10 @@ function NavBar() {
   return isLoggedIn ? (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
-        <Container>
           <Navbar.Brand href="/" className="logo">
             <img
               src={logo}
               alt="logo"
-              width="70"
               height="70"
               className="d-inline-block align-top"
             />
@@ -96,7 +94,6 @@ function NavBar() {
               </NavDropdown>
             )}
           </Nav>
-        </Container>
       </Navbar>
     </div>
   ) : (

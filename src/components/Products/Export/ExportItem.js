@@ -77,13 +77,14 @@ const ExportItem = () => {
             return (
               <div key={exportProduct.id}>
                 <div>
-                  <p>country: {exportProduct.country}</p>
-                  <p>price: {exportProduct.price}</p>
-                  <p>name: {exportProduct.name}</p>
-                  <p>description: {exportProduct.description}</p>
-                  <p>created at: {formatDate(exportProduct.created_at)}</p>
-                  <p>views: {exportProduct.views}</p>
-                  <p>category: {exportProduct.category_name}</p>
+                <p>Name: {exportProduct.name}</p>
+                  <p>Country: {exportProduct.country}</p>
+                  <p>Price: {exportProduct.price}</p>
+                 
+                  <p>Description: {exportProduct.description}</p>
+                  <p>Added: {formatDate(exportProduct.created_at)}</p>
+                  <p>Views: {exportProduct.views}</p>
+                  <p>Category: {exportProduct.category_name}</p>
                   <a href="https://www.facebook.com/" className="m-2">
                     <FaFacebook />
                   </a>

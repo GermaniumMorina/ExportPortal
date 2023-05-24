@@ -130,11 +130,12 @@ const Import = () => {
               key={importProduct.id}
               className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark rounded">
               <div>
-                <p>country: {importProduct.country}</p>
-                <p>price: {importProduct.price}</p>
-                <p>name: {importProduct.name}</p>
-                <p>description: {importProduct.description}</p>
-                <p>created at: {formatDate(importProduct.created_at)}</p>
+              <p>Name: {importProduct.name}</p>
+                <p>Country: {importProduct.country}</p>
+                <p>Price: {importProduct.price}</p>
+                
+                <p>Description: {importProduct.description}</p>
+                <p>Added: {formatDate(importProduct.created_at)}</p>
               </div>
 
               <div className="d-flex justify-content-center">

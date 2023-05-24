@@ -5,9 +5,12 @@ import axios from "axios";
 import NavBar from "./Navigation/NavBar";
 import { Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
-
+import truck from "./Images/Trucks.jpg";
+import depo from "./Images/depo.jpg";
 
 const Main = () => {
+  let gender= '';
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     localStorage.clear();
@@ -18,27 +21,58 @@ const Main = () => {
 
 
   const isLoggedIn = checkIfLoggedIn();
-  const user = (localStorage.getItem('userName'));
-  return (
+  const userName = (localStorage.getItem('userName'));
+  const userSurname = (localStorage.getItem('userSurname'));
+  const userGender= (localStorage.getItem('userGender'));
 
+  if(userGender === 'male') {
+    gender= 'Mr.';
+  }
+  else if (userGender === 'female') {
+        gender= 'Mrs.';
+      }
+
+
+ return isLoggedIn ? (
     <div>
-      {isLoggedIn ? (
-        <>
-        <NavBar />
-          <div>You are Logged in {user}</div>
-          <Form onSubmit={handleSubmit}>
-            <Button className="sign-in-button" variant="info" type="submit" style={{ width: "10%" }}>
-              Logout
-            </Button>
-          </Form>
-        </>
-      ) : (
-        <Navigate to = "/SignIn"></Navigate>
-)}
-    </div>
+      <NavBar />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h1 className="text-center">Welcome {gender}{userName} {userSurname}!</h1>
+            <h6 className="text-center">This is our ExportPortal</h6>
+            <img src={truck} alt="truck" className="img-fluid" id="main-truck"/>
+            <h6 className="text-center">You are logged in!</h6>
+            <h6 className="text-center">You can now browse our products and services</h6>
+            <img src={depo} alt="depo" className="img-fluid justify-center " />
+            <h6 className="text-center">You can also add your own products and services</h6>
+            <h6 className="text-center">You can also edit your profile</h6>
+            <h6 className="text-center">You can also view your profile</h6>
+            <h6 className="text-center">You can also view your orders</h6>
+      
 
-  )
-}
+
+
+
+
+
+            <Form onSubmit={handleSubmit}>
+              <Button variant="primary" type="submit">
+               !!! TEST LOGOUT !!!
+              </Button>
+            </Form>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <Navigate to="/login" />
+  );
+    
+
+};
+
+
 export default Main;
 
 
