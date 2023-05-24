@@ -4,13 +4,22 @@ import { InputGroup } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import "./footer.css";
+import axios from 'axios';
 
 export const Newsletter = () => {
     const [email, setEmail] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submitted " + email);
+       
+      const response = await axios.post("http://localhost:8000/api/newsletter", {
+        email: email,
+      });
+      console.log(response);
+      if (response.status === 201) {
+        window.alert("You have been subscribed to our newsletter");
+        window.location.reload();
+      }
     }
   return (
     <div> <div className="newsletter">
@@ -29,7 +38,7 @@ export const Newsletter = () => {
           aria-describedby="basic-addon2"
         />
         <Button variant="outline-secondary" id="button-addon2"  onClick={handleSubmit}>
-          Button
+          Subscribe
         </Button>
       </InputGroup>
     </Form>
