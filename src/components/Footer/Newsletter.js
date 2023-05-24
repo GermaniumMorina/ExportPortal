@@ -3,6 +3,8 @@ import { Form } from "react-bootstrap";
 import { InputGroup } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 import "./footer.css";
 import axios from 'axios';
 
@@ -17,8 +19,11 @@ export const Newsletter = () => {
       });
       console.log(response);
       if (response.status === 201) {
-        window.alert("You have been subscribed to our newsletter");
-        window.location.reload();
+        alertify.success("You have been subscribed to our newsletter");
+      } else {
+        alertify.error("You are already subscribed to our newsletter");
+
+        
       }
     }
   return (

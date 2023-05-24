@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../Navigation/NavBar";
 import LoadingBar from "../LoadingScreens/LoadingBar";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 
 export const ProductSellTest = () => {
   const price = 43;
@@ -35,24 +37,26 @@ export const ProductSellTest = () => {
   
   const handleChat = async () => {
     if (tokens < 10) {
-      alert("You should have at least 10 tokens to chat with the owner!");
+      alertify.alert("You should have at least 10 tokens to chat with the owner!");
     } else {
-      const confirmChat = window.confirm(
-        "Chat with the owner? This will take 10 tokens from your account."
-      );
-
-      if (confirmChat) {
-        setLoading(true);
-        try {
-          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
-            amount: chatprice,
-          });
-          // Handle success or redirect to a success page
-        } catch (error) {
-          // Handle error
+      alertify.confirm(
+        "Chat with the owner? This will take 10 tokens from your account.",
+        async () => {
+          setLoading(true);
+          try {
+            await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
+              amount: chatprice,
+            });
+            // Handle success or redirect to a success page
+          } catch (error) {
+            // Handle error
+          }
+          setLoading(false);
+        },
+        () => {
+          // Cancel callback
         }
-        setLoading(false);
-      }
+      );
     }
   };
   
