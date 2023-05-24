@@ -2,21 +2,32 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../Navigation/NavBar";
+import LoadingBar from "../LoadingScreens/LoadingBar";
 
 const Company = () => {
   const { id } = useParams();
   const [company, setCompany] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getCompany = async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/company_details/${id}`);
-    setCompany(response.data.data);
-    console.log(response.data.data);
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/company_details/${id}`);
+      setCompany(response.data.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
+
   useEffect(() => {
     getCompany();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
+  if (isLoading) {
+    return <LoadingBar/>
+  }
+
   return (
     <div>
       <NavBar />

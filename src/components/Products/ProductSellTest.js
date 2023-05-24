@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../Navigation/NavBar";
+import LoadingBar from "../LoadingScreens/LoadingBar";
 
 export const ProductSellTest = () => {
   const price = 43;
   
   const [loading, setLoading] = useState(false);
-  const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
-  const chatprice =tokens - 10;
+  const [tokens, setTokens] = useState(localStorage.getItem("tokens") );
+  const chatprice = tokens - 10;
   let userId = localStorage.getItem("userId");
   
+  const fetchTokenValue = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/token/${userId}`
+      );
+      setTokens(response.data.amount);
+    } catch (error) {
+      // Handle error
+    }
+  };
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchTokenValue();
+    }, 5000);
+    
+    return () => {
+      clearInterval(interval);
+    };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   const handleChat = async () => {
     if (tokens < 10) {
@@ -22,30 +44,24 @@ export const ProductSellTest = () => {
       if (confirmChat) {
         setLoading(true);
         try {
-          await axios.put(`http://localhost:8000/api/updateToken/${userId}`,
-          {
+          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
             amount: chatprice,
-          }
-          );
-          setLoading(false);
+          });
           // Handle success or redirect to a success page
         } catch (error) {
-          setLoading(false);
           // Handle error
         }
-        const response = await axios.get(
-          `http://localhost:8000/api/token/{userId}`
-        );
-        setTokens(response.data.amount);
+        setLoading(false);
       }
     }
   };
+  
   return (
     <div>
       <NavBar />
       {loading ? (
         <div className="loading-screen">
-          <p>Loading...</p>
+          <LoadingBar />
         </div>
       ) : (
         <div>

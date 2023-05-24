@@ -1,38 +1,48 @@
-import React from "react";
-import { useNavigate } from "react-router";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
-import axios from "axios";
 import moment from "moment";
-import NavBar from "../Navigation/NavBar";
-const ExportItem = () => {
+import NavBar from "../../Navigation/NavBar";
+import LoadingBar from "../../LoadingScreens/LoadingBar"; 
+
+const ImportItem = () => {
   const navigate = useNavigate();
-  const [exportProduct, setExportProduct] = useState([]);
+  const [importProduct, setImportProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); 
+  const { id } = useParams();
 
-  const getExportProduct = async () => {
-    const data = {
-      headers: {
-        Accept: "application/json",
-      },
-    };
+  const getImportProduct = async () => {
+    try {
+      const data = {
+        headers: {
+          Accept: "application/json",
+        },
+      };
 
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/elist/" + id,
-      data
-    );
-    const apiExportProducts = response.data.data;
-    setExportProduct(apiExportProducts);
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/ilist/${id}`,
+        data
+      );
+      const apiImportProducts = response.data.data;
+      setImportProduct(apiImportProducts);
+      setIsLoading(false); // Set loading state to false when data is fetched
+    } catch (error) {
+      console.error("Error fetching import product:", error);
+      setIsLoading(false); // Set loading state to false on error
+    }
   };
-  let { id } = useParams();
+
   useEffect(() => {
-    getExportProduct(id);
+    getImportProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleBack = () => {
-    navigate("/Export");
+    navigate("/Import");
   };
+
   const formatDate = (date) => {
     const now = moment();
     const created = moment(date);
@@ -48,25 +58,30 @@ const ExportItem = () => {
     }
   };
 
+  if (isLoading) {
+    // Render loading screen while data is being fetched
+    return <LoadingBar />;
+  }
+
   return (
     <div>
       <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
-        <h1>Export Details</h1>
+        <h1>Import Details</h1>
       </div>
       <div>
         <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto   mb-4 p-5 border rounded  border-dark ">
-          {exportProduct.map((exportProduct) => {
+          {importProduct.map((importProduct) => {
             return (
-              <div key={exportProduct.id}>
+              <div key={importProduct.id}>
                 <div>
-                  <p>country: {exportProduct.country}</p>
-                  <p>price: {exportProduct.price}</p>
-                  <p>name: {exportProduct.name}</p>
-                  <p>description: {exportProduct.description}</p>
-                  <p>created at: {formatDate(exportProduct.created_at)}</p>
-                  <p>views: {exportProduct.views}</p>
-                  <p>category: {exportProduct.category_name}</p>
+                  <p>country: {importProduct.country}</p>
+                  <p>price: {importProduct.price}</p>
+                  <p>name: {importProduct.name}</p>
+                  <p>description: {importProduct.description}</p>
+                  <p>created at: {formatDate(importProduct.created_at)}</p>
+                  <p>views: {importProduct.views}</p>
+                  <p>category: {importProduct.category_name}</p>
                   <a href="https://www.facebook.com/" className="m-2">
                     <FaFacebook />
                   </a>
@@ -88,5 +103,4 @@ const ExportItem = () => {
     </div>
   );
 };
-
-export default ExportItem;
+export default ImportItem;

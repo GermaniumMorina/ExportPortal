@@ -70,6 +70,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 Install all these packages :
+### `npm install`
+
+If you get any error while installing packages then install them individually using these commands :
+
 ### `npm install react-router-dom`
 ### `npm install react-google-recaptcha`
 ### `npm install react-bootstrap` 
@@ -79,3 +83,4 @@ Install all these packages :
 ### `npm install @mui/icons-material`
 ### `npm install axios`   
 ### `npm install react-icons --save`
+### `npm install react-loading`
