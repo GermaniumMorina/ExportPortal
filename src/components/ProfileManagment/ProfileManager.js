@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../Navigation/NavBar";
 import "./ProfileManager.css";
 import Form from "react-bootstrap/Form";
+//eslint-disable-next-line
 import axios from "axios";
 import { useState } from "react";
 
@@ -9,8 +10,8 @@ const ProfileManager = () => {
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
   const UserSurname = localStorage.getItem("userSurname");
-    const UserPhone = localStorage.getItem("userPhone");
-    const UserGender = localStorage.getItem("userGender");
+  const UserPhone = localStorage.getItem("userPhone");
+  const UserGender = localStorage.getItem("userGender");
 
   const [formValues, setFormValues] = useState({
     name: UserName,
@@ -48,19 +49,13 @@ const ProfileManager = () => {
     // });
   };
 
-    const handleBack = () => {
-        const confirmBack = window.confirm(
-            "Discard Changes?"
-          );
-    
+  const handleBack = () => {
+    const confirmBack = window.confirm("Discard Changes?");
+
     if (confirmBack) {
-        window.location.href = "/profile";
+      window.location.href = "/profile";
     }
- 
-
-       
-    }
-
+  };
 
   return (
     <div>
@@ -70,84 +65,83 @@ const ProfileManager = () => {
         <div className="edit-div">
           <h2 className="welcome">Edit Profile</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" >
+            <Form.Group className="mb-3">
               <Form.Control
                 type="text"
                 id="name"
                 name="name"
                 defaultValue={UserName}
-        
                 onChange={(e) =>
-                    setFormValues({ ...formValues, name: e.target.value })
+                  setFormValues({ ...formValues, name: e.target.value })
                 }
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" >
+            <Form.Group className="mb-3">
               <Form.Control
                 type="text"
                 id="surname"
                 name="surname"
                 defaultValue={UserSurname}
                 onChange={(e) =>
-                    setFormValues({ ...formValues, surname: e.target.value })
+                  setFormValues({ ...formValues, surname: e.target.value })
                 }
               />
             </Form.Group>
-            <Form.Group className="mb-3" >
+            <Form.Group className="mb-3">
               <Form.Control
                 type="text"
                 id="email"
                 name="email"
                 defaultValue={UserEmail}
                 onChange={(e) =>
-                    setFormValues({ ...formValues, email: e.target.value })
+                  setFormValues({ ...formValues, email: e.target.value })
                 }
               />
             </Form.Group>
-            <Form.Group className="mb-3" >
-            <Form.Check
-              type="radio"
-              name="gender"
-              id="male"
-              label="Male"
-              
-              inline
-              value="male"
-            
-              onChange={(e) =>
-                    setFormValues({...formValues, gender: e.target.value})
+            <Form.Group className="mb-3">
+              <Form.Check
+                type="radio"
+                name="gender"
+                id="male"
+                label="Male"
+                inline
+                value="male"
+                onChange={(e) =>
+                  setFormValues({ ...formValues, gender: e.target.value })
                 }
-            />
+              />
 
-            <Form.Check
-            
-              type="radio"
-              name="gender"
-              id="female"
-              label="Female"
-              inline
-              value="female"
-            
-              onChange={(e) =>
-                setFormValues({ ...formValues, gender: e.target.value })
-            }
-            />
+              <Form.Check
+                type="radio"
+                name="gender"
+                id="female"
+                label="Female"
+                inline
+                value="female"
+                onChange={(e) =>
+                  setFormValues({ ...formValues, gender: e.target.value })
+                }
+              />
             </Form.Group>
-            
-            <Form.Group className="mb-3" >
-                <Form.Control
-                    type="text"
-                    id="phone"
-                    name="phone"
-                    defaultValue={UserPhone}
-                    onChange={(e) =>
-                        setFormValues({ ...formValues, phone: e.target.value })
-                    }
-                />
+
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="text"
+                id="phone"
+                name="phone"
+                defaultValue={UserPhone}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, phone: e.target.value })
+                }
+              />
             </Form.Group>
-            <button className="edit-button" type="submit">Submit</button>
-            <button className="back-button" onClick={handleBack}>Back</button>
+            <button className="edit-button" type="submit">
+              Submit
+            </button>
+            <button className="back-button" onClick={handleBack}>
+              Back
+            </button>
           </Form>
         </div>
       </div>

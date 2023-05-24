@@ -11,12 +11,12 @@ import Main from './components/Main';
 
 
 import { AddNewCompany } from './components/Company/AddNewCompany';
-import { AddNewItem } from './components/Products/AddNewItem';
+import { AddNewItem } from './components/Products/NewProductForm/AddNewItem';
 import { checkIfLoggedIn } from './components/Authentication/checkIfLoggedIn';
-import  Import  from './components/Products/Import';
-import  ImportItem  from './components/Products/ImportItem';
-import  Export from './components/Products/Export';
-import  ExportItem  from './components/Products/ExportItem';
+import  Import  from './components/Products/Import/Import';
+import  ImportItem  from './components/Products/Import/ImportItem';
+import  Export from './components/Products/Export/Export';
+import  ExportItem  from './components/Products/Export/ExportItem';
 import Companies from './components/Company/Companies';
 import Company from './components/Company/Company';
 import  CompanyListing from './components/Company/CompanyListing';

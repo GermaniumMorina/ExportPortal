@@ -4,38 +4,52 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
-import NavBar from "../Navigation/NavBar";
+import NavBar from "../../Navigation/NavBar";
+import LoadingBar from "../../LoadingScreens/LoadingBar"; // Import your loading component
 
 const ProductList = () => {
   const navigate = useNavigate();
   const [exportProducts, setExportProducts] = useState([]);
-  const [categories , setCategories] = useState([]);
-  const [selectedCategories , setSelectedCategories] = useState([]);
-  
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+
   const getExportProducts = async () => {
-    const data = {
-      headers: {
-        Accept: "application/json",
-      },
-    };
-    const apiExportProducts = await axios.get(
-      "http://127.0.0.1:8000/api/elist",
-      data
-    );
-    setExportProducts(apiExportProducts.data.data);
+    try {
+      const data = {
+        headers: {
+          Accept: "application/json",
+        },
+      };
+      const apiExportProducts = await axios.get(
+        "http://127.0.0.1:8000/api/elist",
+        data
+      );
+      setExportProducts(apiExportProducts.data.data);
+      setIsLoading(false); // Set loading state to false when data is fetched
+    } catch (error) {
+      console.error("Error fetching export products:", error);
+      setIsLoading(false); // Set loading state to false on error
+    }
   };
 
-  const getCategories = async () =>{
-    const data = {
-      headers: {
-        Accept: "application/json",
-      },
-    };
-    const apiCategories = await axios.get("http://127.0.0.1:8000/api/productcategory",
-    data
-    );
-    setCategories(apiCategories.data.data);
-  }
+  const getCategories = async () => {
+    try {
+      const data = {
+        headers: {
+          Accept: "application/json",
+        },
+      };
+      const apiCategories = await axios.get(
+        "http://127.0.0.1:8000/api/productcategory",
+        data
+      );
+      setCategories(apiCategories.data.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
   useEffect(() => {
     getExportProducts();
     getCategories();
@@ -46,12 +60,12 @@ const ProductList = () => {
     if (checked) {
       setSelectedCategories([...selectedCategories, name]);
     } else {
-      setSelectedCategories(selectedCategories.filter(category => category !== name));
+      setSelectedCategories(selectedCategories.filter((category) => category !== name));
     }
   };
-  
-  const filteredProducts = selectedCategories.length > 0 
-    ? exportProducts.filter(product => selectedCategories.includes(product.category_name)) // I changed 'product.category' to 'product.category_name'
+
+  const filteredProducts = selectedCategories.length > 0
+    ? exportProducts.filter((product) => selectedCategories.includes(product.category_name))
     : exportProducts;
 
   const handleNavigateItem = (id) => {
@@ -66,6 +80,7 @@ const ProductList = () => {
       console.error("Error viewing product:", error);
     }
   };
+
   const formatDate = (date) => {
     const now = moment();
     const created = moment(date);
@@ -80,6 +95,12 @@ const ProductList = () => {
       return `${Math.floor(diffInHours / (24 * 30))} months ago`;
     }
   };
+
+  if (isLoading) {
+    // Render loading screen while data is being fetched
+    return <LoadingBar />;
+  }
+
   return (
     <div>
       <NavBar />

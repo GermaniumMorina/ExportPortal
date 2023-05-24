@@ -1,41 +1,52 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import moment from "moment";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import NavBar from "../Navigation/NavBar";
+import NavBar from "../../Navigation/NavBar";
+import LoadingBar from "../../LoadingScreens/LoadingBar";
 
 const Import = () => {
   const navigate = useNavigate();
   const [importProducts, setImportProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getImportProducts = async () => {
-    const data = {
-      headers: {
-        Accept: "application/json",
-      },
-    };
-    const apiImportProducts = await axios.get(
-      "http://127.0.0.1:8000/api/ilist",
-      data
-    );
-    setImportProducts(apiImportProducts.data.data);
+    try {
+      const data = {
+        headers: {
+          Accept: "application/json",
+        },
+      };
+      const apiImportProducts = await axios.get(
+        "http://127.0.0.1:8000/api/ilist",
+        data
+      );
+      setImportProducts(apiImportProducts.data.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching import products:", error);
+    }
   };
 
   const getCategories = async () => {
-    const data = {
-      headers: {
-        Accept: "application/json",
-      },
-    };
-    const apiCategories = await axios.get(
-      "http://127.0.0.1:8000/api/productcategory",
-      data
-    );
-    setCategories(apiCategories.data.data);
+    try {
+      const data = {
+        headers: {
+          Accept: "application/json",
+        },
+      };
+      const apiCategories = await axios.get(
+        "http://127.0.0.1:8000/api/productcategory",
+        data
+      );
+      setCategories(apiCategories.data.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
   };
 
   useEffect(() => {
@@ -57,7 +68,7 @@ const Import = () => {
   };
   
   const filteredProducts = selectedCategories.length > 0 
-    ? importProducts.filter(product => selectedCategories.includes(product.category_name)) // I changed 'product.category' to 'product.category_name'
+    ? importProducts.filter(product => selectedCategories.includes(product.category_name))
     : importProducts;
 
   const handleNavigateItem = (id) => {
@@ -88,6 +99,10 @@ const Import = () => {
     }
   };
 
+  if (isLoading) {
+    return <LoadingBar />;
+  }
+
   return (
     <div>
       <NavBar />
@@ -96,6 +111,7 @@ const Import = () => {
       </div>
       <div className="d-flex justify-content-center mt-4">
       {categories.map(category => (
+          <div key={category.id}>
           <Form.Check 
             type="checkbox" 
             id={`category-${category.name}`} 
@@ -104,6 +120,7 @@ const Import = () => {
             onChange={handleCheckboxChange} 
             className="m-2"
           />
+          </div>
       ))}
       </div>
       <div>

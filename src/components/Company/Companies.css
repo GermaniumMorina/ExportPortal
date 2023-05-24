@@ -7,6 +7,9 @@
 
 .search {
   width: 100%;
+
+  
+
 }
 
 .search-box {
@@ -25,6 +28,7 @@
 
 .input-bar {
   width: 6%;
+  min-width: 100px;
   content: attr(placeholder);
   padding: 10px 10px 10px 17px;
   border: 1px solid #ccc;
@@ -58,6 +62,7 @@
 
 .filter-button {
   width: 6%;
+  min-width: 100px;
   content: attr(placeholder);
   padding: 10px 10px 10px 17px;
   border: 1px solid #32abf6;
@@ -71,6 +76,7 @@
 .input-bar:focus {
   outline: none;
   width: 20%;
+  min-width: 200px;
   border-radius: 10px;
   content: "";
   margin-left: 20px;

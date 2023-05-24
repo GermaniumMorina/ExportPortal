@@ -5,8 +5,7 @@ import NavBar from "../Navigation/NavBar";
 import "./Companies.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
-
+import LoadingBar from "../LoadingScreens/LoadingBar";
 
 const Companies = () => {
   const [companyList, setCompanyList] = useState([]);
@@ -16,10 +15,8 @@ const Companies = () => {
   const [countryList, setCountryList] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
-  
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,17 +26,18 @@ const Companies = () => {
           axios.get("http://127.0.0.1:8000/api/category"),
           axios.get("http://127.0.0.1:8000/api/country")
         ]);
-  
+
         setCompanyList(companiesResponse.data.data);
         setCategories(categoriesResponse.data.data);
         setCountryList(countriesResponse.data.data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
-  }, []);
+  }, []);
 
   const filteredCompanies = companyList.filter((company) =>
     company.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -72,12 +70,9 @@ const Companies = () => {
       ? filteredCompaniesWithCategories.filter((company) => company.country === selectedCountry)
       : filteredCompaniesWithCategories;
 
-
-
   const tdStyle = {
     padding: "10px",
   };
-
 
   const navigateToCompany = (id) => {
     navigate(`/companies/${id}`);
@@ -86,7 +81,10 @@ const Companies = () => {
   const toggleFilters = () => {
     setShowFilters((prevState) => !prevState);
   };
-  
+
+  if (isLoading) {
+    return <LoadingBar />;
+  }
 
 
   return (

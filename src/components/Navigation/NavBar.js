@@ -5,32 +5,39 @@ import logo from "./logo.png";
 import avatar from "./avatar.jpg";
 import "./NavBar.css";
 import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
 import { BsCurrencyExchange } from "react-icons/bs";
-import { useEffect } from "react";
-
 
 function NavBar() {
   const isLoggedIn = checkIfLoggedIn();
   const user = localStorage.getItem("userName");
-  const tokens = localStorage.getItem("tokens");
+  const [tokens, setTokens] = useState(localStorage.getItem("tokens"));
   const userId = localStorage.getItem("userId");
 
-  const handleTokens = async () => {
-    const response = await axios.get(
-      `http://localhost:8000/api/token/${userId}`
-    );
-    console.log(response.data.amount);
-    localStorage.setItem("tokens", response.data.amount);
+  const fetchTokenValue = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/token/${userId}`
+      );
+      setTokens(response.data.amount);
+      localStorage.setItem("tokens", response.data.amount);
+    } catch (error) {
+      // Handle error
+    }
   };
 
   useEffect(() => {
-    handleTokens();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const interval = setInterval(() => {
+      fetchTokenValue();
+    }, 5000);
 
+    return () => {
+      clearInterval(interval);
+    };
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return isLoggedIn ? (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
