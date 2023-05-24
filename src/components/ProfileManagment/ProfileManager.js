@@ -6,6 +6,9 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { useState } from "react";
 
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
+
 const ProfileManager = () => {
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
@@ -52,14 +55,24 @@ const ProfileManager = () => {
 
   const handleBack = () => {
     if (hasChanges) {
-      const confirmBack = window.confirm("Discard Changes?");
-      if (confirmBack) {
-        window.location.href = "/profile";
-      }
-    } else {
-      window.location.href = "/profile";
-    }
-  };
+
+       alertify.confirm(
+        "You have unsaved changes. Are you sure you want to leave?",
+        async () => {
+          window.location.href = "/profile";
+          
+        },
+        () => {
+          // Cancel callback
+          
+        }
+      );
+
+  } else {
+    window.location.href = "/profile";
+  }
+  
+};
 
   return (
     <div>

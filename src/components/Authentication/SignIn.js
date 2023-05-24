@@ -2,6 +2,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React from "react";
 import "./SignIn.css";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 
 import { Link } from "react-router-dom";
 
@@ -41,7 +43,7 @@ export const SignIn = () => {
             localStorage.setItem('userGender', response.data.user.gender)
             localStorage.setItem('userSurname', response.data.user.surname)
             localStorage.setItem('userPhone', response.data.user.phone_number)
-            window.alert("Login Successful");
+            alertify.success("Welcome Back!")
             navigate("/dashboard");
 
           }
@@ -51,7 +53,7 @@ export const SignIn = () => {
         })
         .catch(function (error) {
           console.error(error);
-            window.alert("Authentication Failed");
+          alertify.warning("Authentication Failed");
 
         });
     });

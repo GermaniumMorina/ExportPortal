@@ -34,6 +34,7 @@ import NewsletterCreator from './components/Newsletter/NewsletterCreator';
 import { Marketplace } from './components/Marketplace/Marketplace';
 import ProfileManager from './components/ProfileManagment/ProfileManager';
 import ProfileViewer from './components/ProfileManagment/ProfileViewer';
+import AlertTest from './components/TestPages/AlertTest';
 console.log(document.cookie);
 
 const routes = [
@@ -151,7 +152,12 @@ const routes = [
     {
       path: "/profile/manager",
       element:<ProfileManager/>,
+    },
+    {
+      path: "/testpage",
+      element:<AlertTest/>,
     }
+
 
 
   

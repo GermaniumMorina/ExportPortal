@@ -9,7 +9,9 @@ const ProfileViewer = () => {
     const UserPhone=localStorage.getItem("userPhone");
     const UserGender=localStorage.getItem("userGender");
 
-
+    const handleEdit = () => {
+        window.location.href = '/profile/manager';
+    }
 
   return (
     <div>
@@ -21,7 +23,7 @@ const ProfileViewer = () => {
             <p>Email: {UserEmail} </p>
             <p>Phone: {UserPhone} </p>
             <p>Gender: {UserGender}</p>
-            <button ><a href="/profile/manager"> Edit </a></button>
+            <button className="edit-button" onClick={handleEdit}>Edit Profile</button>
         </div>
     </div>
   )

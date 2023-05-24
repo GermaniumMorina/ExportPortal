@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 
 import "./SignUp.css";
 axios.defaults.withCredentials = true;
@@ -70,8 +72,8 @@ export const SignUp = () => {
           localStorage.setItem('userEmail', formValues.email);
           localStorage.setItem('userId', response.data.user.id);
           navigate("/AddNewCompany");
-          window.alert("Welcome to the system");
-        }
+          alertify.success("Welcome!");  
+              }
       } catch (error) {
         console.log(error.response.data);
       }
