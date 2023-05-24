@@ -13,6 +13,7 @@ const ProfileManager = () => {
   const UserPhone = localStorage.getItem("userPhone");
   const UserGender = localStorage.getItem("userGender");
 
+  const [hasChanges, setHasChanges] = useState(false);
   const [formValues, setFormValues] = useState({
     name: UserName,
     surname: UserSurname,
@@ -50,9 +51,12 @@ const ProfileManager = () => {
   };
 
   const handleBack = () => {
-    const confirmBack = window.confirm("Discard Changes?");
-
-    if (confirmBack) {
+    if (hasChanges) {
+      const confirmBack = window.confirm("Discard Changes?");
+      if (confirmBack) {
+        window.location.href = "/profile";
+      }
+    } else {
       window.location.href = "/profile";
     }
   };
@@ -71,9 +75,10 @@ const ProfileManager = () => {
                 id="name"
                 name="name"
                 defaultValue={UserName}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, name: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormValues({ ...formValues, name: e.target.value });
+                  setHasChanges(true);
+                }}
               />
             </Form.Group>
 
@@ -83,9 +88,10 @@ const ProfileManager = () => {
                 id="surname"
                 name="surname"
                 defaultValue={UserSurname}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, surname: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormValues({ ...formValues, surname: e.target.value });
+                  setHasChanges(true);
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -94,9 +100,10 @@ const ProfileManager = () => {
                 id="email"
                 name="email"
                 defaultValue={UserEmail}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, email: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormValues({ ...formValues, email: e.target.value });
+                  setHasChanges(true);
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -107,9 +114,10 @@ const ProfileManager = () => {
                 label="Male"
                 inline
                 value="male"
-                onChange={(e) =>
-                  setFormValues({ ...formValues, gender: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormValues({ ...formValues, gender: e.target.value });
+                  setHasChanges(true);
+                }}
               />
 
               <Form.Check
@@ -119,9 +127,10 @@ const ProfileManager = () => {
                 label="Female"
                 inline
                 value="female"
-                onChange={(e) =>
-                  setFormValues({ ...formValues, gender: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormValues({ ...formValues, gender: e.target.value });
+                  setHasChanges(true);
+                }}
               />
             </Form.Group>
 
@@ -131,9 +140,10 @@ const ProfileManager = () => {
                 id="phone"
                 name="phone"
                 defaultValue={UserPhone}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, phone: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormValues({ ...formValues, phone: e.target.value });
+                  setHasChanges(true);
+                }}
               />
             </Form.Group>
             <button className="edit-button" type="submit">
