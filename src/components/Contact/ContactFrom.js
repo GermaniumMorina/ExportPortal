@@ -17,7 +17,7 @@ export const ContactFrom = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/form/2`);
+        const response = await axios.get(`http://localhost:8000/api/form/${id}`);
         setProductData(response.data[0]); // Set product data. Assume response is an array and we're interested in the first item
 
         // Also update form values with product data
