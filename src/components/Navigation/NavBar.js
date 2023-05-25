@@ -30,15 +30,21 @@ function NavBar() {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/Notify/${userId}`);
-                  
+        console.log(response.data);
         if (response.data && response.data.length > 0) {
-          console.log(response.data);
-          setNotifications(response.data);
-          
+          // Filter notifications by notifiable_id
+          const userNotifications = response.data.filter(notification => {
+            const notificationData = JSON.parse(notification.data);
+            return notificationData.notifiable_id == userId;
+          });
+  
+          console.log(userNotifications);
+          setNotifications(userNotifications);
+  
           // Count unread notifications
           let unread = 0;
-          response.data.forEach(notification => {
-            if (!notification.read) { unread++; }
+          userNotifications.forEach(notification => {
+            if (!notification.read_at) { unread++; } // assuming read_at is null for unread notifications
           });
           setUnreadCount(unread);
   
@@ -160,16 +166,18 @@ function NavBar() {
           </span>
         }
       </DropdownToggle>
-      <DropdownMenu>
-      <p>{message}</p>
-        {notifications.map((notification, index) => (
-          <DropdownItem key={index}>
-            
-            <p>{`${notification['Full Name']} is interested in your  product: ${notification['Product']}`}</p>
-          </DropdownItem>
-        ))}
-      </DropdownMenu>
-    </Dropdown>
+        <DropdownMenu>
+          <p>{message}</p>
+          {notifications.map((notification, index) => {
+            const notificationData = JSON.parse(notification.data);
+            return (
+              <DropdownItem key={index}>
+                <p>{`${notificationData['Full Name']} is interested in your product: ${notificationData['Product']}`}</p>
+              </DropdownItem>
+            );
+          })}
+        </DropdownMenu>
+      </Dropdown>
          </Nav>
 
 

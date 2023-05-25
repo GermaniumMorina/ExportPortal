@@ -17,7 +17,7 @@ export const ContactFrom = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/form/2`);
+        const response = await axios.get(`http://localhost:8000/api/form/${id}`);
         setProductData(response.data[0]); // Set product data. Assume response is an array and we're interested in the first item
 
         // Also update form values with product data
@@ -41,16 +41,21 @@ export const ContactFrom = () => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // axios
-    //   .get('http://localhost:8000/api/Notify/${Oid}/${Uid}/${Pid}', formValues)
-    //   .then(res => {
-    //     console.log('Data sent to database successfully.');
-    //     window.location.href = `mailto:${formValues.email}?subject=Interest in ${formValues.name}&body=${formValues.message}`;
-    //   })
-    //   .catch(err => {
-    //     console.log('Error in sending data to database.', err);
-    //   });
+    e.preventDefault();
+
+    if (!productData) return; // return if no product data is available
+
+    const { Owner_id: Oid, Product_ID: Pid } = productData; // Extract Oid and Pid from productData
+
+    axios
+      .get(`http://localhost:8000/api/Notify/${Oid}/${id}/${Pid}`, formValues) // use Oid and Pid here
+      .then(res => {
+        console.log('Data sent to database successfully.');
+        window.location.href = `mailto:${formValues.email}?subject=Interest in ${formValues.name}&body=${formValues.message}`;
+      })
+      .catch(err => {
+        console.log('Error in sending data to database.', err);
+      });
   };
 
   if (!productData) {
@@ -68,7 +73,6 @@ export const ContactFrom = () => {
             name="name"
             placeholder="Subject"
             aria-label="Name"
-            onChange={handleChange}
           />
         </InputGroup>
         <h5>Email</h5>
