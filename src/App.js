@@ -147,6 +147,10 @@ const routes = [
     {
       path: "/ContactFrom",
       element: <ContactFrom />,
+    },
+    {
+      path: "/ContactFrom/:id",
+      element: <ContactFrom />,
     } 
   
 

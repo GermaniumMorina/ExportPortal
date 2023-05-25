@@ -34,10 +34,13 @@ const ExportItem = () => {
   let { id } = useParams();
   useEffect(() => {
     getExportProduct(id);
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
   const handleBack = () => {
     navigate("/Export");
   };
+
+
   const formatDate = (date) => {
     const now = moment();
     const created = moment(date);
@@ -53,7 +56,7 @@ const ExportItem = () => {
     }
   };
 
-  const handleChat = async () => {
+  const handleChat = async (id) => {
     if (tokens < 10) {
       alert("You should have at least 10 tokens to chat with the owner!");
     } else {
@@ -70,7 +73,7 @@ const ExportItem = () => {
           }
           );
           setLoading(false);
-          navigate("/ContactFrom");
+          navigate("/ContactFrom/" + id);
         } catch (error) {
           setLoading(false);
           // Handle error
@@ -115,7 +118,8 @@ const ExportItem = () => {
                 </div>
                 <div className="d-flex justify-content-center btn-lg">
                   <Button className="mx-3"  onClick={handleBack}>Back</Button>
-                  <Button onClick={handleChat}>Chat with owner</Button>
+                  <Button onClick={() => handleChat(exportProduct.id)}>Chat with owner</Button>
+
                 </div>
               </div>
             );

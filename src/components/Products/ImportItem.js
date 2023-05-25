@@ -28,7 +28,8 @@ const ImportItem = () => {
  let { id } = useParams();
  useEffect(() => {
    getImportProduct(id);
- });
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
  const handleBack = () => {
    navigate("/Import");
  };
