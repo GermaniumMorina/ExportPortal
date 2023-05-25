@@ -3,6 +3,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "./logo.png";
 import avatar from "./avatar.jpg";
+import albania from "./al.png";
+import english from "./en.png";
+import spanish from "./es.png";
 import "./NavBar.css";
 import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
 import React from "react";
@@ -48,16 +51,20 @@ function NavBar() {
             <NavDropdown title={<span className="ms-2">Company</span>}>
               <NavDropdown.Item href="/Companies">Companies</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/AddNewCompany">Add new company</NavDropdown.Item>
+              <NavDropdown.Item href="/AddNewCompany">
+                Add new company
+              </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<span className="ms-2">Product</span>}>
-            <NavDropdown.Item href="/AddNewItem">Add New Product</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/Import">Import</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
+              <NavDropdown.Item href="/AddNewItem">
+                Add New Product
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/Import">Import</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
             </NavDropdown>
-            
+
             <Nav.Link href="/buy">Buy TEST</Nav.Link>
           </Nav>
 
@@ -83,6 +90,38 @@ function NavBar() {
               >
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/account">Account</NavDropdown.Item>
+                <NavDropdown title="Language">
+                  <NavDropdown.Item>
+                    <img
+                      src={albania}
+                      alt="albania"
+                      width="30"
+                      height="20"
+                      className="m-1"
+                    />
+                    Albanian
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <img
+                      src={english}
+                      alt="english"
+                      width="30"
+                      height="20"
+                      className="m-1"
+                    />
+                    English
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <img
+                      src={spanish}
+                      alt="spanish"
+                      width="30"
+                      height="20"
+                      className="m-1"
+                    />
+                    Spanish
+                  </NavDropdown.Item>
+                </NavDropdown>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
               </NavDropdown>
@@ -109,20 +148,26 @@ function NavBar() {
             <NavDropdown title={<span className="ms-2">Company</span>}>
               <NavDropdown.Item href="/Companies">Companies</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/companyListing">Company List</NavDropdown.Item>
+              <NavDropdown.Item href="/companyListing">
+                Company List
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/AddNewCompany">Add new company</NavDropdown.Item>
+              <NavDropdown.Item href="/AddNewCompany">
+                Add new company
+              </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<span className="ms-2">Product</span>}>
-            <NavDropdown.Item href="/AddNewItem">Add New Product</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/Import">Import</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
+              <NavDropdown.Item href="/AddNewItem">
+                Add New Product
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/Import">Import</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/Export">Export</NavDropdown.Item>
             </NavDropdown>
-            
+
             <Nav.Link href="/buy">Buy TEST</Nav.Link>
-        
+
             <Nav.Link href="/SignUp">Sign Up</Nav.Link>
             <Nav.Link href="/SignIn">Sign In</Nav.Link>
           </Nav>
