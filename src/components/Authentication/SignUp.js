@@ -70,7 +70,14 @@ export const SignUp = () => {
           localStorage.setItem('userName', formValues.name);
           localStorage.setItem('userSurname', formValues.surname);
           localStorage.setItem('userEmail', formValues.email);
+          localStorage.setItem('userPhone', formValues.phone_number);
+          localStorage.setItem('userGender', formValues.gender);
           localStorage.setItem('userId', response.data.user.id);
+          localStorage.setItem('userToken', response.data.token);
+          localStorage.setItem('userRole', response.data.user.role);
+          localStorage.setItem('userCompany', response.data.user.company_id);
+          localStorage.setItem('userCountry', response.data.user.country_id);
+          
           navigate("/AddNewCompany");
           alertify.success("Welcome!");  
               }
