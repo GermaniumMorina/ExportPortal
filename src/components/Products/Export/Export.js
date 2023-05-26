@@ -25,7 +25,9 @@ const ProductList = () => {
         "http://127.0.0.1:8000/api/elist",
         data
       );
-      setExportProducts(apiExportProducts.data.data);
+      setExportProducts(apiExportProducts.data[0]);
+      console.log(apiExportProducts.data[0]);
+
       setIsLoading(false); // Set loading state to false when data is fetched
     } catch (error) {
       console.error("Error fetching export products:", error);

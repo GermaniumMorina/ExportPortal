@@ -25,6 +25,7 @@ const ExportItem = () => {
         "http://127.0.0.1:8000/api/elist/" + id,
         data
       );
+      
       const apiExportProducts = response.data.data;
       setExportProduct(apiExportProducts);
       setIsLoading(false); // Set loading state to false when data is fetched

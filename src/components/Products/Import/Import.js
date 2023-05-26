@@ -25,7 +25,7 @@ const Import = () => {
         "http://127.0.0.1:8000/api/ilist",
         data
       );
-      setImportProducts(apiImportProducts.data.data);
+      setImportProducts(apiImportProducts.data[0]);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching import products:", error);
