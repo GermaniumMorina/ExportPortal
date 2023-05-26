@@ -5,6 +5,7 @@ import NavBar from "../Navigation/NavBar";
 import "./Companies.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useTranslation } from "react-i18next";
 
 const Companies = () => {
   const [companyList, setCompanyList] = useState([]);
@@ -84,7 +85,7 @@ const Companies = () => {
     setShowFilters((prevState) => !prevState);
   };
   
-
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -92,30 +93,30 @@ const Companies = () => {
       <div className="search">
         <div className="search-box">
           <button className="filter-button" onClick={toggleFilters}>
-            Filter
+            {t("companies.Filter")}
           </button>
           <input
             type="text"
             className="input-bar"
             value={searchTerm}
             onChange={handleSearch}
-            placeholder="Search!"
+            placeholder={t("companies.Search!")}
           />
           <span></span>
         </div>
       </div>
-      <div className={`filters ${showFilters ? 'showFilters' : ''}`}>
+      <div className={`filters ${showFilters ? "showFilters" : ""}`}>
         <div className="row justify-content-center mt-4">
           <div className="col-md-6">
             <Form.Group>
-              <Form.Label>Filter by Category:</Form.Label>
+              <Form.Label>{t("companies.Filter by Category")}</Form.Label>
               <div>
                 {categories.map((category) => (
                   <Form.Check
                     key={category.id}
                     type="checkbox"
                     id={category.id.toString()}
-                    label={category.name}
+                    label={t(`companies.${category.name}`)}
                     name={category.name}
                     onChange={handleCheckboxChange}
                     className="m-2"
@@ -126,9 +127,13 @@ const Companies = () => {
           </div>
           <div className="col-md-6">
             <Form.Group>
-              <Form.Label>Filter by Country:</Form.Label>
-              <Form.Control as="select" value={selectedCountry} onChange={handleCountryChange}>
-                <option value="">All</option>
+              <Form.Label>{t("companies.Filter by Country")}</Form.Label>
+              <Form.Control
+                as="select"
+                value={selectedCountry}
+                onChange={handleCountryChange}
+              >
+                <option value=""> {t("companies.All")}</option>
                 {countryList.map((country) => (
                   <option key={country.id} value={country.name}>
                     {country.country}
@@ -147,25 +152,27 @@ const Companies = () => {
           <table>
             <tbody>
               <tr>
-                <td style={tdStyle}>Name:</td>
+                <td style={tdStyle}>{t("companies.Name")}</td>
                 <td style={tdStyle}>{company.name}</td>
               </tr>
               <tr>
-                <td style={tdStyle}>Keywords:</td>
+                <td style={tdStyle}> {t("companies.Keywords")}</td>
                 <td style={tdStyle}>{company.keywords}</td>
               </tr>
               <tr>
-                <td style={tdStyle}>Country:</td>
+                <td style={tdStyle}> {t("companies.Country")}</td>
                 <td style={tdStyle}>{company.country}</td>
               </tr>
               <tr>
-                <td style={tdStyle}>Web Address:</td>
+                <td style={tdStyle}> {t("companies.Web Address")}</td>
                 <td style={tdStyle}>{company.web_address || "N/A"}</td>
               </tr>
             </tbody>
           </table>
           <div className="d-flex justify-content-center">
-            <Button onClick={() => navigateToCompany(company.id)}>View More</Button>
+            <Button onClick={() => navigateToCompany(company.id)}>
+              {t("companies.View More")}
+            </Button>
           </div>
         </div>
       ))}

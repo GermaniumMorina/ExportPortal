@@ -7,6 +7,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
 import NavBar from "../Navigation/NavBar";
+import { useTranslation } from "react-i18next";
 const ExportItem = () => {
   const navigate = useNavigate();
   const [exportProduct, setExportProduct] = useState([]);
@@ -46,12 +47,12 @@ const ExportItem = () => {
       return `${Math.floor(diffInHours / (24 * 30))} months ago`;
     }
   };
-
+  const { t } = useTranslation();
   return (
     <div>
       <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
-        <h1>Export Details</h1>
+        <h1>{t("import.Export Details")}</h1>
       </div>
       <div>
         <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto   mb-4 p-5 border rounded  border-dark ">
@@ -59,13 +60,29 @@ const ExportItem = () => {
             return (
               <div key={exportProduct.id}>
                 <div>
-                  <p>country: {exportProduct.country}</p>
-                  <p>price: {exportProduct.price}</p>
-                  <p>name: {exportProduct.name}</p>
-                  <p>description: {exportProduct.description}</p>
-                  <p>created at: {formatDate(exportProduct.created_at)}</p>
-                  <p>views: {exportProduct.views}</p>
-                  <p>category: {exportProduct.category_name}</p>
+                  <p>
+                    {t("companies.Name")} {exportProduct.name}
+                  </p>
+                  <p>
+                    {t("companies.Country")} {exportProduct.country}
+                  </p>
+                  <p>
+                    {t("import.Price")} {exportProduct.price}
+                  </p>
+
+                  <p>
+                    {t("import.Description")} {exportProduct.description}
+                  </p>
+                  <p>
+                    {t("import.Created at")}
+                    {formatDate(exportProduct.created_at)}
+                  </p>
+                  <p>
+                    {t("import.Views")} {exportProduct.views}
+                  </p>
+                  <p>
+                    {t("company.Category")} {exportProduct.category_name}
+                  </p>
                   <a href="https://www.facebook.com/" className="m-2">
                     <FaFacebook />
                   </a>
@@ -77,7 +94,7 @@ const ExportItem = () => {
                   </a>
                 </div>
                 <div className="d-flex justify-content-center btn-lg">
-                  <Button onClick={handleBack}>Back</Button>
+                  <Button onClick={handleBack}>{t("import.Back")}</Button>
                 </div>
               </div>
             );

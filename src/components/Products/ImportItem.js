@@ -7,53 +7,54 @@ import { useParams } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import moment from "moment";
 import NavBar from "../Navigation/NavBar";
+import { useTranslation } from "react-i18next";
 const ImportItem = () => {
   const navigate = useNavigate();
   const [importProduct, setImportProduct] = useState([]);
   //calling the GET method to get the "import" data
- const getImportProduct = async () => {
-   const data = {
-     headers: {
-       Accept: "application/json",
-     },
-   };
+  const getImportProduct = async () => {
+    const data = {
+      headers: {
+        Accept: "application/json",
+      },
+    };
 
-   const response = await axios.get(
-     "http://127.0.0.1:8000/api/ilist/" + id,
-     data
-   );
-   const apiImportProducts = response.data.data;
-   setImportProduct(apiImportProducts);
- };
- let { id } = useParams();
- useEffect(() => {
-   getImportProduct(id);
- });
- const handleBack = () => {
-   navigate("/Import");
- };
+    const response = await axios.get(
+      "http://127.0.0.1:8000/api/ilist/" + id,
+      data
+    );
+    const apiImportProducts = response.data.data;
+    setImportProduct(apiImportProducts);
+  };
+  let { id } = useParams();
+  useEffect(() => {
+    getImportProduct(id);
+  });
+  const handleBack = () => {
+    navigate("/Import");
+  };
 
-   const formatDate = (date) => {
-     const now = moment();
-     const created = moment(date);
-     const diffInHours = now.diff(created, "hours");
-     if (diffInHours < 24) {
-       return `${diffInHours} hours ago`;
-     } else if (diffInHours < 24 * 7) {
-       return `${Math.floor(diffInHours / 24)} days ago`;
-     } else if (diffInHours < 24 * 30) {
-       return `${Math.floor(diffInHours / (24 * 7))} weeks ago`;
-     } else {
-       return `${Math.floor(diffInHours / (24 * 30))} months ago`;
-     }
-   };
+  const formatDate = (date) => {
+    const now = moment();
+    const created = moment(date);
+    const diffInHours = now.diff(created, "hours");
+    if (diffInHours < 24) {
+      return `${diffInHours} hours ago`;
+    } else if (diffInHours < 24 * 7) {
+      return `${Math.floor(diffInHours / 24)} days ago`;
+    } else if (diffInHours < 24 * 30) {
+      return `${Math.floor(diffInHours / (24 * 7))} weeks ago`;
+    } else {
+      return `${Math.floor(diffInHours / (24 * 30))} months ago`;
+    }
+  };
+  const { t } = useTranslation();
 
-  
   return (
     <div>
       <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
-        <h1>Import Details</h1>
+        <h1>{t("import.Import Details")}</h1>
       </div>
       <div>
         <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto   mb-4 p-5 border rounded  border-dark ">
@@ -61,13 +62,30 @@ const ImportItem = () => {
             return (
               <div key={importProduct.id}>
                 <div>
-                  <p>country: {importProduct.country}</p>
-                  <p>price: {importProduct.price}</p>
-                  <p>name: {importProduct.name}</p>
-                  <p>description: {importProduct.description}</p>
-                  <p>created at: {formatDate(importProduct.created_at)}</p>
-                  <p>views: {importProduct.views}</p>
-                  <p>category: {importProduct.category_name}</p>
+                  <p>
+                    {t("companies.Name")} {importProduct.name}
+                  </p>
+                  <p>
+                    {t("companies.Country")} {importProduct.country}
+                  </p>
+                  <p>
+                    {t("import.Price")}
+                    {importProduct.price}
+                  </p>
+
+                  <p>
+                    {t("import.Description")} {importProduct.description}
+                  </p>
+                  <p>
+                    {t("import.Created at")}
+                    {formatDate(importProduct.created_at)}
+                  </p>
+                  <p>
+                    {t("import.Views")} {importProduct.views}
+                  </p>
+                  <p>
+                    {t("company.Category")} {importProduct.category_name}
+                  </p>
                   <a href="https://www.facebook.com/" className="m-2">
                     <FaFacebook />
                   </a>
@@ -79,7 +97,7 @@ const ImportItem = () => {
                   </a>
                 </div>
                 <div className="d-flex justify-content-center btn-lg">
-                  <Button onClick={handleBack}>Back</Button>
+                  <Button onClick={handleBack}>{t("import.Back")}</Button>
                 </div>
               </div>
             );

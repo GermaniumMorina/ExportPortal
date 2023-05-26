@@ -1,0 +1,142 @@
+{
+  "navbar": {
+    "Company": "Company",
+    "Product": "Product",
+    "Buy TEST": "Buy TEST",
+    "Companies": "Companies",
+    "Add new company": "Add new company",
+    "Add New Product": "Add New Product",
+    "Import": "Import",
+    "Export": "Export",
+    "Profile": "Profile",
+    "Account": "Account",
+    "Language": "Language",
+    "Albanian": "Albanian",
+    "English": "English",
+    "Spanish": "Spanish",
+    "Logout": "Logout",
+    "Company List": "Company List",
+    "Sign Up": "Sign Up",
+    "Sign In": "Sign In"
+  },
+  "main": {
+    "You are Logged in": "You are Logged in"
+  },
+  "footer": {
+    "St.Uke Bytyqi Nr.7": "St.Uke Bytyqi Nr.7",
+    "Prizren, Kosovo": "Prizren, Kosovo",
+    "Email support": "Email support",
+    "Contact Support": "Contact Support",
+    "Home": "Home"
+  },
+  "newsletter": {
+    "Subscribe to our newsletter!": "Subscribe to our newsletter!",
+    "Email": "Email",
+    "Button": "Button"
+  },
+  "companies": {
+    "Filter": "Filter",
+    "Search!": "Search!",
+    "Filter by Category": "Filter by Category:",
+    "Filter by Country": "Filter by Country:",
+    "All": "All",
+    "Name": "Name:",
+    "Keywords": "Keywords:",
+    "Country": "Country:",
+    "Web Address": "Web Address:",
+    "View More": "View More",
+    "Liability": "Liability",
+    "Control": "Control",
+    "Stock": "Stock",
+    "Others": "Others"
+  },
+  "company": {
+    "More Info": "More Info:",
+    "Category": "Category:",
+    "Sub-Catgory": "Sub-Catgory:",
+    "Membership": "Membership:"
+  },
+  "companyListing": {
+    "Select": "Select",
+    "Name": "Name",
+    "Keywords": "Keywords",
+    "Country": "Country",
+    "More Info": "More Info"
+  },
+  "addCompany": {
+    "Add Company": "Add Company"
+  },
+  "import": {
+    "Import List": "Import List",
+    "Export List": "Export List",
+    "Price": "Price:",
+    "Description": "Description:",
+    "Created at": "Created at:",
+    "Views": "Views:",
+    "Fashion": "Fashion",
+    "Home": "Home",
+    "Accessories": "Accessories",
+    "Sporting": "Sporting",
+    "Health": "Health",
+    "Medical": "Medical",
+    "Pets": "Pets",
+    "Back": "Back",
+    "Import Details": "Import Details",
+    "Export Details": "Export Details"
+  },
+  "notAllowed": {
+    "You are not allowed to view this page": "You are not allowed to view this page"
+  },
+  "signIn": {
+    "Welcome": "Welcome",
+    "Forgot Password?": "Forgot Password?",
+    "If you dont have a membership yet": " If you dont have a membership yet,",
+    "Activate": "Activate",
+    "Enter email or username": "Enter email or username",
+    "Submit": "Submit",
+    "Password": "Password"
+  },
+  "signUp": {
+    "Sign Up For Free": "Sign Up For Free",
+    "Surname": "Surname",
+    "E-mail": "E-mail",
+    "Password (again)": "Password (again)",
+    "Phone Number": "Phone Number",
+    "Select country": "Select country",
+    "Gender": "Gender",
+    "Male": "Male",
+    "Female": "Female",
+    "I have read and understood Membership Classification Text": "I have read and understood Membership Classification Text",
+    "If you have an account": "If you have an account"
+  },
+  "error": {
+    "Bad Request": "Bad Request",
+    "Unathorized": "Unathorized",
+    "Page Not Foundt": "Page Not Foundt",
+    "Internal Server Error": "Internal Server Error",
+    "Service Temporarily Overloaded": "Service Temporarily Overloaded",
+    "Service Unavailable": "Service Unavailable"
+  },
+  "products": {
+    "Add new Item": "Add new Item",
+    "Item Name": "Item Name",
+    "Item Description": "Item Description",
+    "Item Price": "Item Price",
+    "Type": "Type",
+    "Import Item": "Import Item",
+    "Export Item": "Export Item",
+    "Choose a file": "Choose a file",
+    "File added": "File added:",
+    "Fashion": "Fashion",
+    "Home": "Home",
+    "Accessories": "Accessories",
+    "Sporting": "Sporting",
+    "Health": "Health",
+    "Medical": "Medical",
+    "Pets": "Pets"
+  },
+  "support": {
+    "Message": "Message",
+    "Send": "Send"
+  }
+}

@@ -4,7 +4,7 @@ import axios from "axios";
 import NavBar from "./Navigation/NavBar";
 import NotAllowed from "./Authentication/NotAllowed";
 import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
-
+import { useTranslation } from "react-i18next";
 const Main = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -36,25 +36,26 @@ const Main = () => {
 
   const isLoggedIn = checkIfLoggedIn();
   const user = (localStorage.getItem('userName'));
+   const { t } = useTranslation();
   return (
-
     <div>
       {isLoggedIn ? (
         <>
-        <NavBar />
-          <div>You are Logged in {user}</div>
+          <NavBar />
+          <div>
+            {t("main.You are Logged in")} {user}
+          </div>
           <Form onSubmit={handleSubmit}>
-            <Button className="sign-in-button" variant="info" type="submit" >
-              Logout
+            <Button className="sign-in-button" variant="info" type="submit">
+              {t("navbar.Logout")}
             </Button>
           </Form>
         </>
       ) : (
         <NotAllowed />
-)}
+      )}
     </div>
-
-  )
+  );
 }
 export default Main;
 
