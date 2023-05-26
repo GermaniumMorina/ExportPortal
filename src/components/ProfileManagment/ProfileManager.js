@@ -2,7 +2,6 @@ import React from "react";
 import NavBar from "../Navigation/NavBar";
 import "./ProfileManager.css";
 import Form from "react-bootstrap/Form";
-//eslint-disable-next-line
 import axios from "axios";
 import { useState } from "react";
 
@@ -10,69 +9,75 @@ import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 
 const ProfileManager = () => {
+
+  const userId = localStorage.getItem("userId");
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
   const UserSurname = localStorage.getItem("userSurname");
   const UserPhone = localStorage.getItem("userPhone");
   const UserGender = localStorage.getItem("userGender");
+  const userCountry = localStorage.getItem("userCountry");
 
   const [hasChanges, setHasChanges] = useState(false);
   const [formValues, setFormValues] = useState({
     name: UserName,
     surname: UserSurname,
     email: UserEmail,
-    phone: UserPhone,
+    phone_number: UserPhone,
     gender: UserGender,
+    country_id: userCountry,
   });
+
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
     console.log(formValues);
-    // axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
-    //   axios
-    //     .put("http://localhost:8000/api/??????????", {
-    //       name: formValues.name,
-    //       surname: formValues.surname,
-    //       email: formValues.email,
-    //     })
-    //     .then((response) => {
-    //       console.log(response);
-    //       //set response in local storage
-    //       //  localStorage.setItem('user', JSON.stringify(response.data))
-    //       if (response.status === 200) {
-    //         localStorage.setItem("userName", response.data.user.name);
-    //         localStorage.setItem("userEmail", response.data.user.email);
-    //         localStorage.setItem("userSurname", response.data.user.surname);
-    //         localStorage.setItem("userLoggedIn", true);
-    //       }
-    //     })
-    //     .catch(function (error) {
-    //       console.error(error);
-    //       window.alert("Authentication Failed");
-    //     });
-    // });
+    axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
+      axios
+        .put(`http://localhost:8000/api/updateUser/${userId}`, {
+          name: formValues.name,
+          surname: formValues.surname,
+          email: formValues.email,
+          phone_number: formValues.phone_number,
+          gender: formValues.gender,
+          country_id: 1,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            localStorage.setItem("userName", formValues.name);
+            localStorage.setItem("userEmail", formValues.email);
+            localStorage.setItem("userSurname", formValues.surname);
+            localStorage.setItem("userPhone", formValues.phone_number);
+
+            alertify.success("Profile updated successfully");
+            setHasChanges(false);
+            console.log("ALL OK");
+          }
+        })
+        .catch(function (error) {
+          console.error(error);
+          alertify.error("Error updating profile");
+        });
+    });
   };
 
-  const handleBack = () => {
+  const handleBack = (event) => {
+    event.preventDefault();
     if (hasChanges) {
-
-       alertify.confirm(
+      alertify.confirm(
         "You have unsaved changes. Are you sure you want to leave?",
         async () => {
           window.location.href = "/profile";
-          
         },
         () => {
           // Cancel callback
-          
         }
       );
-
-  } else {
-    window.location.href = "/profile";
-  }
-  
-};
+    } else {
+      window.location.href = "/profile";
+    }
+  };
 
   return (
     <div>
@@ -83,6 +88,7 @@ const ProfileManager = () => {
           <h2 className="welcome">Edit Profile</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 id="name"
@@ -96,6 +102,7 @@ const ProfileManager = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
+              <Form.Label>Surname</Form.Label>
               <Form.Control
                 type="text"
                 id="surname"
@@ -108,6 +115,7 @@ const ProfileManager = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
                 id="email"
@@ -119,6 +127,7 @@ const ProfileManager = () => {
                 }}
               />
             </Form.Group>
+            <Form.Label>Gender</Form.Label>
             <Form.Group className="mb-3">
               <Form.Check
                 type="radio"
@@ -148,17 +157,22 @@ const ProfileManager = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
+              <Form.Label>Phone Number</Form.Label>
               <Form.Control
                 type="text"
-                id="phone"
-                name="phone"
+                id="phone_number"
+                name="phone_number"
                 defaultValue={UserPhone}
                 onChange={(e) => {
-                  setFormValues({ ...formValues, phone: e.target.value });
+                  setFormValues({
+                    ...formValues,
+                    phone_number: e.target.value,
+                  });
                   setHasChanges(true);
                 }}
               />
             </Form.Group>
+          
             <button className="edit-button" type="submit">
               Submit
             </button>
