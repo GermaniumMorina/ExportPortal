@@ -35,6 +35,8 @@ import { Marketplace } from './components/Marketplace/Marketplace';
 import ProfileManager from './components/ProfileManagment/ProfileManager';
 import ProfileViewer from './components/ProfileManagment/ProfileViewer';
 import AlertTest from './components/TestPages/AlertTest';
+import { ContactFrom } from './components/Contact/ContactFrom';
+
 console.log(document.cookie);
 
 const routes = [
@@ -156,8 +158,16 @@ const routes = [
     {
       path: "/testpage",
       element:<AlertTest/>,
-    }
-
+    },
+{
+      path: "/ContactFrom",
+      element: <ContactFrom />,
+    },
+    {
+      path: "/ContactFrom/:id",
+      element: <ContactFrom />,
+    } 
+  
 
 
   

@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';  // Import Dropdown components here
 import logo from "./logo.png";
 import avatar from "./avatar.jpg";
 import "./NavBar.css";
@@ -15,6 +16,53 @@ function NavBar() {
   const user = localStorage.getItem("userName");
   const [tokens, setTokens] = useState(localStorage.getItem("tokens"));
   const userId = localStorage.getItem("userId");
+  const [dropdownOpen, setDropdownOpen] = useState(false); 
+  const toggle = () => setDropdownOpen(prevState => !prevState);  
+
+
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  const [message, setMessage] = useState('');
+    
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/Notify/${userId}`);
+        console.log(response.data);
+        if (response.data && response.data.length > 0) {
+          // Filter notifications by notifiable_id
+          const userNotifications = response.data.filter(notification => {
+            const notificationData = JSON.parse(notification.data);
+            return notificationData.notifiable_id == userId;
+          });
+  
+          console.log(userNotifications);
+          setNotifications(userNotifications);
+  
+          // Count unread notifications
+          let unread = 0;
+          userNotifications.forEach(notification => {
+            if (!notification.read_at) { unread++; } // assuming read_at is null for unread notifications
+          });
+          setUnreadCount(unread);
+  
+          setMessage(''); // Clear the message if notifications are present
+        } else {
+          console.log("No notifications found.");
+          setNotifications([]);
+          setUnreadCount(0);
+  
+          setMessage('No new notifications.'); // Set the message when no notifications are found
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    fetchNotifications();
+  }, [userId]);
+
 
   const fetchTokenValue = async () => {
     try {
@@ -94,8 +142,53 @@ function NavBar() {
               </NavDropdown>
             )}
           </Nav>
+
+          <Nav className="me-auto">
+          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle 
+        caret 
+        tag="span" 
+        style={{ position: 'relative' }} // Inline styling added here
+      >
+        <span role="img" aria-label="bell">🔔</span>
+        {unreadCount > 0 && 
+          <span 
+            style={{
+              position: 'absolute',
+              top: '-5px',
+              right: '-10px',
+              width: '20px',
+              height: '20px',
+              borderRadius: '50%',
+              background: 'red',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '14px',
+            }}
+          >
+            {unreadCount}
+          </span>
+        }
+      </DropdownToggle>
+        <DropdownMenu>
+          <p>{message}</p>
+          {notifications.map((notification, index) => {
+            const notificationData = JSON.parse(notification.data);
+            return (
+              <DropdownItem key={index}>
+                <p>{`${notificationData['Full Name']} is interested in your product: ${notificationData['Product']}`}</p>
+              </DropdownItem>
+            );
+          })}
+        </DropdownMenu>
+      </Dropdown>
+         </Nav>
       </Navbar>
     </div>
+          
+          
   ) : (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
