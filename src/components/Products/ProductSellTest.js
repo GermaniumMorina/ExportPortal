@@ -5,7 +5,7 @@ import LoadingBar from "../LoadingScreens/LoadingBar";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 //es-lint-disable-next-line
-import { useNavigate, Navigate } from "react-router";
+import { Navigate } from "react-router";
 
 export const ProductSellTest = () => {
   const price = 43;

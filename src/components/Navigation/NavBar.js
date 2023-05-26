@@ -34,7 +34,7 @@ function NavBar() {
           // Filter notifications by notifiable_id
           const userNotifications = response.data.filter(notification => {
             const notificationData = JSON.parse(notification.data);
-            return notificationData.notifiable_id == userId;
+            return notificationData.notifiable_id === userId;
           });
   
           console.log(userNotifications);
@@ -143,30 +143,17 @@ function NavBar() {
             )}
           </Nav>
 
-          <Nav className="me-auto">
+          <Nav >
           <Dropdown isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle 
         caret 
         tag="span" 
         style={{ position: 'relative' }} // Inline styling added here
       >
-        <span role="img" aria-label="bell">🔔</span>
+        <span role="img" aria-label="bell" className="bell-icon">🔔</span>
         {unreadCount > 0 && 
           <span 
-            style={{
-              position: 'absolute',
-              top: '-5px',
-              right: '-10px',
-              width: '20px',
-              height: '20px',
-              borderRadius: '50%',
-              background: 'red',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '14px',
-            }}
+         
           >
             {unreadCount}
           </span>
