@@ -23,7 +23,7 @@ const ImportItem = () => {
       "http://127.0.0.1:8000/api/ilist/" + id,
       data
     );
-    const apiImportProducts = response.data.data;
+    const apiImportProducts = response.data[0][0];
     setImportProduct(apiImportProducts);
   };
   let { id } = useParams();
