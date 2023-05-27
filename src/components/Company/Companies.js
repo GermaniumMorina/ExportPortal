@@ -18,6 +18,7 @@ const Companies = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,7 +89,6 @@ const Companies = () => {
   }
 
   
-  const { t } = useTranslation();
 
   return (
     <div>

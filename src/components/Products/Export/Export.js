@@ -14,6 +14,7 @@ const ProductList = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
+  const { t } = useTranslation();
 
   const getExportProducts = async () => {
     try {
@@ -107,7 +108,7 @@ const ProductList = () => {
     return <LoadingBar />;
   }
 
-  const { t } = useTranslation();
+  
   return (
     <div>
       <NavBar />

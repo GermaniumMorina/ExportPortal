@@ -7,16 +7,11 @@ import { useParams } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import moment from "moment";
 import NavBar from "../../Navigation/NavBar";
-
+import { useTranslation } from "react-i18next";
 const ImportItem = () => {
   const navigate = useNavigate();
   const [importProduct, setImportProduct] = useState([]);
-  //eslint-disable-next-line
-  const [loading, setLoading] = useState(false);
-  const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
-  const chatprice = tokens - 10;
-  let userId = localStorage.getItem("userId");
-
+  //calling the GET method to get the "import" data
   const getImportProduct = async () => {
     const data = {
       headers: {
@@ -34,9 +29,7 @@ const ImportItem = () => {
   let { id } = useParams();
   useEffect(() => {
     getImportProduct(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-
+  });
   const handleBack = () => {
     navigate("/Import");
   };
@@ -55,54 +48,44 @@ const ImportItem = () => {
       return `${Math.floor(diffInHours / (24 * 30))} months ago`;
     }
   };
-
-  const handleChat = async (id) => {
-    if (tokens < 10) {
-      alert("You should have at least 10 tokens to chat with the owner!");
-    } else {
-      const confirmChat = window.confirm(
-        "Chat with the owner? This will take 10 tokens from your account."
-      );
-
-      if (confirmChat) {
-        setLoading(true);
-        try {
-          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, 
-          {
-            amount: chatprice,
-          });
-          setLoading(false);
-          navigate("/ContactFrom/" + id);
-        } catch (error) {
-          setLoading(false);
-        }
-        const response = await axios.get(
-          `http://localhost:8000/api/token/${userId}`
-        );
-        setTokens(response.data.amount);
-      }
-    }
-  };
+  const { t } = useTranslation();
 
   return (
     <div>
       <NavBar />
-      <div className="d-flex justify-content-center mt-4 text-primary">
-        <h1>Import Details</h1>
+      <div className="d-flex justify-content-center  mt-4 text-primary">
+        <h1>{t("import.Import Details")}</h1>
       </div>
       <div>
-        <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto mb-4 p-5 border rounded border-dark">
+        <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto   mb-4 p-5 border rounded  border-dark ">
           {importProduct.map((importProduct) => {
             return (
               <div key={importProduct.id}>
                 <div>
-                  <p>country: {importProduct.country}</p>
-                  <p>price: {importProduct.price}</p>
-                  <p>name: {importProduct.name}</p>
-                  <p>description: {importProduct.description}</p>
-                  <p>created at: {formatDate(importProduct.created_at)}</p>
-                  <p>views: {importProduct.views}</p>
-                  <p>category: {importProduct.category_name}</p>
+                  <p>
+                    {t("companies.Name")} {importProduct.name}
+                  </p>
+                  <p>
+                    {t("companies.Country")} {importProduct.country}
+                  </p>
+                  <p>
+                    {t("import.Price")}
+                    {importProduct.price}
+                  </p>
+
+                  <p>
+                    {t("import.Description")} {importProduct.description}
+                  </p>
+                  <p>
+                    {t("import.Created at")}
+                    {formatDate(importProduct.created_at)}
+                  </p>
+                  <p>
+                    {t("import.Views")} {importProduct.views}
+                  </p>
+                  <p>
+                    {t("company.Category")} {importProduct.category_name}
+                  </p>
                   <a href="https://www.facebook.com/" className="m-2">
                     <FaFacebook />
                   </a>
@@ -114,12 +97,7 @@ const ImportItem = () => {
                   </a>
                 </div>
                 <div className="d-flex justify-content-center btn-lg">
-                  <Button className="mx-3" onClick={handleBack}>
-                    Back
-                  </Button>
-                  <Button onClick={() => handleChat(importProduct.id)}>
-                    Chat with owner
-                  </Button>
+                  <Button onClick={handleBack}>{t("import.Back")}</Button>
                 </div>
               </div>
             );

@@ -9,6 +9,7 @@ const Company = () => {
   const { id } = useParams();
   const [company, setCompany] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation();
 
   const getCompany = async () => {
     try {
@@ -29,7 +30,6 @@ const Company = () => {
     return <LoadingBar/>
   }
 
-     const { t } = useTranslation();
   return (
     <div>
       <NavBar />
