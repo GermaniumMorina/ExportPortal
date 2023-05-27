@@ -68,13 +68,20 @@ function NavBar() {
   }, [userId]);
 
 
+
+  const handleLogout = (ev) => {
+    ev.preventDefault();
+    localStorage.clear();
+    window.location.href = '/';
+  } 
+
   const fetchTokenValue = async () => {
     try {
       const response = await axios.get(
         `http://localhost:8000/api/token/${userId}`
       );
-      setTokens(response.data.amount);
-      localStorage.setItem("tokens", response.data.amount);
+      setTokens(response.data[0].original.amount);
+      localStorage.setItem("tokens", response.data[0].original.amount);
     } catch (error) {
       // Handle error
     }
@@ -197,7 +204,7 @@ function NavBar() {
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/logout">
+                <NavDropdown.Item onClick={handleLogout}>
                   {t("navbar.Logout")}
                 </NavDropdown.Item>
               </NavDropdown>

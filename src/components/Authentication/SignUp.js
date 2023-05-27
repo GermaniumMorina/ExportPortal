@@ -66,24 +66,40 @@ export const SignUp = () => {
           }
         );
         console.log(response);
+        const user = response.data[0].original.user;
+        console.log(user);
+
         if (response.status === 201) {
           localStorage.setItem("userLoggedIn", true);
-          localStorage.setItem('userName', formValues.name);
-          localStorage.setItem('userSurname', formValues.surname);
-          localStorage.setItem('userEmail', formValues.email);
-          localStorage.setItem('userPhone', formValues.phone_number);
-          localStorage.setItem('userGender', formValues.gender);
-          localStorage.setItem('userId', response.data.user.id);
-          localStorage.setItem('userToken', response.data.token);
-          localStorage.setItem('userRole', response.data.user.role);
-          localStorage.setItem('userCompany', response.data.user.company_id);
-          localStorage.setItem('userCountry', response.data.user.country_id);
-          
+          localStorage.setItem("userName", formValues.name);
+          localStorage.setItem("userSurname", formValues.surname);
+          localStorage.setItem("userEmail", formValues.email);
+          localStorage.setItem("userPhone", formValues.phone_number);
+          localStorage.setItem("userGender", formValues.gender);
+
+          localStorage.setItem("userId", response.data[0].original.user.id);
+          localStorage.setItem("userToken", response.data[0].original.token);
+          localStorage.setItem("userRole", response.data[0].original.user.role);
+          localStorage.setItem(
+            "userCompany",
+            response.data[0].original.user.company_id
+          );
+          localStorage.setItem(
+            "userCountry",
+            response.data[0].original.user.country_id
+          );
+
           navigate("/AddNewCompany");
-          alertify.success("Welcome!");  
-              }
+          alertify.success("Welcome!");
+        }
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
+        if (error.response.status === 422) {
+          alertify.error("Email already exists");
+        }
+        if (error.response.status === 500) {
+          alertify.error("Something went wrong");
+        }
       }
     } else {
       setErrors(errors);
@@ -106,14 +122,16 @@ export const SignUp = () => {
     }));
   };
 
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //FIX THIS
+  //eslint-disable-next-line
   const handleCountryChange = (e) => {
     setFormValues((prevValues) => ({
       ...prevValues,
       country_id: e.target.value,
     }));
   };
-
-  console.log(handleCountryChange);
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
