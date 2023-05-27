@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 export const AddNewCompany = () => {
+  const userID=(localStorage.getItem("userID"));
   const navigate = useNavigate();
   const isLoggedIn = checkIfLoggedIn();
   const [formValues, setFormValues] = useState({
@@ -59,7 +60,7 @@ export const AddNewCompany = () => {
     e.preventDefault();
     await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
-    const response = await axios.post(`http://localhost:8000/api/company`, formValues);
+    const response = await axios.post(`http://localhost:8000/api/company/${userID}`, formValues);
  if (response.status === 201) {
      
       window.alert("Company added successfully");
