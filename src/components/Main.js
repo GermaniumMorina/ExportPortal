@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+
 import NavBar from './Navigation/NavBar';
 import { Navigate } from 'react-router-dom';
 import { checkIfLoggedIn } from './Authentication/checkIfLoggedIn';
@@ -11,11 +10,6 @@ import './Main.css';
 const Main = () => {
   let gender = '';
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    localStorage.clear();
-    window.location.href = '/';
-  };
 
   const isLoggedIn = checkIfLoggedIn();
   const userName = localStorage.getItem('userName');
@@ -45,11 +39,7 @@ const Main = () => {
             <h6 className="text-center">You can also view your profile</h6>
             <h6 className="text-center">You can also view your orders</h6>
 
-            <Form onSubmit={handleSubmit} className="text-center logout-button">
-              <Button variant="primary" type="submit">
-                !!! TEST LOGOUT !!!
-              </Button>
-            </Form>
+          
           </div>
         </div>
       </div>

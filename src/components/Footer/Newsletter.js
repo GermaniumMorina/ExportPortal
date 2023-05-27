@@ -12,21 +12,26 @@ import { useTranslation } from "react-i18next";
 export const Newsletter = () => {
   const [email, setEmail] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-       
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
       const response = await axios.post("http://localhost:8000/api/newsletter", {
         email: email,
       });
-      console.log(response);
+      
       if (response.status === 201) {
         alertify.success("You have been subscribed to our newsletter");
-      } else {
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
         alertify.error("You are already subscribed to our newsletter");
-
-        
+      } else {
+        alertify.error("Cannot subscribe to newsletter");
       }
     }
+  };
+  
 
   const { t } = useTranslation();
   return (
@@ -49,10 +54,9 @@ export const Newsletter = () => {
             />
             <Button
               variant="outline-secondary"
-              id="button-addon2"
               onClick={handleSubmit}
             >
-              {t("support.Subscribe")}
+              {t("support.Send")}
             </Button>
           </InputGroup>
         </Form>
