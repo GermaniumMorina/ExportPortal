@@ -16,6 +16,13 @@ function NavBar() {
   const [tokens, setTokens] = useState(localStorage.getItem("tokens"));
   const userId = localStorage.getItem("userId");
 
+
+  const handleLogout = (ev) => {
+    ev.preventDefault();
+    localStorage.clear();
+    window.location.href = '/';
+  } 
+
   const fetchTokenValue = async () => {
     try {
       const response = await axios.get(
@@ -90,7 +97,7 @@ function NavBar() {
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/account">Account</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>
