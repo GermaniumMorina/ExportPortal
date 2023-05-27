@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import NavBar from "../../Navigation/NavBar";
 import LoadingBar from "../../LoadingScreens/LoadingBar"; // Import your loading component
 
+import { useTranslation } from "react-i18next";
 const ProductList = () => {
   const navigate = useNavigate();
   const [exportProducts, setExportProducts] = useState([]);
@@ -60,13 +61,18 @@ const ProductList = () => {
     if (checked) {
       setSelectedCategories([...selectedCategories, name]);
     } else {
-      setSelectedCategories(selectedCategories.filter((category) => category !== name));
+      setSelectedCategories(
+        selectedCategories.filter((category) => category !== name)
+      );
     }
   };
 
-  const filteredProducts = selectedCategories.length > 0
-    ? exportProducts.filter((product) => selectedCategories.includes(product.category_name))
-    : exportProducts;
+  const filteredProducts =
+    selectedCategories.length > 0
+      ? exportProducts.filter((product) =>
+          selectedCategories.includes(product.category_name)
+        ) // I changed 'product.category' to 'product.category_name'
+      : exportProducts;
 
   const handleNavigateItem = (id) => {
     navigate("/ExportItem/" + id);
@@ -101,23 +107,24 @@ const ProductList = () => {
     return <LoadingBar />;
   }
 
+  const { t } = useTranslation();
   return (
     <div>
       <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
-        <h1>   Export List</h1>
+        <h1> {t("import.Export List")} </h1>
       </div>
       <div className="d-flex justify-content-center mt-4">
-      {categories.map(category => (
-          <Form.Check 
-            type="checkbox" 
-            id={`category-${category.name}`} 
-            label={category.name} 
-            name={category.name} 
-            onChange={handleCheckboxChange} 
+        {categories.map((category) => (
+          <Form.Check
+            type="checkbox"
+            id={`category-${category.name}`}
+            label={t(`import.${category.name}`)}
+            name={category.name}
+            onChange={handleCheckboxChange}
             className="m-2"
           />
-      ))}
+        ))}
       </div>
       <div>
         <div>
@@ -128,12 +135,23 @@ const ProductList = () => {
                 className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark  rounded"
               >
                 <div>
-                  <p>Name: {exportProduct.name}</p>
-                  <p>Country: {exportProduct.country}</p>
-                  <p>Price: {exportProduct.price}</p>
-                  
-                  <p>Description: {exportProduct.description}</p>
-                  <p>Added: {formatDate(exportProduct.created_at)}</p>
+                  <p>
+                    {t("companies.Name")} {exportProduct.name}
+                  </p>
+                  <p>
+                    {t("companies.Country")} {exportProduct.country}
+                  </p>
+                  <p>
+                    {t("import.Price")} {exportProduct.price}
+                  </p>
+
+                  <p>
+                    {t("import.Description")} {exportProduct.description}
+                  </p>
+                  <p>
+                    {t("import.Created at")}
+                    {formatDate(exportProduct.created_at)}
+                  </p>
                 </div>
 
                 <div className="d-flex justify-content-center">
@@ -143,7 +161,7 @@ const ProductList = () => {
                       handleView(exportProduct.id);
                     }}
                   >
-                    View More
+                    {t("companies.View More")}
                   </Button>
                 </div>
               </div>
@@ -155,4 +173,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductList;

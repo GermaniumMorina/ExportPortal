@@ -1,0 +1,142 @@
+{
+  "navbar": {
+    "Company": "Compañía",
+    "Product": "Producto",
+    "Buy TEST": "Comprar PRUEBA",
+    "Companies": "Compañías",
+    "Add new company": "Añadir nueva empresay",
+    "Add New Product": "Añadir nuevo producto",
+    "Import": "Importar",
+    "Export": "Exportar",
+    "Profile": "Perfil",
+    "Account": "Cuenta",
+    "Language": "Idioma",
+    "Albanian": "Albanés",
+    "English": "Inglés",
+    "Spanish": "Español",
+    "Logout": "Cerrar sesión",
+    "Company List": "Lista de empresas",
+    "Sign Up": "Inscribirse",
+    "Sign In": "Iniciar sesión"
+  },
+  "main": {
+    "You are Logged in": "Estás conectado"
+  },
+  "footer": {
+    "St.Uke Bytyqi Nr.7": "Calle St.Uke Bytyqi Nr.7 ",
+    "Prizren, Kosovo": "Prizren, Kosovo",
+    "Email support": "Soporte de correo electrónico",
+    "Contact Support": "Soporte de contacto",
+    "Home": "Hogar"
+  },
+  "newsletter": {
+    "Subscribe to our newsletter!": "¡Suscríbete a nuestro boletín!",
+    "Email": "Correo electrónico",
+    "Button": "Botón"
+  },
+  "companies": {
+    "Filter": "Filtrar",
+    "Search!": "¡Buscar!",
+    "Filter by Category": "Filtrar por Categoría:",
+    "Filter by Country": "Filtrar por País:",
+    "All": "Todo",
+    "Name": "Nombre:",
+    "Keywords": "Palabras clave",
+    "Country": "País",
+    "Web Address": "Dirección web:",
+    "View More": "Ver más",
+    "Liability": "Liability",
+    "Control": "Control",
+    "Stock": "Existencias",
+    "Others": "Otro"
+  },
+  "company": {
+    "More Info": "Más información:",
+    "Category": "Categoría:",
+    "Sub-Catgory": "Subcategoría:",
+    "Membership": "Afiliación:"
+  },
+  "companyListing": {
+    "Select": "Seleccionar",
+    "Name": "Nombre",
+    "Keywords": "Palabras clave",
+    "Country": "País",
+    "More Info": "Más información"
+  },
+  "addCompany": {
+    "Add Company": "Agregar empresa"
+  },
+  "import": {
+    "Import List": "Lista de importación",
+    "Export List": "Lista de exportación",
+    "Price": "Precio:",
+    "Description": "Descripción:",
+    "Created at": "Creado en:",
+    "Views": "Puntos de vista:",
+    "Fashion": "Moda",
+    "Home": "Hogar",
+    "Accessories": "Accesorios",
+    "Sporting": "Deportivo",
+    "Health": "Salud",
+    "Medical": "Médico",
+    "Pets": "Mascotas",
+    "Back": "Atrás",
+    "Import Details": "Importar detalles",
+    "Export Details": "Detalles de exportación"
+  },
+  "notAllowed": {
+    "You are not allowed to view this page": "No tienes permiso para ver esta página"
+  },
+  "signIn": {
+    "Welcome": "Bienvenido",
+    "Forgot Password?": "¿Has olvidado tu contraseña?",
+    "If you dont have a membership yet": "Si aún no tienes una membresía,",
+    "Activate": "Activar",
+    "Enter email or username": "Ingrese correo electrónico o nombre de usuario",
+    "Submit": "Entregar",
+    "Password": "Contraseña"
+  },
+  "signUp": {
+    "Sign Up For Free": "Registrate gratis",
+    "Surname": "Apellido",
+    "E-mail": "Correo electrónico",
+    "Password (again)": "Contraseña de nuevo",
+    "Phone Number": "Número de teléfono",
+    "Select country": "Seleccionar país",
+    "Gender": "Género",
+    "Male": "Masculino",
+    "Female": "Femenino",
+    "I have read and understood Membership Classification Text": "He leído y comprendido el Texto de Clasificación de Membresía",
+    "If you have an account": "Si tienes una cuenta"
+  },
+  "error": {
+    "Bad Request": "Solicitud incorrecta",
+    "Unathorized": "No autorizado",
+    "Page Not Foundt": "Página no encontrada",
+    "Internal Server Error": "Error Interno del Servidor",
+    "Service Temporarily Overloaded": "Servicio temporalmente sobrecargado",
+    "Service Unavailable": "Servicio No Disponible"
+  },
+  "products": {
+    "Add new Item": "Agregar nuevo producto",
+    "Item Name": "Nombre del producto",
+    "Item Description": "Descripción del Producto",
+    "Item Price": "Precio del producto",
+    "Type": "Tipo",
+    "Import Item": "Importar producto",
+    "Export Item": "Exportar artículo",
+    "Choose a file": "Escoge un archivo",
+    "File added": "Archivo agregado:",
+    "Fashion": "Moda",
+    "Home": "Hogar",
+    "Accessories": "Accesorios",
+    "Sporting": "Deportivo",
+    "Health": "Salud",
+    "Medical": "Médico",
+    "Pets": "Mascotas"
+  },
+  "support": {
+    "Message": "Mensaje",
+    "Send": "Enviar"
+  }
+}

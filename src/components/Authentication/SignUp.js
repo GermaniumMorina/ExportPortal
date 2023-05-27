@@ -8,6 +8,7 @@ import axios from "axios";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 
+import { useTranslation } from "react-i18next";
 import "./SignUp.css";
 axios.defaults.withCredentials = true;
 
@@ -89,8 +90,6 @@ export const SignUp = () => {
     }
   };
 
-
-
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
     setCountryList(ApiCountry.data.data);
@@ -163,6 +162,7 @@ export const SignUp = () => {
     }
     return errors;
   };
+  const { t } = useTranslation();
   return (
     <div className="container">
       <Form
@@ -173,13 +173,13 @@ export const SignUp = () => {
           id="form"
           className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-5 border border-dark"
         >
-          <h5 className="p-2">Sign Up For Free</h5>
+          <h5 className="p-2">{t("signUp.Sign Up For Free")}</h5>
           <Form.Group>
             <Form.Control
               type="text"
               name="name"
               value={formValues.name}
-              placeholder="Name"
+              placeholder={t("companyListing.Name")}
               className="mb-2"
               onChange={handleInputChange}
             />
@@ -191,7 +191,7 @@ export const SignUp = () => {
             <Form.Control
               type="text"
               name="surname"
-              placeholder="Surname"
+              placeholder={t("signUp.Surname")}
               value={formValues.surname}
               className="mb-2"
               onChange={handleInputChange}
@@ -203,7 +203,7 @@ export const SignUp = () => {
           <Form.Group>
             <Form.Control
               type="email"
-              placeholder="E-mail"
+              placeholder={t("signUp.E-mail")}
               value={formValues.email}
               className="mb-2"
               name="email"
@@ -216,7 +216,7 @@ export const SignUp = () => {
           <Form.Group>
             <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder={t("signIn.Password")}
               className="mb-2"
               value={formValues.password}
               name="password"
@@ -229,7 +229,7 @@ export const SignUp = () => {
           <Form.Group>
             <Form.Control
               type="password"
-              placeholder="Password (again)"
+              placeholder={t("signUp.Password (again)")}
               name="passwordAgain"
               className="mb-2"
               value={formValues.passwordAgain}
@@ -244,7 +244,7 @@ export const SignUp = () => {
           <Form.Group>
             <Form.Control
               type="tel"
-              placeholder="Phone Number"
+              placeholder={t("signUp.Phone Number")}
               className="mb-2"
               name="phone_number"
               value={formValues.phone_number}
@@ -263,7 +263,7 @@ export const SignUp = () => {
               value={formValues.country_id}
               onChange={handleInputChange}
             >
-              <option>Select country</option>
+              <option>{t("signUp.Select country")}</option>
               {countryList.map((country) => (
                 <option key={country.id} value={country.id}>
                   {country.country}
@@ -275,12 +275,12 @@ export const SignUp = () => {
             )}
           </Form.Group>
           <Form.Group>
-            <Form.Label className="gender">Gender</Form.Label>
+            <Form.Label className="gender">{t("signUp.Gender")}</Form.Label>
             <Form.Check
               type="radio"
               name="gender"
               id="male"
-              label="Male"
+              label={t("signUp.Male")}
               inline
               value="male"
               checked={formValues.gender === "male"}
@@ -291,7 +291,7 @@ export const SignUp = () => {
               type="radio"
               name="gender"
               id="female"
-              label="Female"
+              label={t("signUp.Female")}
               inline
               value="female"
               checked={formValues.gender === "female"}
@@ -304,15 +304,15 @@ export const SignUp = () => {
           <Form.Group>
             <Form.Check
               type="checkbox"
-              label="I have read and understood Membership Classification Text"
+              label={t(
+                "signUp.I have read and understood Membership Classification Text"
+              )}
               checked={formValues.agreements}
               onChange={handleAgreementCheck}
               className="mb-2"
             />
             {errors.agreements && (
-              <Form.Text className="text-danger">
-                {errors.agreements}
-              </Form.Text>
+              <Form.Text className="text-danger">{errors.agreements}</Form.Text>
             )}
           </Form.Group>
           <Form.Group>
@@ -328,19 +328,19 @@ export const SignUp = () => {
           </Form.Group>
           <Form.Group>
             <Button variant="info" className="sign-up-button" type="submit">
-              Sign Up
+              {t("navbar.Sign Up")}
             </Button>
           </Form.Group>
           <div className="d-flex justify-content-center">
             <p className="mt-3">
-              If you have an account
+              {t("signUp.If you have an account")}
               <Link className="p-2" to={"/SignIn"}>
-                Sign In
+                {t("navbar.Sign In")}
               </Link>
             </p>
           </div>
         </div>
       </Form>
-    </div>
-  );
+    </div>
+  );
 };

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import NotAllowed from "../Authentication/NotAllowed";
 import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export const AddNewCompany = () => {
   const navigate = useNavigate();
@@ -70,12 +71,13 @@ export const AddNewCompany = () => {
     console.log(activity);
    
   };
+       const { t } = useTranslation();
 
   return isLoggedIn ? (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
         <div className="add-new-company-form-div">
-          <h2>Add Company</h2>
+          <h2>{t("addCompany.Add Company")}</h2>
           <Form onSubmit={handleSubmit} className="main-form">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Control
