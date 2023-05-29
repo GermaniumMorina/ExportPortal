@@ -84,3 +84,4 @@ If you get any error while installing packages then install them individually us
 ### `npm install axios`   
 ### `npm install react-icons --save`
 ### `npm install react-loading`
+### `npm i i18next i18next-browser-languagedetector i18next-http-backend react-i18next`
