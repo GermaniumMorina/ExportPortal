@@ -12,9 +12,11 @@ import NotAllowed from "../Authentication/NotAllowed";
 import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 
 export const AddNewCompany = () => {
-  const userID=(localStorage.getItem("userID"));
+  const userID=(localStorage.getItem("userId"));
   const navigate = useNavigate();
   const isLoggedIn = checkIfLoggedIn();
   const [formValues, setFormValues] = useState({
@@ -24,13 +26,16 @@ export const AddNewCompany = () => {
     web_address: "",
     taxpayer_office: "",
     keywords: "",
-    category_id: "",
+    category_id: 0,
     more_info: "",
-    subcategory_id: "",
+    subcategory_id: 0,
     selectedValues: [],
     country: "",
     budged: "",
     profile_picture:"null.jpg",
+
+
+    
   });
   const [countryList, setCountryList] = useState([]);
 
@@ -63,7 +68,7 @@ export const AddNewCompany = () => {
     const response = await axios.post(`http://localhost:8000/api/company/${userID}`, formValues);
  if (response.status === 201) {
      
-      window.alert("Company added successfully");
+  alertify.success("Company created successfully")
     navigate ("/companies");
     }
 
