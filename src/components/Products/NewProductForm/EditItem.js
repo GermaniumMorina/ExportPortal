@@ -3,6 +3,7 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export const EditItem = () => {
   const [formValues, setFormValues] = useState({
     id: 0,
@@ -38,7 +39,7 @@ export const EditItem = () => {
       console.error(error);
     }
   };
-
+  const { t } = useTranslation();
   return (
     <div className="container ">
       <Form
@@ -50,12 +51,12 @@ export const EditItem = () => {
           className=" col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto  form p-5  border border-dark  "
           controlId="exampleForm.ControlInput1"
         >
-          <h5 className="p-2">Edit Item</h5>
+          <h5 className="p-2">{t("editItem.Edit Item")}</h5>
           <Form.Group>
             <Form.Control
               type="text"
               name="id"
-              placeholder="ID "
+              placeholder={t("editItem.ID")}
               className="mb-2"
               // value={formValues.id}
               onChange={onChange}
@@ -65,7 +66,7 @@ export const EditItem = () => {
             <Form.Control
               type="text"
               name="name"
-              placeholder="Name "
+              placeholder={t("companyListing.Name")}
               className="mb-2"
               value={formValues.name}
               onChange={onChange}
@@ -75,7 +76,7 @@ export const EditItem = () => {
             <Form.Control
               type="text"
               name="description"
-              placeholder="Description"
+              placeholder={t("editItem.Description")}
               className="mb-2"
               value={formValues.description}
               onChange={onChange}
@@ -85,7 +86,7 @@ export const EditItem = () => {
               <Form.Control
                 type="number"
                 name="price"
-                placeholder=" Price"
+                placeholder={t("editItem.Price")}
                 className="mb-2"
                 value={formValues["price"]}
                 onChange={onChange}
@@ -95,7 +96,7 @@ export const EditItem = () => {
               <Form.Control
                 type="text"
                 name="imageURL"
-                placeholder="ImageUrl"
+                placeholder={t("editItem.ImageUrl")}
                 className="mb-2"
                 value={formValues["imageURL"]}
                 onChange={onChange}
@@ -105,7 +106,7 @@ export const EditItem = () => {
               <Form.Control
                 type="text"
                 name="views"
-                placeholder="Views"
+                placeholder={t("editItem.Views")}
                 className="mb-2"
                 value={formValues["views"]}
                 onChange={onChange}
@@ -115,7 +116,7 @@ export const EditItem = () => {
               <Form.Control
                 type="text"
                 name="type"
-                placeholder="type"
+                placeholder={t("products.type")}
                 className="mb-2"
                 value={formValues["type"]}
                 onChange={onChange}
@@ -125,7 +126,7 @@ export const EditItem = () => {
               <Form.Control
                 type="number"
                 name="category_id"
-                placeholder="Category ID"
+                placeholder={t("editItem.Category ID")}
                 className="mb-2"
                 value={formValues["category_id"]}
                 onChange={onChange}
@@ -135,7 +136,7 @@ export const EditItem = () => {
               <Form.Control
                 type="number"
                 name="company_id"
-                placeholder="Company ID"
+                placeholder={t("editItem.Company ID")}
                 className="mb-2"
                 value={formValues["company_id"]}
                 onChange={onChange}
@@ -143,11 +144,11 @@ export const EditItem = () => {
             </Form.Group>
             <Form.Group>
               <Button type="submit" className="btn btn-primary button-add  m-2">
-                Update
+                {t("editItem.Update")}
               </Button>
               <Link to={"/ModifyItem"}>
                 <Button type="submit" className="btn btn-warning m-2">
-                  Go Back
+                  {t("editItem.Go Back")}
                 </Button>
               </Link>
             </Form.Group>

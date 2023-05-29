@@ -30,9 +30,10 @@
     "Home": "Ballina"
   },
   "newsletter": {
-    "Subscribe to our newsletter!": "Regjistrohu në buletinin tonë!",
+    "Subscribe to our newsletter!": "Abonohu në buletinin tonë!",
     "Email": "Email",
-    "Button": "Butoni"
+    "Button": "Butoni",
+    "Subscribe": "Abonohu"
   },
   "companies": {
     "Filter": "Filtro",
@@ -64,7 +65,20 @@
     "More Info": "Me shume informacion"
   },
   "addCompany": {
-    "Add Company": "Shto kompani"
+    "Add Company": "Shto kompani",
+    "Company Name": "Emri i Kompanise",
+    "Company Type": "Lloji i kompanisë",
+    "More information about the company": "Më shumë informacion rreth kompanisë",
+    "Taxpayer ID number": "Numri i identifikimit të tatimpaguesit",
+    "Company Budget": "Buxheti i kompanisë",
+    "Taxpayer Office": "Zyra e Tatimpaguesve",
+    "Activity Area": "Zona e Aktivitetit",
+    "Exporter": "Eksportues",
+    "Importer": "Importues",
+    "Servicer": "Servisues",
+    "Retailer": "Shitës me pakicë",
+    "Wholesaler": "Shitës me shumicë",
+    "Manufacturer": "Prodhuesi"
   },
   "import": {
     "Import List": "Lista e importit",
@@ -139,5 +153,74 @@
   "support": {
     "Message": "Mesazh",
     "Send": "Dërgo"
+  },
+  "contact": {
+    "Subject": "Subjekti",
+    "Loading": "Po ngarkohet..."
+  },
+  "marketplace": {
+    "Did you buy this": "E keni blerë këtë?",
+    "Product name": "Emri i produktit:",
+    "Product price": "Çmimi i produktit:",
+    "Product description": "Përshkrim i produktit",
+    "Yes": "Po",
+    "No": "Jo",
+    "Did you sell this product": "A e keni shitur këtë produkt?",
+    "Marketplace": "Tregu"
+  },
+  "newsletterCreator": {
+    "Write newsletter": "Shkruani buletinin",
+    "To": "Per",
+    "Subscribers": "Abonentët"
+  },
+
+  "editItem": {
+    "Edit Item": "Ndrysho Produktin",
+    "ID": "ID",
+    "Description": "Përshkrimi",
+    "Price": "Çmimi",
+    "ImageUrl": "FotoUrl",
+    "Views": "Shikime",
+    "Category ID": "Kategori ID",
+    "Company ID": "Kompani ID",
+    "Update": "Përditëso",
+    "Go Back": "Kthehu mbrapa",
+    "Edit": "Ndrysho",
+    "Delete": "Fshije"
+  },
+  "productSellTest": {
+    "This is a test site": "Ky është një vend testimi",
+    "Product Name: Test": "Emri i produktit: Test",
+    "Product Description: Test product": "Përshkrimi i produktit: Produkt Test",
+    "Product Price": "Çmimi i produktit: ",
+    "Chat with owner": "Bisedoni me pronarin"
+  },
+  "profileManager": {
+    "Edit Profile": "Ndrysho profilin"
+  },
+  "profileViewer": {
+    "Surname": "Mbiemri:",
+    "Email": "Emaili:",
+    "Phone": "Telefoni:",
+    "Gender": "Gjinia:"
+  },
+  "alertTest": {
+    "Alert Test Page": "Faqja e testimit të alarmit",
+    "Here you can test pop ups": "Këtu mund të testoni pop-up-et",
+    "Pop Up with OK": "Pop Up me OK",
+    "Warning": "Paralajmërim",
+    "Succes": "Suksese",
+    "Any message": "Ndonjë mesazh",
+    "Confirmation Pop Up": "Konfirmimi Pop Up",
+    "Error": "Gabim"
+  },
+  "testPages": {
+    "This is our ExportPortal": "Ky është Portali ynë i Eksportit",
+    "You are logged in!": "Ju jeni identifikuar!",
+    "You can now browse our products and services": "Tani mund të shfletoni produktet dhe shërbimet tona",
+    "You can also add your own products and services": "Ju gjithashtu mund të shtoni produktet dhe shërbimet tuaja",
+    "You can also edit your profile": "Ju gjithashtu mund të modifikoni profilin tuaj",
+    "You can also view your profile": "Ju gjithashtu mund të shikoni profilin tuaj",
+    "You can also edit your orders": "Ju gjithashtu mund të modifikoni porositë tuaja"
   }
 }

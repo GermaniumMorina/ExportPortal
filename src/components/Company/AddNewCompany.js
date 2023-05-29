@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 export const AddNewCompany = () => {
-  const userID=(localStorage.getItem("userID"));
+  const userID = localStorage.getItem("userID");
   const navigate = useNavigate();
   const isLoggedIn = checkIfLoggedIn();
   const [formValues, setFormValues] = useState({
@@ -30,7 +30,7 @@ export const AddNewCompany = () => {
     selectedValues: [],
     country: "",
     budged: "",
-    profile_picture:"null.jpg",
+    profile_picture: "null.jpg",
   });
   const [countryList, setCountryList] = useState([]);
 
@@ -60,19 +60,22 @@ export const AddNewCompany = () => {
     e.preventDefault();
     await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
-    const response = await axios.post(`http://localhost:8000/api/company/${userID}`, formValues);
- if (response.status === 201) {
-     
+    const response = await axios.post(
+      `http://localhost:8000/api/company/${userID}`,
+      formValues
+    );
+    if (response.status === 201) {
       window.alert("Company added successfully");
-    navigate ("/companies");
+      navigate("/companies");
     }
 
-    const activity = JSON.stringify({ selectedValues: formValues.selectedValues });
+    const activity = JSON.stringify({
+      selectedValues: formValues.selectedValues,
+    });
     // send `data` to API endpoint using fetch or Axios
     console.log(activity);
-   
   };
-       const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return isLoggedIn ? (
     <div className="d-flex justify-content-center">
@@ -83,8 +86,10 @@ export const AddNewCompany = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Control
                 type="text"
-                placeholder="Company Name"
-                onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
+                placeholder={t("addCompany.Company Name")}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, name: e.target.value })
+                }
                 value={formValues.name}
                 name="name"
               />
@@ -94,20 +99,27 @@ export const AddNewCompany = () => {
               <Form.Control
                 required
                 type="text"
-                placeholder="Company Type"
-                onChange={(e) => setFormValues({ ...formValues, type: e.target.value })}
+                placeholder={t("addCompany.Company Type")}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, type: e.target.value })
+                }
                 value={formValues.type}
                 name="type"
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
               <Form.Control
                 as="textarea"
                 rows={3}
                 type="text"
-                placeholder="More information about the company"
-                onChange={(e) => setFormValues({ ...formValues, more_info: e.target.value })}
+                placeholder={t("addCompany.More information about the company")}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, more_info: e.target.value })
+                }
                 value={formValues.more_info}
                 name="more_info"
               />
@@ -116,18 +128,22 @@ export const AddNewCompany = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Control
                 type="number"
-                placeholder="Taxpayer ID number"
-                onChange={(e) => setFormValues({ ...formValues, TIN: e.target.value })}
+                placeholder={t("addCompany.Taxpayer ID number")}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, TIN: e.target.value })
+                }
                 value={formValues.TIN}
                 name="TIN"
               />
             </Form.Group>
-            
+
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Control
                 type="number"
-                placeholder="Company Budget"
-                onChange={(e) => setFormValues({ ...formValues, budged: e.target.value })}
+                placeholder={t("addCompany.Company Budget")}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, budged: e.target.value })
+                }
                 value={formValues.budged}
                 name="budged"
               />
@@ -136,8 +152,13 @@ export const AddNewCompany = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Control
                 type="text"
-                placeholder="Taxpayer Office"
-                onChange={(e) => setFormValues({ ...formValues, taxpayer_office: e.target.value })}
+                placeholder={t("addCompany.Taxpayer Office")}
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    taxpayer_office: e.target.value,
+                  })
+                }
                 value={formValues.taxpayer_office}
                 name="taxpayer_office"
               />
@@ -146,8 +167,10 @@ export const AddNewCompany = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
               <Form.Control
                 type="text"
-                placeholder="Keywords"
-                onChange={(e) => setFormValues({ ...formValues, keywords: e.target.value })}
+                placeholder={t("companies.Keywords")}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, keywords: e.target.value })
+                }
                 value={formValues.keywords}
                 name="keywords"
               />
@@ -155,33 +178,37 @@ export const AddNewCompany = () => {
 
             <Form.Select
               value={formValues.category_id}
-              onChange={(e) => setFormValues({ ...formValues, category_id: e.target.value })}
+              onChange={(e) =>
+                setFormValues({ ...formValues, category_id: e.target.value })
+              }
               name="category_id"
             >
-              <option value={0}>Category</option>
-              <option value={1}>Fashion</option>
-              <option value={2}>Accesories</option>
-              <option value={3}>Home</option>
-              <option value={4}>Sporting</option>
-              <option value={5}>Health</option>
-              <option value={6}>Medical</option>
-              <option value={7}>Pets</option>
+              <option value={0}>{t("company.Category")}</option>
+              <option value={1}>{t("products.Fashion")}</option>
+              <option value={2}>{t("products.Accessories")}</option>
+              <option value={3}>{t("products.Home")}</option>
+              <option value={4}>{t("products.Sporting")}</option>
+              <option value={5}>{t("products.Health")}</option>
+              <option value={6}>{t("products.Medical")}</option>
+              <option value={7}>{t("products.Pets")}</option>
             </Form.Select>
             <br />
-            
+
             <Form.Select
               value={formValues.subcategory_id}
-              onChange={(e) => setFormValues({ ...formValues, subcategory_id: e.target.value })}
+              onChange={(e) =>
+                setFormValues({ ...formValues, subcategory_id: e.target.value })
+              }
               name="subcategory_id"
             >
-              <option value={0}>Sub-Category</option>
-              <option value={1}>Fashion</option>
-              <option value={2}>Accesories</option>
-              <option value={3}>Home</option>
-              <option value={4}>Sporting</option>
-              <option value={5}>Health</option>
-              <option value={6}>Medical</option>
-              <option value={7}>Pets</option>
+              <option value={0}>{t("company.Sub-Catgory")}</option>
+              <option value={1}>{t("products.Fashion")}</option>
+              <option value={2}>{t("products.Accessories")}</option>
+              <option value={3}>{t("products.Home")}</option>
+              <option value={4}>{t("products.Sporting")}</option>
+              <option value={5}>{t("products.Health")}</option>
+              <option value={6}>{t("products.Medical")}</option>
+              <option value={7}>{t("products.Pets")}</option>
             </Form.Select>
             <br />
 
@@ -192,7 +219,7 @@ export const AddNewCompany = () => {
                 value={formValues.country}
                 onChange={handleCountryChange}
               >
-                <option>Select country</option>
+                <option>{t("signUp.Select country")}</option>
                 {countryList.map((country) => (
                   <option key={country.id} value={country.country}>
                     {country.country}
@@ -205,67 +232,67 @@ export const AddNewCompany = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
               <Form.Control
                 type="text"
-                placeholder="Web Address"
+                placeholder={t("companies.Web Address")}
                 onChange={(e) =>
-                  setFormValues({ ...formValues, web_address: e.target.value })}
-                  value={formValues.web_address}
-                  name="web_address"
+                  setFormValues({ ...formValues, web_address: e.target.value })
+                }
+                value={formValues.web_address}
+                name="web_address"
+              />
+            </Form.Group>
+
+            <h5>{t("addCompany.Activity Area")}</h5>
+
+            <div className="d-flex justify-content-center">
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  onChange={handleChange}
+                  label={t("addCompany.Exporter")}
+                  name="1"
                 />
-              </Form.Group>
-  
-              <h5>Activity Area</h5>
-  
-              <div className="d-flex justify-content-center">
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    onChange={handleChange}
-                    label="Exporter"
-                    name="1"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    onChange={handleChange}
-                    label="Importer"
-                    name="2"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    onChange={handleChange}
-                    label="Servicer"
-                    name="3"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    onChange={handleChange}
-                    label="Retailer"
-                    name="4"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    onChange={handleChange}
-                    label="Wholesaler"
-                    name="5"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    onChange={handleChange}
-                    label="Manufacturer"
-                    name="6"
-                  />
-                </FormGroup>
-              </div>
-              <Button className="submit-button" variant="info" type="submit">
-                Submit
-              </Button>
-            </Form>
-          </div>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  onChange={handleChange}
+                  label={t("addCompany.Importer")}
+                  name="2"
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  onChange={handleChange}
+                  label={t("addCompany.Servicer")}
+                  name="3"
+                />
+              </FormGroup>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  onChange={handleChange}
+                  label={t("addCompany.Retailer")}
+                  name="4"
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  onChange={handleChange}
+                  label={t("addCompany.Wholesaler")}
+                  name="5"
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  onChange={handleChange}
+                  label={t("addCompany.Manufacturer")}
+                  name="6"
+                />
+              </FormGroup>
+            </div>
+            <Button className="submit-button" variant="info" type="submit">
+              {t("signIn.Submit")}
+            </Button>
+          </Form>
         </div>
       </div>
-    ) : (
-      <NotAllowed />
-    );
-  };
-  
+    </div>
+  ) : (
+    <NotAllowed />
+  );
+};

@@ -32,7 +32,8 @@
   "newsletter": {
     "Subscribe to our newsletter!": "Subscribe to our newsletter!",
     "Email": "Email",
-    "Button": "Button"
+    "Button": "Button",
+    "Subscribe": "Subscribe"
   },
   "companies": {
     "Filter": "Filter",
@@ -64,7 +65,20 @@
     "More Info": "More Info"
   },
   "addCompany": {
-    "Add Company": "Add Company"
+    "Add Company": "Add Company",
+    "Company Name": "Company Name",
+    "Company Type": "Company Type",
+    "More information about the company": "More information about the company",
+    "Taxpayer ID number": "Taxpayer ID number",
+    "Company Budget": "Company Budget",
+    "Taxpayer Office": "Taxpayer Office",
+    "Activity Area": "Activity Area",
+    "Exporter": "Exporter",
+    "Importer": "Importer",
+    "Servicer": "Servicer",
+    "Retailer": "Retailer",
+    "Wholesaler": "Wholesaler",
+    "Manufacturer": "Manufacturer"
   },
   "import": {
     "Import List": "Import List",
@@ -138,5 +152,73 @@
   "support": {
     "Message": "Message",
     "Send": "Send"
+  },
+  "contact": {
+    "Subject": "Subject",
+    "Loading": "Loading..."
+  },
+  "marketplace": {
+    "Did you buy this": "Did you buy this?",
+    "Product name": "Product name:",
+    "Product price": "Product price:",
+    "Product description": "Product description",
+    "Yes": "Yes",
+    "No": "No",
+    "Did you sell this product": "Did you sell this product?",
+    "Marketplace": "Marketplace"
+  },
+  "newsletterCreator": {
+    "Write newsletter": "Write newsletter",
+    "To": "To",
+    "Subscribers": "Subscribers"
+  },
+  "editItem": {
+    "Edit Item": "Edit Item",
+    "ID": "ID",
+    "Description": "Description",
+    "Price": "Price",
+    "ImageUrl": "ImageUrl",
+    "Views": "Views",
+    "Category ID": "Category ID",
+    "Company ID": "Company ID",
+    "Update": "Update",
+    "Go Back": "Go Back",
+    "Edit": "Edit",
+    "Delete": "Delete"
+  },
+  "productSellTest": {
+    "This is a test site": "This is a test site",
+    "Product Name: Test": "Product Name: Test",
+    "Product Description: Test product": "Product Description: Test product",
+    "Product Price": "Product Price: ",
+    "Chat with owner": "Chat with owner"
+  },
+  "profileManager": {
+    "Edit Profile": "Edit Profile"
+  },
+  "profileViewer": {
+    "Surname": "Surname:",
+    "Email": "Email:",
+    "Phone": "Phone:",
+    "Gender": "Gender:"
+  },
+  "alertTest": {
+    "Alert Test Page": "Alert Test Page",
+    "Here you can test pop ups": "Here you can test pop ups",
+    "Pop Up with OK": "Pop Up with OK",
+    "Warning": "Warning",
+    "Succes": "Succes",
+    "Any message": "Any message",
+    "Confirmation Pop Up": "Confirmation Pop Up",
+    "Error": "Error"
+  },
+  "testPages": {
+    "This is our ExportPortal": "This is our ExportPortal",
+    "You are logged in!": "You are logged in!",
+    "You can now browse our products and services": "You can now browse our products and services",
+    "You can also add your own products and services": "You can also add your own products and services",
+    "You can also edit your profile": "You can also edit your profile",
+    "You can also view your profile": "You can also view your profile",
+    "You can also edit your orders": "You can also edit your orders"
   }
 }

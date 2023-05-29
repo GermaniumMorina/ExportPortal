@@ -6,15 +6,15 @@ import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 //es-lint-disable-next-line
 import { Navigate } from "react-router";
-
+import { useTranslation } from "react-i18next";
 export const ProductSellTest = () => {
   const price = 43;
-  
+
   const [loading, setLoading] = useState(false);
-  const [tokens, setTokens] = useState(localStorage.getItem("tokens") );
+  const [tokens, setTokens] = useState(localStorage.getItem("tokens"));
   const chatprice = tokens - 10;
   let userId = localStorage.getItem("userId");
-  
+
   const fetchTokenValue = async () => {
     try {
       const response = await axios.get(
@@ -25,40 +25,47 @@ export const ProductSellTest = () => {
       // Handle error
     }
   };
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       fetchTokenValue();
     }, 5000);
-    
+
     return () => {
       clearInterval(interval);
     };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const handleChat = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
+      const response = await axios.get(
+        `http://localhost:8000/api/token/${userId}`
+      );
       const tokens = response.data.amount;
-      
+
       if (tokens < 10) {
-        alertify.alert("You should have at least 10 tokens to chat with the owner!");
+        alertify.alert(
+          "You should have at least 10 tokens to chat with the owner!"
+        );
       } else {
         alertify.confirm(
           "Chat with the owner? This will take 10 tokens from your account.",
           async () => {
             try {
               setLoading(true);
-              await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
-                amount: chatprice,
-              });
+              await axios.put(
+                `http://localhost:8000/api/updateToken/${userId}`,
+                {
+                  amount: chatprice,
+                }
+              );
               // Handle success or redirect to a success page
             } catch (error) {
               // Handle error
             }
             setLoading(false);
-            
+
             // Navigate to the contact form page
             // Replace "Navigate" with the appropriate code for navigating in your application
             Navigate("/ContactFrom");
@@ -72,7 +79,8 @@ export const ProductSellTest = () => {
       // Handle error
     }
   };
-  
+  const { t } = useTranslation();
+
   return (
     <div>
       <NavBar />
@@ -83,20 +91,24 @@ export const ProductSellTest = () => {
       ) : (
         <div>
           <p>{tokens}</p>
-          <h1>This is a test site</h1>
+          <h1>{t("productSellTest.This is a test site")}</h1>
           <br />
-          <h2>Product Name: Test</h2>
+          <h2>{t("productSellTest.Product Name: Test")}</h2>
           <br />
           <br />
-          <br />
-
-          <h3>Product Description: Test product</h3>
           <br />
 
-          <p>Product Price: {price}</p>
+          <h3>{t("productSellTest.Product Description: Test product")}</h3>
           <br />
 
-          <button onClick={handleChat}>Chat with owner</button>
+          <p>
+            {t("productSellTest.Product Price")} {price}
+          </p>
+          <br />
+
+          <button onClick={handleChat}>
+            {t("productSellTest.Chat with owner")}
+          </button>
         </div>
       )}
     </div>
