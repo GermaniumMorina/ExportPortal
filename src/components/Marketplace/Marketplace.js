@@ -38,6 +38,7 @@ export const Marketplace = () => {
     });
   };
   const { t } = useTranslation();
+
   return (
     <div>
       <NavBar />

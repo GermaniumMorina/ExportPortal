@@ -13,7 +13,9 @@ const Company = () => {
 
   const getCompany = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/company_details/${id}`);
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/company_details/${id}`
+      );
       setCompany(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -27,14 +29,14 @@ const Company = () => {
   }, []);
 
   if (isLoading) {
-    return <LoadingBar/>
+    return <LoadingBar />;
   }
 
   return (
     <div>
       <NavBar />
       {company.length === 0 ? (
-        <p>Loading...</p>
+        <p> {t("contact.Loading...")}</p>
       ) : (
         company.map((company) => (
           <div key={company.id} className="d-flex justify-content-center  mt-4">
@@ -47,7 +49,8 @@ const Company = () => {
                 className="company-image"
               />
               <p>
-                {t("companies.Keywords")} {company.keywords}
+                {t("companies.Keywords")}
+                {company.keywords}
               </p>
               <p>
                 {t("companies.Country")} {company.country}

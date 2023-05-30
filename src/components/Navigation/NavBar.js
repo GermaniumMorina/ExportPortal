@@ -104,10 +104,18 @@ function NavBar() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { i18n, t } = useTranslation();
-  const changeLanguage = (languageCode) => {
-    i18n.changeLanguage(languageCode);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
+  const handleLanguageChange = (languageCode) => {
+    setSelectedLanguage(languageCode);
+    localStorage.setItem("language", languageCode); // Save language code to local storage
+    i18n.changeLanguage(languageCode); // Change language using react-i18next
+    window.location.reload(); // Reload the page to apply the new language
   };
-
+  useEffect(() => {
+    i18n.changeLanguage(selectedLanguage);
+  }, [i18n, selectedLanguage]);
   return isLoggedIn ? (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
@@ -180,7 +188,7 @@ function NavBar() {
                 {t("navbar.Account")}
               </NavDropdown.Item>
               <NavDropdown title={t("navbar.Language")}>
-                <NavDropdown.Item onClick={() => changeLanguage("al")}>
+                <NavDropdown.Item onClick={() => handleLanguageChange("al")}>
                   <img
                     src={albania}
                     alt="albania"
@@ -190,7 +198,7 @@ function NavBar() {
                   />
                   {t("navbar.Albanian")}
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => changeLanguage("en")}>
+                <NavDropdown.Item onClick={() => handleLanguageChange("en")}>
                   <img
                     src={english}
                     alt="english"
@@ -200,7 +208,7 @@ function NavBar() {
                   />
                   {t("navbar.English")}
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => changeLanguage("es")}>
+                <NavDropdown.Item onClick={() => handleLanguageChange("es")}>
                   <img
                     src={spanish}
                     alt="spanish"
