@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import LoadingBar from "../LoadingScreens/LoadingBar";
 
 import "./ContactFrom.css";
 
 export const ContactFrom = () => {
   //eslint-disable-next-line
-  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [formValues, setFormValues] = useState({
@@ -62,11 +60,7 @@ export const ContactFrom = () => {
       });
   };
 
-  // if (isLoading) {
-  //   // Render loading screen while data is being fetched
-  //   return <LoadingBar />;
-  // }
-
+ 
   return (
     <div id="add-new-company-base">
       <Form onSubmit={handleSubmit}>
