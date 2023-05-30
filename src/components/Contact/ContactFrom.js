@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import LoadingBar from "../LoadingScreens/LoadingBar";
 
 import "./ContactFrom.css";
 
 export const ContactFrom = () => {
+  //eslint-disable-next-line
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [formValues, setFormValues] = useState({
@@ -19,7 +22,7 @@ export const ContactFrom = () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/form/${id}`);
         setProductData(response.data[0]); // Set product data. Assume response is an array and we're interested in the first item
-
+        
         // Also update form values with product data
         setFormValues({
           name: response.data[0].Product,
@@ -29,6 +32,7 @@ export const ContactFrom = () => {
 
       } catch (error) {
         console.error('Error fetching data: ', error);
+        
       }
     };
 
@@ -58,9 +62,10 @@ export const ContactFrom = () => {
       });
   };
 
-  if (!productData) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   // Render loading screen while data is being fetched
+  //   return <LoadingBar />;
+  // }
 
   return (
     <div id="add-new-company-base">

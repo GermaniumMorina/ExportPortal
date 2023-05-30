@@ -1,49 +1,46 @@
-import React from "react";
-import { useNavigate } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { useParams } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import moment from "moment";
 import NavBar from "../../Navigation/NavBar";
 import { useTranslation } from "react-i18next";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
 
-
-
-
 const ImportItem = () => {
   const navigate = useNavigate();
-  const [importProduct, setImportProduct] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  let { id } = useParams();
+  const { id } = useParams();
   const { t } = useTranslation();
 
-  const getImportProduct = async () => {
-    try {
-      const data = {
-        headers: {
-          Accept: "application/json",
-        },
-      };
-
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/ilist/${id}`,
-        data
-      );
-      const apiImportProducts = response.data[0][0];
-      setImportProduct(apiImportProducts);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching import product:", error);
-    }
-  };
+  const [importProduct, setImportProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
+  //eslint-disable-next-line
+  const [loading, setLoading] = useState(false);
+  const chatPrice = tokens - 10;
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    getImportProduct(id);
-    //eslint-disable-next-line 
-      }, [id]);
+    const getImportProduct = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/ilist/${id}`, {
+          headers: {
+            Accept: "application/json",
+          },
+        });
+  
+        const apiImportProducts = response.data[0][0];
+        console.log(response.data[0][0]);
+        setImportProduct(apiImportProducts);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching import product:", error);
+      }
+    };
+  
+    getImportProduct();
+  }, [id]);
 
   const handleBack = () => {
     navigate("/Import");
@@ -64,8 +61,38 @@ const ImportItem = () => {
     }
   };
 
+  const handleChat = async () => {
+    if (tokens < 10) {
+      alert("You should have at least 10 tokens to chat with the owner!");
+    } else {
+      const confirmChat = window.confirm(
+        "Chat with the owner? This will take 10 tokens from your account."
+      );
+
+      if (confirmChat) {
+        setLoading(true);
+        try {
+          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
+            amount: chatPrice,
+          });
+          setLoading(false);
+          navigate("/ContactFrom/" + id);
+        } catch (error) {
+          setLoading(false);
+          console.error("Error updating token:", error);
+        }
+        try {
+          const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
+          setTokens(response.data.amount);
+        } catch (error) {
+          console.error("Error fetching token:", error);
+        }
+      }
+    }
+  };
+
   if (isLoading) {
-    return <LoadingBar/>
+    return <LoadingBar />;
   }
 
   return (
@@ -88,7 +115,6 @@ const ImportItem = () => {
                 {t("import.Price")}
                 {importProduct.price}
               </p>
-
               <p>
                 {t("import.Description")} {importProduct.description}
               </p>
@@ -113,7 +139,10 @@ const ImportItem = () => {
               </a>
             </div>
             <div className="d-flex justify-content-center btn-lg">
-              <Button onClick={handleBack}>{t("import.Back")}</Button>
+              <Button className="mx-3" onClick={handleBack}>
+                {t("import.Back")}
+              </Button>
+              <Button onClick={handleChat}>Chat with owner</Button>
             </div>
           </div>
         </div>
