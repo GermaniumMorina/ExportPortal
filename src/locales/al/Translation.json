@@ -1,0 +1,143 @@
+{
+  "navbar": {
+    "Company": "Kompania",
+    "Product": "Produkti",
+    "Buy TEST": "Blej Test",
+    "Companies": "Kompanitë",
+    "Add new company": "Shto kompani të re",
+    "Add New Product": "Shto Produkt të Ri",
+    "Import": "Import",
+    "Export": "Eksport",
+    "Profile": "Profili",
+    "Account": "Llogaria",
+    "Language": "Gjuha",
+    "Albanian": "Shqip",
+    "English": "Anglisht",
+    "Spanish": "Spanjisht",
+    "Logout": "Shkyçu",
+    "Company List": "Lista e kompanive",
+    "Sign Up": "Regjistrohu",
+    "Sign In": "Hyni"
+  },
+  "main": {
+    "You are Logged in": "Jeni të identifikuar"
+  },
+  "footer": {
+    "St.Uke Bytyqi Nr.7": "Rr.Ukë Bytyqi Nr.7",
+    "Prizren, Kosovo": "Prizren, Kosovë",
+    "Email support": "Mbështetje me email",
+    "Contact Support": "Mbështetje me kontakt",
+    "Home": "Ballina"
+  },
+  "newsletter": {
+    "Subscribe to our newsletter!": "Regjistrohu në buletinin tonë!",
+    "Email": "Email",
+    "Button": "Butoni"
+  },
+  "companies": {
+    "Filter": "Filtro",
+    "Search!": "Kërko!",
+    "Filter by Category": "Filtro sipas kategorisë:",
+    "Filter by Country": "Filtro sipas shtetit:",
+    "All": "Të gjitha",
+    "Name": "Emri:",
+    "Keywords": "Fjalë kyçe:",
+    "Country": "Shteti:",
+    "Web Address": "Faqe interneti:",
+    "View More": "Shiko më shumë",
+    "Liability": "Përgjegjësia",
+    "Control": "Kontrolli",
+    "Stock": "Stoku",
+    "Others": "Të tjera"
+  },
+  "company": {
+    "More Info": "Me shume informacion:",
+    "Category": "Kategoria:",
+    "Sub-Catgory": "Nën-Kategoria:",
+    "Membership": "Anëtarësimi:"
+  },
+  "companyListing": {
+    "Select": "Zgjidhni",
+    "Name": "Emri",
+    "Keywords": "Fjalë kyçe",
+    "Country": "Shteti",
+    "More Info": "Me shume informacion"
+  },
+  "addCompany": {
+    "Add Company": "Shto kompani"
+  },
+  "import": {
+    "Import List": "Lista e importit",
+    "Export List": "Lista e eksportit",
+    "Price": "Çmimi:",
+    "Description": "Përshkrim:",
+    "Created at": "Krijuar në:",
+    "Views": "Shikime:",
+    "Fashion": "Moda",
+    "Home": "Shtepi",
+    "Accessories": "Aksesorë",
+    "Sporting": "Sport",
+    "Health": "Shëndeti",
+    "Medical": "Mjekësor",
+    "Pets": "Kafshët shtëpiake",
+    "Back": "Kthehu Mbrapa",
+    "Import Details": "Detajet e importit",
+    "Export Details": "Detajet e eksportit"
+  },
+  "notAllowed": {
+    "You are not allowed to view this page": "Nuk ju lejohet ta shikoni këtë faqe"
+  },
+  "signIn": {
+    "Welcome": "Mirë se vini",
+    "Forgot Password?": "Keni harruar fjalëkalimin?",
+    "If you dont have a membership yet": "Nëse nuk keni ende një anëtarësim,",
+    "Activate": "Aktivizoni",
+    "Enter email or username": "Shenoni emailin ose emrin e përdoruesit",
+    "Submit": "Paraqisni",
+    "Password": "Fjalëkalimi"
+  },
+  "signUp": {
+    "Sign Up For Free": "Regjistrohu falas",
+    "Surname": "Mbiemri",
+    "E-mail": "E-mail",
+    "Password (again)": "Fjalëkalimi (përsëri)",
+    "Phone Number": "Numri i telefonit",
+    "Select country": "Zgjidh Shtetin",
+    "Gender": "Gjinia",
+    "Male": "Mashkull",
+    "Female": "Femër",
+    "I have read and understood Membership Classification Text": "Kam lexuar dhe kuptuar Tekstin e Klasifikimit të Anëtarësisë",
+    "If you have an account": "Nëse keni një llogari"
+  },
+  "error": {
+    "Bad Request": "Kerkese e keqe",
+    "Unathorized": "I paautorizuar",
+    "Page Not Foundt": "Faqja nuk u gjet",
+    "Internal Server Error": "Gabim i brendshëm i serverit",
+    "Service Temporarily Overloaded": "Shërbimi është i mbingarkuar përkohësisht",
+    "Service Unavailable": "Sherbim i padisponueshem"
+  },
+  "products": {
+    "Add new Item": "Shto Produkt të ri",
+    "Item Name": "Emri i produktit",
+    "Item Description": "Përshkrimi i produktit",
+    "Item Price": "Çmimi i produktit",
+    "Type": "Lloji",
+    "Import Item": "Importoni Produkt",
+    "Export Item": "Exportoni Produkt",
+    "Choose a file": "Zgjidhni një skedar",
+    "File added": "Skedari u shtua:",
+    "Fashion": "Moda",
+    "Home": "Shtepi",
+    "Accessories": "Aksesorë",
+    "Sporting": "Sport",
+    "Health": "Shëndeti",
+    "Medical": "Mjekësor",
+    "Pets": "Kafshët shtëpiake"
+  },
+
+  "support": {
+    "Message": "Mesazh",
+    "Send": "Dërgo"
+  }
+}

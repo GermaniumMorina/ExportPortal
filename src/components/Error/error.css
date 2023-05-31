@@ -1,0 +1,17 @@
+.imageError {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45%;
+  }
+
+.errorType{
+    font-size: 4em;
+    text-align: center;
+    color: #ff0000;
+}
+.errorText{
+    font-size: 2em;
+    text-align: center;
+    color: #ff0000;
+}

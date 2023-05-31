@@ -1,0 +1,16 @@
+.custom-navbar {
+  height: 80px; /* Set the desired height */
+}
+.logo{
+    height: 80px;
+    width: 80px;
+}
+
+
+  
+.bell-icon{
+    height: 30px;
+    width: 30px;
+    margin-top: 25px;
+    margin-left: 10px;
+}
