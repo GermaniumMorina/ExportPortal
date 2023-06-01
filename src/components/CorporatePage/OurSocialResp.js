@@ -8,7 +8,7 @@ const OurSocialResp = () => {
 
   const getCompanyData = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/corporate`);
+      const response = await axios.get(`http://127.0.0.1:8000/api/corporate/26`);
       setCompanyData(response.data[0]);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -26,13 +26,13 @@ const OurSocialResp = () => {
     <div className='height-controller-container'>
 
     <div className='company-data-text'>
-      <p>Company Profile</p>
+      <p>Our Social Responsibility</p>
       {isLoading ? (
         <LoadingText />
       ) : (
         <div >
        
-        <p>{companyData.name}</p>
+        <p>Company Name: {companyData.name}</p>
         <p>{companyData.responsibility}</p> 
        
 

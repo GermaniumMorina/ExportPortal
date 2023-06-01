@@ -7,6 +7,10 @@ const MainCorporatePage = () => {
     <div>
         <NavBar/>
         <Navigation />
+        <div className='height-controller-container'>
+
+       
+    </div>
     </div>
   )
 }

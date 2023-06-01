@@ -8,7 +8,7 @@ const MissionVission = () => {
 
   const getCompanyData = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/corporate`);
+      const response = await axios.get(`http://127.0.0.1:8000/api/corporate/26`);
       setCompanyData(response.data[0]);
     } catch (error) {
       console.error("Error fetching data:", error);
