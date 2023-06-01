@@ -143,6 +143,7 @@ function NavBar() {
             </NavDropdown>
             
             <Nav.Link href="/Marketplace">Marketplace</Nav.Link>
+            <Nav.Link href="/corporate">Corporate</Nav.Link>
           </Nav>
 
           <Nav>

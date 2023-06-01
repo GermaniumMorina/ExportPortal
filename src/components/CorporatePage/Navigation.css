@@ -24,6 +24,8 @@
     left: 15px;
     top: 20px;
     transition: 250ms;
+    box-shadow: -1px 1px 32px 9px rgba(33, 15, 235, 0.21);
+
 }
 
 .PageContact {
@@ -45,6 +47,9 @@
     line-height: 0;
     padding: 16px 15px;
     z-index: -1;
+    -webkit-box-shadow: 1px 1px 15px -1px rgba(0,0,0,0.56); 
+    box-shadow: 1px 1px 15px -1px rgba(0,0,0,0.56);
+    
 }
 
 .MenuBox>ul>li {
@@ -74,8 +79,10 @@
     color: white;
 }
 .company-data-text{
+    margin-top: 30px;
     margin-left: 130px ;
     margin-right: 130px;
+    height:35vh;
   }
 
 .feather {
@@ -89,9 +96,9 @@
     background: white;
     position: absolute;
     margin: 34px 12px;
-    height: 90%;
+    height: 70%;
     border-radius: 9px;
-    box-shadow: 0 0 40px 0 rgb(94 92 154 / 6%);
+    box-shadow: -1px 1px 32px 9px rgba(0,0,0,0.21);
 }
 
 .Contact {
@@ -180,29 +187,6 @@
 }
 
 
-/* Style About Box  */
-
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap');
-.linkAbout {
-    text-decoration: auto;
-    margin: 0 5px;
-    color: black;
-}
-
-.about {
-    position: absolute;
-    top: 0;
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 0 0 15px 15px;
-    font-size: 1em;
-    font-family: 'Heebo', sans-serif;
-    right: 31px;
-}
-
-.linkAbout:hover {
-    color: #406ff3;
-}
 
 
 /* End Style About Box  */ 
