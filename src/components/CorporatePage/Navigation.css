@@ -81,8 +81,16 @@
 .company-data-text{
     margin-top: 30px;
     margin-left: 130px ;
-    margin-right: 130px;
-    height:35vh;
+    text-align: start;
+    border-radius: 9px;
+    box-shadow: -1px 1px 32px 9px rgba(0,0,0,0.21);
+    padding: 30px;
+    width: 860px;
+  }
+
+  .height-controller-container{
+    height:75vh;
+
   }
 
 .feather {

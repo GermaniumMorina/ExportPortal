@@ -74,7 +74,7 @@ const Navigation = () => {
               </svg>
               <span>Profile</span>
             </li>
-            <li  onClick={() => handleItemClick(<MissionVission />)}> 
+            <li  > 
            
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@ const Navigation = () => {
               </svg>{" "}
               <span>History</span>
             </li>
-            <li>
+            <li onClick={() => handleItemClick(<MissionVission />)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

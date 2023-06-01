@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react'
-import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
+import React, { useEffect, useState } from 'react';
+import LoadingText from '../LoadingScreens/LoadingText';
 import axios from 'axios';
 
 const MissionVission = () => {
+  const [companyData, setCompanyData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getCompanyData = async () => {
     try {
       const response = await axios.get(`http://127.0.0.1:8000/api/corporate`);
-     console.log(response);
+      setCompanyData(response.data[0]);
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -20,16 +23,17 @@ const MissionVission = () => {
   }, []);
 
   return (
+    <div className='height-controller-container'>
     <div className='company-data-text'>
-        MissionVission
-        <Box sx={{ width: 800 }}>
-      <Skeleton />
-      <Skeleton animation="wave" />
-      <Skeleton animation={false} />
-    </Box>
-        </div>
-  )
-}
+      <p>Our Mission and Vision</p>
+      {isLoading ? (
+        <LoadingText />
+      ) : (
+        <p>{companyData.mission}</p> // Render the mission from companyData
+      )}
+    </div>
+    </div>
+  );
+};
 
-export default MissionVission
-
+export default MissionVission;
