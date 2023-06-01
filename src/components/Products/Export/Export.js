@@ -38,8 +38,8 @@ const ProductList = () => {
       const apiCategories = await axios.get(
         "http://127.0.0.1:8000/api/productcategory"
       );
-      setCategories(apiCategories.data.data);
-    } catch (error) {
+      setCategories(apiCategories.data[0]);
+        } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };

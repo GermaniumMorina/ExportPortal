@@ -27,6 +27,7 @@ const Import = () => {
         "http://127.0.0.1:8000/api/ilist",
         data
       );
+      console.log(apiImportProducts);
       setImportProducts(apiImportProducts.data[0]);
       setIsLoading(false);
     } catch (error) {
@@ -36,16 +37,12 @@ const Import = () => {
 
   const getCategories = async () => {
     try {
-      const data = {
-        headers: {
-          Accept: "application/json",
-        },
-      };
+     
       const apiCategories = await axios.get(
-        "http://127.0.0.1:8000/api/productcategory",
-        data
+        "http://127.0.0.1:8000/api/productcategory"
       );
-      setCategories(apiCategories.data.data);
+      console.log(apiCategories);
+      setCategories(apiCategories.data[0]);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
