@@ -62,7 +62,7 @@ export const ContactFrom = () => {
 
  
   return (
-    <div id="add-new-company-base">
+    <div id="add-new-company-base-contact-from">
       <Form onSubmit={handleSubmit}>
         <h1 className="text-center">Contact seller</h1>
         <h5>Subject</h5>
