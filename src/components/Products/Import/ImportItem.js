@@ -31,7 +31,7 @@ const ImportItem = () => {
         });
   
         const apiImportProducts = response.data[0][0];
-        console.log(response.data[0][0]);
+        console.log(response);
         setImportProduct(apiImportProducts);
         setIsLoading(false);
       } catch (error) {

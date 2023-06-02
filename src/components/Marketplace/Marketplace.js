@@ -10,9 +10,8 @@ export const Marketplace = () => {
 
 
   const getProducts = async () => {
-    const response = await axios.get(`http://localhost:8000/api/interstedProduct/${userId}`);
+    const response = await axios.get(`http://localhost:8000/api/interstedProduct/2`);   // this is for testing purposes, the 2 should be the ${userId}
     setProductList(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {

@@ -11,23 +11,25 @@ const Company = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
 
+  useEffect(() => {
+    getCompany();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const getCompany = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/company_details/${id}`);
-      setCompany(response.data.data);
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/company_details/${id}`
+      );
+      setCompany(response.data[0]);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  useEffect(() => {
-    getCompany();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   if (isLoading) {
-    return <LoadingBar/>
+    return <LoadingBar />;
   }
 
   return (
