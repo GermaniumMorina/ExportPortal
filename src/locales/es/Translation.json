@@ -17,7 +17,8 @@
     "Logout": "Cerrar sesión",
     "Company List": "Lista de empresas",
     "Sign Up": "Inscribirse",
-    "Sign In": "Iniciar sesión"
+    "Sign In": "Iniciar sesión",
+    "Corporate": "Corporativo"
   },
   "main": {
     "You are Logged in": "Estás conectado"
@@ -32,7 +33,8 @@
   "newsletter": {
     "Subscribe to our newsletter!": "¡Suscríbete a nuestro boletín!",
     "Email": "Correo electrónico",
-    "Button": "Botón"
+    "Button": "Botón",
+    "Subscribe": "Subscribe"
   },
   "companies": {
     "Filter": "Filtrar",
@@ -42,7 +44,7 @@
     "All": "Todo",
     "Name": "Nombre:",
     "Keywords": "Palabras clave",
-    "Country": "País",
+    "Country": "País:",
     "Web Address": "Dirección web:",
     "View More": "Ver más",
     "Liability": "Liability",
@@ -54,7 +56,8 @@
     "More Info": "Más información:",
     "Category": "Categoría:",
     "Sub-Catgory": "Subcategoría:",
-    "Membership": "Afiliación:"
+    "Membership": "Afiliación:",
+    "Company Profile": "Perfil de la Empresa"
   },
   "companyListing": {
     "Select": "Seleccionar",
@@ -64,7 +67,20 @@
     "More Info": "Más información"
   },
   "addCompany": {
-    "Add Company": "Agregar empresa"
+    "Add Company": "Agregar empresa",
+    "Company Name": "Nombre de empresa",
+    "Company Type": "Tipo de compañía",
+    "More information about the company": "Más información sobre la empresa",
+    "Taxpayer ID number": "Número de identificación fiscal",
+    "Company Budget": "Presupuesto de la empresa",
+    "Taxpayer Office": "Oficina del Contribuyente",
+    "Activity Area": "Área de actividad",
+    "Exporter": "Exportador",
+    "Importer": "Importador",
+    "Servicer": "Administrador",
+    "Retailer": "Detallista",
+    "Wholesaler": "Mayorista",
+    "Manufacturer": "Fabricante"
   },
   "import": {
     "Import List": "Lista de importación",
@@ -82,7 +98,8 @@
     "Pets": "Mascotas",
     "Back": "Atrás",
     "Import Details": "Importar detalles",
-    "Export Details": "Detalles de exportación"
+    "Export Details": "Detalles de exportación",
+    "Chat with owner": "Chatear con el propietario"
   },
   "notAllowed": {
     "You are not allowed to view this page": "No tienes permiso para ver esta página"
@@ -138,5 +155,91 @@
   "support": {
     "Message": "Mensaje",
     "Send": "Enviar"
+  },
+  "contact": {
+    "Subject": "Sujeto",
+    "Loading": "Cargando...",
+    "Contact seller": "Contactar al vendedor"
+  },
+  "marketplace": {
+    "Did you buy this": "¿Compraste esto?",
+    "Product name": "Nombre del producto:",
+    "Product price": "Precio del producto:",
+    "Product description": "Descripción del Producto:",
+    "Yes": "Sí",
+    "No": "No",
+    "Did you sell this product": "Vendiste este producto?",
+    "Marketplace": "Mercado"
+  },
+  "newsletterCreator": {
+    "Write newsletter": "Escribir boletín",
+    "To": "A",
+    "Subscribers": "Suscriptores"
+  },
+  "editItem": {
+    "Edit Item": "Editar producto",
+    "ID": "IDENTIFICACIÓN",
+    "Description": "Descripción",
+    "Price": "Precio",
+    "ImageUrl": "URL de la imagen",
+    "Views": "Puntos de vista",
+    "Category ID": "Categoria ID",
+    "Company ID": "Compañía ID",
+    "Update": "Actualizar",
+    "Go Back": "Regresa",
+    "Edit": "Editar",
+    "Delete": "Borrar"
+  },
+  "productSellTest": {
+    "This is a test site": "Este es un sitio de prueba",
+    "Product Name: Test": "Nombre del producto: Prueba",
+    "Product Description: Test product": "Descripción del producto: producto de prueba",
+    "Product Price": "Precio del producto: ",
+    "Chat with owner": "Chatea con el dueño"
+  },
+  "profileManager": {
+    "Edit Profile": "Editar perfil"
+  },
+  "profileViewer": {
+    "Surname": "Apellido:",
+    "Email": "Correo electrónico:",
+    "Phone": "Teléfono:",
+    "Gender": "Género:"
+  },
+  "alertTest": {
+    "Alert Test Page": "Página de prueba de alerta",
+    "Here you can test pop ups": "Aquí puedes probar las ventanas emergentes",
+    "Pop Up with OK": "Aparecer con Aceptar",
+    "Warning": "Advertencia",
+    "Succes": "Éxito",
+    "Any message": "Cualquier mensaje",
+    "Confirmation Pop Up": "Ventana emergente de confirmación",
+    "Error": "Error"
+  },
+  "testPages": {
+    "This is our ExportPortal": "Este es nuestro Portal de Exportación",
+    "You are logged in!": "¡Estás conectado!",
+    "You can now browse our products and services": "Ahora puede navegar por nuestros productos y servicios",
+    "You can also add your own products and services": "También puede agregar sus propios productos y servicios",
+    "You can also edit your profile": "También puedes editar tu perfil",
+    "You can also view your profile": "También puedes ver tu perfil",
+    "You can also edit your orders": "También puedes editar tus pedidos"
+  },
+  "corporatePage": {
+    "Bank Account": "Cuenta Bancaria",
+    "Account": "Cuenta:",
+    "Our Brands": "Nuestras Marcas",
+    "Our History": "Nuestra Historia",
+    "Human Resources": "Recursos Humanos",
+    "Our Mission And Vision": "Nuestra Misión y Visión",
+    "Profile": "Perfil",
+    "History": "Historia",
+    "Mission": "Misión",
+    "Responsibility": "Responsabilidad",
+    "HR": "RecursosHumanos",
+    "Bank": "Banco",
+    "Brands": "Marcas",
+    "Our Social Responsibility": "Nuestra Responsabilidad Social",
+    "Company Name": "Nombre de la Empresa:"
   }
 }

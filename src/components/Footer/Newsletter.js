@@ -6,7 +6,7 @@ import { useState } from "react";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 import "./footer.css";
-import axios from 'axios';
+import axios from "axios";
 
 import { useTranslation } from "react-i18next";
 export const Newsletter = () => {
@@ -14,12 +14,15 @@ export const Newsletter = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await axios.post("http://localhost:8000/api/newsletter", {
-        email: email,
-      });
-      
+      const response = await axios.post(
+        "http://localhost:8000/api/newsletter",
+        {
+          email: email,
+        }
+      );
+
       if (response.status === 201) {
         alertify.success("You have been subscribed to our newsletter");
       }
@@ -31,12 +34,10 @@ export const Newsletter = () => {
       }
     }
   };
-  
 
   const { t } = useTranslation();
   return (
     <div>
-    
       <div className="newsletter">
         <Form>
           <div className="subscribe-txt">
@@ -52,15 +53,12 @@ export const Newsletter = () => {
               aria-label="email@example.com"
               aria-describedby="basic-addon2"
             />
-            <Button
-              variant="outline-secondary"
-              onClick={handleSubmit}
-            >
-              {t("support.Send")}
+            <Button variant="outline-secondary" onClick={handleSubmit}>
+              {t("newsletter.Subscribe")}
             </Button>
           </InputGroup>
         </Form>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -4,12 +4,11 @@ import "./ProfileManager.css";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 
 const ProfileManager = () => {
-
   const userId = localStorage.getItem("userId");
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
@@ -27,7 +26,6 @@ const ProfileManager = () => {
     gender: UserGender,
     country_id: userCountry,
   });
-
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -78,6 +76,7 @@ const ProfileManager = () => {
       window.location.href = "/profile";
     }
   };
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -85,10 +84,10 @@ const ProfileManager = () => {
 
       <div className="d-flex justify-content-center">
         <div className="edit-div">
-          <h2 className="welcome">Edit Profile</h2>
+          <h2 className="welcome">{t("profileManager.Edit Profile")}</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>{t("companyListing.Name")}</Form.Label>
               <Form.Control
                 type="text"
                 id="name"
@@ -102,7 +101,7 @@ const ProfileManager = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Surname</Form.Label>
+              <Form.Label>{t("signUp.Surname")}</Form.Label>
               <Form.Control
                 type="text"
                 id="surname"
@@ -115,7 +114,7 @@ const ProfileManager = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>{t("newsletter.Email")}</Form.Label>
               <Form.Control
                 type="text"
                 id="email"
@@ -127,13 +126,13 @@ const ProfileManager = () => {
                 }}
               />
             </Form.Group>
-            <Form.Label>Gender</Form.Label>
+            <Form.Label>{t("signUp.Gender")}</Form.Label>
             <Form.Group className="mb-3">
               <Form.Check
                 type="radio"
                 name="gender"
                 id="male"
-                label="Male"
+                label={t("signUp.Male")}
                 inline
                 value="male"
                 onChange={(e) => {
@@ -146,7 +145,7 @@ const ProfileManager = () => {
                 type="radio"
                 name="gender"
                 id="female"
-                label="Female"
+                label={t("signUp.Female")}
                 inline
                 value="female"
                 onChange={(e) => {
@@ -157,7 +156,7 @@ const ProfileManager = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Phone Number</Form.Label>
+              <Form.Label>{t("signUp.Phone Number")}</Form.Label>
               <Form.Control
                 type="text"
                 id="phone_number"
@@ -172,12 +171,12 @@ const ProfileManager = () => {
                 }}
               />
             </Form.Group>
-          
+
             <button className="edit-button" type="submit">
-              Submit
+              {t("signIn.Submit")}
             </button>
             <button className="back-button" onClick={handleBack}>
-              Back
+              {t("import.Back")}
             </button>
           </Form>
         </div>

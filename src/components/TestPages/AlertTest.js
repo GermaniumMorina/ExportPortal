@@ -1,12 +1,13 @@
 import React from "react";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
-
+import { useTranslation } from "react-i18next";
 const AlertTest = () => {
+  const { t } = useTranslation();
   return (
     <div>
-      <h1>Alert Test Page</h1>
-      <h2>Here you can test pop ups</h2>
+      <h1>{t("alertTest.Alert Test Page")}</h1>
+      <h2>{t("alertTest.Here you can test pop ups")}</h2>
       <br />
       <br />
       <br />
@@ -18,21 +19,23 @@ const AlertTest = () => {
           })
         }
       >
-        Pop Up with OK
+        {t("alertTest.Pop Up with OK")}
       </button>
       <br></br>
-      <button onClick={() => alertify.error("Error message")}>Error</button>
+      <button onClick={() => alertify.error("Error message")}>
+        {t("alertTest.Error")}
+      </button>
       <br></br>
       <button onClick={() => alertify.warning("Warning message")}>
-        Warning
+        {t("alertTest.Warning")}
       </button>
       <br></br>
       <button onClick={() => alertify.success("Success message")}>
-        Succes
+        {t("alertTest.Succes")}
       </button>
       <br></br>
       <button onClick={() => alertify.message("Normal message")}>
-        Any message
+        {t("alertTest.Any message")}
       </button>
       <br></br>
       <button
@@ -48,7 +51,7 @@ const AlertTest = () => {
           )
         }
       >
-        Confirmation Pop Up
+        {t("alertTest.Confirmation Pop Up")}
       </button>
     </div>
   );

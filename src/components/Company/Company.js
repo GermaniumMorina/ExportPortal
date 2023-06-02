@@ -37,7 +37,7 @@ const Company = () => {
     <div>
       <NavBar />
       {company.length === 0 ? (
-        <p>Loading...</p>
+        <p> {t("contact.Loading...")}</p>
       ) : (
         
           <div key={company.id} className="d-flex justify-content-center  mt-4">
@@ -50,7 +50,8 @@ const Company = () => {
                 className="company-image"
               />
               <p>
-                {t("companies.Keywords")} {company.keywords}
+                {t("companies.Keywords")}
+                {company.keywords}
               </p>
               <p>
                 {t("companies.Country")} {company.country}

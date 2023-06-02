@@ -7,7 +7,7 @@ import axios from "axios";
 import moment from "moment";
 import NavBar from "../../Navigation/NavBar";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
-
+import { useTranslation } from "react-i18next";
 const ExportItem = () => {
   const navigate = useNavigate();
   const [exportProduct, setExportProduct] = useState([]);
@@ -17,7 +17,7 @@ const ExportItem = () => {
   const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
   const chatPrice = tokens - 10;
   let userId = localStorage.getItem("userId");
-
+  const { t } = useTranslation();
   const getExportProduct = async () => {
     const data = {
       headers: {
@@ -97,19 +97,36 @@ const ExportItem = () => {
     <div>
       <NavBar />
       <div className="d-flex justify-content-center mt-4 text-primary">
-        <h1>Export Details</h1>
+        <h1>{t("import.Export Details")}</h1>
       </div>
       <div>
         <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto mb-4 p-5 border rounded border-dark">
           <div key={exportProduct.id}>
             <div>
-              <p>country: {exportProduct.country}</p>
-              <p>price: {exportProduct.price}</p>
-              <p>name: {exportProduct.name}</p>
-              <p>description: {exportProduct.description}</p>
-              <p>created at: {formatDate(exportProduct.created_at)}</p>
-              <p>views: {exportProduct.views}</p>
-              <p>category: {exportProduct.category_name}</p>
+              <p>
+                {t("companies.Name")} {exportProduct.name}
+              </p>
+              <p>
+                {t("companies.Country")}
+                {exportProduct.country}
+              </p>
+              <p>
+                {t("import.Price")} {exportProduct.price}
+              </p>
+
+              <p>
+                {t("import.Description")} {exportProduct.description}
+              </p>
+              <p>
+                {t("import.Created at")} {formatDate(exportProduct.created_at)}
+              </p>
+              <p>
+                {t("import.Views")}
+                {exportProduct.views}
+              </p>
+              <p>
+                {t("company.Category")} {exportProduct.category_name}
+              </p>
               <a href="https://www.facebook.com/" className="m-2">
                 <FaFacebook />
               </a>
@@ -122,10 +139,10 @@ const ExportItem = () => {
             </div>
             <div className="d-flex justify-content-center btn-lg">
               <Button className="mx-3" onClick={handleBack}>
-                Back
+                {t("import.Back")}
               </Button>
               <Button onClick={() => handleChat(exportProduct.id)}>
-                Chat with owner
+                {t("import.Chat with owner")}
               </Button>
             </div>
           </div>

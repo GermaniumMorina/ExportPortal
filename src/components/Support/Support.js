@@ -81,7 +81,7 @@ export const Support = () => {
                 id="button-addon2"
                 onClick={handleSubmit}
               >
-                {t("support.Submit")}
+                {t("signIn.Submit")}
               </Button>
             </Form>
           </div>

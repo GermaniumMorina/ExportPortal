@@ -3,14 +3,16 @@ import NavBar from "../Navigation/NavBar";
 import "./Marketplace.css";
 import axios from "axios";
 
+import { useTranslation } from "react-i18next";
 export const Marketplace = () => {
   const [productList, setProductList] = useState([]);
   const userId = localStorage.getItem("userId");
   const productId = localStorage.getItem("productId");
 
-
   const getProducts = async () => {
-    const response = await axios.get(`http://localhost:8000/api/interstedProduct/2`);   // this is for testing purposes, the 2 should be the ${userId}
+    const response = await axios.get(
+      `http://localhost:8000/api/interstedProduct/${userId}`
+    );
     setProductList(response.data);
   };
 
@@ -20,20 +22,21 @@ export const Marketplace = () => {
   }, []);
 
   const confirmBuy = async () => {
-   await axios.post(`http://localhost:8000/api/buyConfirmed`,{
+    await axios.post(`http://localhost:8000/api/buyConfirmed`, {
       userId: userId,
       productId: productId,
       confirmation: true,
     });
-    };
+  };
 
-    const denyBuy = async () => {
-     await axios.post(`http://localhost:8000/api/buyConfirmed`, {
-        userId: userId,
-        productId: productId,
-        confirmation: false,
-      });
-      };
+  const denyBuy = async () => {
+    await axios.post(`http://localhost:8000/api/buyConfirmed`, {
+      userId: userId,
+      productId: productId,
+      confirmation: false,
+    });
+  };
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -41,29 +44,49 @@ export const Marketplace = () => {
       <section className="container" id="main-container">
         <div className="left-half">
           <article className="product-box">
-            <h3>Did you buy this?</h3>
+            <h3>{t("marketplace.Did you buy this")}</h3>
             {productList.map((product, index) => (
               <div className="product" key={index}>
-                <p>Product name: {product.name}</p>
-                <p>Product price: {product.price}</p>
-                <p>Product description: {product.description}</p>
-                <button className="yes-button" onClick={confirmBuy}>Yes</button>
-                <button className="no-button" onClick={denyBuy}>No</button>
+                <p>
+                  {t("marketplace.Product name")}
+
+                  {product.name}
+                </p>
+                <p>
+                  {t("marketplace.Product price")}
+                  {product.price}
+                </p>
+                <p>
+                  {t("marketplace.Product description")}
+                  {product.description}
+                </p>
+                <button className="yes-button" onClick={confirmBuy}>
+                  {t("marketplace.Yes")}
+                </button>
+                <button className="no-button" onClick={denyBuy}>
+                  {t("marketplace.No")}
+                </button>
               </div>
             ))}
           </article>
         </div>
         <div className="right-half">
           <article className="product-box">
-          <h3>Did you sell this product</h3>
+            <h3> {t("marketplace.Did you sell this product")}</h3>
             {productList.map((product, index) => (
               <div className="product" key={index}>
-                <p>Product name: {product.name}</p>
-                <p>Product price: {product.price}</p>
-          
-                <p>Product description: {product.description}</p>
-                <button className="yes-button">Yes</button>
-                <button className="no-button">No</button>
+                <p>
+                  {t("marketplace.Product name")} {product.name}
+                </p>
+                <p>
+                  {t("marketplace.Product price")} {product.price}
+                </p>
+
+                <p>
+                  {t("marketplace.Product description")} {product.description}
+                </p>
+                <button className="yes-button">{t("marketplace.Yes")}</button>
+                <button className="no-button"> {t("marketplace.No")}</button>
               </div>
             ))}
           </article>

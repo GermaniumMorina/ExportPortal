@@ -38,7 +38,7 @@ const ImportItem = () => {
         console.error("Error fetching import product:", error);
       }
     };
-  
+
     getImportProduct();
   }, [id]);
 
@@ -82,7 +82,9 @@ const ImportItem = () => {
           console.error("Error updating token:", error);
         }
         try {
-          const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
+          const response = await axios.get(
+            `http://localhost:8000/api/token/${userId}`
+          );
           setTokens(response.data.amount);
         } catch (error) {
           console.error("Error fetching token:", error);
@@ -142,7 +144,9 @@ const ImportItem = () => {
               <Button className="mx-3" onClick={handleBack}>
                 {t("import.Back")}
               </Button>
-              <Button onClick={handleChat}>Chat with owner</Button>
+              <Button onClick={handleChat}>
+                {t("import.Chat with owner")}
+              </Button>
             </div>
           </div>
         </div>
