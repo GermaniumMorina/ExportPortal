@@ -30,7 +30,6 @@ const Company = () => {
 
   if (isLoading) {
     return <LoadingBar />;
-    return <LoadingBar />;
   }
 
   return (

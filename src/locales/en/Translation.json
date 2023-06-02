@@ -17,7 +17,8 @@
     "Logout": "Logout",
     "Company List": "Company List",
     "Sign Up": "Sign Up",
-    "Sign In": "Sign In"
+    "Sign In": "Sign In",
+    "Corporate": "Corporate"
   },
   "main": {
     "You are Logged in": "You are Logged in"
@@ -55,7 +56,8 @@
     "More Info": "More Info:",
     "Category": "Category:",
     "Sub-Catgory": "Sub-Catgory:",
-    "Membership": "Membership:"
+    "Membership": "Membership:",
+    "Company Profile": "Company Profile"
   },
   "companyListing": {
     "Select": "Select",
@@ -96,7 +98,8 @@
     "Pets": "Pets",
     "Back": "Back",
     "Import Details": "Import Details",
-    "Export Details": "Export Details"
+    "Export Details": "Export Details",
+    "Chat with owner": "Chat with owner"
   },
   "notAllowed": {
     "You are not allowed to view this page": "You are not allowed to view this page"
@@ -155,7 +158,8 @@
   },
   "contact": {
     "Subject": "Subject",
-    "Loading": "Loading..."
+    "Loading": "Loading...",
+    "Contact seller": "Contact seller"
   },
   "marketplace": {
     "Did you buy this": "Did you buy this?",
@@ -220,5 +224,22 @@
     "You can also edit your profile": "You can also edit your profile",
     "You can also view your profile": "You can also view your profile",
     "You can also edit your orders": "You can also edit your orders"
+  },
+  "corporatePage": {
+    "Bank Account": "Bank Account",
+    "Account": "Account:",
+    "Our Brands": "Our Brands",
+    "Our History": "Our History",
+    "Human Resources": "Human Resources",
+    "Our Mission and Vision": "Our Mission and Vision",
+    "Profile": "Profile",
+    "History": "History",
+    "Mission": "Mission",
+    "Responsibility": "Responsibility",
+    "HR": "HR",
+    "Bank": "Bank",
+    "Brands": "Brands",
+    "Our Social Responsibility": "Our Social Responsibility",
+    "Company Name": "Company Name:"
   }
 }

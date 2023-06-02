@@ -17,7 +17,8 @@
     "Logout": "Cerrar sesión",
     "Company List": "Lista de empresas",
     "Sign Up": "Inscribirse",
-    "Sign In": "Iniciar sesión"
+    "Sign In": "Iniciar sesión",
+    "Corporate": "Corporativo"
   },
   "main": {
     "You are Logged in": "Estás conectado"
@@ -43,7 +44,7 @@
     "All": "Todo",
     "Name": "Nombre:",
     "Keywords": "Palabras clave",
-    "Country": "País",
+    "Country": "País:",
     "Web Address": "Dirección web:",
     "View More": "Ver más",
     "Liability": "Liability",
@@ -55,7 +56,8 @@
     "More Info": "Más información:",
     "Category": "Categoría:",
     "Sub-Catgory": "Subcategoría:",
-    "Membership": "Afiliación:"
+    "Membership": "Afiliación:",
+    "Company Profile": "Perfil de la Empresa"
   },
   "companyListing": {
     "Select": "Seleccionar",
@@ -96,7 +98,8 @@
     "Pets": "Mascotas",
     "Back": "Atrás",
     "Import Details": "Importar detalles",
-    "Export Details": "Detalles de exportación"
+    "Export Details": "Detalles de exportación",
+    "Chat with owner": "Chatear con el propietario"
   },
   "notAllowed": {
     "You are not allowed to view this page": "No tienes permiso para ver esta página"
@@ -155,7 +158,8 @@
   },
   "contact": {
     "Subject": "Sujeto",
-    "Loading": "Cargando..."
+    "Loading": "Cargando...",
+    "Contact seller": "Contactar al vendedor"
   },
   "marketplace": {
     "Did you buy this": "¿Compraste esto?",
@@ -220,5 +224,22 @@
     "You can also edit your profile": "También puedes editar tu perfil",
     "You can also view your profile": "También puedes ver tu perfil",
     "You can also edit your orders": "También puedes editar tus pedidos"
+  },
+  "corporatePage": {
+    "Bank Account": "Cuenta Bancaria",
+    "Account": "Cuenta:",
+    "Our Brands": "Nuestras Marcas",
+    "Our History": "Nuestra Historia",
+    "Human Resources": "Recursos Humanos",
+    "Our Mission And Vision": "Nuestra Misión y Visión",
+    "Profile": "Perfil",
+    "History": "Historia",
+    "Mission": "Misión",
+    "Responsibility": "Responsabilidad",
+    "HR": "RecursosHumanos",
+    "Bank": "Banco",
+    "Brands": "Marcas",
+    "Our Social Responsibility": "Nuestra Responsabilidad Social",
+    "Company Name": "Nombre de la Empresa:"
   }
 }

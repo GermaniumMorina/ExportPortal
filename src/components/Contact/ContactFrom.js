@@ -73,13 +73,13 @@ export const ContactFrom = () => {
             aria-label="Name"
           />
         </InputGroup>
-        <h5>{t("nesletter.Email")}</h5>
+        <h5>{t("newsletter.Email")}</h5>
         <InputGroup className="mb-3">
           <Form.Control
             readOnly
             value={formValues.email}
             name="email"
-            placeholder={t("nesletter.Email")}
+            placeholder={t("newsletter.Email")}
             aria-label="Email"
           />
         </InputGroup>

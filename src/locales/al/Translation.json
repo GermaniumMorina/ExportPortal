@@ -17,7 +17,8 @@
     "Logout": "Shkyçu",
     "Company List": "Lista e kompanive",
     "Sign Up": "Regjistrohu",
-    "Sign In": "Hyni"
+    "Sign In": "Hyni",
+    "Corporate": "Korporatë"
   },
   "main": {
     "You are Logged in": "Jeni të identifikuar"
@@ -55,7 +56,8 @@
     "More Info": "Me shume informacion:",
     "Category": "Kategoria:",
     "Sub-Catgory": "Nën-Kategoria:",
-    "Membership": "Anëtarësimi:"
+    "Membership": "Anëtarësimi:",
+    "Company Profile": "Profil i Kompanisë"
   },
   "companyListing": {
     "Select": "Zgjidhni",
@@ -96,7 +98,8 @@
     "Pets": "Kafshët shtëpiake",
     "Back": "Kthehu Mbrapa",
     "Import Details": "Detajet e importit",
-    "Export Details": "Detajet e eksportit"
+    "Export Details": "Detajet e eksportit",
+    "Chat with owner": "Bisedo me pronarin"
   },
   "notAllowed": {
     "You are not allowed to view this page": "Nuk ju lejohet ta shikoni këtë faqe"
@@ -156,7 +159,8 @@
   },
   "contact": {
     "Subject": "Subjekti",
-    "Loading": "Po ngarkohet..."
+    "Loading": "Po ngarkohet...",
+    "Contact seller": "Kontakto shitësin"
   },
   "marketplace": {
     "Did you buy this": "E keni blerë këtë?",
@@ -222,5 +226,23 @@
     "You can also edit your profile": "Ju gjithashtu mund të modifikoni profilin tuaj",
     "You can also view your profile": "Ju gjithashtu mund të shikoni profilin tuaj",
     "You can also edit your orders": "Ju gjithashtu mund të modifikoni porositë tuaja"
+  },
+
+  "corporatePage": {
+    "Bank Account": "Llogari Bankare",
+    "Account": "Llogari:",
+    "Our Brands": "Brendet Tona",
+    "Our History": "Historia Jonë",
+    "Human Resources": "Burimet Njerëzore",
+    "Our Mission And Vision": "Misioni dhe Vizioni ynë",
+    "Profile": "Profil",
+    "History": "Historia",
+    "Mission": "Misioni",
+    "Responsibility": "Përgjegjësia",
+    "HR": "BurimetNjerëzore",
+    "Bank": "Banka",
+    "Brands": "Brendet",
+    "Our Social Responsibility": "Përgjegjësia Sociale Jonë",
+    "Company Name": "Emri i Kompanisë:"
   }
 }

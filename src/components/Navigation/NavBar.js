@@ -156,8 +156,10 @@ function NavBar() {
             </NavDropdown.Item>
           </NavDropdown>
 
-          <Nav.Link href="/Marketplace">Marketplace</Nav.Link>
-          <Nav.Link href="/corporate">Corporate</Nav.Link>
+          <Nav.Link href="/Marketplace">
+            {t("marketplace.Marketplace")}
+          </Nav.Link>
+          <Nav.Link href="/corporate">{t("navbar.Corporate")}</Nav.Link>
         </Nav>
 
         <Nav>
