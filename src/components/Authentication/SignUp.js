@@ -65,9 +65,9 @@ export const SignUp = () => {
             },
           }
         );
-        console.log(response);
-        const user = response.data[0].original.user;
-        console.log(user);
+        console.log(response.data[0]);
+        console.log(response.status);
+
 
         if (response.status === 201) {
           localStorage.setItem("userLoggedIn", true);
@@ -77,16 +77,15 @@ export const SignUp = () => {
           localStorage.setItem("userPhone", formValues.phone_number);
           localStorage.setItem("userGender", formValues.gender);
 
-          localStorage.setItem("userId", response.data[0].original.user.id);
-          localStorage.setItem("userToken", response.data[0].original.token);
-          localStorage.setItem("userRole", response.data[0].original.user.role);
+          localStorage.setItem("userId", response.data[0].id);
+       
           localStorage.setItem(
             "userCompany",
-            response.data[0].original.user.company_id
+            response.data[0].company_id
           );
           localStorage.setItem(
             "userCountry",
-            response.data[0].original.user.country_id
+            response.data[0].country_id
           );
 
           navigate("/AddNewCompany");
