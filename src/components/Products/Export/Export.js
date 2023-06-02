@@ -5,41 +5,35 @@ import Button from "react-bootstrap/Button";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
 import NavBar from "../../Navigation/NavBar";
-import LoadingBar from "../../LoadingScreens/LoadingBar"; // Import your loading component
-
+import LoadingBar from "../../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
+
 const ProductList = () => {
   const navigate = useNavigate();
   const [exportProducts, setExportProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
 
   const getExportProducts = async () => {
     try {
-     
-      const apiExportProducts = await axios.get(
-        "http://127.0.0.1:8000/api/elist"
-      );
+      const apiExportProducts = await axios.get("http://127.0.0.1:8000/api/elist");
       setExportProducts(apiExportProducts.data);
       console.log(apiExportProducts.data);
 
-      setIsLoading(false); // Set loading state to false when data is fetched
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching export products:", error);
-      setIsLoading(false); // Set loading state to false on error
+      setIsLoading(false);
     }
   };
 
   const getCategories = async () => {
     try {
-    
-      const apiCategories = await axios.get(
-        "http://127.0.0.1:8000/api/productcategory"
-      );
+      const apiCategories = await axios.get("http://127.0.0.1:8000/api/productcategory");
       setCategories(apiCategories.data);
-        } catch (error) {
+    } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };
@@ -54,17 +48,13 @@ const ProductList = () => {
     if (checked) {
       setSelectedCategories([...selectedCategories, name]);
     } else {
-      setSelectedCategories(
-        selectedCategories.filter((category) => category !== name)
-      );
+      setSelectedCategories(selectedCategories.filter((category) => category !== name));
     }
   };
 
   const filteredProducts =
     selectedCategories.length > 0
-      ? exportProducts.filter((product) =>
-          selectedCategories.includes(product.category_name)
-        ) // I changed 'product.category' to 'product.category_name'
+      ? exportProducts.filter((product) => selectedCategories.includes(product.category_name))
       : exportProducts;
 
   const handleNavigateItem = (id) => {
@@ -96,20 +86,19 @@ const ProductList = () => {
   };
 
   if (isLoading) {
-    // Render loading screen while data is being fetched
     return <LoadingBar />;
   }
 
-  
   return (
     <div>
       <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
-        <h1> {t("import.Export List")} </h1>
+        <h1>{t("import.Export List")}</h1>
       </div>
       <div className="d-flex justify-content-center mt-4">
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <Form.Check
+            key={index}
             type="checkbox"
             id={`category-${category.name}`}
             label={t(`import.${category.name}`)}
@@ -121,10 +110,10 @@ const ProductList = () => {
       </div>
       <div>
         <div>
-          {filteredProducts.map((exportProduct) => {
+          {filteredProducts.map((exportProduct, index) => {
             return (
               <div
-                key={exportProduct.id}
+                key={index}
                 className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark  rounded"
               >
                 <div>
@@ -137,7 +126,6 @@ const ProductList = () => {
                   <p>
                     {t("import.Price")} {exportProduct.price}
                   </p>
-
                   <p>
                     {t("import.Description")} {exportProduct.description}
                   </p>
@@ -146,7 +134,6 @@ const ProductList = () => {
                     {formatDate(exportProduct.created_at)}
                   </p>
                 </div>
-
                 <div className="d-flex justify-content-center">
                   <Button
                     onClick={() => {
