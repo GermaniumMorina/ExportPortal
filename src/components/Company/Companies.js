@@ -31,8 +31,8 @@ const Companies = () => {
           axios.get("http://127.0.0.1:8000/api/country")
         ]);
 
-        setCompanyList(companiesResponse.data.data);
-        setCategories(categoriesResponse.data.data);
+        setCompanyList(companiesResponse.data);
+        setCategories(categoriesResponse.data);
         setCountryList(countriesResponse.data.data);
         setIsLoading(false);
       } catch (error) {
@@ -42,6 +42,12 @@ const Companies = () => {
 
     fetchData();
   }, []);
+
+  console.log(companyList)
+  console.log(countryList);
+  console.log(categories);
+
+
 
   // Filter companies based on search term
   const filteredCompanies = companyList.filter((company) =>
