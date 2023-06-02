@@ -36,6 +36,8 @@ import ProfileManager from './components/ProfileManagment/ProfileManager';
 import ProfileViewer from './components/ProfileManagment/ProfileViewer';
 import AlertTest from './components/TestPages/AlertTest';
 import { ContactFrom } from './components/Contact/ContactFrom';
+import Navigation from './components/CorporatePage/Navigation';
+import MainCorporatePage from './components/CorporatePage/MainCorporatePage';
 
 console.log(document.cookie);
 
@@ -166,7 +168,15 @@ const routes = [
     {
       path: "/ContactFrom/:id",
       element: <ContactFrom />,
-    } 
+    } ,
+    {
+      path: "/Navigation",
+      element: <Navigation />
+    },
+    {
+      path: "/Corporate",
+      element: <MainCorporatePage />
+    }
   
 
 
