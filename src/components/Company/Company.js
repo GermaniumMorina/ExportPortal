@@ -23,6 +23,7 @@ const Company = () => {
       );
       setCompany(response.data[0]);
       setIsLoading(false);
+      console.log(response.data[0])
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -38,7 +39,7 @@ const Company = () => {
       {company.length === 0 ? (
         <p>Loading...</p>
       ) : (
-        company.map((company) => (
+        
           <div key={company.id} className="d-flex justify-content-center  mt-4">
             <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto   mb-4 p-5 border rounded  border-dark ">
               <h1>{company.name}</h1>
@@ -72,7 +73,7 @@ const Company = () => {
               </p>
             </div>
           </div>
-        ))
+        
       )}
     </div>
   );
