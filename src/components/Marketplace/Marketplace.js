@@ -14,7 +14,6 @@ export const Marketplace = () => {
       `http://localhost:8000/api/interstedProduct/${userId}`
     );
     setProductList(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {

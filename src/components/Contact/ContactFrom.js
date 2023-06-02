@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import "./ContactFrom.css";
 
 export const ContactFrom = () => {
+  //eslint-disable-next-line
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [formValues, setFormValues] = useState({
@@ -59,12 +60,8 @@ export const ContactFrom = () => {
       });
   };
 
-  if (!productData) {
-    return <div>{t("contact.Loading")}</div>;
-  }
-
   return (
-    <div id="add-new-company-base">
+    <div id="add-new-company-base-contact-from">
       <Form onSubmit={handleSubmit}>
         <h1 className="text-center">{t("contact.Contact seller")}</h1>
         <h5>{t("contact.Subject")}</h5>

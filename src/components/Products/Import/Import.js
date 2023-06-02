@@ -27,6 +27,7 @@ const Import = () => {
         "http://127.0.0.1:8000/api/ilist",
         data
       );
+      console.log(apiImportProducts);
       setImportProducts(apiImportProducts.data[0]);
       setIsLoading(false);
     } catch (error) {
@@ -36,16 +37,12 @@ const Import = () => {
 
   const getCategories = async () => {
     try {
-      const data = {
-        headers: {
-          Accept: "application/json",
-        },
-      };
+     
       const apiCategories = await axios.get(
-        "http://127.0.0.1:8000/api/productcategory",
-        data
+        "http://127.0.0.1:8000/api/productcategory"
       );
-      setCategories(apiCategories.data.data);
+      console.log(apiCategories);
+      setCategories(apiCategories.data[0]);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -117,58 +114,59 @@ const Import = () => {
         <h1> {t("import.Import List")}</h1>
       </div>
       <div className="d-flex justify-content-center mt-4">
-        {categories.map((category) => (
-          <Form.Check
-            type="checkbox"
-            id={`category-${category.name}`}
-            label={t(`import.${category.name}`)}
-            name={category.name}
-            onChange={handleCheckboxChange}
-            className="m-2"
-          />
-        ))}
-      </div>
-      <div>
+  {categories.map((category) => (
+    <Form.Check
+      key={category.name} // Add unique key prop
+      type="checkbox"
+      id={`category-${category.name}`}
+      label={t(`import.${category.name}`)}
+      name={category.name}
+      onChange={handleCheckboxChange}
+      className="m-2"
+    />
+  ))}
+</div>
+<div>
+  <div>
+    {filteredProducts.map((importProduct) => (
+      <div
+        key={importProduct.id} // Add unique key prop
+        className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark rounded"
+      >
         <div>
-          {filteredProducts.map((importProduct) => (
-            <div
-              key={importProduct.id}
-              className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark rounded"
-            >
-              <div>
-                <p>
-                  {t("companies.Name")} {importProduct.name}
-                </p>
-                <p>
-                  {t("companies.Country")} {importProduct.country}
-                </p>
-                <p>
-                  {t("import.Price")} {importProduct.price}
-                </p>
+          <p>
+            {t("companies.Name")} {importProduct.name}
+          </p>
+          <p>
+            {t("companies.Country")} {importProduct.country}
+          </p>
+          <p>
+            {t("import.Price")} {importProduct.price}
+          </p>
+          <p>
+            {t("import.Description")} {importProduct.description}
+          </p>
+          <p>
+            {t("import.Created at")}
+            {formatDate(importProduct.created_at)}
+          </p>
+        </div>
 
-                <p>
-                  {t("import.Description")} {importProduct.description}
-                </p>
-                <p>
-                  {t("import.Created at")}
-                  {formatDate(importProduct.created_at)}
-                </p>
-              </div>
-
-              <div className="d-flex justify-content-center">
-                <Button
-                  onClick={() => {
-                    handleNavigateItem(importProduct.id);
-                    handleView(importProduct.id);
-                  }}
-                >
-                  {t("companies.View More")}
-                </Button>
-              </div>
-            </div>
-          ))}
+        <div className="d-flex justify-content-center">
+          <Button
+            onClick={() => {
+              handleNavigateItem(importProduct.id);
+              handleView(importProduct.id);
+            }}
+          >
+            {t("companies.View More")}
+          </Button>
         </div>
       </div>
+    ))}
+  </div>
+</div>
+
     </div>
   );
 };

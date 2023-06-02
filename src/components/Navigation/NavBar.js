@@ -86,7 +86,7 @@ function NavBar() {
       const response = await axios.get(
         `http://localhost:8000/api/token/${userId}`
       );
-      setTokens(response.data[0].original.amount);
+      setTokens(response.data[0].amount);
       localStorage.setItem("tokens", response.data[0].original.amount);
     } catch (error) {
       // Handle error
@@ -156,9 +156,8 @@ function NavBar() {
             </NavDropdown.Item>
           </NavDropdown>
 
-          <Nav.Link href="/Marketplace">
-            {t("marketplace.Marketplace")}
-          </Nav.Link>
+          <Nav.Link href="/Marketplace">Marketplace</Nav.Link>
+          <Nav.Link href="/corporate">Corporate</Nav.Link>
         </Nav>
 
         <Nav>

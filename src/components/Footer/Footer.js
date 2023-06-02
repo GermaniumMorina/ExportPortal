@@ -20,7 +20,7 @@ const Footer = () => {
 
         <div className="footer-center">
           <div>
-            <i class="fa fa-map-marker"></i>
+            <i className="fa fa-map-marker"></i>
             <p>
               <span>{t("footer.St.Uke Bytyqi Nr.7")}</span>
               <span>{t("footer.Prizren, Kosovo")}</span>
@@ -29,18 +29,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <i class="fa fa-phone"></i>
+            <i className="fa fa-phone"></i>
             <p>+383 49 123 123</p>
           </div>
 
           <div>
-            <i class="fa fa-envelope"></i>
+            <i className="fa fa-envelope"></i>
             <p>
               <a href="mailto:info@protecht.ch">{t("footer.Email support")}</a>
             </p>
           </div>
           <div>
-            <i class="fa fa-envelope"></i>
+            <i className="fa fa-envelope"></i>
 
             <p>info@protecht.ch</p>
           </div>
@@ -54,7 +54,7 @@ const Footer = () => {
               </li>
               <br></br>
               <li>
-                <a href="/" class="link-1">
+                <a href="/" className="link-1">
                   {t("footer.Home")}
                 </a>
               </li>

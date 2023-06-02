@@ -9,6 +9,7 @@ import LoadingBar from "../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
 
 const Companies = () => {
+  // State variables
   const [companyList, setCompanyList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState([]);
@@ -20,6 +21,7 @@ const Companies = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  // Fetch data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,14 +43,17 @@ const Companies = () => {
     fetchData();
   }, []);
 
+  // Filter companies based on search term
   const filteredCompanies = companyList.filter((company) =>
     company.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Handle search input change
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
+  // Handle checkbox change for category filters
   const handleCheckboxChange = (event) => {
     const { checked, id } = event.target;
     if (checked) {
@@ -58,28 +63,34 @@ const Companies = () => {
     }
   };
 
+  // Handle country select change for country filter
   const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
   };
 
+  // Apply category filters to the filtered companies list
   const filteredCompaniesWithCategories =
     selectedCategories.length > 0
       ? filteredCompanies.filter((company) => selectedCategories.includes(company.category_id))
       : filteredCompanies;
 
+  // Apply country filter to the filtered companies list
   const filteredCompaniesWithCountry =
     selectedCountry !== ""
       ? filteredCompaniesWithCategories.filter((company) => company.country === selectedCountry)
       : filteredCompaniesWithCategories;
 
+  // Style for table cells
   const tdStyle = {
     padding: "10px",
   };
 
+  // Navigate to company details page
   const navigateToCompany = (id) => {
     navigate(`/companies/${id}`);
   };
 
+  // Toggle visibility of filters section
   const toggleFilters = () => {
     setShowFilters((prevState) => !prevState);
   };
@@ -88,11 +99,11 @@ const Companies = () => {
     return <LoadingBar />;
   }
 
-  
-
   return (
     <div>
       <NavBar />
+
+      {/* Search bar */}
       <div className="search">
         <div className="search-box">
           <button className="filter-button" onClick={toggleFilters}>
@@ -108,6 +119,8 @@ const Companies = () => {
           <span></span>
         </div>
       </div>
+
+      {/* Filters section */}
       <div className={`filters ${showFilters ? "showFilters" : ""}`}>
         <div className="row justify-content-center mt-4">
           <div className="col-md-6">
@@ -147,6 +160,8 @@ const Companies = () => {
           </div>
         </div>
       </div>
+
+      {/* Display filtered companies */}
       {filteredCompaniesWithCountry.map((company) => (
         <div
           key={company.id}
