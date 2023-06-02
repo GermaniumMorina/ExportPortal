@@ -22,8 +22,8 @@ const ProductList = () => {
       const apiExportProducts = await axios.get(
         "http://127.0.0.1:8000/api/elist"
       );
-      setExportProducts(apiExportProducts.data[0]);
-      console.log(apiExportProducts.data[0]);
+      setExportProducts(apiExportProducts.data);
+      console.log(apiExportProducts.data);
 
       setIsLoading(false); // Set loading state to false when data is fetched
     } catch (error) {
@@ -38,7 +38,7 @@ const ProductList = () => {
       const apiCategories = await axios.get(
         "http://127.0.0.1:8000/api/productcategory"
       );
-      setCategories(apiCategories.data[0]);
+      setCategories(apiCategories.data);
         } catch (error) {
       console.error("Error fetching categories:", error);
     }

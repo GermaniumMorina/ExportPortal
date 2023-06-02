@@ -28,7 +28,7 @@ const Import = () => {
         data
       );
       console.log(apiImportProducts);
-      setImportProducts(apiImportProducts.data[0]);
+      setImportProducts(apiImportProducts.data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching import products:", error);
@@ -42,7 +42,7 @@ const Import = () => {
         "http://127.0.0.1:8000/api/productcategory"
       );
       console.log(apiCategories);
-      setCategories(apiCategories.data[0]);
+      setCategories(apiCategories.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }

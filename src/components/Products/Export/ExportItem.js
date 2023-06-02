@@ -29,7 +29,8 @@ const ExportItem = () => {
       "http://127.0.0.1:8000/api/elist/" + id,
       data
     );
-    const apiExportProducts = response.data[0][0];
+    const apiExportProducts = response.data[0];
+    console.log(apiExportProducts)
     setIsLoading(false);
     setExportProduct(apiExportProducts);
   };
