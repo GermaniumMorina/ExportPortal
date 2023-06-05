@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
-import NavBar from "../../Navigation/NavBar";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
 import { useTranslation } from "react-i18next";
 const ExportItem = () => {
@@ -95,7 +94,6 @@ const ExportItem = () => {
 
   return (
     <div>
-      <NavBar />
       <div className="d-flex justify-content-center mt-4 text-primary">
         <h1>{t("import.Export Details")}</h1>
       </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../Navigation/NavBar";
 import "./ProfileManager.css";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
@@ -80,8 +79,6 @@ const ProfileManager = () => {
 
   return (
     <div>
-      <NavBar />
-
       <div className="d-flex justify-content-center">
         <div className="edit-div">
           <h2 className="welcome">{t("profileManager.Edit Profile")}</h2>

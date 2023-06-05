@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
-import NavBar from "../../Navigation/NavBar";
 import LoadingBar from "../../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
 
@@ -91,7 +90,6 @@ const ProductList = () => {
 
   return (
     <div>
-      <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
         <h1>{t("import.Export List")}</h1>
       </div>

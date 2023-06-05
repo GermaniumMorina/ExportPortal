@@ -4,7 +4,6 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import moment from "moment";
-import NavBar from "../../Navigation/NavBar";
 import { useTranslation } from "react-i18next";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
 
@@ -99,7 +98,6 @@ const ImportItem = () => {
 
   return (
     <div>
-      <NavBar />
       <div className="d-flex justify-content-center  mt-4 text-primary">
         <h1>{t("import.Import Details")}</h1>
       </div>

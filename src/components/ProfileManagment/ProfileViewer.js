@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../Navigation/NavBar";
 import "./ProfileManager.css";
 import { useTranslation } from "react-i18next";
 const ProfileViewer = () => {
@@ -15,7 +14,6 @@ const ProfileViewer = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <NavBar />
       <div className="profile-view">
         <h1> {t("navbar.Profile")}</h1>
         <p>

@@ -5,6 +5,7 @@ import { useRoutes, Navigate } from "react-router-dom";
 import { SignIn } from './components/Authentication/SignIn';
 import { SignUp } from './components/Authentication/SignUp';
 import { ForgotPassword } from './components/Authentication/ForgotPassword';
+import NavBar from './components/Navigation/NavBar';
 
 import Main from './components/Main';
 
@@ -38,6 +39,7 @@ import AlertTest from './components/TestPages/AlertTest';
 import { ContactFrom } from './components/Contact/ContactFrom';
 import Navigation from './components/CorporatePage/Navigation';
 import MainCorporatePage from './components/CorporatePage/MainCorporatePage';
+
 
 console.log(document.cookie);
 
@@ -161,7 +163,7 @@ const routes = [
       path: "/testpage",
       element:<AlertTest/>,
     },
-{
+    {
       path: "/ContactFrom",
       element: <ContactFrom />,
     },
@@ -177,6 +179,7 @@ const routes = [
       path: "/Corporate",
       element: <MainCorporatePage />
     }
+
   
 
 
@@ -186,11 +189,14 @@ const routes = [
 
 function App() {
   const routing = useRoutes(routes);
-
-  return <div className="App">{routing}
+  return( 
+  <div className="App">
+    <NavBar/>
+    {routing}
   
   <Footer />
-</div>;
+  </div>
+  )
 }
 
 export default App;

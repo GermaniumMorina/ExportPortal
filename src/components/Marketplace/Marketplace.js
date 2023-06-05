@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../Navigation/NavBar";
 import "./Marketplace.css";
 import axios from "axios";
 
@@ -40,7 +39,6 @@ export const Marketplace = () => {
 
   return (
     <div>
-      <NavBar />
       <section className="container" id="main-container">
         <div className="left-half">
           <article className="product-box">

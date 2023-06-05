@@ -60,16 +60,22 @@ export const AddNewCompany = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.get("http://localhost:8000/sanctum/csrf-cookie");
+  await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
+  try {
     const response = await axios.post(
       `http://localhost:8000/api/company/${userID}`,
       formValues
     );
-    if (response.status === 201) {
+    // changed from 201 to 200 because it was returning 201 from backend api
+    if (response.status === 200) {
       alertify.success("Company created successfully");
-      navigate("/companies");
+      navigate("/dashboard"); // Redirect to the dashboard route
     }
+  } catch (error) {
+    // Handle any error that occurred during the API request
+    console.error(error);
+  }
 
     const activity = JSON.stringify({
       selectedValues: formValues.selectedValues,

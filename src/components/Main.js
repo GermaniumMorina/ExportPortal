@@ -1,6 +1,5 @@
 import React from "react";
 
-import NavBar from "./Navigation/NavBar";
 import { Navigate } from "react-router-dom";
 import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
 import truck from "./Images/Trucks.jpg";
@@ -23,7 +22,6 @@ const Main = () => {
   const { t } = useTranslation();
   return isLoggedIn ? (
     <div>
-      <NavBar />
       <div className="container">
         <div className="row">
           <div className="col-md-12">
