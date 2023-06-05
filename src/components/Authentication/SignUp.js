@@ -65,7 +65,7 @@ export const SignUp = () => {
             },
           }
         );
-        console.log(response.data[0]);
+        console.log(response.data);
         console.log(response.status);
 
 
@@ -77,15 +77,15 @@ export const SignUp = () => {
           localStorage.setItem("userPhone", formValues.phone_number);
           localStorage.setItem("userGender", formValues.gender);
 
-          localStorage.setItem("userId", response.data[0].id);
+          localStorage.setItem("userId", response.data.id);
        
           localStorage.setItem(
             "userCompany",
-            response.data[0].company_id
+            response.data.company_id
           );
           localStorage.setItem(
             "userCountry",
-            response.data[0].country_id
+            response.data.country_id
           );
 
           navigate("/AddNewCompany");
