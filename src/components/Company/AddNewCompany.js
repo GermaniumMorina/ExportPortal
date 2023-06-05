@@ -35,6 +35,35 @@ export const AddNewCompany = () => {
     profile_picture: "null.jpg",
   });
   const [countryList, setCountryList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
+  const [subcategoryList, setSubcategoryList] = useState([]);
+
+const getSubcategory = async () => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/subcategory");
+    setSubcategoryList(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
+
+const getCategory = async () => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/category");
+    setCategoryList(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+useEffect(() => {
+  getCategory();
+  getSubcategory();
+
+}, []);
 
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
@@ -188,39 +217,37 @@ export const AddNewCompany = () => {
             </Form.Group>
 
             <Form.Select
-              value={formValues.category_id}
-              onChange={(e) =>
-                setFormValues({ ...formValues, category_id: e.target.value })
-              }
-              name="category_id"
-            >
-              <option value={0}>{t("company.Category")}</option>
-              <option value={1}>{t("products.Fashion")}</option>
-              <option value={2}>{t("products.Accessories")}</option>
-              <option value={3}>{t("products.Home")}</option>
-              <option value={4}>{t("products.Sporting")}</option>
-              <option value={5}>{t("products.Health")}</option>
-              <option value={6}>{t("products.Medical")}</option>
-              <option value={7}>{t("products.Pets")}</option>
-            </Form.Select>
+  value={formValues.category_id}
+  onChange={(e) =>
+    setFormValues({ ...formValues, category_id: e.target.value })
+  }
+  name="category_id"
+>
+  <option value={0}>{t("company.Category")}</option>
+  {categoryList.map((category) => (
+    <option key={category.id} value={category.id}>
+      {category.name}
+    </option>
+  ))}
+</Form.Select>
+
             <br />
 
             <Form.Select
-              value={formValues.subcategory_id}
-              onChange={(e) =>
-                setFormValues({ ...formValues, subcategory_id: e.target.value })
-              }
-              name="subcategory_id"
-            >
-              <option value={0}>{t("company.Sub-Catgory")}</option>
-              <option value={1}>{t("products.Fashion")}</option>
-              <option value={2}>{t("products.Accessories")}</option>
-              <option value={3}>{t("products.Home")}</option>
-              <option value={4}>{t("products.Sporting")}</option>
-              <option value={5}>{t("products.Health")}</option>
-              <option value={6}>{t("products.Medical")}</option>
-              <option value={7}>{t("products.Pets")}</option>
-            </Form.Select>
+  value={formValues.subcategory_id}
+  onChange={(e) =>
+    setFormValues({ ...formValues, subcategory_id: e.target.value })
+  }
+  name="subcategory_id"
+>
+  <option value={0}>{t("company.Sub-Catgory")}</option>
+  {subcategoryList.map((subcategory) => (
+    <option key={subcategory.id} value={subcategory.id}>
+      {subcategory.name}
+    </option>
+  ))}
+</Form.Select>
+
             <br />
 
             <Form.Group>
