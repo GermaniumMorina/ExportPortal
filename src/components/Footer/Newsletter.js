@@ -23,7 +23,7 @@ export const Newsletter = () => {
         }
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         alertify.success("You have been subscribed to our newsletter");
       }
     } catch (error) {
