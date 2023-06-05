@@ -104,17 +104,20 @@ export const AddNewCompany = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-              <Form.Control
-                required
-                type="text"
-                placeholder={t("addCompany.Company Type")}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, type: e.target.value })
-                }
-                value={formValues.type}
-                name="type"
-              />
-            </Form.Group>
+  <Form.Control
+    as="select"
+    required
+    onChange={(e) =>
+      setFormValues({ ...formValues, type: e.target.value })
+    }
+    value={formValues.type}
+    name="type"
+  >
+    <option value="export">{t("navbar.Export")}</option>
+    <option value="import">{t("navbar.Import")}</option>
+  </Form.Control>
+</Form.Group>
+
 
             <Form.Group
               className="mb-3"
