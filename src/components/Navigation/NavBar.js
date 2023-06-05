@@ -86,8 +86,8 @@ function NavBar() {
       const response = await axios.get(
         `http://localhost:8000/api/token/${userId}`
       );
-      setTokens(response.data[0].amount);
-      localStorage.setItem("tokens", response.data[0].original.amount);
+      setTokens(response.data.original.amount);
+      localStorage.setItem("tokens", response.data.original.amount);
     } catch (error) {
       // Handle error
     }
