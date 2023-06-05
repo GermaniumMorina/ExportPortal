@@ -9,7 +9,7 @@ const ProfileViewer = () => {
   const UserGender = localStorage.getItem("userGender");
 
   const handleEdit = () => {
-    window.location.href = "/profile/manager";
+    window.location.href = "/account";
   };
   const { t } = useTranslation();
   return (

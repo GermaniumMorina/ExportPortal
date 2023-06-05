@@ -156,7 +156,7 @@ const routes = [
       element:<ProfileViewer/>,
     },
     {
-      path: "/profile/manager",
+      path: "/account",
       element:<ProfileManager/>,
     },
     {
