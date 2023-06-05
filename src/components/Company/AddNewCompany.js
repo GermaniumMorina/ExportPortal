@@ -35,6 +35,31 @@ export const AddNewCompany = () => {
     profile_picture: "null.jpg",
   });
   const [countryList, setCountryList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
+  const [subcategoryList, setSubcategoryList] = useState([]);
+
+  const getSubcategory = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/subcategory");
+      setSubcategoryList(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getCategory = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/category");
+      setCategoryList(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getCategory();
+    getSubcategory();
+  }, []);
 
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
@@ -60,22 +85,22 @@ export const AddNewCompany = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  await axios.get("http://localhost:8000/sanctum/csrf-cookie");
+    await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
-  try {
-    const response = await axios.post(
-      `http://localhost:8000/api/company/${userID}`,
-      formValues
-    );
-    // changed from 201 to 200 because it was returning 201 from backend api
-    if (response.status === 200) {
-      alertify.success("Company created successfully");
-      navigate("/dashboard"); // Redirect to the dashboard route
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/api/company/${userID}`,
+        formValues
+      );
+      // changed from 201 to 200 because it was returning 201 from backend api
+      if (response.status === 200) {
+        alertify.success("Company created successfully");
+        navigate("/dashboard"); // Redirect to the dashboard route
+      }
+    } catch (error) {
+      // Handle any error that occurred during the API request
+      console.error(error);
     }
-  } catch (error) {
-    // Handle any error that occurred during the API request
-    console.error(error);
-  }
 
     const activity = JSON.stringify({
       selectedValues: formValues.selectedValues,
@@ -104,20 +129,19 @@ export const AddNewCompany = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-  <Form.Control
-    as="select"
-    required
-    onChange={(e) =>
-      setFormValues({ ...formValues, type: e.target.value })
-    }
-    value={formValues.type}
-    name="type"
-  >
-    <option value="export">{t("navbar.Export")}</option>
-    <option value="import">{t("navbar.Import")}</option>
-  </Form.Control>
-</Form.Group>
-
+              <Form.Select
+                as="select"
+                required
+                onChange={(e) =>
+                  setFormValues({ ...formValues, type: e.target.value })
+                }
+                value={formValues.type}
+                name="type"
+              >
+                <option value="export">{t("navbar.Export")}</option>
+                <option value="import">{t("navbar.Import")}</option>
+              </Form.Select>
+            </Form.Group>
 
             <Form.Group
               className="mb-3"
@@ -195,14 +219,13 @@ export const AddNewCompany = () => {
               name="category_id"
             >
               <option value={0}>{t("company.Category")}</option>
-              <option value={1}>{t("products.Fashion")}</option>
-              <option value={2}>{t("products.Accessories")}</option>
-              <option value={3}>{t("products.Home")}</option>
-              <option value={4}>{t("products.Sporting")}</option>
-              <option value={5}>{t("products.Health")}</option>
-              <option value={6}>{t("products.Medical")}</option>
-              <option value={7}>{t("products.Pets")}</option>
+              {categoryList.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
             </Form.Select>
+
             <br />
 
             <Form.Select
@@ -213,14 +236,13 @@ export const AddNewCompany = () => {
               name="subcategory_id"
             >
               <option value={0}>{t("company.Sub-Catgory")}</option>
-              <option value={1}>{t("products.Fashion")}</option>
-              <option value={2}>{t("products.Accessories")}</option>
-              <option value={3}>{t("products.Home")}</option>
-              <option value={4}>{t("products.Sporting")}</option>
-              <option value={5}>{t("products.Health")}</option>
-              <option value={6}>{t("products.Medical")}</option>
-              <option value={7}>{t("products.Pets")}</option>
+              {subcategoryList.map((subcategory) => (
+                <option key={subcategory.id} value={subcategory.id}>
+                  {subcategory.name}
+                </option>
+              ))}
             </Form.Select>
+
             <br />
 
             <Form.Group>
