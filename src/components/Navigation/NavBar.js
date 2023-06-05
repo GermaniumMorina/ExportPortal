@@ -114,6 +114,7 @@ function NavBar() {
     window.location.reload(); // Reload the page to apply the new language
   };
   useEffect(() => {
+    localStorage.setItem("language", selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
   }, [i18n, selectedLanguage]);
   return isLoggedIn ? (
