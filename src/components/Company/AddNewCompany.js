@@ -38,32 +38,28 @@ export const AddNewCompany = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [subcategoryList, setSubcategoryList] = useState([]);
 
-const getSubcategory = async () => {
-  try {
-    const response = await axios.get("http://127.0.0.1:8000/api/subcategory");
-    setSubcategoryList(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
+  const getSubcategory = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/subcategory");
+      setSubcategoryList(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  const getCategory = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/category");
+      setCategoryList(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-
-
-const getCategory = async () => {
-  try {
-    const response = await axios.get("http://127.0.0.1:8000/api/category");
-    setCategoryList(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-useEffect(() => {
-  getCategory();
-  getSubcategory();
-
-}, []);
+  useEffect(() => {
+    getCategory();
+    getSubcategory();
+  }, []);
 
   const getCountry = async () => {
     const ApiCountry = await axios.get("http://127.0.0.1:8000/api/country");
@@ -89,22 +85,22 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  await axios.get("http://localhost:8000/sanctum/csrf-cookie");
+    await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
-  try {
-    const response = await axios.post(
-      `http://localhost:8000/api/company/${userID}`,
-      formValues
-    );
-    // changed from 201 to 200 because it was returning 201 from backend api
-    if (response.status === 200) {
-      alertify.success("Company created successfully");
-      navigate("/dashboard"); // Redirect to the dashboard route
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/api/company/${userID}`,
+        formValues
+      );
+      // changed from 201 to 200 because it was returning 201 from backend api
+      if (response.status === 200) {
+        alertify.success("Company created successfully");
+        navigate("/dashboard"); // Redirect to the dashboard route
+      }
+    } catch (error) {
+      // Handle any error that occurred during the API request
+      console.error(error);
     }
-  } catch (error) {
-    // Handle any error that occurred during the API request
-    console.error(error);
-  }
 
     const activity = JSON.stringify({
       selectedValues: formValues.selectedValues,
@@ -133,20 +129,19 @@ useEffect(() => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-  <Form.Control
-    as="select"
-    required
-    onChange={(e) =>
-      setFormValues({ ...formValues, type: e.target.value })
-    }
-    value={formValues.type}
-    name="type"
-  >
-    <option value="export">{t("navbar.Export")}</option>
-    <option value="import">{t("navbar.Import")}</option>
-  </Form.Control>
-</Form.Group>
-
+              <Form.Select
+                as="select"
+                required
+                onChange={(e) =>
+                  setFormValues({ ...formValues, type: e.target.value })
+                }
+                value={formValues.type}
+                name="type"
+              >
+                <option value="export">{t("navbar.Export")}</option>
+                <option value="import">{t("navbar.Import")}</option>
+              </Form.Select>
+            </Form.Group>
 
             <Form.Group
               className="mb-3"
@@ -217,36 +212,36 @@ useEffect(() => {
             </Form.Group>
 
             <Form.Select
-  value={formValues.category_id}
-  onChange={(e) =>
-    setFormValues({ ...formValues, category_id: e.target.value })
-  }
-  name="category_id"
->
-  <option value={0}>{t("company.Category")}</option>
-  {categoryList.map((category) => (
-    <option key={category.id} value={category.id}>
-      {category.name}
-    </option>
-  ))}
-</Form.Select>
+              value={formValues.category_id}
+              onChange={(e) =>
+                setFormValues({ ...formValues, category_id: e.target.value })
+              }
+              name="category_id"
+            >
+              <option value={0}>{t("company.Category")}</option>
+              {categoryList.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </Form.Select>
 
             <br />
 
             <Form.Select
-  value={formValues.subcategory_id}
-  onChange={(e) =>
-    setFormValues({ ...formValues, subcategory_id: e.target.value })
-  }
-  name="subcategory_id"
->
-  <option value={0}>{t("company.Sub-Catgory")}</option>
-  {subcategoryList.map((subcategory) => (
-    <option key={subcategory.id} value={subcategory.id}>
-      {subcategory.name}
-    </option>
-  ))}
-</Form.Select>
+              value={formValues.subcategory_id}
+              onChange={(e) =>
+                setFormValues({ ...formValues, subcategory_id: e.target.value })
+              }
+              name="subcategory_id"
+            >
+              <option value={0}>{t("company.Sub-Catgory")}</option>
+              {subcategoryList.map((subcategory) => (
+                <option key={subcategory.id} value={subcategory.id}>
+                  {subcategory.name}
+                </option>
+              ))}
+            </Form.Select>
 
             <br />
 
