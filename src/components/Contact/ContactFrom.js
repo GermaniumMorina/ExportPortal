@@ -21,13 +21,13 @@ export const ContactFrom = () => {
         const response = await axios.get(
           `http://localhost:8000/api/form/${id}`
         );
-        setProductData(response.data[0]); // Set product data. Assume response is an array and we're interested in the first item
+        setProductData(response.data.original[0]); // Set product data. Assume response is an array and we're interested in the first item
 
         // Also update form values with product data
         setFormValues({
-          name: response.data[0].Product,
-          email: response.data[0].email,
-          message: `I am interested in your product: ${response.data[0].Product}`,
+          name: response.data.original[0].Product,
+          email: response.data.original[0].email,
+          message: `I am interested in your product: ${response.data.original[0].Product}`,
         });
       } catch (error) {
         console.error("Error fetching data: ", error);
