@@ -1,4 +1,3 @@
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {
@@ -258,7 +257,6 @@ function NavBar() {
   ) : (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
-        <Container>
           <Navbar.Brand href="/" className="logo">
             <img
               src={logo}
@@ -277,10 +275,7 @@ function NavBar() {
                 {t("navbar.Companies")}
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/companyListing">
-                {t("navbar.Company List")}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
+           
               <NavDropdown.Item href="/AddNewCompany">
                 {t("navbar.Add new company")}
               </NavDropdown.Item>
@@ -301,12 +296,11 @@ function NavBar() {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="/buy">{t("navbar.Buy TEST")}</Nav.Link>
+           
 
             <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
             <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
           </Nav>
-        </Container>
       </Navbar>
     </div>
   );

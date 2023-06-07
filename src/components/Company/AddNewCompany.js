@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
+import { TagsInput } from "react-tag-input-component";
 
 export const AddNewCompany = () => {
   const userID = localStorage.getItem("userId");
@@ -34,6 +35,7 @@ export const AddNewCompany = () => {
     budged: "",
     profile_picture: "null.jpg",
   });
+
   const [countryList, setCountryList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [subcategoryList, setSubcategoryList] = useState([]);
@@ -199,17 +201,17 @@ export const AddNewCompany = () => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
-              <Form.Control
-                type="text"
-                placeholder={t("companies.Keywords")}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, keywords: e.target.value })
+            <div>
+              <TagsInput
+                value={formValues.keywords.split(",")}
+                onChange={(tags) =>
+                  setFormValues({ ...formValues, keywords: tags.join(",") })
                 }
-                value={formValues.keywords}
                 name="keywords"
+                placeHolder="Enter Keywords"
               />
-            </Form.Group>
+              <em>Press enter to add a new KeyWord</em>
+            </div>
 
             <Form.Select
               value={formValues.category_id}

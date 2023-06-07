@@ -1,15 +1,13 @@
 import React from "react";
-import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
 import logo from "../Navigation/logo.png";
 import "./footer.css";
 import { Newsletter } from "./Newsletter";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {
-  const isLoggedIn = checkIfLoggedIn();
   const { t } = useTranslation();
 
-  return isLoggedIn ? (
+  return(
     <div id="container">
       <footer className="footer-distributed" id="footer">
         <div className="footer-left">
@@ -68,6 +66,10 @@ const Footer = () => {
               <li>
                 <a href="/account"> {t("navbar.Account")}</a>
               </li>
+              <br></br>
+              <li>
+                <a href="/corporate"> {t("navbar.Corporate")}</a>
+              </li>
             </p>
           </ul>
         </div>
@@ -76,11 +78,7 @@ const Footer = () => {
         </div>
       </footer>
     </div>
-  ) : (
-    <div id="container">
-      <p> </p>
-    </div>
-  );
+  ) 
 };
 
 export default Footer;

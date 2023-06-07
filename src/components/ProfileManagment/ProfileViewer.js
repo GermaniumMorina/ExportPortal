@@ -1,6 +1,8 @@
 import React from "react";
 import "./ProfileManager.css";
 import { useTranslation } from "react-i18next";
+import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
+import NotAllowed from "../Authentication/NotAllowed";
 const ProfileViewer = () => {
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
@@ -12,7 +14,9 @@ const ProfileViewer = () => {
     window.location.href = "/account";
   };
   const { t } = useTranslation();
-  return (
+
+  const isLoggedIn=checkIfLoggedIn();
+  return isLoggedIn ?  (
     <div>
       <div className="profile-view">
         <h1> {t("navbar.Profile")}</h1>
@@ -36,7 +40,9 @@ const ProfileViewer = () => {
         </button>
       </div>
     </div>
-  );
+  ):(
+    <NotAllowed/>
+  )
 };
 
 export default ProfileViewer;
