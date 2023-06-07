@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { checkIfLoggedIn } from "../../Authentication/checkIfLoggedIn";
+import NotAllowed from "../../Authentication/NotAllowed";
 
 export const AddNewItem = () => {
   const navigate = useNavigate();
@@ -55,8 +57,8 @@ export const AddNewItem = () => {
     }));
   };
   const { t } = useTranslation();
-
-  return (
+const isLoggedIn=checkIfLoggedIn();
+  return isLoggedIn ? (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
         <div className="add-new-company-form-div">
@@ -157,5 +159,7 @@ export const AddNewItem = () => {
         </div>
       </div>
     </div>
-  );
+  ):(
+    <NotAllowed/>
+  )
 };

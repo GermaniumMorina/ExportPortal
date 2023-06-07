@@ -1,7 +1,4 @@
 import React from "react";
-
-import { Navigate } from "react-router-dom";
-import { checkIfLoggedIn } from "./Authentication/checkIfLoggedIn";
 import truck from "./Images/Trucks.jpg";
 import depo from "./Images/depo.jpg";
 import "./Main.css";
@@ -9,7 +6,6 @@ import { useTranslation } from "react-i18next";
 const Main = () => {
   let gender = "";
 
-  const isLoggedIn = checkIfLoggedIn();
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userGender = localStorage.getItem("userGender");
@@ -20,7 +16,7 @@ const Main = () => {
     gender = "Mrs.";
   }
   const { t } = useTranslation();
-  return isLoggedIn ? (
+  return (
     <div>
       <div className="container">
         <div className="row">
@@ -54,9 +50,7 @@ const Main = () => {
         </div>
       </div>
     </div>
-  ) : (
-    <Navigate to="/login" />
-  );
+  ) 
 };
 
 export default Main;

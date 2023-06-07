@@ -13,7 +13,6 @@ import Main from './components/Main';
 
 import { AddNewCompany } from './components/Company/AddNewCompany';
 import { AddNewItem } from './components/Products/NewProductForm/AddNewItem';
-import { checkIfLoggedIn } from './components/Authentication/checkIfLoggedIn';
 import  Import  from './components/Products/Import/Import';
 import  ImportItem  from './components/Products/Import/ImportItem';
 import  Export from './components/Products/Export/Export';
@@ -46,7 +45,7 @@ console.log(document.cookie);
 const routes = [
   {
     path: "/",
-    element: checkIfLoggedIn() ? <Navigate to="/dashboard" /> : <Navigate to="/SignIn" />,
+    element: <Navigate to="/dashboard" />,
   },
   {
     path: "/dashboard",
