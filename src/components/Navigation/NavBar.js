@@ -275,10 +275,7 @@ function NavBar() {
                 {t("navbar.Companies")}
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/companyListing">
-                {t("navbar.Company List")}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
+           
               <NavDropdown.Item href="/AddNewCompany">
                 {t("navbar.Add new company")}
               </NavDropdown.Item>

@@ -17,8 +17,8 @@ window.location.href="/SignIn";
   return (
     <div className="main-not-allowed-div">
       <img src={stop} alt={stop} className="stop-image" />
-      <h1>{t("notAllowed.You are not allowed to view this page")}</h1>
-
+      <h1>{t("notAllowed.You are not allowed to view this page")}!</h1>
+        
       <div className="first-not-allowed-button">
       <button className="learn-more"  onClick={handleSignIn}>
         <span className="circle" aria-hidden="true">

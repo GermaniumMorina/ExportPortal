@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
+import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
+import NotAllowed from "../Authentication/NotAllowed";
 
 const ProfileManager = () => {
   const userId = localStorage.getItem("userId");
@@ -77,7 +79,8 @@ const ProfileManager = () => {
   };
   const { t } = useTranslation();
 
-  return (
+  const isLoggedIn=checkIfLoggedIn();
+  return isLoggedIn ? (
     <div>
       <div className="d-flex justify-content-center">
         <div className="edit-div">
@@ -182,7 +185,9 @@ const ProfileManager = () => {
         </div>
       </div>
     </div>
-  );
+  ):(
+    <NotAllowed/>
+  )
 };
 
 export default ProfileManager;
