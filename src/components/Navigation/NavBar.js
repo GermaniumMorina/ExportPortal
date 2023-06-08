@@ -19,7 +19,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
 import { BsCurrencyExchange } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
-
+import { BsGlobe } from "react-icons/bs";
 function NavBar() {
   const isLoggedIn = checkIfLoggedIn();
   const user = localStorage.getItem("userName");
@@ -301,12 +301,42 @@ function NavBar() {
                 {t("navbar.Export")}
               </NavDropdown.Item>
             </NavDropdown>
-
             <Nav.Link href="/buy">{t("navbar.Buy TEST")}</Nav.Link>
-
             <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
             <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
           </Nav>
+          <NavDropdown title={<BsGlobe />} className="text-primary">
+            <NavDropdown.Item onClick={() => handleLanguageChange("al")}>
+              <img
+                src={albania}
+                alt="albania"
+                width="30"
+                height="20"
+                className="m-1"
+              />
+              {t("navbar.Albanian")}
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => handleLanguageChange("en")}>
+              <img
+                src={english}
+                alt="english"
+                width="30"
+                height="20"
+                className="m-1"
+              />
+              {t("navbar.English")}
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => handleLanguageChange("es")}>
+              <img
+                src={spanish}
+                alt="spanish"
+                width="30"
+                height="20"
+                className="m-1"
+              />
+              {t("navbar.Spanish")}
+            </NavDropdown.Item>
+          </NavDropdown>
         </Container>
       </Navbar>
     </div>
