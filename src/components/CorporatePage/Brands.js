@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from "react";
-import LoadingText from "../LoadingScreens/LoadingText";
-import axios from "axios";
-import { useTranslation } from "react-i18next";
+import "./Brands.css";
+import coop from "./coop.png";
+import loremlogo from "./logo.png";
 
 const Brands = () => {
-  const [companyData, setCompanyData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { t } = useTranslation();
-  const getCompanyData = async () => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/corporate/26`
-      );
-      setCompanyData(response.data[0]);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getCompanyData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
-    <div className="height-controller-container">
-      <div className="company-data-text">
-        <p>{t("corporatePage.Our Brands")}</p>
-        {isLoading ? <LoadingText /> : <p>{companyData.brands}</p>}
+    <div className="company-data-text">
+      <div class="brands-card-container">
+        <div class="brands-card">
+          <div class="brands-img-content">
+            <img src={coop} alt="coop" className="brands-logos" />
+          </div>
+          <div class="brands-content">
+            <p class="brands-heading">COOP Switzerland</p>
+            <p>
+              Retail Application & Network / System administration Installing
+              Coop Retail application and customized based on branch request.
+              Optimize database and connect with datacenter. Install all network
+              hardware and software. 
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="brands-card-container">
+        <div class="brands-card">
+          <div class="brands-img-content">
+            <img src={loremlogo} alt="coop" className="brands-logos" />
+          </div>
+          <div class="brands-content">
+            <p class="brands-heading">Lorem Ipsum</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipii voluptas ten
+              mollitia pariatur odit, ab minus ratione adipisci accusamus vel
+              est excepturi laboriosam magnam necessitatibus dignissimos
+              molestias.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

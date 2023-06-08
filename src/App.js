@@ -38,6 +38,7 @@ import AlertTest from './components/TestPages/AlertTest';
 import { ContactFrom } from './components/Contact/ContactFrom';
 import Navigation from './components/CorporatePage/Navigation';
 import MainCorporatePage from './components/CorporatePage/MainCorporatePage';
+import AllProduct from './components/Products/AllProducts/AllProduct';
 
 
 console.log(document.cookie);
@@ -177,6 +178,10 @@ const routes = [
     {
       path: "/Corporate",
       element: <MainCorporatePage />
+    },
+    {
+      path: "/products",
+      element: <AllProduct />
     }
 
   

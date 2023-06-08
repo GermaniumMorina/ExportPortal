@@ -146,6 +146,10 @@ function NavBar() {
               {t("navbar.Add New Product")}
             </NavDropdown.Item>
             <NavDropdown.Divider />
+              <NavDropdown.Item href="/products">
+                Products
+              </NavDropdown.Item>
+            <NavDropdown.Divider />
             <NavDropdown.Item href="/Import">
               {t("navbar.Import")}
             </NavDropdown.Item>
@@ -158,7 +162,7 @@ function NavBar() {
           <Nav.Link href="/Marketplace">
             {t("marketplace.Marketplace")}
           </Nav.Link>
-          <Nav.Link href="/corporate">{t("navbar.Corporate")}</Nav.Link>
+        
         </Nav>
 
         <Nav>
@@ -285,6 +289,10 @@ function NavBar() {
             >
               <NavDropdown.Item href="/AddNewItem">
                 {t("navbar.Add New Product")}
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/products">
+                Products
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/Import">
