@@ -64,6 +64,16 @@ const HumanResources = () => {
           <div class="img">
             <img src={avatar} alt="Avatar" className="avatar" />
           </div>
+          <span> Vjollca Baxhaku</span>
+          <p class="job">Cordinator</p>
+          <p className="job">Prizren</p>
+          <button> More</button>
+        </div>
+        <div class="card">
+          <div class="card-border-top"></div>
+          <div class="img">
+            <img src={avatar} alt="Avatar" className="avatar" />
+          </div>
           <span> Rrezon Krasniqi</span>
           <p class="job">Web Developer</p>
           <p className="job">Team Nova</p>
@@ -119,16 +129,7 @@ const HumanResources = () => {
           <p className="job">Team Nova</p>
           <button> More</button>
         </div>
-        <div class="card">
-          <div class="card-border-top"></div>
-          <div class="img">
-            <img src={avatar} alt="Avatar" className="avatar" />
-          </div>
-          <span> Vjollca Baxhaku</span>
-          <p class="job">Cordinator</p>
-          <p className="job">Prizren</p>
-          <button> More</button>
-        </div>
+      
       </div>
     </div>
   );

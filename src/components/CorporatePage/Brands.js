@@ -5,6 +5,7 @@ import loremlogo from "./logo.png";
 const Brands = () => {
   return (
     <div className="company-data-text">
+      <h1>Brands</h1>
       <div class="brands-card-container">
         <div class="brands-card">
           <div class="brands-img-content">

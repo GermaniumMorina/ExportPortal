@@ -1,45 +1,25 @@
-import React, { useEffect, useState } from "react";
-import LoadingText from "../LoadingScreens/LoadingText";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
 
 const OurSocialResp = () => {
-  const [companyData, setCompanyData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
-  const getCompanyData = async () => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/corporate/26`
-      );
-      setCompanyData(response.data[0]);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getCompanyData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className="height-controller-container">
       <div className="company-data-text">
-        <p>{t("corporatePage.Our Social Responsibility")}</p>
-        {isLoading ? (
-          <LoadingText />
-        ) : (
-          <div>
-            <p>
-              {t("corporatePage.Company Name")}
-              {companyData.name}
-            </p>
-            <p>{companyData.responsibility}</p>
-          </div>
-        )}
+        <h1>{t("corporatePage.Our Social Responsibility")}</h1>
+        <div>
+          <p>
+            Lorem ipsumCulpa voluptate magna est deserunt excepteur dolore magna
+            non Lorem sit laborum do. Consequat laborum et irure eu cupidatat
+            quis reprehenderit dolor elit eu duis. Fugiat ipsum minim excepteur
+            non sunt et. Minim excepteur dolor velit commodo elit veniam
+            voluptate Lorem irure eu ullamco proident duis. Nisi dolore anim qui
+            id in laboris pariatur magna consequat non. Mollit enim consequat
+            minim laborum. Excepteur ea enim culpa voluptate dolor reprehenderit
+            excepteur minim qui est consectetur et.
+          </p>
+        </div>
+    
       </div>
     </div>
   );

@@ -10,8 +10,9 @@ const CompanyProfile = () => {
   return (
     <div className="height-controller-container">
       <div className="company-data-text">
+      <h1>{t("company.Company Profile")}</h1>
+<br/>
         <img src={companylogo} alt="Protecht" className="companylogo"/>
-        <h5>{t("company.Company Profile")}</h5>
 
        
           <div>
