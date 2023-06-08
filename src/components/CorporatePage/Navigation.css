@@ -5,6 +5,9 @@
     text-align: center;
 }
 
+.height-controller-container{
+    min-height: 40vh;
+}
 .TopBox {
     width: 71px;
     height: 5px;
@@ -79,19 +82,17 @@
     color: white;
 }
 .company-data-text{
-    margin-top: 30px;
-    margin-left: 130px ;
+    margin-top: 35px;
+    margin-left: 200px;
     text-align: start;
     border-radius: 9px;
     box-shadow: -1px 1px 32px 9px rgba(0,0,0,0.21);
     padding: 30px;
-    width: 860px;
+    height: 100%;
+    width: 85%;
   }
 
-  .height-controller-container{
-    height:80vh;
-
-  }
+ 
 
 .feather {
     color: #6e6c6c;

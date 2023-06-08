@@ -1,56 +1,35 @@
-import React, { useEffect, useState } from "react";
-import LoadingText from "../LoadingScreens/LoadingText";
-import axios from "axios";
+
 import { useTranslation } from "react-i18next";
-
+import companylogo from "./Corp.png"
+import "./CompanyProfile.css"
 const CompanyProfile = () => {
-  const [companyData, setCompanyData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { t } = useTranslation();
-  const getCompanyData = async () => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/corporate/26`
-      );
-      console.log(response);
-      setCompanyData(response.data[0]);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  useEffect(() => {
-    getCompanyData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { t } = useTranslation();
+
 
   return (
     <div className="height-controller-container">
       <div className="company-data-text">
-        <p>{t("company.Company Profile")}</p>
-        {isLoading ? (
-          <LoadingText />
-        ) : (
+      <h1>{t("company.Company Profile")}</h1>
+<br/>
+        <img src={companylogo} alt="Protecht" className="companylogo"/>
+
+       
           <div>
             <p>
-              {t("companies.Name")} {companyData.name}
+              {t("companies.Name")} Protecht
             </p>
             <p>
-              {t("companies.Country")} {companyData.country}
+              {t("companies.Country")} Kosovo
             </p>
             <p>
-              {t("companies.Keywords")} {companyData.keywords}
+              {t("companies.Keywords")} #Cybersecurity,  #Web Services,  #Web Developer Services
             </p>
             <p>
-              {t("companies.Web Address")} {companyData.web_address}
+              {t("companies.Web Address")} <a href="https://www.protecht.ch/"> Protecht.ch</a>
             </p>
-            <p>
-              {t("company.More Info")} {companyData.more_info}
-            </p>
+           
           </div>
-        )}
       </div>
     </div>
   );

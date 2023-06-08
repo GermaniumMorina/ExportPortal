@@ -10,7 +10,7 @@ import Brands from "./Brands";
 import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
-  const [selectedComponent, setSelectedComponent] = useState(null);
+  const [selectedComponent, setSelectedComponent] = useState(<CompanyProfile/>);
   const { t } = useTranslation();
   const handleItemClick = (component) => {
     setSelectedComponent(component);
@@ -52,6 +52,7 @@ const Navigation = () => {
   }, []);
 
   return (
+    <div className="height-controller-container">
     <div className="navigation-corp-page">
       <div className="Contact">
         <div className="MenuBox">
@@ -198,6 +199,7 @@ const Navigation = () => {
         </div>
         <div>{selectedComponent}</div>
       </div>
+    </div>
     </div>
   );
 };
