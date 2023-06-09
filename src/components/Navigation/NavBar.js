@@ -305,7 +305,7 @@ function NavBar() {
             <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
             <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
           </Nav>
-          <NavDropdown title={<BsGlobe />} className="text-primary">
+          <NavDropdown title={<BsGlobe />} className="text-info">
             <NavDropdown.Item onClick={() => handleLanguageChange("al")}>
               <img
                 src={albania}
