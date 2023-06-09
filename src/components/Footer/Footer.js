@@ -34,7 +34,7 @@ const Footer = () => {
           <div>
             <i className="fa fa-envelope"></i>
             <p>
-              <a href="mailto:info@protecht.ch">{t("footer.Email support")}</a>
+              <a href="mailto:info@protecht.ch" className="links-footer">{t("footer.Email support")}</a>
             </p>
           </div>
           <div>
@@ -48,27 +48,27 @@ const Footer = () => {
           <ul className="list-unstyled">
             <p className="footer-links">
               <li>
-                <a href="/Support">{t("footer.Contact Support")}</a>
+                <a href="/Support" className="links-footer">{t("footer.Contact Support")}</a>
               </li>
               <br></br>
               <li>
-                <a href="/" className="link-1">
+                <a href="/"  className="links-footer">
                   {t("footer.Home")}
                 </a>
               </li>
               <br></br>
 
               <li>
-                <a href="/profile"> {t("navbar.Profile")}</a>
+                <a href="/profile" className="links-footer"> {t("navbar.Profile")}</a>
               </li>
               <br></br>
 
               <li>
-                <a href="/account"> {t("navbar.Account")}</a>
+                <a href="/contact" className="links-footer">Contact Us</a>
               </li>
               <br></br>
               <li>
-                <a href="/corporate"> {t("navbar.Corporate")}</a>
+                <a href="/corporate" className="links-footer"> {t("navbar.Corporate")}</a>
               </li>
             </p>
           </ul>

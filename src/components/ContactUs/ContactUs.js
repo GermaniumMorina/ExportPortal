@@ -5,7 +5,8 @@ import { InputGroup } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-const NewsletterCreator = () => {
+
+const ContactUs = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -29,7 +30,7 @@ const NewsletterCreator = () => {
           <div className="add-new-company-form-div">
             <Form>
               <h1 className="text-center">
-                {t("newsletterCreator.Write newsletter")}
+                Contact Us
               </h1>
               <h5> {t("newsletterCreator.To")}</h5>
               <InputGroup className="mb-3">
@@ -80,11 +81,26 @@ const NewsletterCreator = () => {
                 {t("support.Send")}
               </Button>
             </Form>
+            <br></br>
+            <div>
+                <h2>
+                    Or you can visit us here
+                </h2>
+                <br></br>
+                <br></br>
+                <br></br>
+                <p>Rruga Uke Bytyci,</p>
+                <p>ITP, U23, Kati 2</p>
+                <p>Prizren, 20000, Kosove</p>
+                 
+                <iframe title="MAP" src="https://api.jawg.io/maps/09b6e47a-046f-4e95-85b3-5748274cdbf9/0e7e0a86-121c-43ba-8f06-f31de5bf55dd.html?access-token=ANqIJBdfTowrRjH2cG9UUBRDgJUzYz8gNgZI2VRLrfdnRoJQ1OlHmGbxIO45lXdx" width="500px" height="300px"></iframe>  
+
+            </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 };
 
-export default NewsletterCreator;
+export default ContactUs;

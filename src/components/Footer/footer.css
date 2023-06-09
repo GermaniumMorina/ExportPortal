@@ -14,6 +14,28 @@
 
   }
   
+  .links-footer {
+    background:
+      linear-gradient(
+        to right,
+        rgb(243, 243, 243),
+        rgb(255, 158, 158)
+      ),
+      linear-gradient(
+        to right,
+        rgba(255, 0, 0, 1),
+        rgba(255, 0, 180, 1),
+        rgb(64, 80, 224)
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+  }
+
+  .links-footer:hover {
+    background-size: 0 3px, 100% 3px;
+  }
 
 .footer-distributed {
     background: #aba7a7;
@@ -70,7 +92,6 @@
 
 .footer-distributed .footer-links{
   color:  #ffffff;
-  margin: 20px 0 12px;
   padding: 0;
 }
 

@@ -162,6 +162,8 @@ function NavBar() {
           <Nav.Link href="/Marketplace">
             {t("marketplace.Marketplace")}
           </Nav.Link>
+          <Nav.Link href="/stories">Succes Stories</Nav.Link>
+
         
         </Nav>
 
