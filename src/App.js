@@ -42,6 +42,7 @@ import AllProduct from './components/Products/AllProducts/AllProduct';
 import Admin from './components/Admin/Admin';
 import SuccesStories from './components/Admin/SuccesStories';
 import ContactUs from './components/ContactUs/ContactUs';
+import Stories from './components/SuccesStories/Stories';
 
 
 console.log(document.cookie);
@@ -198,6 +199,10 @@ const routes = [
     {
       path: "/contact",
       element: <ContactUs/>,
+    },
+    {
+      path: "/stories",
+      element: <Stories/>,
     }
 
   
