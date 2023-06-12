@@ -79,7 +79,7 @@ const ProfileManager = () => {
   };
   const { t } = useTranslation();
 
-  const isLoggedIn=checkIfLoggedIn();
+  const isLoggedIn = checkIfLoggedIn();
   return isLoggedIn ? (
     <div>
       <div className="d-flex justify-content-center">
@@ -128,34 +128,33 @@ const ProfileManager = () => {
             </Form.Group>
             <Form.Label>{t("signUp.Gender")}</Form.Label>
             <Form.Group className="mb-3">
-            <Form.Check
-  type="radio"
-  name="gender"
-  id="male"
-  label={t("signUp.Male")}
-  inline
-  value="male"
-  checked={formValues.gender === "male"} // Add checked attribute based on condition
-  onChange={(e) => {
-    setFormValues({ ...formValues, gender: e.target.value });
-    setHasChanges(true);
-  }}
-/>
+              <Form.Check
+                type="radio"
+                name="gender"
+                id="male"
+                label={t("signUp.Male")}
+                inline
+                value="male"
+                checked={formValues.gender === "male"} 
+                onChange={(e) => {
+                  setFormValues({ ...formValues, gender: e.target.value });
+                  setHasChanges(true);
+                }}
+              />
 
-<Form.Check
-  type="radio"
-  name="gender"
-  id="female"
-  label={t("signUp.Female")}
-  inline
-  value="female"
-  checked={formValues.gender === "female"} // Add checked attribute based on condition
-  onChange={(e) => {
-    setFormValues({ ...formValues, gender: e.target.value });
-    setHasChanges(true);
-  }}
-/>
-
+              <Form.Check
+                type="radio"
+                name="gender"
+                id="female"
+                label={t("signUp.Female")}
+                inline
+                value="female"
+                checked={formValues.gender === "female"} 
+                onChange={(e) => {
+                  setFormValues({ ...formValues, gender: e.target.value });
+                  setHasChanges(true);
+                }}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -185,9 +184,9 @@ const ProfileManager = () => {
         </div>
       </div>
     </div>
-  ):(
-    <NotAllowed/>
-  )
+  ) : (
+    <NotAllowed />
+  );
 };
 
 export default ProfileManager;

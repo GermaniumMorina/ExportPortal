@@ -55,6 +55,7 @@
    .stories-card:hover .stories-card-button {
     transform: translate(-50%, 50%);
     opacity: 1;
+   
    }
 
    .stories-card span::before {
