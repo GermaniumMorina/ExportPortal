@@ -6,6 +6,10 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
+
+import ImageComponent from "./ImageComponent"; // Import the ImageComponent
+
+
 import { useTranslation } from "react-i18next";
 const ExportItem = () => {
   const navigate = useNavigate();
@@ -111,7 +115,9 @@ const ExportItem = () => {
               <p>
                 {t("import.Price")} {exportProduct.price}
               </p>
-
+              <ImageComponent
+              URL={`http://localhost:8000/api/img`} // Pass the image source as a prop
+            />
               <p>
                 {t("import.Description")} {exportProduct.description}
               </p>

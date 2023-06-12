@@ -39,6 +39,7 @@ import { ContactFrom } from './components/Contact/ContactFrom';
 import Navigation from './components/CorporatePage/Navigation';
 import MainCorporatePage from './components/CorporatePage/MainCorporatePage';
 import AllProduct from './components/Products/AllProducts/AllProduct';
+import ImageComponent from './components/Products/Export/ImageComponent';
 
 
 console.log(document.cookie);
@@ -182,6 +183,10 @@ const routes = [
     {
       path: "/products",
       element: <AllProduct />
+    },
+    {
+      path: "/ImageComponent",
+      element: <ImageComponent />
     }
 
   

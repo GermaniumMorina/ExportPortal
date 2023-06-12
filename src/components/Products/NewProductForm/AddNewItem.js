@@ -58,6 +58,8 @@ export const AddNewItem = () => {
   };
   const { t } = useTranslation();
 const isLoggedIn=checkIfLoggedIn();
+
+
   return isLoggedIn ? (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
@@ -137,11 +139,6 @@ const isLoggedIn=checkIfLoggedIn();
               <option value="export">{t("products.Export Item")}</option>
             </Form.Select>
             <br />
-            <Button type="submit" variant="primary">
-              {t("signIn.Submit")}
-            </Button>
-            <br />
-            <br />
             <input
               type="file"
               id="myfile"
@@ -155,6 +152,12 @@ const isLoggedIn=checkIfLoggedIn();
             <span className="file-name">
               {t("products.File added")} {formValues.imageURL}
             </span>
+            <br />
+
+            <br />
+            <Button type="submit" variant="primary">
+              {t("signIn.Submit")}
+            </Button>
           </Form>
         </div>
       </div>
