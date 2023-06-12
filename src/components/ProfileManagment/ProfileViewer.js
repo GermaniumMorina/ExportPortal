@@ -10,9 +10,7 @@ const ProfileViewer = () => {
   const UserPhone = localStorage.getItem("userPhone");
   const UserGender = localStorage.getItem("userGender");
 
-  const handleEdit = () => {
-    window.location.href = "/account";
-  };
+
   const { t } = useTranslation();
 
   const isLoggedIn=checkIfLoggedIn();
@@ -35,9 +33,7 @@ const ProfileViewer = () => {
         <p>
           {t("profileViewer.Gender")} {UserGender}
         </p>
-        <button className="edit-button" onClick={handleEdit}>
-          {t("profileManager.Edit Profile")}
-        </button>
+       
       </div>
     </div>
   ):(

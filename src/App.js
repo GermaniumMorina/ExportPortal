@@ -32,8 +32,7 @@ import Footer from './components/Footer/Footer';
 import { Support } from './components/Support/Support';
 import NewsletterCreator from './components/Admin/NewsletterCreator';
 import { Marketplace } from './components/Marketplace/Marketplace';
-import ProfileManager from './components/ProfileManagment/ProfileManager';
-import ProfileViewer from './components/ProfileManagment/ProfileViewer';
+
 import AlertTest from './components/TestPages/AlertTest';
 import { ContactFrom } from './components/Contact/ContactFrom';
 import Navigation from './components/CorporatePage/Navigation';
@@ -43,6 +42,7 @@ import Admin from './components/Admin/Admin';
 import SuccesStories from './components/Admin/SuccesStories';
 import ContactUs from './components/ContactUs/ContactUs';
 import Stories from './components/SuccesStories/Stories';
+import Account from './components/ProfileManagment/Account';
 
 
 console.log(document.cookie);
@@ -152,13 +152,10 @@ const routes = [
       path: "/Marketplace",
       element:<Marketplace />,
     },
-    {
-      path: "/profile",
-      element:<ProfileViewer/>,
-    },
+
     {
       path: "/account",
-      element:<ProfileManager/>,
+      element:<Account/>
     },
     {
       path: "/testpage",

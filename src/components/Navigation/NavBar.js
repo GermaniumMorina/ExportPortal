@@ -187,9 +187,7 @@ function NavBar() {
               }
               className="flex-grow-0"
             >
-              <NavDropdown.Item href="/profile">
-                {t("navbar.Profile")}
-              </NavDropdown.Item>
+            
               <NavDropdown.Item href="/account">
                 {t("navbar.Account")}
               </NavDropdown.Item>

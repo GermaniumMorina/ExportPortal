@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import LoadingBar from "../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
+import ReactPaginate from "react-paginate";
 
 const Companies = () => {
   // State variables
@@ -20,17 +21,17 @@ const Companies = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  // Fetch data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [companiesResponse, categoriesResponse, countriesResponse] = await Promise.all([
-          axios.get("http://127.0.0.1:8000/api/CompanyList"),
+          axios.get(`http://127.0.0.1:8000/api/CompanyList?page={page}`),
           axios.get("http://127.0.0.1:8000/api/category"),
           axios.get("http://127.0.0.1:8000/api/country")
         ]);
 
         setCompanyList(companiesResponse.data);
+        console.log(companiesResponse);
         setCategories(categoriesResponse.data);
         setCountryList(countriesResponse.data.data);
         setIsLoading(false);
@@ -41,10 +42,6 @@ const Companies = () => {
 
     fetchData();
   }, []);
-
-  console.log(companyList)
-  console.log(countryList);
-  console.log(categories);
 
 
 
@@ -103,6 +100,15 @@ const Companies = () => {
   if (isLoading) {
     return <LoadingBar />;
   }
+  const handlePageClick = async(data) =>{
+    setIsLoading(true)
+    console.log(data.selected+1);
+    let page=data.selected+1;
+const companiesResponse= await axios.get(`http://127.0.0.1:8000/api/CompanyList?page=${page}`)
+setIsLoading(false);
+
+setCompanyList(companiesResponse.data);
+}
 
   return (
     <div>
@@ -198,6 +204,24 @@ const Companies = () => {
           </div>
         </div>
       ))}
+<ReactPaginate
+  previousLabel={'Previous'}
+  nextLabel={'Next'}
+  breakLabel={'...'}
+  pageCount={5}
+  onPageChange={handlePageClick}
+  containerClassName={'pagination justify-content-center'}
+  pageClassName={'page-item'}
+  pageLinkClassName={'page-link'}
+  previousClassName={'page-item'}
+  previousLinkClassName={'page-link'}
+  nextClassName={'page-item'}
+  nextLinkClassName={'page-link'}
+  activeClassName={'active'}
+ 
+/>
+
+
     </div>
   );
 };
