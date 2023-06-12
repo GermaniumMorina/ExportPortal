@@ -30,7 +30,7 @@ import { Error502 } from './components/Error/502';
 import { Error503 } from './components/Error/503';
 import Footer from './components/Footer/Footer';
 import { Support } from './components/Support/Support';
-import NewsletterCreator from './components/Newsletter/NewsletterCreator';
+import NewsletterCreator from './components/Admin/NewsletterCreator';
 import { Marketplace } from './components/Marketplace/Marketplace';
 import ProfileManager from './components/ProfileManagment/ProfileManager';
 import ProfileViewer from './components/ProfileManagment/ProfileViewer';
@@ -39,6 +39,10 @@ import { ContactFrom } from './components/Contact/ContactFrom';
 import Navigation from './components/CorporatePage/Navigation';
 import MainCorporatePage from './components/CorporatePage/MainCorporatePage';
 import AllProduct from './components/Products/AllProducts/AllProduct';
+import Admin from './components/Admin/Admin';
+import SuccesStories from './components/Admin/SuccesStories';
+import ContactUs from './components/ContactUs/ContactUs';
+import Stories from './components/SuccesStories/Stories';
 import ImageComponent from './components/Products/Export/ImageComponent';
 
 
@@ -144,10 +148,7 @@ const routes = [
       path: "/support",
       element: <Support />,
     },
-    {
-      path: "/newsletteradmin",
-      element: <NewsletterCreator />,
-    },
+   
     {
       path: "/Marketplace",
       element:<Marketplace />,
@@ -183,6 +184,26 @@ const routes = [
     {
       path: "/products",
       element: <AllProduct />
+    },
+    {
+      path: "/admin/newsletter",
+      element: <NewsletterCreator />,
+    },
+    {
+      path: "/admin",
+      element: <Admin/>,
+    },
+    {
+      path: "/admin/success",
+      element: <SuccesStories/>,
+    },
+    {
+      path: "/contact",
+      element: <ContactUs/>,
+    },
+    {
+      path: "/stories",
+      element: <Stories/>,
     },
     {
       path: "/ImageComponent",
