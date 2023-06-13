@@ -298,7 +298,6 @@ function NavBar() {
                 {t("navbar.Export")}
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/buy">{t("navbar.Buy TEST")}</Nav.Link>
             <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
             <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
           </Nav>
