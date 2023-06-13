@@ -11,41 +11,34 @@ import ImportTruck from "./import.png";
 import ExportTruck from "./export.png";
 
 const AllProduct = () => {
-//   const navigate = useNavigate();
   const [exportProducts, setExportProducts] = useState([]);
   const [importProducts, setImportProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
 
-  const getExportProducts = async () => {
-    try {
-      const apiExportProducts = await axios.get(
-        "http://127.0.0.1:8000/api/elist"
-      );
-      setExportProducts(apiExportProducts.data);
-      console.log(apiExportProducts.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching export products:", error);
-      setIsLoading(false);
-    }
-  };
-
-  const getImportProducts = async () => {
-    try {
-      const apiImportProducts = await axios.get(
-        "http://127.0.0.1:8000/api/ilist"
-      );
-      setImportProducts(apiImportProducts.data);
-    } catch (error) {
-      console.error("Error fetching import products:", error);
-    }
-  };
-
   useEffect(() => {
-    getExportProducts();
-    getImportProducts();
+    const fetchData = async () => {
+      try {
+        const [apiExportProducts, apiImportProducts] =
+          await Promise.all([
+ axios.get("http://127.0.0.1:8000/api/elist"),
+         await axios.get("http://127.0.0.1:8000/api/ilist")
+          ]);
+
+ setExportProducts(apiExportProducts.data);  
+           setImportProducts(apiImportProducts.data);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+
+
 
 
 

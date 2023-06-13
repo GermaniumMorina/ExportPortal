@@ -6,11 +6,12 @@
     position: relative;
     padding: 1.8rem;
     border: 2px solid #c3c6ce;
-    transition: 0.5s ease-out;
+    transition: 0.5s ;
     overflow: visible;
     margin-top: 30px;
       z-index: 1; 
         margin-bottom: 30px;
+          
 
    }
    
@@ -19,7 +20,9 @@
     gap: .5em;
     display: grid;
     place-content: center;
-   }
+
+  }
+
    
    .stories-card-button {
     transform: translate(-50%, 125%);
