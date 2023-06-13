@@ -38,33 +38,33 @@ function NavBar() {
         const response = await axios.get(
           `http://localhost:8000/api/Notify/${userId}`
         );
-        if (response.data.original && response.data.original.length > 0) {
-          const userNotifications = response.data.original.filter(
-            (notification) => {
-              const notificationData = JSON.parse(notification.data);
-              return (
-                notificationData.notifiable_id === parseInt(userId, 10)
-              );
-            }
-          );
+        console.log(response.data);
+        if (response.data && response.data.length > 0) {
+          // Filter notifications by notifiable_id
+          const userNotifications = response.data.filter((notification) => {
+            const notificationData = JSON.parse(notification.data);
+            return notificationData.notifiable_id === userId;
+          });
 
+          console.log(userNotifications);
           setNotifications(userNotifications);
 
+          // Count unread notifications
           let unread = 0;
           userNotifications.forEach((notification) => {
             if (!notification.read_at) {
               unread++;
-            }
+            } // assuming read_at is null for unread notifications
           });
           setUnreadCount(unread);
 
-          setMessage("");
+          setMessage(""); // Clear the message if notifications are present
         } else {
           console.log("No notifications found.");
           setNotifications([]);
           setUnreadCount(0);
 
-          setMessage("No new notifications.");
+          setMessage("No new notifications."); // Set the message when no notifications are found
         }
       } catch (error) {
         console.error(error);
@@ -73,7 +73,6 @@ function NavBar() {
 
     fetchNotifications();
   }, [userId]);
-
 
   const handleLogout = (ev) => {
     ev.preventDefault();
@@ -147,9 +146,7 @@ function NavBar() {
               {t("navbar.Add New Product")}
             </NavDropdown.Item>
             <NavDropdown.Divider />
-              <NavDropdown.Item href="/products">
-                Products
-              </NavDropdown.Item>
+            <NavDropdown.Item href="/products">Products</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/Import">
               {t("navbar.Import")}
@@ -164,8 +161,6 @@ function NavBar() {
             {t("marketplace.Marketplace")}
           </Nav.Link>
           <Nav.Link href="/stories">Succes Stories</Nav.Link>
-
-        
         </Nav>
 
         <Nav>
@@ -188,7 +183,6 @@ function NavBar() {
               }
               className="flex-grow-0"
             >
-            
               <NavDropdown.Item href="/account">
                 {t("navbar.Account")}
               </NavDropdown.Item>
@@ -233,7 +227,7 @@ function NavBar() {
         </Nav>
 
         <Nav>
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle
               caret
               tag="span"
@@ -262,54 +256,50 @@ function NavBar() {
   ) : (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
-          <Navbar.Brand href="/" className="logo">
-            <img
-              src={logo}
-              alt="logo"
-              width="70"
-              height="70"
-              className="d-inline-block align-top"
-            />
-          </Navbar.Brand>
+        <Navbar.Brand href="/" className="logo">
+          <img
+            src={logo}
+            alt="logo"
+            width="70"
+            height="70"
+            className="d-inline-block align-top"
+          />
+        </Navbar.Brand>
 
-          <Nav className="me-auto">
-            <NavDropdown
-              title={<span className="ms-2">{t("navbar.Company")}</span>}
-            >
-              <NavDropdown.Item href="/Companies">
-                {t("navbar.Companies")}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-           
-              <NavDropdown.Item href="/AddNewCompany">
-                {t("navbar.Add new company")}
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown
-              title={<span className="ms-2">{t("navbar.Product")}</span>}
-            >
-              <NavDropdown.Item href="/AddNewItem">
-                {t("navbar.Add New Product")}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/products">
-                Products
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/Import">
-                {t("navbar.Import")}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/Export">
-                {t("navbar.Export")}
-              </NavDropdown.Item>
-            </NavDropdown>
+        <Nav className="me-auto">
+          <NavDropdown
+            title={<span className="ms-2">{t("navbar.Company")}</span>}
+          >
+            <NavDropdown.Item href="/Companies">
+              {t("navbar.Companies")}
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
 
-           
+            <NavDropdown.Item href="/AddNewCompany">
+              {t("navbar.Add new company")}
+            </NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown
+            title={<span className="ms-2">{t("navbar.Product")}</span>}
+          >
+            <NavDropdown.Item href="/AddNewItem">
+              {t("navbar.Add New Product")}
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/products">Products</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/Import">
+              {t("navbar.Import")}
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/Export">
+              {t("navbar.Export")}
+            </NavDropdown.Item>
+          </NavDropdown>
 
-            <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
-            <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
-          </Nav>
+          <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
+          <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
+        </Nav>
       </Navbar>
     </div>
   );
