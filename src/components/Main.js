@@ -1,6 +1,6 @@
 import React from "react";
-import image from "./Images/img.png";
 
+import truck from "./Images/img.png";
 import "./Main.css";
 import { useTranslation } from "react-i18next";
 const Main = () => {
@@ -20,32 +20,36 @@ const Main = () => {
     <div>
       <div className="container">
         <div className="row">
-          <h1 className="text-center mt-5 heading">
-            {t("signIn.Welcome")} {gender}
-            {userName} {userSurname}!
-          </h1>
-          <div className="col-md-12 d-flex mb-4 mt-4">
-            <div>
-              <p>
-                Veniam nostrud quis et do. Ea commodo ad sit occaecat veniam
-                consectetur consequat veniam qui amet irure duis ea. Voluptate
-                excepteur nulla magna ullamco excepteur ullamco. Reprehenderit
-                velit ex nisi sit sint laborum laboris magna cillum esse. Elit
-                consequat veniam veniam exercitation officia consectetur ullamco
-                laboris in laborum id dolor consectetur. Non pariatur qui esse
-                tempor sint nulla cillum aliquip ut et non incididunt eu non. Do
-                cupidatat amet amet consequat elit aliquip commodo exercitation.
-                Excepteur consectetur et non elit qui ut ad magna occaecat
-                nostrud velit velit irure qui. Nulla consectetur officia
-                proident culpa anim sint elit ea anim et non ex incididunt.
-              </p>
-            </div>
-            <img src={image} alt="truck" className="img-fluid main-truck" />
+          <div className="col-md-12">
+            <h1 className="text-center">
+              {t("signIn.Welcome")} {gender}
+              {userName} {userSurname}!
+            </h1>
+            <h6 className="text-center">
+              {t("testPages.This is our ExportPortal")}
+            </h6>
+            <img src={truck} alt="truck" className="img-fluid main-truck" />
+            <h6 className="text-center">{t("testPages.You are logged in!")}</h6>
+            <h6 className="text-center">
+              {t("testPages.You can now browse our products and services")}
+            </h6>
+            <h6 className="text-center">
+              {t("testPages.You can also add your own products and services")}
+            </h6>
+            <h6 className="text-center">
+              {t("testPages.You can also edit your profile")}
+            </h6>
+            <h6 className="text-center">
+              {t("testPages.You can also view your profile")}
+            </h6>
+            <h6 className="text-center">
+              {t("testPages.You can also edit your orders")}
+            </h6>
           </div>
         </div>
       </div>
     </div>
-  );
+  ) 
 };
 
 export default Main;

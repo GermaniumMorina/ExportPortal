@@ -3,22 +3,11 @@
   width: 70%;
   height: 70%;
   display: flex;
-  justify-content: end;
+  justify-content: center;
 }
 
-.main-depo {
-  display: block;
-  margin: 0 auto;
-  border-radius: 15px;
-  width: 60%;
-}
 
-/* .heading {
-  font-size: 55px;
-  color: #87aecb;
-  font-family: Gabriola;
-  text-shadow: 2px 0px 2px #266a9d;
-} */
+
 .main1 {
   margin-top: 100px;
 }
