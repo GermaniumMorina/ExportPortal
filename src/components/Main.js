@@ -1,6 +1,6 @@
 import React from "react";
-import truck from "./Images/Trucks.jpg";
-import depo from "./Images/depo.jpg";
+import image from "./Images/img.png";
+
 import "./Main.css";
 import { useTranslation } from "react-i18next";
 const Main = () => {
@@ -20,37 +20,31 @@ const Main = () => {
     <div>
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
-            <h1 className="text-center">
-              {t("signIn.Welcome")} {gender}
-              {userName} {userSurname}!
-            </h1>
-            <h6 className="text-center">
-              {t("testPages.This is our ExportPortal")}
-            </h6>
-            <img src={truck} alt="truck" className="img-fluid main-truck" />
-            <h6 className="text-center">{t("testPages.You are logged in!")}</h6>
-            <h6 className="text-center">
-              {t("testPages.You can now browse our products and services")}
-            </h6>
-            <img src={depo} alt="depo" className="img-fluid main-depo" />
-            <h6 className="text-center">
-              {t("testPages.You can also add your own products and services")}
-            </h6>
-            <h6 className="text-center">
-              {t("testPages.You can also edit your profile")}
-            </h6>
-            <h6 className="text-center">
-              {t("testPages.You can also view your profile")}
-            </h6>
-            <h6 className="text-center">
-              {t("testPages.You can also edit your orders")}
-            </h6>
+          <h1 className="text-center mt-5 heading">
+            {t("signIn.Welcome")} {gender}
+            {userName} {userSurname}!
+          </h1>
+          <div className="col-md-12 d-flex mb-4 mt-4">
+            <div>
+              <p>
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less
+                normal distribution of letters, as opposed to using 'Content
+                here, content here', making it look like readable English. Many
+                desktop publishing packages and web page editors now use Lorem
+                Ipsum as their default model text, and a search for 'lorem
+                ipsum' will uncover many web sites still in their infancy.
+                Various versions have evolved over the years, sometimes by
+                accident, sometimes on purpose (injected humour and the like).
+              </p>
+            </div>
+            <img src={image} alt="truck" className="img-fluid main-truck" />
           </div>
         </div>
       </div>
     </div>
-  ) 
+  );
 };
 
 export default Main;

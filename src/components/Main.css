@@ -1,20 +1,24 @@
 .main-truck {
-    display: block;
-    margin: 0 auto;
-    border-radius: 15px;
-    width: 60%;
-  }
-  
-  .main-depo {
-    display: block;
-    margin: 0 auto;
-    border-radius: 15px;
-    width: 60%;
-  }
-  
-  .logout-button{
-    display: block;
-    margin: 0 auto;
-    border-radius: 15px;
-    width: 60%;
-  }
+  margin: 0 auto;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  justify-content: end;
+}
+
+.main-depo {
+  display: block;
+  margin: 0 auto;
+  border-radius: 15px;
+  width: 60%;
+}
+
+/* .heading {
+  font-size: 55px;
+  color: #87aecb;
+  font-family: Gabriola;
+  text-shadow: 2px 0px 2px #266a9d;
+} */
+.main1 {
+  margin-top: 100px;
+}
