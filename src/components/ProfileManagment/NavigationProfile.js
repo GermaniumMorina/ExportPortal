@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './NavigationProfile.css';
 import ProfileViewer from './ProfileViewer';
 import ProfileManager from './ProfileManager';
+import Password from './Password';
 
 const NavigationProfile = () => {
   const [selectedComponent, setSelectedComponent] = useState(<ProfileViewer />);
@@ -29,7 +30,7 @@ const NavigationProfile = () => {
         </p>
         <br />
         <br />
-        <p onClick={() => handleItemClick(<ProfileViewer />)}>
+        <p onClick={() => handleItemClick(<Password />)}>
           <i className="fa fa-clone" aria-hidden="true"></i>
           Security
         </p>

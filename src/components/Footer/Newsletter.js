@@ -8,6 +8,7 @@ import "alertifyjs/build/css/alertify.css";
 import "./footer.css";
 import axios from "axios";
 
+
 import { useTranslation } from "react-i18next";
 export const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +22,10 @@ export const Newsletter = () => {
         {
           email: email,
         }
-      );
+
+        );
+
+        console.log(response)
 
       if (response.status === 200) {
         alertify.success("You have been subscribed to our newsletter");
