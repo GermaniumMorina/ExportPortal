@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 const ContactUs = () => {
   const [formValues, setFormValues] = useState({
     name: "",
-    email: "",
     message: "",
   });
 
@@ -32,18 +31,7 @@ const ContactUs = () => {
               <h1 className="text-center">
                 Contact Us
               </h1>
-              <h5> {t("newsletterCreator.To")}</h5>
-              <InputGroup className="mb-3">
-                <Form.Control
-                  onChange={handleChange}
-                  required
-                  value={formValues.email}
-                  name="email"
-                  placeholder={t("newsletterCreator.Subscribers")}
-                  aria-label="Email"
-                  aria-describedby="basic-addon2"
-                />
-              </InputGroup>
+             
 
               <h5>{t("contact.Subject")}</h5>
               <InputGroup className="mb-3">
