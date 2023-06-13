@@ -18,7 +18,6 @@ const ProfileManager = () => {
   const UserGender = localStorage.getItem("userGender");
   const userCountry = localStorage.getItem("userCountry");
 
-  const [hasChanges, setHasChanges] = useState(false);
   const [formValues, setFormValues] = useState({
     name: UserName,
     surname: UserSurname,
@@ -50,7 +49,6 @@ const ProfileManager = () => {
             localStorage.setItem("userPhone", formValues.phone_number);
 
             alertify.success("Profile updated successfully");
-            setHasChanges(false);
             console.log("ALL OK");
           }
         })
@@ -61,22 +59,7 @@ const ProfileManager = () => {
     });
   };
 
-  const handleBack = (event) => {
-    event.preventDefault();
-    if (hasChanges) {
-      alertify.confirm(
-        "You have unsaved changes. Are you sure you want to leave?",
-        async () => {
-          window.location.href = "/profile";
-        },
-        () => {
-          // Cancel callback
-        }
-      );
-    } else {
-      window.location.href = "/profile";
-    }
-  };
+
   const { t } = useTranslation();
 
   const isLoggedIn = checkIfLoggedIn();
@@ -95,7 +78,6 @@ const ProfileManager = () => {
                 defaultValue={UserName}
                 onChange={(e) => {
                   setFormValues({ ...formValues, name: e.target.value });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -109,7 +91,6 @@ const ProfileManager = () => {
                 defaultValue={UserSurname}
                 onChange={(e) => {
                   setFormValues({ ...formValues, surname: e.target.value });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -122,7 +103,6 @@ const ProfileManager = () => {
                 defaultValue={UserEmail}
                 onChange={(e) => {
                   setFormValues({ ...formValues, email: e.target.value });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -138,7 +118,6 @@ const ProfileManager = () => {
                 checked={formValues.gender === "male"} 
                 onChange={(e) => {
                   setFormValues({ ...formValues, gender: e.target.value });
-                  setHasChanges(true);
                 }}
               />
 
@@ -152,7 +131,6 @@ const ProfileManager = () => {
                 checked={formValues.gender === "female"} 
                 onChange={(e) => {
                   setFormValues({ ...formValues, gender: e.target.value });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -169,7 +147,6 @@ const ProfileManager = () => {
                     ...formValues,
                     phone_number: e.target.value,
                   });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -177,9 +154,7 @@ const ProfileManager = () => {
             <button className="edit-button" type="submit">
               {t("signIn.Submit")}
             </button>
-            <button className="back-button" onClick={handleBack}>
-              {t("import.Back")}
-            </button>
+          
           </Form>
         </div>
       </div>

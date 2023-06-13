@@ -47,34 +47,7 @@ const AllProduct = () => {
     getImportProducts();
   }, []);
 
-//   const handleNavigateItem = (id) => {
-//     navigate("/ExportItem/" + id);
-//   };
 
-//   const handleView = async (id) => {
-//     try {
-//       const response = await axios.get(`http://127.0.0.1:8000/api/view/${id}`);
-//       console.log("View request successful:", response);
-//     } catch (error) {
-//       console.error("Error viewing product:", error);
-//     }
-//   };
-
-//   const handlePageChange = (page) => {
-//     console.log("Page changed to:", page);
-//     alertify.success("Page changed to:", page);
-//     alertify.error("Pagination doesn't work yet");
-
-//     // const apiEndpoint = ``;
-//     // axios
-//     //   .get(apiEndpoint)
-//     //   .then((response) => {
-//     //     console.log("API response for page", page, ":", response.data);
-//     //   })
-//     //   .catch((error) => {
-//     //     console.error("Error fetching data for page", page, ":", error);
-//     //   });
-//   };
 
   const formatDate = (date) => {
     const now = moment();
