@@ -18,7 +18,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
 import { BsCurrencyExchange } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
-
+import { BsGlobe } from "react-icons/bs";
 function NavBar() {
   const isLoggedIn = checkIfLoggedIn();
   const user = localStorage.getItem("userName");
@@ -111,6 +111,7 @@ function NavBar() {
     window.location.reload(); // Reload the page to apply the new language
   };
   useEffect(() => {
+    localStorage.setItem("language", selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
   }, [i18n, selectedLanguage]);
   return isLoggedIn ? (
@@ -266,40 +267,73 @@ function NavBar() {
           />
         </Navbar.Brand>
 
-        <Nav className="me-auto">
-          <NavDropdown
-            title={<span className="ms-2">{t("navbar.Company")}</span>}
-          >
-            <NavDropdown.Item href="/Companies">
-              {t("navbar.Companies")}
+          <Nav className="me-auto">
+            <NavDropdown
+              title={<span className="ms-2">{t("navbar.Company")}</span>}
+            >
+              <NavDropdown.Item href="/Companies">
+                {t("navbar.Companies")}
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/companyListing">
+                {t("navbar.Company List")}
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/AddNewCompany">
+                {t("navbar.Add new company")}
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown
+              title={<span className="ms-2">{t("navbar.Product")}</span>}
+            >
+              <NavDropdown.Item href="/AddNewItem">
+                {t("navbar.Add New Product")}
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/Import">
+                {t("navbar.Import")}
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/Export">
+                {t("navbar.Export")}
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link href="/buy">{t("navbar.Buy TEST")}</Nav.Link>
+            <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
+            <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
+          </Nav>
+          <NavDropdown title={<BsGlobe />} className="text-info">
+            <NavDropdown.Item onClick={() => handleLanguageChange("al")}>
+              <img
+                src={albania}
+                alt="albania"
+                width="30"
+                height="20"
+                className="m-1"
+              />
+              {t("navbar.Albanian")}
             </NavDropdown.Item>
-            <NavDropdown.Divider />
-
-            <NavDropdown.Item href="/AddNewCompany">
-              {t("navbar.Add new company")}
+            <NavDropdown.Item onClick={() => handleLanguageChange("en")}>
+              <img
+                src={english}
+                alt="english"
+                width="30"
+                height="20"
+                className="m-1"
+              />
+              {t("navbar.English")}
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => handleLanguageChange("es")}>
+              <img
+                src={spanish}
+                alt="spanish"
+                width="30"
+                height="20"
+                className="m-1"
+              />
+              {t("navbar.Spanish")}
             </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown
-            title={<span className="ms-2">{t("navbar.Product")}</span>}
-          >
-            <NavDropdown.Item href="/AddNewItem">
-              {t("navbar.Add New Product")}
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/products">Products</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/Import">
-              {t("navbar.Import")}
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/Export">
-              {t("navbar.Export")}
-            </NavDropdown.Item>
-          </NavDropdown>
-
-          <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
-          <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
-        </Nav>
       </Navbar>
     </div>
   );
