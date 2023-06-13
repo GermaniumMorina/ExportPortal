@@ -8,6 +8,7 @@ import "alertifyjs/build/css/alertify.css";
 import "./footer.css";
 import axios from "axios";
 
+
 import { useTranslation } from "react-i18next";
 export const Newsletter = () => {
   const [email, setEmail] = useState("");
