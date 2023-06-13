@@ -38,33 +38,33 @@ function NavBar() {
         const response = await axios.get(
           `http://localhost:8000/api/Notify/${userId}`
         );
-        console.log(response.data);
-        if (response.data && response.data.length > 0) {
-          // Filter notifications by notifiable_id
-          const userNotifications = response.data.filter((notification) => {
-            const notificationData = JSON.parse(notification.data);
-            return notificationData.notifiable_id === userId;
-          });
+        if (response.data.original && response.data.original.length > 0) {
+          const userNotifications = response.data.original.filter(
+            (notification) => {
+              const notificationData = JSON.parse(notification.data);
+              return (
+                notificationData.notifiable_id === parseInt(userId, 10)
+              );
+            }
+          );
 
-          console.log(userNotifications);
           setNotifications(userNotifications);
 
-          // Count unread notifications
           let unread = 0;
           userNotifications.forEach((notification) => {
             if (!notification.read_at) {
               unread++;
-            } // assuming read_at is null for unread notifications
+            }
           });
           setUnreadCount(unread);
 
-          setMessage(""); // Clear the message if notifications are present
+          setMessage("");
         } else {
           console.log("No notifications found.");
           setNotifications([]);
           setUnreadCount(0);
 
-          setMessage("No new notifications."); // Set the message when no notifications are found
+          setMessage("No new notifications.");
         }
       } catch (error) {
         console.error(error);
@@ -73,6 +73,7 @@ function NavBar() {
 
     fetchNotifications();
   }, [userId]);
+
 
   const handleLogout = (ev) => {
     ev.preventDefault();
@@ -232,7 +233,7 @@ function NavBar() {
         </Nav>
 
         <Nav>
-          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle
               caret
               tag="span"
