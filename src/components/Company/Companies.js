@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Companies.css";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import LoadingBar from "../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
@@ -87,10 +86,6 @@ const Companies = () => {
         )
       : filteredCompaniesWithCategories;
 
-  // Style for table cells
-  const tdStyle = {
-    padding: "10px",
-  };
 
   // Navigate to company details page
   const navigateToCompany = (id) => {
@@ -107,16 +102,25 @@ const Companies = () => {
   }
   const handlePageClick = async (data) => {
     setIsLoading(true);
-    console.log(data.selected + 1);
-    let page = data.selected + 1;
-    const companiesResponse = await axios.get(
-      `http://127.0.0.1:8000/api/CompanyList?page=${page}`
-    );
-    setIsLoading(false);
-
-    setCompanyList(companiesResponse.data);
+    const selectedPage = data.selected;
+    let page = 0;
+    
+    if (selectedPage === 0) {
+      page = 1; // Go to the first page
+    } else {
+      page = selectedPage + 1;
+    }
+  
+    try {
+      const companiesResponse = await axios.get(
+        `http://127.0.0.1:8000/api/CompanyList?page=${page}`
+      );
+      setIsLoading(false);
+      setCompanyList(companiesResponse.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
-
   return (
     <div>
       {/* Search bar */}
@@ -177,19 +181,21 @@ const Companies = () => {
         </div>
       </div>
       {filteredCompaniesWithCountry.map((company) => (
+        
         <div
           key={company.id}
-          className="col-xl-6 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark rounded"
+          className="companies-main-div"
         >
+          <div className="companies-info-div">
           <table>
             <tbody>
               <tr>
-                <td style={tdStyle}>{t("companies.Name")}</td>
-                <td style={tdStyle}>{company.name}</td>
+                <td  className="companies-info">{t("companies.Name")}</td>
+                <td  className="companies-info">{company.name}</td>
               </tr>
               <tr>
-                <td style={tdStyle}> {t("companies.Keywords")}</td>
-                <td style={tdStyle}>
+                <td  className="companies-info"> {t("companies.Keywords")}</td>
+                <td  className="companies-info">
                   {company.keywords.split(",").map((keyword, index) => {
                     const trimmedKeyword = keyword.trim();
                     if (trimmedKeyword !== "") {
@@ -207,20 +213,21 @@ const Companies = () => {
                 </td>
               </tr>
               <tr>
-                <td style={tdStyle}> {t("companies.Country")}</td>
-                <td style={tdStyle}>{company.country}</td>
+                <td  className="companies-info"> {t("companies.Country")}</td>
+                <td  className="companies-info">{company.country}</td>
               </tr>
               <tr>
-                <td style={tdStyle}> {t("companies.Web Address")}</td>
-                <td style={tdStyle}>{company.web_address || "N/A"}</td>
+                <td className="companies-info" > {t("companies.Web Address")}</td>
+                <td  className="companies-info">{company.web_address || "N/A"}</td>
               </tr>
             </tbody>
           </table>
           <div className="d-flex justify-content-center">
-            <Button onClick={() => navigateToCompany(company.id)}>
+            <button className="view-more-button" onClick={() => navigateToCompany(company.id)}>
               {t("companies.View More")}
-            </Button>
+            </button>
           </div>
+        </div>
         </div>
       ))}
 
@@ -228,7 +235,7 @@ const Companies = () => {
         previousLabel={"Previous"}
         nextLabel={"Next"}
         breakLabel={"..."}
-        pageCount={5}
+        pageCount={5} // Assuming 5 companies per page
         onPageChange={handlePageClick}
         containerClassName={"pagination justify-content-center"}
         pageClassName={"page-item"}
@@ -239,6 +246,7 @@ const Companies = () => {
         nextLinkClassName={"page-link"}
       />
     </div>
+
   );
 };
 
