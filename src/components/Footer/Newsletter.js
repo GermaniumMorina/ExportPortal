@@ -21,7 +21,10 @@ export const Newsletter = () => {
         {
           email: email,
         }
-      );
+
+        );
+
+        console.log(response)
 
       if (response.status === 200) {
         alertify.success("You have been subscribed to our newsletter");

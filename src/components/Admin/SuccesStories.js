@@ -8,15 +8,18 @@ import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { checkIfAdmin } from "./checkIfAdmin";
 import NotAllowedAdmin from "./NotAllowedAdmin";
+import axios from "axios";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 
 const SuccesStories = () => {
   const [formValues, setFormValues] = useState({
-    company_id: "",
+    company_id:"",
     topic: "",
     representative: "",
     position: "",
     message: "",
-    image_url: ""
+    image_URL: ""
   });
 
   
@@ -33,11 +36,30 @@ const SuccesStories = () => {
       position: selectedPosition
     }));
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formValues);
+  
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+  
+    try {
+      const response = await axios.post(
+        'http://127.0.0.1:8000/api/successStory',
+        formValues,
+        { headers }
+      );
+      console.log(response);
+      alertify.success('Request successful');
+    } catch (error) {
+      console.error(error);
+      alertify.error('Request failed');
+    }
   };
+  
+  
   
   const { t } = useTranslation();
   return isAdmin ? (
@@ -126,8 +148,8 @@ const SuccesStories = () => {
                 <Form.Control
                   onChange={handleChange}
                   required
-                  value={formValues.image_url}
-                  name="image_url"
+                  value={formValues.image_URL}
+                  name="image_URL"
                   placeholder="Image URL"
                   aria-label="Image URL"
                   aria-describedby="basic-addon2"
