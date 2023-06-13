@@ -24,11 +24,12 @@ const Companies = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [companiesResponse, categoriesResponse, countriesResponse] = await Promise.all([
-          axios.get(`http://127.0.0.1:8000/api/CompanyList?page={page}`),
-          axios.get("http://127.0.0.1:8000/api/category"),
-          axios.get("http://127.0.0.1:8000/api/country")
-        ]);
+        const [companiesResponse, categoriesResponse, countriesResponse] =
+          await Promise.all([
+            axios.get(`http://127.0.0.1:8000/api/CompanyList?page={page}`),
+            axios.get("http://127.0.0.1:8000/api/category"),
+            axios.get("http://127.0.0.1:8000/api/country"),
+          ]);
 
         setCompanyList(companiesResponse.data);
         console.log(companiesResponse);
@@ -42,8 +43,6 @@ const Companies = () => {
 
     fetchData();
   }, []);
-
-
 
   // Filter companies based on search term
   const filteredCompanies = companyList.filter((company) =>
@@ -61,7 +60,9 @@ const Companies = () => {
     if (checked) {
       setSelectedCategories([...selectedCategories, parseInt(id)]);
     } else {
-      setSelectedCategories(selectedCategories.filter((category) => category !== parseInt(id)));
+      setSelectedCategories(
+        selectedCategories.filter((category) => category !== parseInt(id))
+      );
     }
   };
 
@@ -73,13 +74,17 @@ const Companies = () => {
   // Apply category filters to the filtered companies list
   const filteredCompaniesWithCategories =
     selectedCategories.length > 0
-      ? filteredCompanies.filter((company) => selectedCategories.includes(company.category_id))
+      ? filteredCompanies.filter((company) =>
+          selectedCategories.includes(company.category_id)
+        )
       : filteredCompanies;
 
   // Apply country filter to the filtered companies list
   const filteredCompaniesWithCountry =
     selectedCountry !== ""
-      ? filteredCompaniesWithCategories.filter((company) => company.country === selectedCountry)
+      ? filteredCompaniesWithCategories.filter(
+          (company) => company.country === selectedCountry
+        )
       : filteredCompaniesWithCategories;
 
   // Style for table cells
@@ -100,19 +105,20 @@ const Companies = () => {
   if (isLoading) {
     return <LoadingBar />;
   }
-  const handlePageClick = async(data) =>{
-    setIsLoading(true)
-    console.log(data.selected+1);
-    let page=data.selected+1;
-const companiesResponse= await axios.get(`http://127.0.0.1:8000/api/CompanyList?page=${page}`)
-setIsLoading(false);
+  const handlePageClick = async (data) => {
+    setIsLoading(true);
+    console.log(data.selected + 1);
+    let page = data.selected + 1;
+    const companiesResponse = await axios.get(
+      `http://127.0.0.1:8000/api/CompanyList?page=${page}`
+    );
+    setIsLoading(false);
 
-setCompanyList(companiesResponse.data);
-}
+    setCompanyList(companiesResponse.data);
+  };
 
   return (
     <div>
-
       {/* Search bar */}
       <div className="search">
         <div className="search-box">
@@ -170,8 +176,6 @@ setCompanyList(companiesResponse.data);
           </div>
         </div>
       </div>
-
-      {/* Display filtered companies */}
       {filteredCompaniesWithCountry.map((company) => (
         <div
           key={company.id}
@@ -185,7 +189,22 @@ setCompanyList(companiesResponse.data);
               </tr>
               <tr>
                 <td style={tdStyle}> {t("companies.Keywords")}</td>
-                <td style={tdStyle}>{company.keywords}</td>
+                <td style={tdStyle}>
+                  {company.keywords.split(",").map((keyword, index) => {
+                    const trimmedKeyword = keyword.trim();
+                    if (trimmedKeyword !== "") {
+                      return (
+                        <React.Fragment key={index}>
+                          {index > 0 && " "}
+                          <span className="keyword-tag">
+                            #{trimmedKeyword}
+                          </span>{" "}
+                        </React.Fragment>
+                      );
+                    }
+                    return null;
+                  })}
+                </td>
               </tr>
               <tr>
                 <td style={tdStyle}> {t("companies.Country")}</td>
@@ -204,24 +223,21 @@ setCompanyList(companiesResponse.data);
           </div>
         </div>
       ))}
-<ReactPaginate
-  previousLabel={'Previous'}
-  nextLabel={'Next'}
-  breakLabel={'...'}
-  pageCount={5}
-  onPageChange={handlePageClick}
-  containerClassName={'pagination justify-content-center'}
-  pageClassName={'page-item'}
-  pageLinkClassName={'page-link'}
-  previousClassName={'page-item'}
-  previousLinkClassName={'page-link'}
-  nextClassName={'page-item'}
-  nextLinkClassName={'page-link'}
-  activeClassName={'active'}
- 
-/>
 
-
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        breakLabel={"..."}
+        pageCount={5}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+      />
     </div>
   );
 };
