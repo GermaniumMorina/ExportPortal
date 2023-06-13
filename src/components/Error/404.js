@@ -8,7 +8,7 @@ export const Error404 = () => {
     <div>
       <img src={notfound} className="imageError" alt="error" />
       <h1 className="errorType">404</h1>
-      <p className="errorText">{t("error.Page Not Foundt")}</p>
+      <p className="errorText">{t("error.Page Not Found")}</p>
     </div>
   );
 };
