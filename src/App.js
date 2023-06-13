@@ -45,7 +45,6 @@ import ContactUs from './components/ContactUs/ContactUs';
 import Stories from './components/SuccesStories/Stories';
 import ImageComponent from './components/Products/Export/ImageComponent';
 
-
 console.log(document.cookie);
 
 const routes = [
@@ -207,7 +206,7 @@ const routes = [
     },
     {
       path: "/ImageComponent",
-      element: <ImageComponent />
+      element: <ImageComponent/>,
     }
 
   

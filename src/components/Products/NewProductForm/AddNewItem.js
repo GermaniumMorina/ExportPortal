@@ -8,8 +8,10 @@ import { useTranslation } from "react-i18next";
 import { checkIfLoggedIn } from "../../Authentication/checkIfLoggedIn";
 import NotAllowed from "../../Authentication/NotAllowed";
 
+
 export const AddNewItem = () => {
   const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
@@ -49,6 +51,7 @@ export const AddNewItem = () => {
       window.alert("Something went wrong");
     }
   };
+  
 
   const handleFileSelect = (event) => {
     setFormValues((prevValues) => ({
@@ -56,6 +59,7 @@ export const AddNewItem = () => {
       imageURL: event.target.files[0].name,
     }));
   };
+
   const { t } = useTranslation();
 const isLoggedIn=checkIfLoggedIn();
 
