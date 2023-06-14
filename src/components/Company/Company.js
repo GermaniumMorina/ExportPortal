@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LoadingBar from "../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
+import { Button } from "react-bootstrap";
 
 const Company = () => {
   const { id } = useParams();
@@ -27,7 +28,9 @@ const Company = () => {
       console.error("Error fetching data:", error);
     }
   };
-
+  const handleBack = () =>{
+    window.location.href="/companies"
+  }
   if (isLoading) {
     return <LoadingBar />;
   }
@@ -49,6 +52,10 @@ const Company = () => {
               alt={company.name}
               className="company-image"
             />
+                        <br/>
+
+                        <br/>
+
             <p>
               {t("companies.Keywords")}
               {company.keywords
@@ -78,6 +85,7 @@ const Company = () => {
             <p>
               {t("company.Membership")} {company.membership}
             </p>
+            <Button onClick={handleBack}>Back</Button>
           </div>
         </div>
       )}
