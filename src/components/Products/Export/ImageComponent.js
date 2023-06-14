@@ -3,7 +3,8 @@ import axios from "axios";
 
 const ImageComponent = () => {
   const [exportProducts, setExportProducts] = useState([]);
-  const [file, setFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileName, setFileName] = useState("");
 
   useEffect(() => {
     getExportProducts();
@@ -20,19 +21,32 @@ const ImageComponent = () => {
   };
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    setFileName(file.name);
   };
 
-  const handleUpload = async () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
+    if (selectedFile) {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("image", selectedFile);
 
-      const response = await axios.post("http://localhost:8000/api/addFile", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      axios
+        .post("http://localhost:8000/api/addFile", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log("Image uploaded successfully!", response.data.url);
+          // Handle the response or update the UI accordingly
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+    }
   };
 
   return (
@@ -44,8 +58,24 @@ const ImageComponent = () => {
           </div>
         ))}
       </div>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
+          <label htmlFor="image" style={{ marginRight: "10px" }}>
+            Choose a file
+          </label>
+          <span>{fileName}</span>
+        </div>
+        <button type="submit" disabled={!selectedFile}>
+          Upload
+        </button>
+      </form>
     </div>
   );
 };
