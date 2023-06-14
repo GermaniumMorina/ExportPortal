@@ -28,11 +28,12 @@ const ImageComponent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     if (selectedFile) {
       const formData = new FormData();
       formData.append("image", selectedFile);
-
+      formData.append("typeId", 1); // Change the type ID to the appropriate value
+  
       axios
         .post("http://localhost:8000/api/addFile", formData, {
           headers: {
@@ -54,7 +55,8 @@ const ImageComponent = () => {
       <div>
         {exportProducts.map((item) => (
           <div key={item.id}>
-            <img src={item.URL} alt="image" />
+            <img src={`http://localhost:8000${item.URL}`} alt="image" />
+            <img src={`http://localhost:8000${item.URL}`} alt="image" />
           </div>
         ))}
       </div>
