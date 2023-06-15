@@ -6,6 +6,8 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^4.5.8",
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.3",
     "@mui/styled-engine-sc": "^5.12.0",
@@ -29,6 +31,7 @@
     "react-icons": "^4.8.0",
     "react-loading": "^2.0.3",
     "react-paginate": "^8.2.0",
+    "react-responsive": "^9.0.2",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "react-tag-input-component": "^2.0.2",
@@ -59,5 +62,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
   }
 }

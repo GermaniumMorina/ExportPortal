@@ -19,7 +19,6 @@ import  Export from './components/Products/Export/Export';
 import  ExportItem  from './components/Products/Export/ExportItem';
 import Companies from './components/Company/Companies';
 import Company from './components/Company/Company';
-import  CompanyListing from './components/Company/CompanyListing';
 import { ProductSellTest } from './components/Products/ProductSellTest';
 import { Error400 } from './components/Error/400';
 import { Error401 } from './components/Error/401';
@@ -100,11 +99,6 @@ const routes = [
     {
     path: "/Companies/:id",
     element: <Company />,
-    },
-
-    {
-      path: "/CompanyListing",
-      element: <CompanyListing />,
     },
     {
       path: "/Buy",
