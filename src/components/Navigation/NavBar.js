@@ -16,7 +16,7 @@ import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
 import React, { useEffect, useState } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
-import { BsCurrencyExchange } from "react-icons/bs";
+import { BsCurrencyExchange, BsBell } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import { BsGlobe } from "react-icons/bs";
 function NavBar() {
@@ -29,7 +29,7 @@ function NavBar() {
 
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
-
+  const [bellClicked, setBellClicked] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -116,6 +116,7 @@ function NavBar() {
     localStorage.setItem("language", selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
   }, [i18n, selectedLanguage]);
+
   return isLoggedIn ? (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
@@ -231,22 +232,25 @@ function NavBar() {
 
         <Nav>
           <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle
-              caret
-              tag="span"
-              style={{ position: "relative" }} // Inline styling added here
-            >
-              <span role="img" aria-label="bell" className="bell-icon">
-                🔔
+            <DropdownToggle caret tag="span">
+              <span
+                role="img"
+                aria-label="bell"
+                className="bell-icon"
+                onClick={() => setBellClicked(true)}
+              >
+                <BsBell />
+                {unreadCount > 0 && !bellClicked && (
+                  <span className="unread-count">{unreadCount}</span>
+                )}
               </span>
-              {unreadCount > 0 && <span>{unreadCount}</span>}
             </DropdownToggle>
-            <DropdownMenu>
+            <DropdownMenu className="message1">
               <p>{message}</p>
               {notifications.map((notification, index) => {
                 const notificationData = JSON.parse(notification.data);
                 return (
-                  <DropdownItem key={index}>
+                  <DropdownItem className="message" key={index}>
                     <p>{`${notificationData["Full Name"]} is interested in your product: ${notificationData["Product"]}`}</p>
                   </DropdownItem>
                 );
@@ -289,7 +293,9 @@ function NavBar() {
               {t("navbar.Add New Product")}
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/products">Products</NavDropdown.Item>
+            <NavDropdown.Item href="/products">
+              {t("navbar.Products")}
+            </NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/Import">
               {t("navbar.Import")}
@@ -303,6 +309,38 @@ function NavBar() {
           <Nav.Link href="/SignUp">{t("navbar.Sign Up")}</Nav.Link>
           <Nav.Link href="/SignIn">{t("navbar.Sign In")}</Nav.Link>
         </Nav>
+        <NavDropdown title={<BsGlobe />} className="text-info">
+          <NavDropdown.Item onClick={() => handleLanguageChange("al")}>
+            <img
+              src={albania}
+              alt="albania"
+              width="30"
+              height="20"
+              className="m-1"
+            />
+            {t("navbar.Albanian")}
+          </NavDropdown.Item>
+          <NavDropdown.Item onClick={() => handleLanguageChange("en")}>
+            <img
+              src={english}
+              alt="english"
+              width="30"
+              height="20"
+              className="m-1"
+            />
+            {t("navbar.English")}
+          </NavDropdown.Item>
+          <NavDropdown.Item onClick={() => handleLanguageChange("es")}>
+            <img
+              src={spanish}
+              alt="spanish"
+              width="30"
+              height="20"
+              className="m-1"
+            />
+            {t("navbar.Spanish")}
+          </NavDropdown.Item>
+        </NavDropdown>
       </Navbar>
     </div>
   );

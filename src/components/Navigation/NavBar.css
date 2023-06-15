@@ -7,8 +7,70 @@
 }
 
 .bell-icon {
-  height: 30px;
-  width: 30px;
-  margin-top: 25px;
-  margin-left: 10px;
+  position: relative;
+}
+.bell-icon:hover {
+  color: red;
+}
+
+.unread-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  z-index: 1;
+}
+.message {
+  color: rgb(172, 172, 172) !important;
+  background-color: white !important;
+  margin: 10px 0px 10px 0px !important;
+  padding-top: 10px !important;
+
+  border: 2px solid rgb(234, 239, 245) !important;
+  border-radius: 10px !important;
+}
+.message:hover {
+  background-color: #c8e3ff !important;
+  color: white !important;
+}
+/* .message1 {
+  overflow: scroll;
+  margin-right: 10px !important;
+  background-color: white !important;
+  
+  height: 400px;
+  box-shadow: 1px 2px 3px 3px #f3f3f3;
+} */
+/* CSS */
+.message1 {
+  max-height: 300px;
+  overflow-y: scroll;
+  padding: 10px !important;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.message1::-webkit-scrollbar {
+  width: 8px; /* width of the scrollbar */
+}
+
+.message1::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* color of the scrollbar track */
+}
+
+.message1::-webkit-scrollbar-thumb {
+  background-color: rgb(110, 155, 240); /* color of the scrollbar thumb */
+  border-radius: 4px; /* border radius of the scrollbar thumb */
+}
+
+.message1::-webkit-scrollbar-thumb:hover {
+  background-color: cornflowerblue; /* color of the scrollbar thumb on hover */
 }
