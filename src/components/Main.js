@@ -1,6 +1,6 @@
 import React from "react";
-import truck from "./Images/Trucks.jpg";
-import depo from "./Images/depo.jpg";
+
+import truck from "./Images/img.png";
 import "./Main.css";
 import { useTranslation } from "react-i18next";
 const Main = () => {
@@ -33,7 +33,6 @@ const Main = () => {
             <h6 className="text-center">
               {t("testPages.You can now browse our products and services")}
             </h6>
-            <img src={depo} alt="depo" className="img-fluid main-depo" />
             <h6 className="text-center">
               {t("testPages.You can also add your own products and services")}
             </h6>

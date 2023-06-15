@@ -7,6 +7,8 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { checkIfLoggedIn } from "../../Authentication/checkIfLoggedIn";
 import NotAllowed from "../../Authentication/NotAllowed";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 
 export const AddNewItem = () => {
   const navigate = useNavigate();
@@ -25,31 +27,45 @@ export const AddNewItem = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.get("http://localhost:8000/sanctum/csrf-cookie");
-
+  
     const data = JSON.stringify({
       ...formValues,
       company_id: 1,
     });
     console.log(data);
-    const response = await axios.post(`http://localhost:8000/api/add`, {
-      ...formValues,
-      company_id: 1,
-    });
-    console.log("response", response);
-    if (response.status === 200 && formValues.type === "export") {
-      window.alert("Item added successfully");
-      navigate("/Export");
-    } else if (response.status === 200 && formValues.type === "import") {
-      window.alert("Item added successfully");
-      navigate("/Import");
-    } else {
-      window.alert("Something went wrong");
+  
+    try {
+      const response = await axios.post(`http://localhost:8000/api/add`, {
+        ...formValues,
+        company_id: 1,
+      });
+  
+      console.log("response", response);
+  
+      if (response.status === 200 && formValues.type === "export") {
+        alertify.success("Item added successfully");
+        navigate("/Export");
+      } else if (response.status === 200 && formValues.type === "import") {
+        alertify.success("Item added successfully");
+        navigate("/Import");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        console.log("error response", error.response.data);
+  
+        const errors = error.response.data;
+        Object.values(errors).forEach((errorMessage) => {
+          alertify.error(errorMessage);
+        });
+      } else {
+        console.error("Error submitting data:", error);
+      }
     }
   };
-
   const handleFileSelect = (event) => {
     setFormValues((prevValues) => ({
       ...prevValues,

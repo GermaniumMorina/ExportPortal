@@ -1,20 +1,13 @@
 .main-truck {
-    display: block;
-    margin: 0 auto;
-    border-radius: 15px;
-    width: 60%;
-  }
-  
-  .main-depo {
-    display: block;
-    margin: 0 auto;
-    border-radius: 15px;
-    width: 60%;
-  }
-  
-  .logout-button{
-    display: block;
-    margin: 0 auto;
-    border-radius: 15px;
-    width: 60%;
-  }
+  margin: 0 auto;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.main1 {
+  margin-top: 100px;
+}

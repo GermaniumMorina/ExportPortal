@@ -18,7 +18,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
 import { BsCurrencyExchange } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
-
+import { BsGlobe } from "react-icons/bs";
 function NavBar() {
   const isLoggedIn = checkIfLoggedIn();
   const user = localStorage.getItem("userName");
@@ -38,13 +38,13 @@ function NavBar() {
         const response = await axios.get(
           `http://localhost:8000/api/Notify/${userId}`
         );
-        console.log(response.data);
-        if (response.data && response.data.length > 0) {
-          // Filter notifications by notifiable_id
-          const userNotifications = response.data.filter((notification) => {
-            const notificationData = JSON.parse(notification.data);
-            return notificationData.notifiable_id === userId;
-          });
+        if (response.data.original && response.data.original.length > 0) {
+          const userNotifications = response.data.original.filter(
+            (notification) => {
+              const notificationData = JSON.parse(notification.data);
+              return notificationData.notifiable_id === parseInt(userId, 10);
+            }
+          );
 
           console.log(userNotifications);
           setNotifications(userNotifications);
@@ -113,6 +113,7 @@ function NavBar() {
     window.location.reload(); // Reload the page to apply the new language
   };
   useEffect(() => {
+    localStorage.setItem("language", selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
   }, [i18n, selectedLanguage]);
   return isLoggedIn ? (
@@ -146,7 +147,9 @@ function NavBar() {
               {t("navbar.Add New Product")}
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/products">Products</NavDropdown.Item>
+            <NavDropdown.Item href="/products">
+              {t("navbar.Products")}
+            </NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/Import">
               {t("navbar.Import")}
@@ -160,7 +163,7 @@ function NavBar() {
           <Nav.Link href="/Marketplace">
             {t("marketplace.Marketplace")}
           </Nav.Link>
-          <Nav.Link href="/stories">Succes Stories</Nav.Link>
+          <Nav.Link href="/stories">{t("navbar.Succes Stories")}</Nav.Link>
         </Nav>
 
         <Nav>
