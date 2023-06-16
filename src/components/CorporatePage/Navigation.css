@@ -16,6 +16,8 @@
     border-radius: 0 0 12px 12px;
 }
 
+
+
 .HoverBox {
     width: 55px;
     height: 55px;
@@ -83,13 +85,15 @@
 }
 .company-data-text{
     margin-top: 35px;
-    margin-left: 200px;
+    max-width: 800px;
+margin-right: 10px;
+    margin-left: 150px;
     text-align: start;
     border-radius: 9px;
     box-shadow: -1px 1px 32px 9px rgba(0,0,0,0.21);
     padding: 30px;
     height: 100%;
-    width: 85%;
+
   }
 
  
