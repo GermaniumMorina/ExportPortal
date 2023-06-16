@@ -110,6 +110,8 @@
 
 .companies-main-div {
   display: flex;
+  max-width: 100%;
+  
   justify-content: center;
 }
 
@@ -118,5 +120,23 @@
   border: 1px solid rgba(46, 44, 44, 0.514);
   border-radius: 15px;
   margin: 20px;
+  overflow: hidden;
   padding: 20px;
 }
+
+
+@media (max-width: 880px) {
+  .companies-info-div {
+    width: 95%;
+    margin: 15px;
+  }
+}
+@media (max-width: 550px) {
+  .companies-info-div {
+    width: 100%;
+    margin: 10px;
+}
+}
+
+
+

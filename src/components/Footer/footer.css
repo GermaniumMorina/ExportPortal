@@ -44,7 +44,8 @@
   width: 100%;
   text-align: left;
   font: bold 16px sans-serif;
-  padding: 55px 50px;
+  padding-top: 55px ;
+  padding: 10px;
   border-top: 2px solid rgba(100, 99, 99, 0.419);
 }
 
@@ -175,12 +176,21 @@
   padding: 30px;
   color: white;
   width: 100%;
+  max-width: 900px; 
+  margin: 0 auto;
   font-size: 20px;
   font-weight: bold;
   border: 1px solid black;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 920px) {
+  .footer-distributed .footer-newsletter {
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
   .footer-distributed {
     font: bold 14px sans-serif;
   }
@@ -197,9 +207,6 @@
   .footer-distributed .footer-center i {
     margin-left: 0;
   }
-}
-.subscribe-txt {
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 15px 10px 10px 10px;
+
+
 }

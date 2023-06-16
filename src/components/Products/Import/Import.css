@@ -1,0 +1,17 @@
+.checkbox-container {
+    overflow-x: auto;
+    padding: 10px;
+    box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 15px
+  }
+  
+  .checkbox-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .checkbox-scroll .form-check {
+    flex: 0 0 auto;
+    margin-right: 10px;
+  }
+  
