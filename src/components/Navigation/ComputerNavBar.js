@@ -39,7 +39,7 @@
     return (
   
       
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" className='main-laptop-navbar'>
         <Container>
       
         <Navbar.Brand href="/" className="logo">

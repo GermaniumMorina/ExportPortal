@@ -289,8 +289,13 @@ export default function CombinedMenuDrawer() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
+          <ListItem
+          
+          onClick={() => {
+            handleDrawerClose();
+            navigate("/import");
+          }}
+        >            <ListItemButton>
               <ListItemIcon>
                 <GetAppIcon />
               </ListItemIcon>
@@ -299,8 +304,12 @@ export default function CombinedMenuDrawer() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
+          <ListItem
+          onClick={() => {
+            handleDrawerClose();
+            navigate("/export");
+          }}
+        >            <ListItemButton>
               <ListItemIcon>
                 <PublishIcon />
               </ListItemIcon>
@@ -313,7 +322,7 @@ export default function CombinedMenuDrawer() {
             disablePadding
             onClick={() => {
               handleDrawerClose();
-              navigate("/storefronts");
+              navigate("/marketplace");
             }}
           >
             <ListItemButton>

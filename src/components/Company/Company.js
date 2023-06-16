@@ -28,9 +28,9 @@ const Company = () => {
       console.error("Error fetching data:", error);
     }
   };
-  const handleBack = () =>{
-    window.location.href="/companies"
-  }
+  const handleBack = () => {
+    window.location.href = "/companies";
+  };
   if (isLoading) {
     return <LoadingBar />;
   }
@@ -40,10 +40,7 @@ const Company = () => {
       {company.length === 0 ? (
         <p> {t("contact.Loading...")}</p>
       ) : (
-        <div
-          key={company.id}
-          className="d-flex justify-content-center  mt-4"
-        >
+        <div key={company.id} className="d-flex justify-content-center  mt-4 mx-3">
           <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto   mb-4 p-5 border rounded  border-dark ">
             <h1>{company.name}</h1>
 
@@ -52,19 +49,17 @@ const Company = () => {
               alt={company.name}
               className="company-image"
             />
-                        <br/>
+            <br />
 
-                        <br/>
+            <br />
 
             <p>
               {t("companies.Keywords")}
-              {company.keywords
-                .split(",")
-                .map((keyword, index) => (
-                  <span key={index} className="keyword-tag">
-                    #{keyword.trim()}
-                  </span>
-                ))}
+              {company.keywords.split(",").map((keyword, index) => (
+                <span key={index} className="keyword-tag">
+                  #{keyword.trim()}
+                </span>
+              ))}
             </p>
             <p>
               {t("companies.Country")} {company.country}

@@ -4,6 +4,11 @@
   height: 80px;
   width: 80px;
 }
+.main-laptop-navbar{
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;}
 
 .main-navbar-box{
   background: rgba(255, 255, 255, 0.5) !important;

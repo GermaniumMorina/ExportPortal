@@ -32,7 +32,11 @@ const Companies = () => {
             axios.get("http://127.0.0.1:8000/api/category"),
             axios.get("http://127.0.0.1:8000/api/country"),
           ]);
-
+          // await Promise.all([
+          //   axios.get(`https://1dcb-5-206-235-216.eu.ngrok.io/api/CompanyList?page=${currentPage + 1}`),
+          //   axios.get("https://1dcb-5-206-235-216.eu.ngrok.io/api/category"),
+          //   axios.get("https://1dcb-5-206-235-216.eu.ngrok.io/api/country"),
+          // ]);
         setCompanyList(companiesResponse.data);
         setCategories(categoriesResponse.data);
         setCountryList(countriesResponse.data.data);
@@ -101,12 +105,9 @@ const Companies = () => {
   if (isLoading) {
     return <LoadingBar />;
   }
-  else{    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
-
   };
 
   return (
@@ -169,52 +170,57 @@ const Companies = () => {
       {isPageLoading ? (
         <LoadingBar />
       ) : (
-        filteredCompaniesWithCountry.map((company) => (
-          <div key={company.id} className="companies-main-div">
-            <div className="companies-info-div">
-              <table>
-                <tbody>
-                  <tr>
-                    <td className="companies-info">{t("companies.Name")}</td>
-                    <td className="companies-info">{company.name}</td>
-                  </tr>
-                  <tr>
-                    <td className="companies-info">{t("companies.Keywords")}</td>
-                    <td className="companies-info">
-                      {company.keywords.split(",").map((keyword, index) => {
-                        const trimmedKeyword = keyword.trim();
-                        if (trimmedKeyword !== "") {
-                          return (
-                            <React.Fragment key={index}>
-                              {index > 0 && " "}
-                              <span className="keyword-tag">
-                                #{trimmedKeyword}
-                              </span>{" "}
-                            </React.Fragment>
-                          );
-                        }
-                        return null;
-                      })}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="companies-info">{t("companies.Country")}</td>
-                    <td className="companies-info">{company.country}</td>
-                  </tr>
-                  <tr>
-                    <td className="companies-info">{t("companies.Web Address")}</td>
-                    <td className="companies-info">{company.web_address || "N/A"}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="d-flex justify-content-center">
-                <button className="view-more-button" onClick={() => navigateToCompany(company.id)}>
-                  {t("companies.View More")}
-                </button>
+        <div className="companies-container">
+          {filteredCompaniesWithCountry.map((company) => (
+            <div key={company.id} className="companies-main-div">
+              <div className="companies-info-div">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td className="companies-info">{t("companies.Name")}</td>
+                      <td className="companies-info">{company.name}</td>
+                    </tr>
+                    <tr>
+                      <td className="companies-info">{t("companies.Keywords")}</td>
+                      <td className="companies-info">
+                        {company.keywords.split(",").map((keyword, index) => {
+                          const trimmedKeyword = keyword.trim();
+                          if (trimmedKeyword !== "") {
+                            return (
+                              <React.Fragment key={index}>
+                                {index > 0 && " "}
+                                <span className="keyword-tag">
+                                  #{trimmedKeyword}
+                                </span>{" "}
+                              </React.Fragment>
+                            );
+                          }
+                          return null;
+                        })}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="companies-info">{t("companies.Country")}</td>
+                      <td className="companies-info">{company.country}</td>
+                    </tr>
+                    <tr>
+                      <td className="companies-info">{t("companies.Web Address")}</td>
+                      <td className="companies-info">{company.web_address || "N/A"}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="view-more-button"
+                    onClick={() => navigateToCompany(company.id)}
+                  >
+                    {t("companies.View More")}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))
+          ))}
+        </div>
       )}
 
       <ReactPaginate

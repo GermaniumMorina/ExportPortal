@@ -18,13 +18,13 @@ function NavBar() {
   return isLoogedIn ? (
     <div>
       {isDesktopOrLaptop && <LoggedinNavBarPC />}
-      {(!isMobile && isTabletOrMobile) && <LoggedinNavBarPC />}
+      {(!isMobile && isTabletOrMobile) && <LoggedInNavBarMobile />}
       {(isPortrait && isMobile) && <LoggedInNavBarMobile/>}
     </div>
   ):(
     <div>
      {isDesktopOrLaptop && <ComputerNavBar />}
-      {(!isMobile && isTabletOrMobile) && <ComputerNavBar />}
+      {(!isMobile && isTabletOrMobile) && <PhoneNavBar />}
       {(isPortrait && isMobile) && <PhoneNavBar/>}
     </div>
   )

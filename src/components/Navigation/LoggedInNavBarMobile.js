@@ -96,7 +96,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function LoggedInNavBarMobile() {
-
   const navigate = useNavigate();
 
   const [notifications, setNotifications] = useState([]);
@@ -303,7 +302,9 @@ export default function LoggedInNavBarMobile() {
               handleDrawerClose();
               navigate("/account");
             }}
-          >            <ListItemButton>
+          >
+            {" "}
+            <ListItemButton>
               <ListItemIcon>
                 <ManageAccountsIcon />
               </ListItemIcon>
@@ -376,7 +377,14 @@ export default function LoggedInNavBarMobile() {
         </List>
         <Divider />
         <List>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/companies");
+            }}
+          >
+            {" "}
             <ListItemButton>
               <ListItemIcon>
                 <StoreIcon />
@@ -386,7 +394,13 @@ export default function LoggedInNavBarMobile() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem>
+          <ListItem
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/addnewcompany");
+            }}
+          >
+            {" "}
             <ListItemButton>
               <ListItemIcon>
                 <AddBusinessIcon />
@@ -396,7 +410,14 @@ export default function LoggedInNavBarMobile() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/products");
+            }}
+          >
+            {" "}
             <ListItemButton>
               <ListItemIcon>
                 <LocalMallIcon />
@@ -406,7 +427,14 @@ export default function LoggedInNavBarMobile() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem>
+          <ListItem
+            disablePadding
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/addnewitem");
+            }}
+          >
+            {" "}
             <ListItemButton>
               <ListItemIcon>
                 <AddShoppingCartIcon />
@@ -416,7 +444,13 @@ export default function LoggedInNavBarMobile() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem>
+          <ListItem
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/import");
+            }}
+          >
+            {" "}
             <ListItemButton>
               <ListItemIcon>
                 <GetAppIcon />
@@ -426,7 +460,13 @@ export default function LoggedInNavBarMobile() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem>
+          <ListItem
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/export");
+            }}
+          >
+            {" "}
             <ListItemButton>
               <ListItemIcon>
                 <PublishIcon />
@@ -436,7 +476,14 @@ export default function LoggedInNavBarMobile() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/marketplace");
+            }}
+          >
+            {" "}
             <ListItemButton>
               <ListItemIcon>
                 <StorefrontIcon />
@@ -447,7 +494,14 @@ export default function LoggedInNavBarMobile() {
             </ListItemButton>
           </ListItem>
         </List>
-        <ListItem disablePadding>
+        <ListItem
+          disablePadding
+          onClick={() => {
+            handleDrawerClose();
+            navigate("/stories");
+          }}
+        >
+          {" "}
           <ListItemButton>
             <ListItemIcon>
               <AutoStoriesIcon />
