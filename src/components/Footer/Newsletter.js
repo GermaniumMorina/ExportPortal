@@ -57,7 +57,7 @@ export const Newsletter = () => {
               aria-label="email@example.com"
               aria-describedby="basic-addon2"
             />
-            <Button variant="outline-secondary" onClick={handleSubmit}>
+            <Button variant="outline-success" onClick={handleSubmit} className="subscribe-button">
               {t("newsletter.Subscribe")}
             </Button>
           </InputGroup>
