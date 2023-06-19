@@ -170,10 +170,10 @@ return (
             {t("navbar.Export")}
           </NavDropdown.Item>
         </NavDropdown>
-
+{/* 
         <Nav.Link href="/Marketplace">
           {t("marketplace.Marketplace")}
-        </Nav.Link>
+        </Nav.Link> */}
         <Nav.Link href="/stories">{t("navbar.Succes Stories")}</Nav.Link>
       </Nav>
      

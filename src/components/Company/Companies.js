@@ -2,97 +2,47 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Companies.css";
-import Form from "react-bootstrap/Form";
 import LoadingBar from "../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
+import { debounce } from "lodash";
+import { useRef } from "react";
+import Form from "react-bootstrap/Form";
 
 const Companies = () => {
   // State variables
   const [companyList, setCompanyList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [countryList, setCountryList] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // Added isLoading state
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isPageLoading, setIsPageLoading] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsPageLoading(true);
-        const [companiesResponse, categoriesResponse, countriesResponse] =
-          await Promise.all([
-            axios.get(`http://127.0.0.1:8000/api/CompanyList?page=${currentPage + 1}`),
-            axios.get("http://127.0.0.1:8000/api/category"),
-            axios.get("http://127.0.0.1:8000/api/country"),
-          ]);
-          // await Promise.all([
-          //   axios.get(`https://1dcb-5-206-235-216.eu.ngrok.io/api/CompanyList?page=${currentPage + 1}`),
-          //   axios.get("https://1dcb-5-206-235-216.eu.ngrok.io/api/category"),
-          //   axios.get("https://1dcb-5-206-235-216.eu.ngrok.io/api/country"),
-          // ]);
-        setCompanyList(companiesResponse.data);
-        setCategories(categoriesResponse.data);
-        setCountryList(countriesResponse.data.data);
-        setIsLoading(false);
-        setIsPageLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setIsPageLoading(false);
-      }
-    };
+  const inputRef = useRef();
 
-    fetchData();
-  }, [currentPage]);
+  const fetchData = async () => {
+    try {
+      setIsLoading(true); // Set isLoading to true when starting API call
 
-  // Filter companies based on search term
-  const filteredCompanies = companyList.filter((company) =>
-    company.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+      const [companiesResponse, categoriesResponse] = await Promise.all([
+        axios.get(`http://127.0.0.1:8000/api/CompanyList`),
+        axios.get("http://127.0.0.1:8000/api/category"),
+      ]);
 
-  // Handle search input change
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  // Handle checkbox change for category filters
-  const handleCheckboxChange = (event) => {
-    const { checked, id } = event.target;
-    if (checked) {
-      setSelectedCategories([...selectedCategories, parseInt(id)]);
-    } else {
-      setSelectedCategories(
-        selectedCategories.filter((category) => category !== parseInt(id))
-      );
+      setCompanyList(companiesResponse.data);
+      console.log(companiesResponse);
+      setCategories(categoriesResponse.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false); // Set isLoading to false after API call is completed
     }
   };
 
-  // Handle country select change for country filter
-  const handleCountryChange = (event) => {
-    setSelectedCountry(event.target.value);
-  };
-
-  // Apply category filters to the filtered companies list
-  const filteredCompaniesWithCategories =
-    selectedCategories.length > 0
-      ? filteredCompanies.filter((company) =>
-          selectedCategories.includes(company.category_id)
-        )
-      : filteredCompanies;
-
-  // Apply country filter to the filtered companies list
-  const filteredCompaniesWithCountry =
-    selectedCountry !== ""
-      ? filteredCompaniesWithCategories.filter(
-          (company) => company.country === selectedCountry
-        )
-      : filteredCompaniesWithCategories;
+  useEffect(() => {
+    fetchData();
+    //eslint-disable-next-line
+  },[]);
 
   const navigateToCompany = (id) => {
     navigate(`/companies/${id}`);
@@ -101,14 +51,70 @@ const Companies = () => {
   const toggleFilters = () => {
     setShowFilters((prevState) => !prevState);
   };
-
-  if (isLoading) {
-    return <LoadingBar />;
-  }
-
-  const handlePageClick = (data) => {
-    setCurrentPage(data.selected);
+  const handlePageClick = async (data) => {
+    setIsLoading(true);
+    const selectedPage = data.selected;
+    let page = 0;
+  
+    if (selectedPage === 0) {
+      page = 1; // Go to the first page
+    } else {
+      page = selectedPage + 1;
+    }
+  
+    try {
+      const companiesResponse = await axios.get(
+        `http://127.0.0.1:8000/api/CompanyList?page=${page}`
+      );
+      setIsLoading(false);
+      setCompanyList(companiesResponse.data);
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top of the page
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
+  
+  const handleCheckboxChange = async (event) => {
+    const { checked, id } = event.target;
+    if (checked) {
+      const response =await axios.get(`http://127.0.0.1:8000/api/filterCompany/${id}/1`);
+      console.log(response);
+      setCompanyList(response.data);
+    }
+    else{
+      fetchData(); // Fetch all companies again
+      return;
+    }
+  };
+  const handleDebounceSearch = () => {
+    const searchValue = inputRef.current.value.trim();
+
+    // If there is no search term, fetch all companies
+    if (!searchValue) {
+      fetchData(); // Fetch all companies again
+      return;
+    }
+
+    debouncedSearch(searchValue); // Pass the search term directly
+  };
+
+  const debouncedSearch = useRef(
+    debounce((searchValue) => {
+      axios
+        .post("http://127.0.0.1:8000/api/searchCompany", {
+          search: searchValue,
+        })
+        .then((response) => {
+          console.log(response);
+          const data = response.data.data;
+          console.log(data);
+          setCompanyList(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }, 600)
+  ).current;
 
   return (
     <div>
@@ -120,8 +126,8 @@ const Companies = () => {
           <input
             type="text"
             className="input-bar"
-            value={searchTerm}
-            onChange={handleSearch}
+            ref={inputRef}
+            onChange={handleDebounceSearch}
             placeholder={t("companies.Search!")}
           />
           <span></span>
@@ -148,30 +154,12 @@ const Companies = () => {
               </div>
             </Form.Group>
           </div>
-          <div className="col-md-6">
-            <Form.Group>
-              <Form.Label>{t("companies.Filter by Country")}</Form.Label>
-              <Form.Control
-                as="select"
-                value={selectedCountry}
-                onChange={handleCountryChange}
-              >
-                <option value=""> {t("companies.All")}</option>
-                {countryList.map((country) => (
-                  <option key={country.id} value={country.name}>
-                    {country.country}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          </div>
         </div>
-      </div>
-      {isPageLoading ? (
-        <LoadingBar />
-      ) : (
+        </div>
         <div className="companies-container">
-          {filteredCompaniesWithCountry.map((company) => (
+        {isLoading && <LoadingBar />}
+
+          {companyList.map((company) => (
             <div key={company.id} className="companies-main-div">
               <div className="companies-info-div">
                 <table>
@@ -181,7 +169,9 @@ const Companies = () => {
                       <td className="companies-info">{company.name}</td>
                     </tr>
                     <tr>
-                      <td className="companies-info">{t("companies.Keywords")}</td>
+                      <td className="companies-info">
+                        {t("companies.Keywords")}
+                      </td>
                       <td className="companies-info">
                         {company.keywords.split(",").map((keyword, index) => {
                           const trimmedKeyword = keyword.trim();
@@ -200,12 +190,18 @@ const Companies = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td className="companies-info">{t("companies.Country")}</td>
+                      <td className="companies-info">
+                        {t("companies.Country")}
+                      </td>
                       <td className="companies-info">{company.country}</td>
                     </tr>
                     <tr>
-                      <td className="companies-info">{t("companies.Web Address")}</td>
-                      <td className="companies-info">{company.web_address || "N/A"}</td>
+                      <td className="companies-info">
+                        {t("companies.Web Address")}
+                      </td>
+                      <td className="companies-info">
+                        {company.web_address || "N/A"}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -221,24 +217,23 @@ const Companies = () => {
             </div>
           ))}
         </div>
-      )}
-
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        breakLabel={"..."}
-        pageCount={5}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination justify-content-center"}
-        pageClassName={"page-item"}
-        pageLinkClassName={"page-link"}
-        previousClassName={"page-item"}
-        previousLinkClassName={"page-link"}
-        nextClassName={"page-item"}
-        nextLinkClassName={"page-link"}
-        activeClassName={"active"}
-      />
-    </div>
+        
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          breakLabel={"..."}
+          pageCount={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination justify-content-center"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
+          previousClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextClassName={"page-item"}
+          nextLinkClassName={"page-link"}
+          activeClassName={"active"}
+        />
+      </div>
   );
 };
 
