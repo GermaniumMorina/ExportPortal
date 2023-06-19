@@ -12,7 +12,7 @@ const ImageComponent = () => {
 
   const getExportProducts = async () => {
     try {
-      const apiExportProducts = await axios.get("http://localhost:8000/api/img");
+      const apiExportProducts = await axios.get("http://localhost:8000/api/allFiles");
       setExportProducts(apiExportProducts.data);
       console.log(apiExportProducts.data);
     } catch (error) {
@@ -28,12 +28,12 @@ const ImageComponent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+
     if (selectedFile) {
       const formData = new FormData();
-      formData.append("image", selectedFile);
-      formData.append("typeId", 1); // Change the type ID to the appropriate value
-  
+      formData.append("files[]", selectedFile); // Use 'files[]' as the name to handle multiple files
+      formData.append("typeId[]", 1); // Change the type ID to the appropriate value
+
       axios
         .post("http://localhost:8000/api/addFile", formData, {
           headers: {
@@ -53,10 +53,13 @@ const ImageComponent = () => {
   return (
     <div>
       <div>
-        {exportProducts.map((item) => (
-          <div key={item.id}>
-            <img src={`http://localhost:8000${item.URL}`} alt="image" />
-            <img src={`http://localhost:8000${item.URL}`} alt="image" />
+        {exportProducts.map((item, index) => (
+          <div key={index}>
+            <img
+              src={item}
+              alt="image"
+              style={{ width: "500px", height: "500px" }}
+            />
           </div>
         ))}
       </div>
@@ -64,12 +67,13 @@ const ImageComponent = () => {
         <div>
           <input
             type="file"
-            name="image"
-            id="image"
+            name="files"
+            id="files" // Update the ID to match the label's htmlFor attribute
             onChange={handleFileChange}
             style={{ display: "none" }}
+            multiple // Enable multiple file selection
           />
-          <label htmlFor="image" style={{ marginRight: "10px" }}>
+          <label htmlFor="files" style={{ marginRight: "10px" }}>
             Choose a file
           </label>
           <span>{fileName}</span>
