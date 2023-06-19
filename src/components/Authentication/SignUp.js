@@ -7,9 +7,9 @@ import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
-
 import { useTranslation } from "react-i18next";
 import "./SignUp.css";
+import { checkIfLoggedIn } from "./checkIfLoggedIn";
 axios.defaults.withCredentials = true;
 
 export const SignUp = () => {
@@ -28,7 +28,7 @@ export const SignUp = () => {
   });
   const [countryList, setCountryList] = useState([]);
   const [errors, setErrors] = useState({});
-
+const isLoggedIn = checkIfLoggedIn();
   const handleCaptchaChange = (value) => {
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -180,8 +180,8 @@ export const SignUp = () => {
     return errors;
   };
   const { t } = useTranslation();
-  return (
-    <div className="container">
+  return !isLoggedIn ?(
+    <div className="sign-up-main-div">
       <Form
         onSubmit={handleRegister}
         className="justify-content-center mt-5 mb-5"
@@ -359,5 +359,9 @@ export const SignUp = () => {
         </div>
       </Form>
     </div>
-  );
+  ):(
+    <div>
+      You are already logged in
+      </div>
+  )
 };

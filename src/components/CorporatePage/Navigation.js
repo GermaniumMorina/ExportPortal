@@ -8,7 +8,6 @@ import History from "./History";
 import BankAcc from "./BankAcc";
 import Brands from "./Brands";
 import { useTranslation } from "react-i18next";
-import { useMediaQuery } from "react-responsive";
 
 const Navigation = () => {
   const [selectedComponent, setSelectedComponent] = useState(<CompanyProfile/>);
@@ -16,10 +15,6 @@ const Navigation = () => {
   const handleItemClick = (component) => {
     setSelectedComponent(component);
   };
-
-  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
-  const isMobile = useMediaQuery({query:"(max-width :450px"});
   useEffect(() => {
     const buttonElements = document.querySelectorAll(".MenuBox>ul>li");
     const svgElements = document.querySelectorAll(".MenuBox>ul>li>svg");
@@ -56,7 +51,7 @@ const Navigation = () => {
     };
   }, []);
 
-  return !(isPortrait || isMobile || isTabletOrMobile) ?(
+  return (
     <div className="height-controller-container">
     <div className="navigation-corp-page">
       <div className="Contact">
@@ -206,11 +201,7 @@ const Navigation = () => {
       </div>
     </div>
     </div>
-  ):(
-<div className="d-flex justify-content-center"> 
-
-</div>
-  )
+  );
 };
 
 export default Navigation;
