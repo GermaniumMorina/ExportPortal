@@ -26,7 +26,9 @@ function NavBar() {
   const userId = localStorage.getItem("userId");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [bellClicked, setBellClicked] = useState(false);
@@ -102,26 +104,30 @@ function NavBar() {
     };
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { i18n, t } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("language") || "en"
-  );
+  const { t } = useTranslation();
+
   const handleLanguageChange = async (language) => {
     let languageId;
 
-    if (language === "en") {
-      languageId = 1;
-    } else if (language === "es") {
-      languageId = 2;
-    } else if (language === "al") {
-      languageId = 3;
-    } else {
-      languageId = 1;
+    switch (language) {
+      case "en":
+        languageId = 1;
+        break;
+      case "es":
+        languageId = 2;
+        break;
+      case "al":
+        languageId = 3;
+        break;
+      default:
+        languageId = 1;
+        break;
     }
+
+    console.log(language);
 
     setSelectedLanguage(language);
     localStorage.setItem("language", language);
-    i18n.changeLanguage(language);
 
     try {
       const userId = localStorage.getItem("userId");
@@ -134,17 +140,16 @@ function NavBar() {
         response.data
       );
 
-      const userData = localStorage.getItem("userData");
+      const userData = localStorage.getItem("user");
       const user = userData ? JSON.parse(userData) : {};
-      user.language = languageId;
-      localStorage.setItem("userData", JSON.stringify(user));
+      user.languageId = languageId;
+      localStorage.setItem("user", JSON.stringify(user));
+
+      window.location.reload();
     } catch (error) {
       console.error("Failed to update language on the server:", error);
     }
-
-    window.location.reload();
   };
-
   return isLoggedIn ? (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
@@ -219,7 +224,14 @@ function NavBar() {
                 {t("navbar.Account")}
               </NavDropdown.Item>
               <NavDropdown title={t("navbar.Language")}>
-                <NavDropdown.Item onClick={() => handleLanguageChange("al")}>
+                <NavDropdown.Item
+                  onClick={() => handleLanguageChange("al")}
+                  style={
+                    selectedLanguage === "al"
+                      ? { fontWeight: "bold", color: "red" }
+                      : {}
+                  }
+                >
                   <img
                     src={albania}
                     alt="albania"
@@ -229,7 +241,14 @@ function NavBar() {
                   />
                   {t("navbar.Albanian")}
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleLanguageChange("en")}>
+                <NavDropdown.Item
+                  onClick={() => handleLanguageChange("en")}
+                  style={
+                    selectedLanguage === "en"
+                      ? { fontWeight: "bold", color: "red" }
+                      : {}
+                  }
+                >
                   <img
                     src={english}
                     alt="english"
@@ -239,7 +258,14 @@ function NavBar() {
                   />
                   {t("navbar.English")}
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleLanguageChange("es")}>
+                <NavDropdown.Item
+                  onClick={() => handleLanguageChange("es")}
+                  style={
+                    selectedLanguage === "es"
+                      ? { fontWeight: "bold", color: "red" }
+                      : {}
+                  }
+                >
                   <img
                     src={spanish}
                     alt="spanish"
@@ -278,7 +304,12 @@ function NavBar() {
                 <h5>Notifications</h5>
                 {user && (
                   <label className="switch">
-                    <input type="checkbox" className="checkbox" />
+                    <input
+                      type="checkbox"
+                      className="checkbox"
+                      // checked={notificationsActive}
+                      // onChange={toggleNotifications}
+                    />{" "}
                     <div className="slider"></div>
                   </label>
                 )}
