@@ -18,7 +18,9 @@
     "Company List": "Lista de empresas",
     "Sign Up": "Inscribirse",
     "Sign In": "Iniciar sesión",
-    "Corporate": "Corporativo"
+    "Corporate": "Corporativo",
+    "Succes Stories": "Historias de éxito",
+    "Products": "Productos"
   },
   "main": {
     "You are Logged in": "Estás conectado"
@@ -129,7 +131,7 @@
   "error": {
     "Bad Request": "Solicitud incorrecta",
     "Unathorized": "No autorizado",
-    "Page Not Foundt": "Página no encontrada",
+    "Page Not Found": "Página no encontrada",
     "Internal Server Error": "Error Interno del Servidor",
     "Service Temporarily Overloaded": "Servicio temporalmente sobrecargado",
     "Service Unavailable": "Servicio No Disponible"
@@ -231,7 +233,7 @@
     "Our Brands": "Nuestras Marcas",
     "Our History": "Nuestra Historia",
     "Human Resources": "Recursos Humanos",
-    "Our Mission And Vision": "Nuestra Misión y Visión",
+    "Our Mission and Vision": "Nuestra Misión y Visión",
     "Profile": "Perfil",
     "History": "Historia",
     "Mission": "Misión",

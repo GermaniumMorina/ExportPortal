@@ -7,9 +7,22 @@
 
 .search {
   width: 100%;
+}
 
-  
+.view-more-button {
+  width: 130px;
+  height: 40px;
 
+  min-width: 100px;
+  border: 1px solid #32abf6;
+  background-color: #85e1ff;
+  border-radius: 50px;
+  font-size: 16px;
+  transition: 0.4s;
+}
+
+.view-more-button:hover {
+  background-color: #4fabc9;
 }
 
 .search-box {
@@ -56,10 +69,6 @@
   padding: 20px; /* Update with the desired padding around the filters */
 }
 
-
-
-
-
 .filter-button {
   width: 6%;
   min-width: 100px;
@@ -85,3 +94,49 @@
 .input-bar:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.293);
 }
+
+.keyword-tag {
+  display: inline-block;
+  background-color: #e8e8e8;
+  color: #555;
+  padding: 2px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+.companies-info {
+  padding: 10px;
+}
+
+.companies-main-div {
+  display: flex;
+  max-width: 100%;
+  
+  justify-content: center;
+}
+
+.companies-info-div {
+  width: 50%;
+  border: 1px solid rgba(46, 44, 44, 0.514);
+  border-radius: 15px;
+  margin: 20px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+
+@media (max-width: 880px) {
+  .companies-info-div {
+    width: 95%;
+    margin: 15px;
+  }
+}
+@media (max-width: 550px) {
+  .companies-info-div {
+    width: 100%;
+    margin: 10px;
+}
+}
+
+
+

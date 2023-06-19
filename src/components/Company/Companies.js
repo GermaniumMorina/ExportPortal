@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Companies.css";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import LoadingBar from "../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
+import ReactPaginate from "react-paginate";
 
 const Companies = () => {
   // State variables
@@ -19,34 +19,37 @@ const Companies = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isPageLoading, setIsPageLoading] = useState(false);
 
-  // Fetch data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [companiesResponse, categoriesResponse, countriesResponse] = await Promise.all([
-          axios.get("http://127.0.0.1:8000/api/CompanyList"),
-          axios.get("http://127.0.0.1:8000/api/category"),
-          axios.get("http://127.0.0.1:8000/api/country")
-        ]);
-
+        setIsPageLoading(true);
+        const [companiesResponse, categoriesResponse, countriesResponse] =
+          await Promise.all([
+            axios.get(`http://127.0.0.1:8000/api/CompanyList?page=${currentPage + 1}`),
+            axios.get("http://127.0.0.1:8000/api/category"),
+            axios.get("http://127.0.0.1:8000/api/country"),
+          ]);
+          // await Promise.all([
+          //   axios.get(`https://1dcb-5-206-235-216.eu.ngrok.io/api/CompanyList?page=${currentPage + 1}`),
+          //   axios.get("https://1dcb-5-206-235-216.eu.ngrok.io/api/category"),
+          //   axios.get("https://1dcb-5-206-235-216.eu.ngrok.io/api/country"),
+          // ]);
         setCompanyList(companiesResponse.data);
         setCategories(categoriesResponse.data);
         setCountryList(countriesResponse.data.data);
         setIsLoading(false);
+        setIsPageLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setIsPageLoading(false);
       }
     };
 
     fetchData();
-  }, []);
-
-  console.log(companyList)
-  console.log(countryList);
-  console.log(categories);
-
-
+  }, [currentPage]);
 
   // Filter companies based on search term
   const filteredCompanies = companyList.filter((company) =>
@@ -64,7 +67,9 @@ const Companies = () => {
     if (checked) {
       setSelectedCategories([...selectedCategories, parseInt(id)]);
     } else {
-      setSelectedCategories(selectedCategories.filter((category) => category !== parseInt(id)));
+      setSelectedCategories(
+        selectedCategories.filter((category) => category !== parseInt(id))
+      );
     }
   };
 
@@ -76,26 +81,23 @@ const Companies = () => {
   // Apply category filters to the filtered companies list
   const filteredCompaniesWithCategories =
     selectedCategories.length > 0
-      ? filteredCompanies.filter((company) => selectedCategories.includes(company.category_id))
+      ? filteredCompanies.filter((company) =>
+          selectedCategories.includes(company.category_id)
+        )
       : filteredCompanies;
 
   // Apply country filter to the filtered companies list
   const filteredCompaniesWithCountry =
     selectedCountry !== ""
-      ? filteredCompaniesWithCategories.filter((company) => company.country === selectedCountry)
+      ? filteredCompaniesWithCategories.filter(
+          (company) => company.country === selectedCountry
+        )
       : filteredCompaniesWithCategories;
 
-  // Style for table cells
-  const tdStyle = {
-    padding: "10px",
-  };
-
-  // Navigate to company details page
   const navigateToCompany = (id) => {
     navigate(`/companies/${id}`);
   };
 
-  // Toggle visibility of filters section
   const toggleFilters = () => {
     setShowFilters((prevState) => !prevState);
   };
@@ -104,10 +106,12 @@ const Companies = () => {
     return <LoadingBar />;
   }
 
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+  };
+
   return (
     <div>
-
-      {/* Search bar */}
       <div className="search">
         <div className="search-box">
           <button className="filter-button" onClick={toggleFilters}>
@@ -124,7 +128,6 @@ const Companies = () => {
         </div>
       </div>
 
-      {/* Filters section */}
       <div className={`filters ${showFilters ? "showFilters" : ""}`}>
         <div className="row justify-content-center mt-4">
           <div className="col-md-6">
@@ -164,40 +167,77 @@ const Companies = () => {
           </div>
         </div>
       </div>
-
-      {/* Display filtered companies */}
-      {filteredCompaniesWithCountry.map((company) => (
-        <div
-          key={company.id}
-          className="col-xl-6 col-lg-6 col-md-8 col-sm-10 mx-auto border m-3 p-4 border-dark rounded"
-        >
-          <table>
-            <tbody>
-              <tr>
-                <td style={tdStyle}>{t("companies.Name")}</td>
-                <td style={tdStyle}>{company.name}</td>
-              </tr>
-              <tr>
-                <td style={tdStyle}> {t("companies.Keywords")}</td>
-                <td style={tdStyle}>{company.keywords}</td>
-              </tr>
-              <tr>
-                <td style={tdStyle}> {t("companies.Country")}</td>
-                <td style={tdStyle}>{company.country}</td>
-              </tr>
-              <tr>
-                <td style={tdStyle}> {t("companies.Web Address")}</td>
-                <td style={tdStyle}>{company.web_address || "N/A"}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="d-flex justify-content-center">
-            <Button onClick={() => navigateToCompany(company.id)}>
-              {t("companies.View More")}
-            </Button>
-          </div>
+      {isPageLoading ? (
+        <LoadingBar />
+      ) : (
+        <div className="companies-container">
+          {filteredCompaniesWithCountry.map((company) => (
+            <div key={company.id} className="companies-main-div">
+              <div className="companies-info-div">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td className="companies-info">{t("companies.Name")}</td>
+                      <td className="companies-info">{company.name}</td>
+                    </tr>
+                    <tr>
+                      <td className="companies-info">{t("companies.Keywords")}</td>
+                      <td className="companies-info">
+                        {company.keywords.split(",").map((keyword, index) => {
+                          const trimmedKeyword = keyword.trim();
+                          if (trimmedKeyword !== "") {
+                            return (
+                              <React.Fragment key={index}>
+                                {index > 0 && " "}
+                                <span className="keyword-tag">
+                                  #{trimmedKeyword}
+                                </span>{" "}
+                              </React.Fragment>
+                            );
+                          }
+                          return null;
+                        })}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="companies-info">{t("companies.Country")}</td>
+                      <td className="companies-info">{company.country}</td>
+                    </tr>
+                    <tr>
+                      <td className="companies-info">{t("companies.Web Address")}</td>
+                      <td className="companies-info">{company.web_address || "N/A"}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="view-more-button"
+                    onClick={() => navigateToCompany(company.id)}
+                  >
+                    {t("companies.View More")}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        breakLabel={"..."}
+        pageCount={5}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        activeClassName={"active"}
+      />
     </div>
   );
 };

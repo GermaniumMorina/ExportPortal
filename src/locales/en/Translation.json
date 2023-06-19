@@ -18,7 +18,9 @@
     "Company List": "Company List",
     "Sign Up": "Sign Up",
     "Sign In": "Sign In",
-    "Corporate": "Corporate"
+    "Corporate": "Corporate",
+    "Succes Stories": "Succes Stories",
+    "Products": "Products"
   },
   "main": {
     "You are Logged in": "You are Logged in"
@@ -129,7 +131,7 @@
   "error": {
     "Bad Request": "Bad Request",
     "Unathorized": "Unathorized",
-    "Page Not Foundt": "Page Not Foundt",
+    "Page Not Found": "Page Not Found",
     "Internal Server Error": "Internal Server Error",
     "Service Temporarily Overloaded": "Service Temporarily Overloaded",
     "Service Unavailable": "Service Unavailable"

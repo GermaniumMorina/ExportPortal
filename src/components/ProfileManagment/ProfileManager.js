@@ -18,7 +18,6 @@ const ProfileManager = () => {
   const UserGender = localStorage.getItem("userGender");
   const userCountry = localStorage.getItem("userCountry");
 
-  const [hasChanges, setHasChanges] = useState(false);
   const [formValues, setFormValues] = useState({
     name: UserName,
     surname: UserSurname,
@@ -50,7 +49,6 @@ const ProfileManager = () => {
             localStorage.setItem("userPhone", formValues.phone_number);
 
             alertify.success("Profile updated successfully");
-            setHasChanges(false);
             console.log("ALL OK");
           }
         })
@@ -61,25 +59,10 @@ const ProfileManager = () => {
     });
   };
 
-  const handleBack = (event) => {
-    event.preventDefault();
-    if (hasChanges) {
-      alertify.confirm(
-        "You have unsaved changes. Are you sure you want to leave?",
-        async () => {
-          window.location.href = "/profile";
-        },
-        () => {
-          // Cancel callback
-        }
-      );
-    } else {
-      window.location.href = "/profile";
-    }
-  };
+
   const { t } = useTranslation();
 
-  const isLoggedIn=checkIfLoggedIn();
+  const isLoggedIn = checkIfLoggedIn();
   return isLoggedIn ? (
     <div>
       <div className="d-flex justify-content-center">
@@ -95,7 +78,6 @@ const ProfileManager = () => {
                 defaultValue={UserName}
                 onChange={(e) => {
                   setFormValues({ ...formValues, name: e.target.value });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -109,7 +91,6 @@ const ProfileManager = () => {
                 defaultValue={UserSurname}
                 onChange={(e) => {
                   setFormValues({ ...formValues, surname: e.target.value });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -122,40 +103,36 @@ const ProfileManager = () => {
                 defaultValue={UserEmail}
                 onChange={(e) => {
                   setFormValues({ ...formValues, email: e.target.value });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
             <Form.Label>{t("signUp.Gender")}</Form.Label>
             <Form.Group className="mb-3">
-            <Form.Check
-  type="radio"
-  name="gender"
-  id="male"
-  label={t("signUp.Male")}
-  inline
-  value="male"
-  checked={formValues.gender === "male"} // Add checked attribute based on condition
-  onChange={(e) => {
-    setFormValues({ ...formValues, gender: e.target.value });
-    setHasChanges(true);
-  }}
-/>
+              <Form.Check
+                type="radio"
+                name="gender"
+                id="male"
+                label={t("signUp.Male")}
+                inline
+                value="male"
+                checked={formValues.gender === "male"} 
+                onChange={(e) => {
+                  setFormValues({ ...formValues, gender: e.target.value });
+                }}
+              />
 
-<Form.Check
-  type="radio"
-  name="gender"
-  id="female"
-  label={t("signUp.Female")}
-  inline
-  value="female"
-  checked={formValues.gender === "female"} // Add checked attribute based on condition
-  onChange={(e) => {
-    setFormValues({ ...formValues, gender: e.target.value });
-    setHasChanges(true);
-  }}
-/>
-
+              <Form.Check
+                type="radio"
+                name="gender"
+                id="female"
+                label={t("signUp.Female")}
+                inline
+                value="female"
+                checked={formValues.gender === "female"} 
+                onChange={(e) => {
+                  setFormValues({ ...formValues, gender: e.target.value });
+                }}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -170,7 +147,6 @@ const ProfileManager = () => {
                     ...formValues,
                     phone_number: e.target.value,
                   });
-                  setHasChanges(true);
                 }}
               />
             </Form.Group>
@@ -178,16 +154,14 @@ const ProfileManager = () => {
             <button className="edit-button" type="submit">
               {t("signIn.Submit")}
             </button>
-            <button className="back-button" onClick={handleBack}>
-              {t("import.Back")}
-            </button>
+          
           </Form>
         </div>
       </div>
     </div>
-  ):(
-    <NotAllowed/>
-  )
+  ) : (
+    <NotAllowed />
+  );
 };
 
 export default ProfileManager;

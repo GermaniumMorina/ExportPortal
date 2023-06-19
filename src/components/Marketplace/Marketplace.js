@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Marketplace.css";
 import axios from "axios";
-
 import { useTranslation } from "react-i18next";
 export const Marketplace = () => {
   const [productList, setProductList] = useState([]);

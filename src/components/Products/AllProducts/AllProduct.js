@@ -1,80 +1,44 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router";
+import { useSwipeable } from "react-swipeable";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 import LoadingBar from "../../LoadingScreens/LoadingBar";
-// import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
-import "./AllProduct.css"
+import "./AllProduct.css";
 import ImportTruck from "./import.png";
 import ExportTruck from "./export.png";
+import { useMediaQuery } from "react-responsive";
 
 const AllProduct = () => {
-//   const navigate = useNavigate();
   const [exportProducts, setExportProducts] = useState([]);
   const [importProducts, setImportProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
-
-  const getExportProducts = async () => {
-    try {
-      const apiExportProducts = await axios.get(
-        "http://127.0.0.1:8000/api/elist"
-      );
-      setExportProducts(apiExportProducts.data);
-      console.log(apiExportProducts.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching export products:", error);
-      setIsLoading(false);
-    }
-  };
-
-  const getImportProducts = async () => {
-    try {
-      const apiImportProducts = await axios.get(
-        "http://127.0.0.1:8000/api/ilist"
-      );
-      setImportProducts(apiImportProducts.data);
-    } catch (error) {
-      console.error("Error fetching import products:", error);
-    }
-  };
+  const [activeTab, setActiveTab] = useState("export");
+  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isMobile = useMediaQuery({query:"(max-width :450px"});
 
   useEffect(() => {
-    getExportProducts();
-    getImportProducts();
+    const fetchData = async () => {
+      try {
+        const [apiExportProducts, apiImportProducts] = await Promise.all([
+          axios.get("http://127.0.0.1:8000/api/elist"),
+          axios.get("http://127.0.0.1:8000/api/ilist")
+        ]);
+
+        setExportProducts(apiExportProducts.data);
+        setImportProducts(apiImportProducts.data);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
-
-//   const handleNavigateItem = (id) => {
-//     navigate("/ExportItem/" + id);
-//   };
-
-//   const handleView = async (id) => {
-//     try {
-//       const response = await axios.get(`http://127.0.0.1:8000/api/view/${id}`);
-//       console.log("View request successful:", response);
-//     } catch (error) {
-//       console.error("Error viewing product:", error);
-//     }
-//   };
-
-//   const handlePageChange = (page) => {
-//     console.log("Page changed to:", page);
-//     alertify.success("Page changed to:", page);
-//     alertify.error("Pagination doesn't work yet");
-
-//     // const apiEndpoint = ``;
-//     // axios
-//     //   .get(apiEndpoint)
-//     //   .then((response) => {
-//     //     console.log("API response for page", page, ":", response.data);
-//     //   })
-//     //   .catch((error) => {
-//     //     console.error("Error fetching data for page", page, ":", error);
-//     //   });
-//   };
 
   const formatDate = (date) => {
     const now = moment();
@@ -91,74 +55,137 @@ const AllProduct = () => {
     }
   };
 
+  const handleSwipeRight = () => {
+    setActiveTab("export");
+  };
+  
+  const handleSwipeLeft = () => {
+    setActiveTab("import");
+  };
+  
+  const handlers = useSwipeable({
+    onSwipedRight: handleSwipeRight,
+    onSwipedLeft: handleSwipeLeft
+  });
+
   if (isLoading) {
     return <LoadingBar />;
   }
 
-  return (
+  return (isPortrait || isMobile || isTabletOrMobile) ?(
     <div>
-      <section className="container" id="main-container">
-        <div className="left-half">
-          <article className="product-box">
-            <div className="d-flex justify-content-center mt-4 mb-4">
-            <img src={ExportTruck} alt="Import truck" className="import-truck-image"/>
+    <section {...handlers}>
+      <div className="swipe-indicator">
+        <span>Xport</span>
+      <div className={`swipe-indicator-circle ${activeTab === "import" ? "active" : ""}`} onClick={handleSwipeRight}></div>
+      <span>Import</span>
 
-              <h3>Export Products</h3>
-            </div>{" "}
-            {exportProducts.map((product, index) => (
-              <div className="products" key={index}>
-                <p>
-                  {t("marketplace.Product name")} {product.name}
-                </p>
-                <p>
-                  {t("marketplace.Product name")} {product.country}
-                </p>
-                <p>
-                  {t("marketplace.Product price")} {product.price}
-                </p>
-                
-                <p>
-                  {t("marketplace.Product description")} {product.description}
-                </p>
-                <p>
-                Created: {formatDate(product.created_at)}
-                </p>
+        <div className={`swipe-indicator-circle ${activeTab === "export" ? "active" : ""}`} onClick={handleSwipeLeft}></div>
+      </div>
+      <div className="left-half">
+          {activeTab === "export" && (
+            <article className="product-box">
+              <div className="d-flex justify-content-center mt-4 mb-4">
+                <img src={ExportTruck} alt="Export truck" className="import-truck-image" />
+                <h3>Export Products</h3>
               </div>
-            ))}
-          </article>
+              {exportProducts.map((product, index) => (
+                <div className="products" key={index}>
+                  <p>{t("marketplace.Product name")} {product.name}</p>
+                  <p>Country: {product.country}</p>
+                  <p>{t("marketplace.Product price")}: {product.price}</p>
+                  <p>{t("marketplace.Product description")}: {product.description}</p>
+                  <p>Created: {formatDate(product.created_at)}</p>
+                </div>
+              ))}
+            </article>
+          )}
         </div>
         <div className="right-half">
-          <article className="product-box">
-            <div className="d-flex justify-content-center mt-4 mb-4">
-            <img src={ImportTruck} alt="Import truck" className="import-truck-image"/>
-              <h3>Import Products</h3>
-            </div>
-
-            {importProducts.map((product, index) => (
-             <div className="products" key={index}>
-             <p>
-               {t("marketplace.Product name")} {product.name}
-             </p>
-             <p>
-               Country: {product.country}
-             </p>
-             <p>
-               {t("marketplace.Product price")} {product.price}
-             </p>
-             
-             <p>
-               {t("marketplace.Product description")}: {product.description}
-             </p>
-             <p>
-             Created: {formatDate(product.created_at)}
-             </p>
-           </div>
-            ))}
-          </article>
+          {activeTab === "import" && (
+            <article className="product-box">
+              <div className="d-flex justify-content-center mt-4 mb-4">
+                <img src={ImportTruck} alt="Import truck" className="import-truck-image" />
+                <h3>Import Products</h3>
+              </div>
+              {importProducts.map((product, index) => (
+                <div className="products" key={index}>
+                  <p>{t("marketplace.Product name")} {product.name}</p>
+                  <p>Country: {product.country}</p>
+                  <p>{t("marketplace.Product price")} {product.price}</p>
+                  <p>{t("marketplace.Product description")}: {product.description}</p>
+                  <p>Created: {formatDate(product.created_at)}</p>
+                </div>
+              ))}
+            </article>
+          )}
         </div>
       </section>
     </div>
-  );
+  ):(
+    <div>
+    <section className="container" id="main-container">
+      <div className="left-half">
+        <article className="product-box">
+          <div className="d-flex justify-content-center mt-4 mb-4">
+          <img src={ExportTruck} alt="Import truck" className="import-truck-image"/>
+
+            <h3>Export Products</h3>
+          </div>{" "}
+          {exportProducts.map((product, index) => (
+            <div className="products" key={index}>
+              <p>
+                {t("marketplace.Product name")} {product.name}
+              </p>
+              <p>
+                {t("marketplace.Product name")} {product.country}
+              </p>
+              <p>
+                {t("marketplace.Product price")} {product.price}
+              </p>
+              
+              <p>
+                {t("marketplace.Product description")} {product.description}
+              </p>
+              <p>
+              Created: {formatDate(product.created_at)}
+              </p>
+            </div>
+          ))}
+        </article>
+      </div>
+      <div className="right-half">
+        <article className="product-box">
+          <div className="d-flex justify-content-center mt-4 mb-4">
+          <img src={ImportTruck} alt="Import truck" className="import-truck-image"/>
+            <h3>Import Products</h3>
+          </div>
+
+          {importProducts.map((product, index) => (
+           <div className="products" key={index}>
+           <p>
+             {t("marketplace.Product name")} {product.name}
+           </p>
+           <p>
+             Country: {product.country}
+           </p>
+           <p>
+             {t("marketplace.Product price")} {product.price}
+           </p>
+           
+           <p>
+             {t("marketplace.Product description")}: {product.description}
+           </p>
+           <p>
+           Created: {formatDate(product.created_at)}
+           </p>
+         </div>
+          ))}
+        </article>
+      </div>
+    </section>
+  </div>
+  )
 };
 
 export default AllProduct;

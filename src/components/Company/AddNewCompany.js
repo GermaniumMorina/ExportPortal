@@ -140,6 +140,7 @@ export const AddNewCompany = () => {
                 value={formValues.type}
                 name="type"
               >
+                <option value=""> Type</option>
                 <option value="export">{t("navbar.Export")}</option>
                 <option value="import">{t("navbar.Import")}</option>
               </Form.Select>

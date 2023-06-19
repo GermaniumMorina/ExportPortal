@@ -6,11 +6,12 @@ import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { checkIfAdmin } from "./checkIfAdmin";
 import NotAllowedAdmin from "./NotAllowedAdmin";
-
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
+import axios from "axios";
 const NewsletterCreator = () => {
   const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
+    subject: "",
     message: "",
   });
   const isAdmin = checkIfAdmin();
@@ -20,9 +21,16 @@ const NewsletterCreator = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues);
+    console.log(
+      "Submitted " + formValues.name + formValues.email + formValues.message
+    );
+  const response= await axios.post(`http://127.0.0.1:8000/api/sendnewsletter`,formValues);
+  console.log(response);
+
+  alertify.success(response.data.message);
+
   };
   const { t } = useTranslation();
   return isAdmin?(
@@ -37,10 +45,9 @@ const NewsletterCreator = () => {
               <h5> {t("newsletterCreator.To")}</h5>
               <InputGroup className="mb-3">
                 <Form.Control
-                  onChange={handleChange}
-                  required
-                  value={formValues.email}
-                  name="email"
+                disabled
+            
+                  
                   placeholder={t("newsletterCreator.Subscribers")}
                   aria-label="Email"
                   aria-describedby="basic-addon2"
@@ -51,8 +58,8 @@ const NewsletterCreator = () => {
               <InputGroup className="mb-3">
                 <Form.Control
                   onChange={handleChange}
-                  value={formValues.name}
-                  name="name"
+                  value={formValues.subject}
+                  name="subject"
                   required
                   placeholder={t("contact.Subject")}
                   aria-label="Subject"

@@ -59,7 +59,7 @@ const Footer = () => {
               <br></br>
 
               <li>
-                <a href="/profile" className="links-footer"> {t("navbar.Profile")}</a>
+                <a href="/account" className="links-footer"> {t("navbar.Account")}</a>
               </li>
               <br></br>
 

@@ -18,7 +18,9 @@
     "Company List": "Lista e kompanive",
     "Sign Up": "Regjistrohu",
     "Sign In": "Hyni",
-    "Corporate": "Korporatë"
+    "Corporate": "Korporatë",
+    "Succes Stories": "Tregime Suksesi",
+    "Products": "Produktet"
   },
   "main": {
     "You are Logged in": "Jeni të identifikuar"
@@ -129,7 +131,7 @@
   "error": {
     "Bad Request": "Kerkese e keqe",
     "Unathorized": "I paautorizuar",
-    "Page Not Foundt": "Faqja nuk u gjet",
+    "Page Not Found": "Faqja nuk u gjet",
     "Internal Server Error": "Gabim i brendshëm i serverit",
     "Service Temporarily Overloaded": "Shërbimi është i mbingarkuar përkohësisht",
     "Service Unavailable": "Sherbim i padisponueshem"
@@ -234,7 +236,7 @@
     "Our Brands": "Brendet Tona",
     "Our History": "Historia Jonë",
     "Human Resources": "Burimet Njerëzore",
-    "Our Mission And Vision": "Misioni dhe Vizioni ynë",
+    "Our Mission and Vision": "Misioni dhe Vizioni ynë",
     "Profile": "Profil",
     "History": "Historia",
     "Mission": "Misioni",

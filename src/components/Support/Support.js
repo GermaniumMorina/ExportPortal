@@ -6,6 +6,9 @@ import { Button } from "react-bootstrap";
 import contactImg from "./contact.jpg";
 import "./support.css";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
 
 export const Support = () => {
   const [formValues, setFormValues] = useState({
@@ -19,11 +22,16 @@ export const Support = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(
       "Submitted " + formValues.name + formValues.email + formValues.message
     );
+  const response= await axios.post(`http://127.0.0.1:8000/api/email`,formValues);
+  console.log(response);
+
+  alertify.success(response.data.message);
+
   };
   const { t } = useTranslation();
   return (
