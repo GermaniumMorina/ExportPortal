@@ -31,23 +31,22 @@ export const SignIn = () => {
           //set response in local storage
           //  localStorage.setItem('user', JSON.stringify(response.data))
           if (response.status === 200) {
-            localStorage.setItem('userName', response.data.user.name)
-            localStorage.setItem('userEmail', response.data.user.email)
-            localStorage.setItem('userLoggedIn', true)
-            localStorage.setItem('userId', response.data.user.id)
-            localStorage.setItem('userRole', response.data.user.role)
-            localStorage.setItem('token' , token)
-            localStorage.setItem('userGender', response.data.user.gender)
-            localStorage.setItem('userSurname', response.data.user.surname)
-            localStorage.setItem('userPhone', response.data.user.phone_number)
-            alertify.success("Welcome Back!")
+            localStorage.setItem("userName", response.data.user.name);
+            localStorage.setItem("userEmail", response.data.user.email);
+            localStorage.setItem("userLoggedIn", true);
+            localStorage.setItem("userId", response.data.user.id);
+            localStorage.setItem("userRole", response.data.user.role);
+            localStorage.setItem("token", token);
+            localStorage.setItem("userGender", response.data.user.gender);
+            localStorage.setItem("userSurname", response.data.user.surname);
+            localStorage.setItem("userPhone", response.data.user.phone_number);
+            alertify.success("Welcome Back!");
             navigate("/dashboard");
           }
         })
         .catch(function (error) {
           console.error(error);
           alertify.warning("Authentication Failed");
-
         });
     });
   };

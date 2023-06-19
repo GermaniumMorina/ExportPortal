@@ -31,12 +31,12 @@ function NavBar() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [bellClicked, setBellClicked] = useState(false);
   const [message, setMessage] = useState("");
-
+  const [notificationsActive, setNotificationsActive] = useState(true);
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/Notify/${userId}`
+          `http://localhost:8000/api/Notify/${userId}/1`
         );
         if (response.data.original && response.data.original.length > 0) {
           const userNotifications = response.data.original.filter(
@@ -106,16 +106,44 @@ function NavBar() {
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("language") || "en"
   );
-  const handleLanguageChange = (languageCode) => {
-    setSelectedLanguage(languageCode);
-    localStorage.setItem("language", languageCode); // Save language code to local storage
-    i18n.changeLanguage(languageCode); // Change language using react-i18next
-    window.location.reload(); // Reload the page to apply the new language
+  const handleLanguageChange = async (language) => {
+    let languageId;
+
+    if (language === "en") {
+      languageId = 1;
+    } else if (language === "es") {
+      languageId = 2;
+    } else if (language === "al") {
+      languageId = 3;
+    } else {
+      languageId = 1;
+    }
+
+    setSelectedLanguage(language);
+    localStorage.setItem("language", language);
+    i18n.changeLanguage(language);
+
+    try {
+      const userId = localStorage.getItem("userId");
+
+      const response = await axios.get(
+        `http://localhost:8000/api/updateLanguage/${userId}/${languageId}`
+      );
+      console.log(
+        "Language updated successfully on the server:",
+        response.data
+      );
+
+      const userData = localStorage.getItem("userData");
+      const user = userData ? JSON.parse(userData) : {};
+      user.language = languageId;
+      localStorage.setItem("userData", JSON.stringify(user));
+    } catch (error) {
+      console.error("Failed to update language on the server:", error);
+    }
+
+    window.location.reload();
   };
-  useEffect(() => {
-    localStorage.setItem("language", selectedLanguage);
-    i18n.changeLanguage(selectedLanguage);
-  }, [i18n, selectedLanguage]);
 
   return isLoggedIn ? (
     <div>
@@ -246,6 +274,15 @@ function NavBar() {
               </span>
             </DropdownToggle>
             <DropdownMenu className="message1">
+              <div className="notification-header">
+                <h5>Notifications</h5>
+                {user && (
+                  <label className="switch">
+                    <input type="checkbox" className="checkbox" />
+                    <div className="slider"></div>
+                  </label>
+                )}
+              </div>
               <p>{message}</p>
               {notifications.map((notification, index) => {
                 const notificationData = JSON.parse(notification.data);
