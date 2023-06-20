@@ -38,7 +38,7 @@ function NavBar() {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/Notify/${userId}/1`
+          `http://localhost:8000/api/Notify/${userId}`
         );
         if (response.data.original && response.data.original.length > 0) {
           const userNotifications = response.data.original.filter(
