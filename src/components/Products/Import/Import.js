@@ -28,7 +28,7 @@ const Import = () => {
         data
       );
       console.log(apiImportProducts);
-      setImportProducts(apiImportProducts.data);
+      setImportProducts(apiImportProducts.data.exportProducts.data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching import products:", error);

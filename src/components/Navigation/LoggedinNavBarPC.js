@@ -28,6 +28,7 @@ function ComputerNavBar() {
 const user = localStorage.getItem("userName");
 const [tokens, setTokens] = useState(localStorage.getItem("tokens"));
 const userId = localStorage.getItem("userId");
+const userSurname =localStorage.getItem("userSurname")
 const [dropdownOpen, setDropdownOpen] = useState(false);
 const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -169,10 +170,10 @@ return (
             {t("navbar.Export")}
           </NavDropdown.Item>
         </NavDropdown>
-
+{/* 
         <Nav.Link href="/Marketplace">
           {t("marketplace.Marketplace")}
-        </Nav.Link>
+        </Nav.Link> */}
         <Nav.Link href="/stories">{t("navbar.Succes Stories")}</Nav.Link>
       </Nav>
      
@@ -215,7 +216,7 @@ return (
                       className="rounded-circle"
                     />
                     <span className="ms-2">
-                      {user} · <BsCurrencyExchange /> {tokens}
+                      {user} {userSurname} · <BsCurrencyExchange /> {tokens}
                     </span>
                   </>
                 }

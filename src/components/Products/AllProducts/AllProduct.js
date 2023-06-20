@@ -28,8 +28,8 @@ const AllProduct = () => {
           axios.get("http://127.0.0.1:8000/api/ilist")
         ]);
 
-        setExportProducts(apiExportProducts.data);
-        setImportProducts(apiImportProducts.data);
+        setExportProducts(apiExportProducts.data.data);
+        setImportProducts(apiImportProducts.data.data);
 
         setIsLoading(false);
       } catch (error) {
@@ -184,6 +184,7 @@ const AllProduct = () => {
         </article>
       </div>
     </section>
+    
   </div>
   )
 };
