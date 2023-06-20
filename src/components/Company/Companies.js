@@ -106,7 +106,7 @@ const Companies = () => {
         })
         .then((response) => {
           console.log(response);
-          const data = response.data.data;
+          const data = response.data.exportProducts.data;
           console.log(data);
           setCompanyList(data);
         })
