@@ -77,7 +77,7 @@ const Companies = () => {
   const handleCheckboxChange = async (event) => {
     const { checked, id } = event.target;
     if (checked) {
-      const response =await axios.get(`http://127.0.0.1:8000/api/filterCompany/${id}/1`);
+      const response =await axios.get(`http://127.0.0.1:8000/api/filterCompany/${id}`);
       console.log(response);
       setCompanyList(response.data);
     }
