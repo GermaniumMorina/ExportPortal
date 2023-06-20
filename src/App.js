@@ -35,7 +35,7 @@ import SuccesStories from "./components/Admin/SuccesStories";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Stories from "./components/SuccesStories/Stories";
 import Account from "./components/ProfileManagment/Account";
-import ImageComponent from './components/Products/Export/ImageComponent';
+import ImageComponent from './components/Products/NewProductForm/ImageComponent';
 
 console.log(document.cookie);
 

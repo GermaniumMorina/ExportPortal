@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AddNewItem.css";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
@@ -9,6 +10,7 @@ import { checkIfLoggedIn } from "../../Authentication/checkIfLoggedIn";
 import NotAllowed from "../../Authentication/NotAllowed";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
+
 
 
 
@@ -50,10 +52,10 @@ export const AddNewItem = () => {
   
       if (response.status === 200 && formValues.type === "export") {
         alertify.success("Item added successfully");
-        navigate("/Export");
+        navigate("/ImageComponent");
       } else if (response.status === 200 && formValues.type === "import") {
         alertify.success("Item added successfully");
-        navigate("/Import");
+        navigate("/ImageComponent");
       }
     } catch (error) {
       if (error.response && error.response.status === 422) {
@@ -174,7 +176,7 @@ const isLoggedIn=checkIfLoggedIn();
               {t("products.File added")} {formValues.imageURL}
             </span>
             <br />
-
+              
             <br />
             <Button type="submit" variant="primary">
               {t("signIn.Submit")}

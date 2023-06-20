@@ -6,6 +6,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
+import Slideshow from "../SlideShow/Slideshow.js";
 
 const ImportItem = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const ImportItem = () => {
   const [loading, setLoading] = useState(false);
   const chatPrice = tokens - 10;
   const userId = localStorage.getItem("userId");
+  const [slideshowImages, setSlideshowImages] = useState([]);
 
   useEffect(() => {
     const getImportProduct = async () => {
@@ -28,7 +30,7 @@ const ImportItem = () => {
             Accept: "application/json",
           },
         });
-  
+
         const apiImportProducts = response.data[0];
         console.log(response);
         setImportProduct(apiImportProducts);
@@ -40,6 +42,24 @@ const ImportItem = () => {
 
     getImportProduct();
   }, [id]);
+
+  useEffect(() => {
+    const getSlideshowImages = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/showFiles/${id}/1`
+        );
+        setSlideshowImages(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching slideshow images:", error);
+      }
+    };
+
+    getSlideshowImages();
+  }, [id]);
+
+
 
   const handleBack = () => {
     navigate("/Import");
@@ -128,6 +148,11 @@ const ImportItem = () => {
               <p>
                 {t("company.Category")} {importProduct.category_name}
               </p>
+              <div>
+                {slideshowImages && slideshowImages.length > 0 && (
+                 <Slideshow images={slideshowImages} />
+                )}
+              </div>
               <a href="https://www.facebook.com/" className="m-2">
                 <FaFacebook />
               </a>
@@ -149,6 +174,7 @@ const ImportItem = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };
