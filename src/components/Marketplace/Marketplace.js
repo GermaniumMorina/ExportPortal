@@ -19,7 +19,7 @@ export const Marketplace = () => {
   const getProducts = async () => {
     try {
       const response = await axios.get(
-        // `http://localhost:8000/api/interestedProduct/${userId}` // Correct the API endpoint
+        `http://localhost:8000/api/interestedProduct/${userId}` // Correct the API endpoint
       );
       setProductList(response.data);
       setIsLoading(false); // Set isLoading to false after fetching data
