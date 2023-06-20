@@ -22,7 +22,7 @@ export const SignIn = () => {
     ev.preventDefault();
     axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
       axios
-        .post("http://localhost:8000/api/login/1", {
+        .post("http://localhost:8000/api/login", {
           email,
           password,
         })
