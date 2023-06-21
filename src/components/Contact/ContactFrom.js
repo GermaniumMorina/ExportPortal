@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import "./ContactFrom.css";
 
 export const ContactFrom = () => {
-  //eslint-disable-next-line
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [formValues, setFormValues] = useState({
@@ -15,15 +14,14 @@ export const ContactFrom = () => {
     message: "",
   });
   const { t } = useTranslation();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `http://localhost:8000/api/form/${id}`
         );
-        setProductData(response.data.original[0]); // Set product data. Assume response is an array and we're interested in the first item
-
-        // Also update form values with product data
+        setProductData(response.data.original[0]);
         setFormValues({
           name: response.data.original[0].Product,
           email: response.data.original[0].email,
@@ -42,26 +40,49 @@ export const ContactFrom = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!productData) return; // return if no product data is available
-
+  
+    if (!productData) return; // Return if no product data is available
+  
     const { Owner_id: Oid, Product_ID: Pid } = productData; // Extract Oid and Pid from productData
-
+  
+    const language = localStorage.getItem("language") || "en";
+    let languageNumber = 1; // Default language number to 1 (English)
+  
+    // Convert language code to number
+    if (language === "es") {
+      languageNumber = 2;
+    } else if (language === "al") {
+      languageNumber = 3;
+    }
+  
+    const buyerListData = {
+      product_id: Pid,
+      user_id: Oid,
+    };
+  
     axios
-      .get(`http://localhost:8000/api/Notify/${Oid}/${id}/${Pid}`, formValues) // use Oid and Pid here
-      .then((res) => {
-        console.log("Data sent to database successfully.");
+      .all([
+        axios.get(`http://localhost:8000/api/Notify/${Oid}/${id}/${Pid}/${languageNumber}`, {
+          params: formValues,
+        }),
+        axios.post("http://localhost:8000/api/buyerList", buyerListData),
+      ])
+      .then(axios.spread((notifyResponse, buyerListResponse) => {
+        console.log("Data sent to the database successfully.");
+  
+        // Proceed with the email sending code here
         window.location.href = `mailto:${formValues.email}?subject=Interest in ${formValues.name}&body=${formValues.message}`;
-      })
+      }))
       .catch((err) => {
-        console.log("Error in sending data to database.", err);
+        console.log("Error in sending data to the database.", err);
       });
   };
+  
 
   return (
-    <div id="add-new-company-base-contact-from">
+    <div id="add-new-company-base-contact-form">
       <Form onSubmit={handleSubmit}>
         <h1 className="text-center">{t("contact.Contact seller")}</h1>
         <h5>{t("contact.Subject")}</h5>
@@ -71,6 +92,7 @@ export const ContactFrom = () => {
             name="name"
             placeholder={t("contact.Subject")}
             aria-label="Name"
+            onChange={handleChange}
           />
         </InputGroup>
         <h5>{t("newsletter.Email")}</h5>

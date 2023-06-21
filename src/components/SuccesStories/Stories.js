@@ -65,7 +65,7 @@ const Stories = () => {
                 <p className="stories-text-title">{story.topic}</p>
                 <p className="stories-text-body">Company Name: {story.name}</p>
                 <p className="stories-text-body">
-                  Representative: {story.representative}
+                  Representative: {story.representative} / {story.position}
                 </p>
                 {expandedStory === story ? (
                   <p className="stories-text-body">{story.message}</p>
@@ -105,7 +105,10 @@ const Stories = () => {
                 <p className="stories-text-title">{story.topic}</p>
                 <p className="stories-text-body">Company Name: {story.name}</p>
                 <p className="stories-text-body">
-                  Representative: {story.representative}
+                  Representative: {story.representative} 
+                </p>
+                <p className="stories-text-body">
+                  Position: {story.position}
                 </p>
                 {expandedStory === story ? (
                   <p className="stories-text-body">{story.message}</p>

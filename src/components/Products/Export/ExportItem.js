@@ -6,6 +6,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
+import Slideshow from "../SlideShow/Slideshow.js";
 
 
 import { useTranslation } from "react-i18next";
@@ -16,6 +17,7 @@ const ExportItem = () => {
   //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
+  const [slideshowImages, setSlideshowImages] = useState([]);
 
   const chatPrice = tokens - 10;
 
@@ -74,7 +76,7 @@ const ExportItem = () => {
       if (confirmChat) {
         setLoading(true);
         try {
-          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
+          await axios.put(`http://localhost:8000/api/updateToken/${userId}/1`, {
             amount: chatPrice,
           });
           setLoading(false);
@@ -129,6 +131,11 @@ const ExportItem = () => {
               <p>
                 {t("company.Category")} {exportProduct.category_name}
               </p>
+              <div>
+                {slideshowImages && slideshowImages.length > 0 && (
+                 <Slideshow images={slideshowImages} />
+                )}
+              </div>
               <a href="https://www.facebook.com/" className="m-2">
                 <FaFacebook />
               </a>
