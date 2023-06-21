@@ -1,0 +1,38 @@
+
+.logo {
+  margin-top: 10px;
+  height: 80px;
+  width: 80px;
+}
+.main-laptop-navbar{
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;}
+
+.main-navbar-box{
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;}
+
+.bell-icon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+}
+
+
+.navigation-item{
+  margin-left: 8px;
+  font-weight: bold !important;
+}
+
+
+
+.drawer-header-inside{
+  height: 90px;
+}
+

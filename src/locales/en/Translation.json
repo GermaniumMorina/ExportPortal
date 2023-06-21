@@ -1,0 +1,247 @@
+{
+  "navbar": {
+    "Company": "Company",
+    "Product": "Product",
+    "Buy TEST": "Buy TEST",
+    "Companies": "Companies",
+    "Add new company": "Add new company",
+    "Add New Product": "Add New Product",
+    "Import": "Import",
+    "Export": "Export",
+    "Profile": "Profile",
+    "Account": "Account",
+    "Language": "Language",
+    "Albanian": "Albanian",
+    "English": "English",
+    "Spanish": "Spanish",
+    "Logout": "Logout",
+    "Company List": "Company List",
+    "Sign Up": "Sign Up",
+    "Sign In": "Sign In",
+    "Corporate": "Corporate",
+    "Succes Stories": "Succes Stories",
+    "Products": "Products"
+  },
+  "main": {
+    "You are Logged in": "You are Logged in"
+  },
+  "footer": {
+    "St.Uke Bytyqi Nr.7": "St.Uke Bytyqi Nr.7",
+    "Prizren, Kosovo": "Prizren, Kosovo",
+    "Email support": "Email support",
+    "Contact Support": "Contact Support",
+    "Home": "Home"
+  },
+  "newsletter": {
+    "Subscribe to our newsletter!": "Subscribe to our newsletter!",
+    "Email": "Email",
+    "Button": "Button",
+    "Subscribe": "Subscribe"
+  },
+  "companies": {
+    "Filter": "Filter",
+    "Search!": "Search!",
+    "Filter by Category": "Filter by Category:",
+    "Filter by Country": "Filter by Country:",
+    "All": "All",
+    "Name": "Name:",
+    "Keywords": "Keywords:",
+    "Country": "Country:",
+    "Web Address": "Web Address:",
+    "View More": "View More",
+    "Liability": "Liability",
+    "Control": "Control",
+    "Stock": "Stock",
+    "Others": "Others"
+  },
+  "company": {
+    "More Info": "More Info:",
+    "Category": "Category:",
+    "Sub-Catgory": "Sub-Catgory:",
+    "Membership": "Membership:",
+    "Company Profile": "Company Profile"
+  },
+  "companyListing": {
+    "Select": "Select",
+    "Name": "Name",
+    "Keywords": "Keywords",
+    "Country": "Country",
+    "More Info": "More Info"
+  },
+  "addCompany": {
+    "Add Company": "Add Company",
+    "Company Name": "Company Name",
+    "Company Type": "Company Type",
+    "More information about the company": "More information about the company",
+    "Taxpayer ID number": "Taxpayer ID number",
+    "Company Budget": "Company Budget",
+    "Taxpayer Office": "Taxpayer Office",
+    "Activity Area": "Activity Area",
+    "Exporter": "Exporter",
+    "Importer": "Importer",
+    "Servicer": "Servicer",
+    "Retailer": "Retailer",
+    "Wholesaler": "Wholesaler",
+    "Manufacturer": "Manufacturer"
+  },
+  "import": {
+    "Import List": "Import List",
+    "Export List": "Export List",
+    "Price": "Price:",
+    "Description": "Description:",
+    "Created at": "Created at:",
+    "Views": "Views:",
+    "Fashion": "Fashion",
+    "Home": "Home",
+    "Accessories": "Accessories",
+    "Sporting": "Sporting",
+    "Health": "Health",
+    "Medical": "Medical",
+    "Pets": "Pets",
+    "Back": "Back",
+    "Import Details": "Import Details",
+    "Export Details": "Export Details",
+    "Chat with owner": "Chat with owner"
+  },
+  "notAllowed": {
+    "You are not allowed to view this page": "You are not allowed to view this page"
+  },
+  "signIn": {
+    "Welcome": "Welcome",
+    "Forgot Password?": "Forgot Password?",
+    "If you dont have a membership yet": " If you dont have a membership yet,",
+    "Activate": "Activate",
+    "Enter email or username": "Enter email or username",
+    "Submit": "Submit",
+    "Password": "Password"
+  },
+  "signUp": {
+    "Sign Up For Free": "Sign Up For Free",
+    "Surname": "Surname",
+    "E-mail": "E-mail",
+    "Password (again)": "Password (again)",
+    "Phone Number": "Phone Number",
+    "Select country": "Select country",
+    "Gender": "Gender",
+    "Male": "Male",
+    "Female": "Female",
+    "I have read and understood Membership Classification Text": "I have read and understood Membership Classification Text",
+    "If you have an account": "If you have an account"
+  },
+  "error": {
+    "Bad Request": "Bad Request",
+    "Unathorized": "Unathorized",
+    "Page Not Found": "Page Not Found",
+    "Internal Server Error": "Internal Server Error",
+    "Service Temporarily Overloaded": "Service Temporarily Overloaded",
+    "Service Unavailable": "Service Unavailable"
+  },
+  "products": {
+    "Add new Item": "Add new Item",
+    "Item Name": "Item Name",
+    "Item Description": "Item Description",
+    "Item Price": "Item Price",
+    "Type": "Type",
+    "Import Item": "Import Item",
+    "Export Item": "Export Item",
+    "Choose a file": "Choose a file",
+    "File added": "File added:",
+    "Fashion": "Fashion",
+    "Home": "Home",
+    "Accessories": "Accessories",
+    "Sporting": "Sporting",
+    "Health": "Health",
+    "Medical": "Medical",
+    "Pets": "Pets"
+  },
+  "support": {
+    "Message": "Message",
+    "Send": "Send"
+  },
+  "contact": {
+    "Subject": "Subject",
+    "Loading": "Loading...",
+    "Contact seller": "Contact seller"
+  },
+  "marketplace": {
+    "Did you buy this": "Did you buy this?",
+    "Product name": "Product name:",
+    "Product price": "Product price:",
+    "Product description": "Product description",
+    "Yes": "Yes",
+    "No": "No",
+    "Did you sell this product": "Did you sell this product?",
+    "Marketplace": "Marketplace"
+  },
+  "newsletterCreator": {
+    "Write newsletter": "Write newsletter",
+    "To": "To",
+    "Subscribers": "Subscribers"
+  },
+  "editItem": {
+    "Edit Item": "Edit Item",
+    "ID": "ID",
+    "Description": "Description",
+    "Price": "Price",
+    "ImageUrl": "ImageUrl",
+    "Views": "Views",
+    "Category ID": "Category ID",
+    "Company ID": "Company ID",
+    "Update": "Update",
+    "Go Back": "Go Back",
+    "Edit": "Edit",
+    "Delete": "Delete"
+  },
+  "productSellTest": {
+    "This is a test site": "This is a test site",
+    "Product Name: Test": "Product Name: Test",
+    "Product Description: Test product": "Product Description: Test product",
+    "Product Price": "Product Price: ",
+    "Chat with owner": "Chat with owner"
+  },
+  "profileManager": {
+    "Edit Profile": "Edit Profile"
+  },
+  "profileViewer": {
+    "Surname": "Surname:",
+    "Email": "Email:",
+    "Phone": "Phone:",
+    "Gender": "Gender:"
+  },
+  "alertTest": {
+    "Alert Test Page": "Alert Test Page",
+    "Here you can test pop ups": "Here you can test pop ups",
+    "Pop Up with OK": "Pop Up with OK",
+    "Warning": "Warning",
+    "Succes": "Succes",
+    "Any message": "Any message",
+    "Confirmation Pop Up": "Confirmation Pop Up",
+    "Error": "Error"
+  },
+  "testPages": {
+    "This is our ExportPortal": "This is our ExportPortal",
+    "You are logged in!": "You are logged in!",
+    "You can now browse our products and services": "You can now browse our products and services",
+    "You can also add your own products and services": "You can also add your own products and services",
+    "You can also edit your profile": "You can also edit your profile",
+    "You can also view your profile": "You can also view your profile",
+    "You can also edit your orders": "You can also edit your orders"
+  },
+  "corporatePage": {
+    "Bank Account": "Bank Account",
+    "Account": "Account:",
+    "Our Brands": "Our Brands",
+    "Our History": "Our History",
+    "Human Resources": "Human Resources",
+    "Our Mission and Vision": "Our Mission and Vision",
+    "Profile": "Profile",
+    "History": "History",
+    "Mission": "Mission",
+    "Responsibility": "Responsibility",
+    "HR": "HR",
+    "Bank": "Bank",
+    "Brands": "Brands",
+    "Our Social Responsibility": "Our Social Responsibility",
+    "Company Name": "Company Name:"
+  }
+}

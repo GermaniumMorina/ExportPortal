@@ -1,0 +1,76 @@
+.profile-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 50%;
+    height: 90%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  }
+  
+  .edit-div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 40%;
+    height: 90%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  }
+  
+  .back-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    width: 100px;
+    height: 50px;
+    background-color: #ff0000;
+    border-radius: 10px;
+    border: 0px solid #f5f5f5;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    transition: all 0.1s ease 0s;
+    cursor: pointer;
+    color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  .edit-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 50px;
+    background-color: #0044ff;
+    border-radius: 10px;
+    border: 0px solid #f5f5f5;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    transition: all 0.1s ease 0s;
+    cursor: pointer;
+    color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .profile-view,
+    .edit-div {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .profile-view,
+    .edit-div {
+      width: 100%;
+    }
+  }
+  

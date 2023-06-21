@@ -1,0 +1,68 @@
+.products {
+    flex-direction: column;
+    margin: 30px 0px 0px 0px;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 30px;
+    transition: 0.2s;
+  }
+  
+  .import-truck-image {
+    width: 50px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+  }
+  .left-half,
+.right-half {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.left-half .product-box,
+.right-half .product-box {
+  width: 100%;
+}
+
+
+
+.swipe-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    text-align: center;
+  }
+  
+  .swipe-indicator-circle {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background-color: #a868f1;
+    margin: 0 4px;
+    transition: background-color 0.6s ease-in-out;
+    transition: 0.6s;
+  }
+   
+  .swipe-indicator-circle:hover {
+    width: 28px;
+    height:28px;
+    box-shadow: -1px 6px 102px -3px rgba(0,0,0,0.97);
+    border-radius: 50%;
+   
+  }
+  
+  
+  .swipe-indicator-circle.active {
+    background-color: #ccc;
+  }
+  
+  .swipe-indicator p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+  }

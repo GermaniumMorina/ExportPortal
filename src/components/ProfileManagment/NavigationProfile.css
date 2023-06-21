@@ -1,0 +1,64 @@
+.profile-container {
+    display: flex;
+  }
+  
+  .profile-sidebar {
+    color: #fff;
+    width: 250px;
+    padding-left: 20px;
+    height: 100vh;
+    background: linear-gradient(30deg, rgba(21, 21, 199, 1) 0%, rgba(120, 120, 255, 1) 49%, rgba(158, 120, 255, 1) 100%);
+    border-top-right-radius: 80px;
+  }
+  
+  .profile-sidebar p {
+    color: #fff;
+    display: block;
+    padding: 12px;
+    padding-left: 30px;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.3s, background-color 0.3s, transform 0.3s;
+    border-radius: 15px;
+
+    .profile-sidebar p:not(:hover) {
+        /* Styles for non-hovered state */
+        transition-delay: 0.2s;
+        transform: translateX(0);
+        box-shadow: none;
+        border-radius: 15px;
+
+      }
+  }
+  .profile-sidebar p:hover {
+    color: #3f5efb;
+    background-color: #fff;
+    transition: color 0.3s, background-color 0.3s, transform 0.3s;
+    transform: translateX(30px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+  }
+  
+  
+  .profile-sidebar p i {
+    margin-right: 5px;
+  }
+
+  .profile-sidebar p::after {
+    right: 0;
+  }
+  
+  .profile-sidebar p::before {
+    right: -35px;
+    border-bottom-left-radius: 20px;
+  }
+  
+  .profile-sidebar p:hover::after,
+  .profile-sidebar p:hover::before {
+    width: 35px;
+  }
+  
+  .profile-content {
+    flex-grow: 1;
+  }
+  
