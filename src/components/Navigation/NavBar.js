@@ -34,11 +34,20 @@ function NavBar() {
   const [bellClicked, setBellClicked] = useState(false);
   const [message, setMessage] = useState("");
   const [notificationsActive, setNotificationsActive] = useState(true);
+
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
+        const language = localStorage.getItem("language") || "en";
+        let languageNumber = 1;
+        if (language === "es") {
+          languageNumber = 2;
+        } else if (language === "al") {
+          languageNumber = 3;
+        }
+
         const response = await axios.get(
-          `http://localhost:8000/api/Notify/${userId}`
+          `http://localhost:8000/api/Notify/${userId}/${languageNumber}`
         );
         if (response.data.original && response.data.original.length > 0) {
           const userNotifications = response.data.original.filter(
@@ -48,25 +57,23 @@ function NavBar() {
             }
           );
 
-          console.log(userNotifications);
           setNotifications(userNotifications);
 
-          // Count unread notifications
           let unread = 0;
           userNotifications.forEach((notification) => {
             if (!notification.read_at) {
               unread++;
-            } // assuming read_at is null for unread notifications
+            }
           });
           setUnreadCount(unread);
 
-          setMessage(""); // Clear the message if notifications are present
+          setMessage("");
         } else {
           console.log("No notifications found.");
           setNotifications([]);
           setUnreadCount(0);
 
-          setMessage("No new notifications."); // Set the message when no notifications are found
+          setMessage("No new notifications.");
         }
       } catch (error) {
         console.error(error);
@@ -150,6 +157,30 @@ function NavBar() {
       console.error("Failed to update language on the server:", error);
     }
   };
+  const toggleNotifications = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/notificatiOnOff/${userId}`
+      );
+
+      setNotificationsActive(
+        (prevNotificationsActive) => !prevNotificationsActive
+      );
+
+      if (response.data.success) {
+        const newUnreadCount = notificationsActive
+          ? unreadCount + 1
+          : unreadCount - 1;
+        setUnreadCount(newUnreadCount);
+      }
+
+      console.log("Notifications toggled successfully for user:", response);
+    } catch (error) {
+      console.error("Failed to toggle notifications:", error);
+      // Handle the error
+    }
+  };
+
   return isLoggedIn ? (
     <div>
       <Navbar bg="light" variant="light" className="custom-navbar">
@@ -307,9 +338,9 @@ function NavBar() {
                     <input
                       type="checkbox"
                       className="checkbox"
-                      // checked={notificationsActive}
-                      // onChange={toggleNotifications}
-                    />{" "}
+                      checked={notificationsActive}
+                      onChange={toggleNotifications}
+                    />
                     <div className="slider"></div>
                   </label>
                 )}
