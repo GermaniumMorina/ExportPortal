@@ -66,6 +66,22 @@ const ExportItem = () => {
     }
   };
 
+  useEffect(() => {
+    const getSlideshowImages = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/showFiles/${id}/1`
+        );
+        setSlideshowImages(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching slideshow images:", error);
+      }
+    };
+
+    getSlideshowImages();
+  }, [id]);
+
   const handleChat = async (id) => {
     if (tokens < 10) {
       alert("You should have at least 10 tokens to chat with the owner!");
