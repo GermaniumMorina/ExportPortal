@@ -26,7 +26,7 @@ const NewsletterCreator = () => {
     console.log(
       "Submitted " + formValues.name + formValues.email + formValues.message
     );
-  const response= await axios.post(`http://127.0.0.1:8000/api/sendnewsletter`,formValues);
+  const response= await axios.post(`http://127.0.0.1:8000/api/sendnewsletter/1`,formValues);
   console.log(response);
 
   alertify.success(response.data.message);

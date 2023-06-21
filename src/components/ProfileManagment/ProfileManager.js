@@ -32,7 +32,7 @@ const ProfileManager = () => {
     console.log(formValues);
     axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
       axios
-        .put(`http://localhost:8000/api/updateUser/${userId}`, {
+        .put(`http://localhost:8000/api/updateUser/${userId}/1`, {
           name: formValues.name,
           surname: formValues.surname,
           email: formValues.email,

@@ -18,7 +18,7 @@ export const Newsletter = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/newsletter",
+        "http://localhost:8000/api/newsletter/1",
         {
           email: email,
         }

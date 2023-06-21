@@ -27,7 +27,7 @@ const Password = () => {
     console.log(formValues);
     axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
       axios
-        .put(`http://localhost:8000/api/password`, {
+        .put(`http://localhost:8000/api/password/1`, {
        
           email: formValues.email,
           newPassword: formValues.password,
