@@ -74,7 +74,7 @@ const ExportItem = () => {
       if (confirmChat) {
         setLoading(true);
         try {
-          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
+          await axios.put(`http://localhost:8000/api/updateToken/${userId}/1`, {
             amount: chatPrice,
           });
           setLoading(false);

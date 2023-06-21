@@ -22,7 +22,7 @@ export const Marketplace = () => {
       try {
         const [buyProductsResponse, sellProductsResponse] = await Promise.all([
           axios.get(`http://localhost:8000/api/buyerList/${userId}`),
-          axios.get(`http://localhost:8000/api/sellerList/${userId}`),
+          axios.get(`http://localhost:8000/api/sellerList`),
         ]);
 
         setBuyProductList(buyProductsResponse.data);

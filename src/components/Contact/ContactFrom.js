@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import "./ContactFrom.css";
 
 export const ContactFrom = () => {
-  //eslint-disable-next-line
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [formValues, setFormValues] = useState({
@@ -21,9 +20,7 @@ export const ContactFrom = () => {
         const response = await axios.get(
           `http://localhost:8000/api/form/${id}`
         );
-        setProductData(response.data.original[0]); // Set product data. Assume response is an array and we're interested in the first item
-
-        // Also update form values with product data
+        setProductData(response.data.original[0]);
         setFormValues({
           name: response.data.original[0].Product,
           email: response.data.original[0].email,
@@ -42,14 +39,15 @@ export const ContactFrom = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await axios.post('http://localhost:8000/api/buyerList');
 
-    if (!productData) return; // return if no product data is available
+    if (!productData) return; 
 
-    const { Owner_id: Oid, Product_ID: Pid } = productData; // Extract Oid and Pid from productData
+    const { Owner_id: Oid, Product_ID: Pid } = productData;
 
-    axios
+    await axios
       .get(`http://localhost:8000/api/Notify/${Oid}/${id}/${Pid}`, formValues) // use Oid and Pid here
       .then((res) => {
         console.log("Data sent to database successfully.");

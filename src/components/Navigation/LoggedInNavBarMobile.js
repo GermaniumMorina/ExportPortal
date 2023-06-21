@@ -24,7 +24,7 @@ import StoreIcon from "@mui/icons-material/Store";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import PublishIcon from "@mui/icons-material/Publish";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-// import StorefrontIcon from "@mui/icons-material/Storefront";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
@@ -476,7 +476,7 @@ export default function LoggedInNavBarMobile() {
               </ListItemText>
             </ListItemButton>
           </ListItem>
-          {/* <ListItem
+          <ListItem
             disablePadding
             onClick={() => {
               handleDrawerClose();
@@ -492,7 +492,7 @@ export default function LoggedInNavBarMobile() {
                 <h5>Marketplace </h5>
               </ListItemText>
             </ListItemButton>
-          </ListItem> */}
+          </ListItem>
         </List>
         <ListItem
           disablePadding
