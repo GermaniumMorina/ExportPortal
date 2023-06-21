@@ -25,8 +25,8 @@ const Stories = () => {
       const response = await axios.get(
         "http://127.0.0.1:8000/api/successStory"
       );
-
-      setSuccessStories(response.data.exportProducts.data);
+        console.log(response)
+      setSuccessStories(response.data.SuccessStory.data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching success stories:", error);

@@ -21,7 +21,7 @@ const ProductList = () => {
       const apiExportProducts = await axios.get(
         "http://127.0.0.1:8000/api/elist"
       );
-      console.log(apiExportProducts.data.exportProducts.data);
+      console.log(apiExportProducts);
 
       setExportProducts(apiExportProducts.data.exportProducts.data);
 
