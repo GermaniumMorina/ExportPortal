@@ -44,8 +44,18 @@ const RemoveInfo=useMediaQuery({ query: '(max-width: 1000px)' })
 useEffect(() => {
   const fetchNotifications = async () => {
     try {
+      const language = localStorage.getItem("language") || "en";
+      let languageNumber = 1; // Default language number to 1 (English)
+
+      // Convert language code to number
+      if (language === "es") {
+        languageNumber = 2;
+      } else if (language === "al") {
+        languageNumber = 3;
+      }
+
       const response = await axios.get(
-        `http://localhost:8000/api/Notify/${userId}`
+        `http://localhost:8000/api/Notify/${userId}/${languageNumber}`
       );
       if (response.data.original && response.data.original.length > 0) {
         const userNotifications = response.data.original.filter(

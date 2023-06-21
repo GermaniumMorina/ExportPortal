@@ -20,9 +20,11 @@ export const Marketplace = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // const userId = localStorage.getItem('userId');
+
         const [buyProductsResponse, sellProductsResponse] = await Promise.all([
           axios.get(`http://localhost:8000/api/buyerList/${userId}`),
-          axios.get(`http://localhost:8000/api/sellerList/${userId}`),
+          // axios.get(`http://localhost:8000/api/sellerList/${userId}`),
         ]);
 
         setBuyProductList(buyProductsResponse.data);
