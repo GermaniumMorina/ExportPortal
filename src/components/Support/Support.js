@@ -27,7 +27,7 @@ export const Support = () => {
     console.log(
       "Submitted " + formValues.name + formValues.email + formValues.message
     );
-  const response= await axios.post(`http://127.0.0.1:8000/api/email`,formValues);
+  const response= await axios.post(`http://127.0.0.1:8000/api/email/1`,formValues);
   console.log(response);
 
   alertify.success(response.data.message);

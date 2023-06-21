@@ -18,17 +18,15 @@ export const ContactFrom = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/form/${id}`);
-        const product = response.data.original[0]; // Assume response is an array and we're interested in the first item
-        setProductData(product);
-
-        // Update form values with product data
-        setFormValues((prevValues) => ({
-          ...prevValues,
-          name: product.Product,
-          email: product.email,
-          message: `I am interested in your product: ${product.Product}`,
-        }));
+        const response = await axios.get(
+          `http://localhost:8000/api/form/${id}`
+        );
+        setProductData(response.data.original[0]);
+        setFormValues({
+          name: response.data.original[0].Product,
+          email: response.data.original[0].email,
+          message: `I am interested in your product: ${response.data.original[0].Product}`,
+        });
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -42,7 +40,7 @@ export const ContactFrom = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (!productData) return; // Return if no product data is available

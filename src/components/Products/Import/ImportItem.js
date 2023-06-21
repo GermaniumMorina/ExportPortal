@@ -91,7 +91,7 @@ const ImportItem = () => {
       if (confirmChat) {
         setLoading(true);
         try {
-          await axios.put(`http://localhost:8000/api/updateToken/${userId}/2`, {
+          await axios.put(`http://localhost:8000/api/updateToken/${userId}`, {
             amount: chatPrice,
           });
           setLoading(false);

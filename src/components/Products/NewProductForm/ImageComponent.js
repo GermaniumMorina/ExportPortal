@@ -4,6 +4,7 @@ import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 import "./ImageComponent.css";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const ImageComponent = () => {
   
@@ -110,9 +111,9 @@ const ImageComponent = () => {
     <div className="image-component">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="mainImage" className="file-label">
+          <Button htmlFor="mainImage"   className="file-label">
             Main Image:
-          </label>
+          </Button>
           <input
             type="file"
             name="mainImage"
@@ -129,9 +130,9 @@ const ImageComponent = () => {
           )}
         </div>
         <div>
-          <label htmlFor="images" className="file-label">
+          <Button htmlFor="images" className="file-label">
             Additional Images:
-          </label>
+          </Button>
           <input
             type="file"
             name="images"
@@ -154,9 +155,9 @@ const ImageComponent = () => {
           )}
         </div>
         <div>
-          <label htmlFor="pdf" className="file-label">
+          <Button htmlFor="pdf" className="file-label">
             PDF File:
-          </label>
+          </Button>
           <input
             type="file"
             name="pdf"
