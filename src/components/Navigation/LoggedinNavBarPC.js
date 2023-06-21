@@ -18,7 +18,7 @@ import "./NavBar.css";
 import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { BsCurrencyExchange } from "react-icons/bs";
+import { BsCurrencyExchange, BsBell } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from 'react-responsive'
 
@@ -196,7 +196,7 @@ return (
       <Dropdown  className="bell-icon" isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle caret tag="span">
           <span role="img" aria-label="bell" >
-            🔔
+          <BsBell />
           </span>
           {unreadCount > 0 && <span>{unreadCount}</span>}
         </DropdownToggle>

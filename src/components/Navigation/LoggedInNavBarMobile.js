@@ -29,7 +29,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import avatar from "./avatar.jpg";
-import { BsCurrencyExchange } from "react-icons/bs";
+import { BsCurrencyExchange, BsBell } from "react-icons/bs";
 import axios from "axios";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
@@ -223,7 +223,7 @@ export default function LoggedInNavBarMobile() {
             >
               <DropdownToggle caret tag="span">
                 <span role="img" aria-label="bell">
-                  🔔
+                <BsBell />
                 </span>
                 {unreadCount > 0 && <span>{unreadCount}</span>}
               </DropdownToggle>
