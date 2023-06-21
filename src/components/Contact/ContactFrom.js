@@ -82,12 +82,13 @@ export const ContactFrom = () => {
   
 
   return (
-    <div id="add-new-company-base-contact-form">
+    <div className="contact-form-owner">
       <Form onSubmit={handleSubmit}>
         <h1 className="text-center">{t("contact.Contact seller")}</h1>
         <h5>{t("contact.Subject")}</h5>
         <InputGroup className="mb-3">
           <Form.Control
+          disabled
             value={formValues.name}
             name="name"
             placeholder={t("contact.Subject")}
@@ -98,7 +99,9 @@ export const ContactFrom = () => {
         <h5>{t("newsletter.Email")}</h5>
         <InputGroup className="mb-3">
           <Form.Control
-            readOnly
+                    disabled
+
+            
             value={formValues.email}
             name="email"
             placeholder={t("newsletter.Email")}
