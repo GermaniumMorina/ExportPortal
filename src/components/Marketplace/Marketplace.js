@@ -8,32 +8,36 @@ import { useMediaQuery } from "react-responsive";
 import "./Marketplace.css";
 
 export const Marketplace = () => {
-  const [productList, setProductList] = useState([]);
   const userId = localStorage.getItem("userId");
+  const [buyProductList, setBuyProductList] = useState([]);
+  const [sellProductList, setSellProductList] = useState([]);
   const [activeTab, setActiveTab] = useState("buy");
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const isMobile = useMediaQuery({ query: "(max-width: 450px)" });
   const [isLoading, setIsLoading] = useState(true); // Add isLoading state
 
-  const getProducts = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8000/api/interestedProduct/${userId}` // Correct the API endpoint
-      );
-      setProductList(response.data);
-      setIsLoading(false); // Set isLoading to false after fetching data
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false); // Set isLoading to false in case of an error
-    }
-  };
-
   useEffect(() => {
-    getProducts();
-    //eslint-disable-next-line 
-  }, []); 
+    const fetchData = async () => {
+      try {
+        const [buyProductsResponse, sellProductsResponse] = await Promise.all([
+          axios.get(`http://localhost:8000/api/buyerList/${userId}`),
+          axios.get(`http://localhost:8000/api/sellerList/${userId}`),
+        ]);
 
+        setBuyProductList(buyProductsResponse.data);
+        setSellProductList(sellProductsResponse.data);
+        setIsLoading(false); // Set isLoading to false after fetching data
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false); // Set isLoading to false in case of an error
+      }
+    };
+
+    fetchData();
+    //eslint-disable-next-line 
+  }, []);
+  
   const confirmBuy = async (productId) => { // Pass productId as an argument
     try {
       await axios.post(`http://localhost:8000/api/buyConfirmed`, {
@@ -102,8 +106,8 @@ export const Marketplace = () => {
               <div className="d-flex justify-content-center mt-4 mb-4">
                 <h3>{t("marketplace.Did you buy this")}</h3>
               </div>
-              {productList.map((product, index) => (
-                <div className="product" key={index}>
+              {buyProductList.map((product, index) => (
+                  <div className="product" key={index}>
                   <p>
                     {t("marketplace.Product name")} {product.name}
                   </p>
@@ -136,8 +140,8 @@ export const Marketplace = () => {
               <div className="d-flex justify-content-center mt-4 mb-4">
                 <h3>{t("marketplace.Did you sell this product")}</h3>
               </div>
-              {productList.map((product, index) => (
-                <div className="product" key={index}>
+              {sellProductList.map((product, index) => (
+                  <div className="product" key={index}>
                   <p>
                     {t("marketplace.Product name")} {product.name}
                   </p>
@@ -168,8 +172,8 @@ export const Marketplace = () => {
             <div className="d-flex justify-content-center mt-4 mb-4">
               <h3>{t("marketplace.Did you buy this")}</h3>
             </div>
-            {productList.map((product, index) => (
-              <div className="product" key={index}>
+            {buyProductList.map((product, index) => (
+                  <div className="product" key={index}>
                 <p>
                   {t("marketplace.Product name")} {product.name}
                 </p>
@@ -200,8 +204,8 @@ export const Marketplace = () => {
             <div className="d-flex justify-content-center mt-4 mb-4">
               <h3>{t("marketplace.Did you sell this product")}</h3>
             </div>
-            {productList.map((product, index) => (
-              <div className="product" key={index}>
+            {sellProductList.map((product, index) => (
+                  <div className="product" key={index}>
                 <p>
                   {t("marketplace.Product name")} {product.name}
                 </p>
