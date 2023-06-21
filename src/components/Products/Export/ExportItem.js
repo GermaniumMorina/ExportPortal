@@ -17,6 +17,7 @@ const ExportItem = () => {
   //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
+  //eslint-disable-next-line
   const [slideshowImages, setSlideshowImages] = useState([]);
 
   const chatPrice = tokens - 10;
