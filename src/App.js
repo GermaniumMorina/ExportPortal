@@ -36,7 +36,8 @@ import ContactUs from "./components/ContactUs/ContactUs";
 import Stories from "./components/SuccesStories/Stories";
 import Account from "./components/ProfileManagment/Account";
 import ImageComponent from './components/Products/NewProductForm/ImageComponent';
-
+import axios from "axios";
+axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
 const routes = [

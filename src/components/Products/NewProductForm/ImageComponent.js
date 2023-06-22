@@ -111,9 +111,9 @@ const ImageComponent = () => {
     <div className="image-component">
       <form onSubmit={handleSubmit}>
         <div>
-          <Button htmlFor="mainImage"   className="file-label">
+          <label htmlFor="mainImage"   className="file-label">
             Main Image:
-          </Button>
+          </label>
           <input
             type="file"
             name="mainImage"

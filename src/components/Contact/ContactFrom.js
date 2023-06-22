@@ -14,8 +14,9 @@ export const ContactFrom = () => {
     message: "",
   });
   const { t } = useTranslation();
-
+const Uid=localStorage.getItem("userId")
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -42,7 +43,8 @@ export const ContactFrom = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    console.log(Uid)
+
     if (!productData) return; // Return if no product data is available
   
     const { Owner_id: Oid, Product_ID: Pid } = productData; // Extract Oid and Pid from productData
@@ -59,7 +61,7 @@ export const ContactFrom = () => {
   
     const buyerListData = {
       product_id: Pid,
-      user_id: Oid,
+      user_id: Uid,
     };
   
     axios
