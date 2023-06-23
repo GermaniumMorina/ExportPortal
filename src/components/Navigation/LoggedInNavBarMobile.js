@@ -29,7 +29,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import avatar from "./avatar.jpg";
-import { BsCurrencyExchange } from "react-icons/bs";
+import { BsCurrencyExchange, BsBell } from "react-icons/bs";
 import axios from "axios";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
@@ -45,7 +45,7 @@ import spanish from "./es.png";
 import albania from "./al.png";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const drawerWidth = 290;
 const user = localStorage.getItem("userName");
 const userId = localStorage.getItem("userId");
@@ -103,7 +103,11 @@ export default function LoggedInNavBarMobile() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [message, setMessage] = useState("");
-
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
+  const [notificationsActive, setNotificationsActive] = useState(true);
+  const { i18n, t } = useTranslation();
   const handleLogout = (ev) => {
     ev.preventDefault();
     localStorage.clear();
@@ -111,10 +115,26 @@ export default function LoggedInNavBarMobile() {
   };
 
   useEffect(() => {
-    const fetchNotifications = async () => {
+    const fetchNotifications = async (language) => {
       try {
+        let languageId;
+
+        switch (language) {
+          case "en":
+            languageId = 1;
+            break;
+          case "es":
+            languageId = 2;
+            break;
+          case "al":
+            languageId = 3;
+            break;
+          default:
+            languageId = 1;
+            break;
+        }
         const response = await axios.get(
-          `http://localhost:8000/api/Notify/${userId}`
+          `http://localhost:8000/api/Notify/${userId}/${languageId}`
         );
         if (response.data.original && response.data.original.length > 0) {
           const userNotifications = response.data.original.filter(
@@ -148,7 +168,7 @@ export default function LoggedInNavBarMobile() {
     };
 
     fetchNotifications();
-  }, []);
+  }, [userId]);
   const [openLanguageMenu, setOpenLanguageMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -196,6 +216,72 @@ export default function LoggedInNavBarMobile() {
     };
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const handleLanguageChange = async (language) => {
+    let languageId;
+
+    switch (language) {
+      case "en":
+        languageId = 1;
+        break;
+      case "es":
+        languageId = 2;
+        break;
+      case "al":
+        languageId = 3;
+        break;
+      default:
+        languageId = 1;
+        break;
+    }
+
+    setSelectedLanguage(language);
+    localStorage.setItem("language", language);
+    console.log("Selected language:", language);
+    try {
+      const userId = localStorage.getItem("userId");
+
+      const response = await axios.get(
+        `http://localhost:8000/api/updateLanguage/${userId}/${languageId}`
+      );
+      console.log(
+        "Language updated successfully on the server:",
+        response.data
+      );
+
+      const userData = localStorage.getItem("user");
+      const user = userData ? JSON.parse(userData) : {};
+      user.languageId = languageId;
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      console.error("Failed to update language on the server:", error);
+    }
+  };
+  useEffect(() => {
+    i18n.changeLanguage(selectedLanguage);
+  }, [i18n, selectedLanguage]);
+  const toggleNotifications = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/notificatiOnOff/${userId}`
+      );
+
+      setNotificationsActive(
+        (prevNotificationsActive) => !prevNotificationsActive
+      );
+
+      if (response.data.success) {
+        const newUnreadCount = notificationsActive
+          ? unreadCount + 1
+          : unreadCount - 1;
+        setUnreadCount(newUnreadCount);
+      }
+
+      console.log("Notifications toggled successfully for user:", response);
+    } catch (error) {
+      console.error("Failed to toggle notifications:", error);
+      // Handle the error
+    }
+  };
   return (
     <Box>
       <CssBaseline />
@@ -223,11 +309,27 @@ export default function LoggedInNavBarMobile() {
             >
               <DropdownToggle caret tag="span">
                 <span role="img" aria-label="bell">
-                  🔔
+                  <BsBell style={{ color: "black" }} />
                 </span>
-                {unreadCount > 0 && <span>{unreadCount}</span>}
+                {unreadCount > 0 && (
+                  <span className="unread-count">{unreadCount}</span>
+                )}
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu className="message1">
+                <div className="notification-header">
+                  <h5>Notifications</h5>
+                  {user && (
+                    <label className="switch">
+                      <input
+                        type="checkbox"
+                        className="checkbox"
+                        checked={notificationsActive}
+                        onChange={toggleNotifications}
+                      />
+                      <div className="slider"></div>
+                    </label>
+                  )}
+                </div>
                 <p>{message}</p>
                 {notifications.map((notification, index) => {
                   const notificationData = JSON.parse(notification.data);
@@ -292,7 +394,7 @@ export default function LoggedInNavBarMobile() {
                 <HomeIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Home</h5>
+                <h5>{t("footer.Home")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -309,7 +411,7 @@ export default function LoggedInNavBarMobile() {
                 <ManageAccountsIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Account</h5>
+                <h5>{t("navbar.Account")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -320,7 +422,7 @@ export default function LoggedInNavBarMobile() {
                 <TranslateIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Language</h5>
+                <h5>{t("navbar.Language")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -331,7 +433,12 @@ export default function LoggedInNavBarMobile() {
             open={openLanguageMenu}
             onClose={handleLanguageClose}
           >
-            <MenuItem onClick={handleLanguageClose}>
+            <MenuItem
+              onClick={() => {
+                handleLanguageChange("en");
+                handleLanguageClose();
+              }}
+            >
               <img
                 src={english}
                 alt="english"
@@ -339,10 +446,15 @@ export default function LoggedInNavBarMobile() {
                 height="20"
                 className="m-1"
               />
-              English
+              {t("navbar.English")}
             </MenuItem>
             <Divider />
-            <MenuItem onClick={handleLanguageClose}>
+            <MenuItem
+              onClick={() => {
+                handleLanguageChange("es");
+                handleLanguageClose();
+              }}
+            >
               <img
                 src={spanish}
                 alt="spanish"
@@ -350,10 +462,15 @@ export default function LoggedInNavBarMobile() {
                 height="20"
                 className="m-1"
               />
-              Spanish
+              {t("navbar.Spanish")}
             </MenuItem>
             <Divider />
-            <MenuItem onClick={handleLanguageClose}>
+            <MenuItem
+              onClick={() => {
+                handleLanguageChange("al");
+                handleLanguageClose();
+              }}
+            >
               <img
                 src={albania}
                 alt="albania"
@@ -361,7 +478,7 @@ export default function LoggedInNavBarMobile() {
                 height="20"
                 className="m-1"
               />
-              Albanian
+              {t("navbar.Albanian")}
             </MenuItem>
           </Menu>
           <ListItem disablePadding onClick={handleLogout}>
@@ -370,7 +487,7 @@ export default function LoggedInNavBarMobile() {
                 <LogoutIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Logout</h5>
+                <h5>{t("navbar.Logout")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -390,7 +507,7 @@ export default function LoggedInNavBarMobile() {
                 <StoreIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Companies</h5>
+                <h5>{t("navbar.Companies")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -406,7 +523,7 @@ export default function LoggedInNavBarMobile() {
                 <AddBusinessIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Register Company</h5>
+                <h5>{t("navbar.Register Company")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -423,7 +540,7 @@ export default function LoggedInNavBarMobile() {
                 <LocalMallIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Products </h5>
+                <h5>{t("navbar.Products")} </h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -440,7 +557,7 @@ export default function LoggedInNavBarMobile() {
                 <AddShoppingCartIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Add New Product</h5>
+                <h5>{t("navbar.Add New Product")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -456,7 +573,7 @@ export default function LoggedInNavBarMobile() {
                 <GetAppIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Import Product</h5>
+                <h5>{t("import.Import Product")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -472,7 +589,7 @@ export default function LoggedInNavBarMobile() {
                 <PublishIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Export Products</h5>
+                <h5>{t("import.Export Product")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -507,7 +624,7 @@ export default function LoggedInNavBarMobile() {
               <AutoStoriesIcon />
             </ListItemIcon>
             <ListItemText>
-              <h5>Succes Stories </h5>
+              <h5>{t("navbar.Succes Stories")} </h5>
             </ListItemText>
           </ListItemButton>
         </ListItem>

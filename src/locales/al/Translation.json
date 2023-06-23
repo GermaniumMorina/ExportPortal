@@ -20,7 +20,10 @@
     "Sign In": "Hyni",
     "Corporate": "Korporatë",
     "Succes Stories": "Tregime Suksesi",
-    "Products": "Produktet"
+    "Products": "Produktet",
+    "Register Company": "Regjistro Kompaninë",
+    "Stories": "Përshkrimet",
+    "Log In": "Hyni"
   },
   "main": {
     "You are Logged in": "Jeni të identifikuar"
@@ -101,7 +104,9 @@
     "Back": "Kthehu Mbrapa",
     "Import Details": "Detajet e importit",
     "Export Details": "Detajet e eksportit",
-    "Chat with owner": "Bisedo me pronarin"
+    "Chat with owner": "Bisedo me pronarin",
+    "Import Product": "Importo Produktin",
+    "Export Product": "Eksporto Produktin"
   },
   "notAllowed": {
     "You are not allowed to view this page": "Nuk ju lejohet ta shikoni këtë faqe"

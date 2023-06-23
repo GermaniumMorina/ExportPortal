@@ -20,7 +20,10 @@
     "Sign In": "Sign In",
     "Corporate": "Corporate",
     "Succes Stories": "Succes Stories",
-    "Products": "Products"
+    "Products": "Products",
+    "Register Company": "Register Company",
+    "Stories": "Stories",
+    "Log In": "Log In"
   },
   "main": {
     "You are Logged in": "You are Logged in"
@@ -101,7 +104,9 @@
     "Back": "Back",
     "Import Details": "Import Details",
     "Export Details": "Export Details",
-    "Chat with owner": "Chat with owner"
+    "Chat with owner": "Chat with owner",
+    "Import Product": "Import Product",
+    "Export Product": "Export Product"
   },
   "notAllowed": {
     "You are not allowed to view this page": "You are not allowed to view this page"

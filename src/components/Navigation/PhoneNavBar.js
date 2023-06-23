@@ -30,7 +30,9 @@ import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import albania from "./al.png";
 import english from "./en.png";
 import spanish from "./es.png";
@@ -87,7 +89,10 @@ export default function CombinedMenuDrawer() {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openLanguageMenu = Boolean(anchorEl);
-
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
+  const { i18n, t } = useTranslation();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -103,6 +108,50 @@ export default function CombinedMenuDrawer() {
   const handleLanguageClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLanguageChange = async (language) => {
+    let languageId;
+
+    switch (language) {
+      case "en":
+        languageId = 1;
+        break;
+      case "es":
+        languageId = 2;
+        break;
+      case "al":
+        languageId = 3;
+        break;
+      default:
+        languageId = 1;
+        break;
+    }
+
+    setSelectedLanguage(language);
+    localStorage.setItem("language", language);
+    console.log("Selected language:", language);
+    try {
+      const userId = localStorage.getItem("userId");
+
+      const response = await axios.get(
+        `http://localhost:8000/api/updateLanguage/${userId}/${languageId}`
+      );
+      console.log(
+        "Language updated successfully on the server:",
+        response.data
+      );
+
+      const userData = localStorage.getItem("user");
+      const user = userData ? JSON.parse(userData) : {};
+      user.languageId = languageId;
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      console.error("Failed to update language on the server:", error);
+    }
+  };
+  useEffect(() => {
+    i18n.changeLanguage(selectedLanguage);
+  }, [i18n, selectedLanguage]);
 
   return (
     <Box>
@@ -161,7 +210,7 @@ export default function CombinedMenuDrawer() {
               <HomeIcon />
             </ListItemIcon>
             <ListItemText>
-              <h5>Home</h5>
+              <h5>{t("footer.Home")}</h5>
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -173,7 +222,7 @@ export default function CombinedMenuDrawer() {
               <TranslateIcon />
             </ListItemIcon>
             <ListItemText>
-              <h5>Language</h5>
+              <h5>{t("navbar.Language")}</h5>
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -184,7 +233,12 @@ export default function CombinedMenuDrawer() {
           open={openLanguageMenu}
           onClose={handleLanguageClose}
         >
-          <MenuItem onClick={handleLanguageClose}>
+          <MenuItem
+            onClick={() => {
+              handleLanguageChange("en");
+              handleLanguageClose();
+            }}
+          >
             <img
               src={english}
               alt="english"
@@ -192,11 +246,16 @@ export default function CombinedMenuDrawer() {
               height="20"
               className="m-1"
             />
-            English
+            {t("navbar.English")}
           </MenuItem>
           <Divider />
 
-          <MenuItem onClick={handleLanguageClose}>
+          <MenuItem
+            onClick={() => {
+              handleLanguageChange("es");
+              handleLanguageClose();
+            }}
+          >
             <img
               src={spanish}
               alt="spanish"
@@ -204,10 +263,15 @@ export default function CombinedMenuDrawer() {
               height="20"
               className="m-1"
             />
-            Spanish
+            {t("navbar.Spanish")}
           </MenuItem>
           <Divider />
-          <MenuItem onClick={handleLanguageClose}>
+          <MenuItem
+            onClick={() => {
+              handleLanguageChange("al");
+              handleLanguageClose();
+            }}
+          >
             <img
               src={albania}
               alt="albania"
@@ -215,7 +279,7 @@ export default function CombinedMenuDrawer() {
               height="20"
               className="m-1"
             />
-            Albanian
+            {t("navbar.Albanian")}
           </MenuItem>
         </Menu>
 
@@ -232,7 +296,7 @@ export default function CombinedMenuDrawer() {
                 <PersonAddIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Sign Up</h5>
+                <h5>{t("navbar.Sign Up")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -249,7 +313,7 @@ export default function CombinedMenuDrawer() {
                 <LoginIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Log In</h5>
+                <h5>{t("navbar.Log In")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -268,7 +332,7 @@ export default function CombinedMenuDrawer() {
                 <StoreIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Companies</h5>
+                <h5> {t("navbar.Companies")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -285,36 +349,39 @@ export default function CombinedMenuDrawer() {
                 <LocalMallIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Products </h5>
+                <h5> {t("navbar.Products")} </h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
           <ListItem
-          
-          onClick={() => {
-            handleDrawerClose();
-            navigate("/import");
-          }}
-        >            <ListItemButton>
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/import");
+            }}
+          >
+            {" "}
+            <ListItemButton>
               <ListItemIcon>
                 <GetAppIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Import Product</h5>
+                <h5>{t("import.Import Product")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
           <ListItem
-          onClick={() => {
-            handleDrawerClose();
-            navigate("/export");
-          }}
-        >            <ListItemButton>
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/export");
+            }}
+          >
+            {" "}
+            <ListItemButton>
               <ListItemIcon>
                 <PublishIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Export Products</h5>
+                <h5>{t("import.Export Product")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -330,7 +397,7 @@ export default function CombinedMenuDrawer() {
                 <StorefrontIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Marketplace</h5>
+                <h5>{t("marketplace.Marketplace")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
@@ -347,7 +414,7 @@ export default function CombinedMenuDrawer() {
                 <AutoStoriesIcon />
               </ListItemIcon>
               <ListItemText>
-                <h5>Stories</h5>
+                <h5>{t("navbar.Stories")}</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>
