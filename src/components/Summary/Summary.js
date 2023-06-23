@@ -8,8 +8,6 @@ import { SiQuicklook } from "react-icons/si";
 import { ImNotification } from "react-icons/im";
 import { BsFillFileEarmarkBreakFill } from "react-icons/bs";
 
-
-
 const Summary = () => {
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
@@ -17,8 +15,6 @@ const Summary = () => {
   const UserPhone = localStorage.getItem("userPhone");
   const UserGender = localStorage.getItem("userGender");
   const { t } = useTranslation();
-
-
 
   return (
     <div>
@@ -43,13 +39,10 @@ const Summary = () => {
           </div>
 
           <div className="personal-notifications">
-          
-
-            <div  className="notification-icon">
-            <NotificationsIcon/>
-            
+            <div className="notification-icon">
+              <NotificationsIcon />
             </div>
-          
+
             <div className="notification">
               <p className="notification-title">News</p>
               <p className="notification-subject">The submarine was found</p>
@@ -67,13 +60,94 @@ const Summary = () => {
           </div>
         </div>
         <div className="company-info-right">
-        <div className="company-status">
-<MdOutlineDoneOutline/>
-<BsFillFileEarmarkBreakFill/>
-<ImNotification/>
-<SiQuicklook/>
-        </div>
-          <div className="company-information"></div>
+            
+          <div className="company-status is-approved">
+            <MdOutlineDoneOutline />
+            <span>Approved</span>
+          </div>
+
+          <div className="company-status is-under-review">
+            <BsFillFileEarmarkBreakFill />
+            <span>Under Reviewal</span>
+          </div>
+
+          <div className="company-status is-disapproved">
+             <ImNotification />
+            <span>Disapproved</span>
+          </div>
+
+          <div className="company-status is-preparing">
+            <SiQuicklook />
+            <span>Preparing </span>
+          </div>
+        
+          <div className="company-information">
+          <div className="company-status is-approved">
+            <MdOutlineDoneOutline />
+            <span>Approved</span>
+          </div>
+          <div className="personal-information">
+            <div className="user-details">
+              <h2>
+            {UserName} {UserSurname}
+              </h2>
+              <p>
+                {t("profileViewer.Email")} {UserEmail}
+              </p>
+              <p>
+                {t("profileViewer.Phone")} {UserPhone}
+              </p>
+              <p>
+                {t("profileViewer.Gender")} {UserGender}
+              </p>
+            </div>
+          </div>
+          </div>
+          
+          <div className="company-information">
+          <div className="company-status is-approved">
+            <MdOutlineDoneOutline />
+            <span>Approved</span>
+          </div>
+          <div className="personal-information">
+            <div className="user-details">
+              <h2>
+            {UserName} {UserSurname}
+              </h2>
+              <p>
+                {t("profileViewer.Email")} {UserEmail}
+              </p>
+              <p>
+                {t("profileViewer.Phone")} {UserPhone}
+              </p>
+              <p>
+                {t("profileViewer.Gender")} {UserGender}
+              </p>
+            </div>
+          </div>
+          </div>
+          <div className="company-information">
+          <div className="company-status is-approved">
+            <MdOutlineDoneOutline />
+            <span>Approved</span>
+          </div>
+          <div className="personal-information">
+            <div className="user-details">
+              <h2>
+            {UserName} {UserSurname}
+              </h2>
+              <p>
+                {t("profileViewer.Email")} {UserEmail}
+              </p>
+              <p>
+                {t("profileViewer.Phone")} {UserPhone}
+              </p>
+              <p>
+                {t("profileViewer.Gender")} {UserGender}
+              </p>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
