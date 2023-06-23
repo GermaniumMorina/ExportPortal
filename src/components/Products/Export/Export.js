@@ -6,6 +6,7 @@ import moment from "moment";
 import Form from "react-bootstrap/Form";
 import LoadingBar from "../../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
+import "../Import/Import.css"
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -17,9 +18,12 @@ const ProductList = () => {
 
   const getExportProducts = async () => {
     try {
-      const apiExportProducts = await axios.get("http://127.0.0.1:8000/api/elist");
-      setExportProducts(apiExportProducts.data);
-      console.log(apiExportProducts.data);
+      const apiExportProducts = await axios.get(
+        "http://127.0.0.1:8000/api/elist"
+      );
+      console.log(apiExportProducts);
+
+      setExportProducts(apiExportProducts.data.exportProducts.data);
 
       setIsLoading(false);
     } catch (error) {
@@ -30,7 +34,9 @@ const ProductList = () => {
 
   const getCategories = async () => {
     try {
-      const apiCategories = await axios.get("http://127.0.0.1:8000/api/productcategory");
+      const apiCategories = await axios.get(
+        "http://127.0.0.1:8000/api/productcategory"
+      );
       setCategories(apiCategories.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -47,13 +53,17 @@ const ProductList = () => {
     if (checked) {
       setSelectedCategories([...selectedCategories, name]);
     } else {
-      setSelectedCategories(selectedCategories.filter((category) => category !== name));
+      setSelectedCategories(
+        selectedCategories.filter((category) => category !== name)
+      );
     }
   };
 
   const filteredProducts =
     selectedCategories.length > 0
-      ? exportProducts.filter((product) => selectedCategories.includes(product.category_name))
+      ? exportProducts.filter((product) =>
+          selectedCategories.includes(product.category_name)
+        )
       : exportProducts;
 
   const handleNavigateItem = (id) => {
@@ -94,17 +104,21 @@ const ProductList = () => {
         <h1>{t("import.Export List")}</h1>
       </div>
       <div className="d-flex justify-content-center mt-4">
-        {categories.map((category, index) => (
-          <Form.Check
-            key={index}
-            type="checkbox"
-            id={`category-${category.name}`}
-            label={t(`import.${category.name}`)}
-            name={category.name}
-            onChange={handleCheckboxChange}
-            className="m-2"
-          />
-        ))}
+        <div className="checkbox-container">
+          <div className="checkbox-scroll">
+            {categories.map((category, index) => (
+              <Form.Check
+                key={index}
+                type="checkbox"
+                id={`category-${category.name}`}
+                label={t(`import.${category.name}`)}
+                name={category.name}
+                onChange={handleCheckboxChange}
+                className="m-2"
+              />
+            ))}
+          </div>
+        </div>
       </div>
       <div>
         <div>

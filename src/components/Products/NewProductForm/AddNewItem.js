@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AddNewItem.css";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
@@ -10,8 +11,12 @@ import NotAllowed from "../../Authentication/NotAllowed";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 
+
+
+
 export const AddNewItem = () => {
   const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
@@ -26,7 +31,6 @@ export const AddNewItem = () => {
     const { name, value } = e.target;
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
-
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,10 +52,10 @@ export const AddNewItem = () => {
   
       if (response.status === 200 && formValues.type === "export") {
         alertify.success("Item added successfully");
-        navigate("/Export");
+        navigate("/ImageComponent");
       } else if (response.status === 200 && formValues.type === "import") {
         alertify.success("Item added successfully");
-        navigate("/Import");
+        navigate("/ImageComponent");
       }
     } catch (error) {
       if (error.response && error.response.status === 422) {
@@ -66,14 +70,19 @@ export const AddNewItem = () => {
       }
     }
   };
+  
+
   const handleFileSelect = (event) => {
     setFormValues((prevValues) => ({
       ...prevValues,
       imageURL: event.target.files[0].name,
     }));
   };
+
   const { t } = useTranslation();
 const isLoggedIn=checkIfLoggedIn();
+
+
   return isLoggedIn ? (
     <div className="d-flex justify-content-center">
       <div id="add-new-company-base">
@@ -153,11 +162,6 @@ const isLoggedIn=checkIfLoggedIn();
               <option value="export">{t("products.Export Item")}</option>
             </Form.Select>
             <br />
-            <Button type="submit" variant="primary">
-              {t("signIn.Submit")}
-            </Button>
-            <br />
-            <br />
             <input
               type="file"
               id="myfile"
@@ -171,6 +175,12 @@ const isLoggedIn=checkIfLoggedIn();
             <span className="file-name">
               {t("products.File added")} {formValues.imageURL}
             </span>
+            <br />
+              
+            <br />
+            <Button type="submit" variant="primary">
+              {t("signIn.Submit")}
+            </Button>
           </Form>
         </div>
       </div>

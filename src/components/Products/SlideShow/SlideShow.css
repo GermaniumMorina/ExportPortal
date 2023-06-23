@@ -1,0 +1,40 @@
+.slideshow-container {
+    text-align: center;
+  }
+  
+  .slideshow-buttons {
+    margin-top: 10px;
+  }
+  
+  .prev-button,
+  .next-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .prev-button {
+    margin-right: 10px;
+  }
+  
+  .prev-button:hover,
+  .next-button:hover {
+    background-color: #45a049;
+  }
+  
+  .prev-button:disabled,
+  .next-button:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
+  }
+
+  .slideshow-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+  }
+  

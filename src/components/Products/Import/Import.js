@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import LoadingBar from "../../LoadingScreens/LoadingBar";
 import { useTranslation } from "react-i18next";
+import "./Import.css"
 
 const Import = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Import = () => {
         data
       );
       console.log(apiImportProducts);
-      setImportProducts(apiImportProducts.data);
+      setImportProducts(apiImportProducts.data.exportProducts.data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching import products:", error);
@@ -111,18 +112,24 @@ const Import = () => {
         <h1> {t("import.Import List")}</h1>
       </div>
       <div className="d-flex justify-content-center mt-4">
-        {categories.map((category, index) => (
-          <Form.Check
-            key={index}
-            type="checkbox"
-            id={`category-${category.name}`}
-            label={t(`import.${category.name}`)}
-            name={category.name}
-            onChange={handleCheckboxChange}
-            className="m-2"
-          />
-        ))}
-      </div>
+      <div className="checkbox-container">
+  <div className="checkbox-scroll">
+    {categories.map((category, index) => (
+      <Form.Check
+        key={index}
+        type="checkbox"
+        id={`category-${category.name}`}
+        label={t(`import.${category.name}`)}
+        name={category.name}
+        onChange={handleCheckboxChange}
+        className="m-2"
+      />
+    ))}
+  </div>
+</div>
+
+</div>
+
       <div>
         {filteredProducts.map((importProduct, index) => (
           <div

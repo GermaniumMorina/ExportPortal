@@ -6,6 +6,8 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
 import LoadingBar from "../../LoadingScreens/LoadingBar.js";
+
+
 import { useTranslation } from "react-i18next";
 const ExportItem = () => {
   const navigate = useNavigate();
@@ -14,7 +16,9 @@ const ExportItem = () => {
   //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
+
   const chatPrice = tokens - 10;
+
   let userId = localStorage.getItem("userId");
   const { t } = useTranslation();
   const getExportProduct = async () => {
@@ -111,7 +115,7 @@ const ExportItem = () => {
               <p>
                 {t("import.Price")} {exportProduct.price}
               </p>
-
+              
               <p>
                 {t("import.Description")} {exportProduct.description}
               </p>

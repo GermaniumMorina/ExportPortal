@@ -19,8 +19,10 @@ const OurSocialResp = () => {
             excepteur minim qui est consectetur et.
           </p>
         </div>
-    
       </div>
+     
+       
+
     </div>
   );
 };
