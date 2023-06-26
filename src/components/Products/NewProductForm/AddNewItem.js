@@ -37,6 +37,7 @@ const userId=localStorage.getItem("userId")
   };
   useEffect(() => {
     getCompaniesId();
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = (e) => {

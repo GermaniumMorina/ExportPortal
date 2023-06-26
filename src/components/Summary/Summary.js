@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Summary.css";
 import avatar from "../Navigation/avatar.jpg";
 import { useTranslation } from "react-i18next";
@@ -7,14 +7,40 @@ import { MdOutlineDoneOutline } from "react-icons/md";
 import { SiQuicklook } from "react-icons/si";
 import { ImNotification } from "react-icons/im";
 import { BsFillFileEarmarkBreakFill } from "react-icons/bs";
+import axios from "axios";
 
 const Summary = () => {
   const UserName = localStorage.getItem("userName");
+  const UserId = localStorage.getItem("userId");
+
   const UserEmail = localStorage.getItem("userEmail");
   const UserSurname = localStorage.getItem("userSurname");
   const UserPhone = localStorage.getItem("userPhone");
   const UserGender = localStorage.getItem("userGender");
   const { t } = useTranslation();
+
+  const [companies, setCompanies] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [apiCompanies, apiNotifications] = await Promise.all([
+          axios.get(`http://127.0.0.1:8000/api/companyData/${UserId}`),
+          axios.get(`http://127.0.0.1:8000/api/showAllNotify/${UserId}/1`),
+        ]);
+        setCompanies(apiCompanies.data);
+        console.log(apiCompanies.data);
+
+        setNotifications(apiNotifications.data.original);
+        console.log(apiNotifications.data.original);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [UserId]);
 
   return (
     <div>
@@ -43,111 +69,51 @@ const Summary = () => {
               <NotificationsIcon />
             </div>
 
-            <div className="notification">
-              <p className="notification-title">News</p>
-              <p className="notification-subject">The submarine was found</p>
-              <p className="notification-text">
-                PQuis amet duis est dolore anim nulla consequat dolore et eu
-                enim dolore deserunt anim. Anim ullamco id nisi nostrud enim eu
-                ipsum consequat et incididunt esse. Qui velit ea cupidatat
-                tempor excepteur minim pariatur reprehenderit excepteur sint
-                duis. Esse minim voluptate in pariatur pariatur sit sit. In
-                Lorem est anim ex minim elit fugiat magna magna veniam cupidatat
-                reprehenderit. Minim ipsum laborum aliqua irure sint. Labore
-                proident voluptate duis duis.
-              </p>
-            </div>
+            {notifications.map((notification, index) => (
+              <div className="notification" key={index}>
+                <p>{`${notification["Full Name"]} is interested in your product: ${notification["Product"]}`}</p>
+              </div>
+            ))}
+
           </div>
         </div>
         <div className="company-info-right">
-            
-          <div className="company-status is-approved">
-            <MdOutlineDoneOutline />
-            <span>Approved</span>
-          </div>
-
-          <div className="company-status is-under-review">
-            <BsFillFileEarmarkBreakFill />
-            <span>Under Reviewal</span>
-          </div>
-
-          <div className="company-status is-disapproved">
-             <ImNotification />
-            <span>Disapproved</span>
-          </div>
-
-          <div className="company-status is-preparing">
-            <SiQuicklook />
-            <span>Preparing </span>
-          </div>
-        
-          <div className="company-information">
-          <div className="company-status is-approved">
-            <MdOutlineDoneOutline />
-            <span>Approved</span>
-          </div>
-          <div className="personal-information">
-            <div className="user-details">
-              <h2>
-            {UserName} {UserSurname}
-              </h2>
-              <p>
-                {t("profileViewer.Email")} {UserEmail}
-              </p>
-              <p>
-                {t("profileViewer.Phone")} {UserPhone}
-              </p>
-              <p>
-                {t("profileViewer.Gender")} {UserGender}
-              </p>
-            </div>
-          </div>
-          </div>
-          
-          <div className="company-information">
-          <div className="company-status is-approved">
-            <MdOutlineDoneOutline />
-            <span>Approved</span>
-          </div>
-          <div className="personal-information">
-            <div className="user-details">
-              <h2>
-            {UserName} {UserSurname}
-              </h2>
-              <p>
-                {t("profileViewer.Email")} {UserEmail}
-              </p>
-              <p>
-                {t("profileViewer.Phone")} {UserPhone}
-              </p>
-              <p>
-                {t("profileViewer.Gender")} {UserGender}
-              </p>
-            </div>
-          </div>
-          </div>
-          <div className="company-information">
-          <div className="company-status is-approved">
-            <MdOutlineDoneOutline />
-            <span>Approved</span>
-          </div>
-          <div className="personal-information">
-            <div className="user-details">
-              <h2>
-            {UserName} {UserSurname}
-              </h2>
-              <p>
-                {t("profileViewer.Email")} {UserEmail}
-              </p>
-              <p>
-                {t("profileViewer.Phone")} {UserPhone}
-              </p>
-              <p>
-                {t("profileViewer.Gender")} {UserGender}
-              </p>
-            </div>
-          </div>
-          </div>
+          {companies.length > 0 && (
+            <>
+              <div className="company-information">
+                {companies.map((company) => (
+                  <div
+                    className={`company-status is-${company.status.toLowerCase()}`}
+                    key={company.id}
+                  >
+                    {company.status === "Approved" && <MdOutlineDoneOutline />}
+                    {company.status === "Under Review" && (
+                      <BsFillFileEarmarkBreakFill />
+                    )}
+                    {company.status === "Disapproved" && <ImNotification />}
+                    {company.status === "Preparing" && <SiQuicklook />}
+                    <span>{company.status}</span>
+                  </div>
+                ))}
+                <div className="personal-information">
+                  {companies.map((company) => (
+                    <div className="user-details" key={company.id}>
+                      <h2>Name: {company.name}</h2>
+                      <p>Keywords: {company.keywords}</p>
+                      <p>Country: {company.country}</p>
+                      <p>Web Address: {company.web_address}</p>
+                      <p>More Info: {company.more_info}</p>
+                      <p>Budget: {company.budged}</p>
+                      <p>Type: {company.type}</p>
+                      <p>Category ID: {company.category_id}</p>
+                      <p>Subcategory ID: {company.subcategory_id}</p>
+                      <p>Membership: {company.membership}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
