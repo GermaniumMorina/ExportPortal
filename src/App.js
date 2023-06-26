@@ -38,6 +38,7 @@ import Account from "./components/ProfileManagment/Account";
 import ImageComponent from './components/Products/NewProductForm/ImageComponent';
 import axios from "axios";
 import Summary from "./components/Summary/Summary";
+import CreateAnnouncements from "./components/Admin/CreateAnnouncements";
 axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
@@ -196,6 +197,10 @@ const routes = [
   {
     path:"/summary",
     element: <Summary/>,
+  },
+  {
+    path:"/admin/announcements",
+    element:<CreateAnnouncements/>
   }
 ];
 
