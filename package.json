@@ -29,7 +29,7 @@
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^2.1.0",
     "react-i18next": "^12.3.1",
-    "react-icons": "^4.8.0",
+    "react-icons": "^4.10.1",
     "react-loading": "^2.0.3",
     "react-paginate": "^8.2.0",
     "react-responsive": "^9.0.2",
@@ -48,8 +48,6 @@
     "eject": "react-scripts eject",
     "deploy": "aws s3 sync build/ s3://rrezon-test-app ",
     "prod": "npm run build && npm run deploy"
-
-
   },
   "eslintConfig": {
     "extends": [

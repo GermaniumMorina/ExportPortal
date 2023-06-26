@@ -37,6 +37,7 @@ import Stories from "./components/SuccesStories/Stories";
 import Account from "./components/ProfileManagment/Account";
 import ImageComponent from './components/Products/NewProductForm/ImageComponent';
 import axios from "axios";
+import Summary from "./components/Summary/Summary";
 axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
@@ -191,6 +192,10 @@ const routes = [
   {
     path: "/ImageComponent",
     element: <ImageComponent/>,
+  },
+  {
+    path:"/summary",
+    element: <Summary/>,
   }
 ];
 

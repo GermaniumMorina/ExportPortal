@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddNewItem.css";
 
 import Button from "react-bootstrap/Button";
@@ -11,12 +11,10 @@ import NotAllowed from "../../Authentication/NotAllowed";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 
-
-
-
 export const AddNewItem = () => {
   const navigate = useNavigate();
-
+  const [companies, setCompanies] = useState([]);
+const userId=localStorage.getItem("userId")
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
@@ -25,31 +23,40 @@ export const AddNewItem = () => {
     type: "",
     imageURL: "",
     subcategory_id: "",
+    company_id: "",
   });
+  const getCompaniesId = async () => {
+    try {
+
+      const response = await axios.get(`http://127.0.0.1:8000/api/userCompany/${userId}`);
+      console.log(response);
+      setCompanies(response.data);
+    } catch (error) {
+      console.error("Error fetching companies:", error);
+    }
+  };
+  useEffect(() => {
+    getCompaniesId();
+    // eslint-disable-next-line
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.get("http://localhost:8000/sanctum/csrf-cookie");
-  
-    const data = JSON.stringify({
-      ...formValues,
-      company_id: 1,
-    });
-    console.log(data);
-  
+    console.log(formValues)
+
     try {
-      const response = await axios.post(`http://localhost:8000/api/add`, {
-        ...formValues,
-        company_id: 1,
-      });
-  
+      const response = await axios.post(
+        `http://localhost:8000/api/add`,
+        formValues
+      );
+
       console.log("response", response);
-  
+
       if (response.status === 200 && formValues.type === "export") {
         alertify.success("Item added successfully");
         navigate("/ImageComponent");
@@ -60,7 +67,7 @@ export const AddNewItem = () => {
     } catch (error) {
       if (error.response && error.response.status === 422) {
         console.log("error response", error.response.data);
-  
+
         const errors = error.response.data;
         Object.values(errors).forEach((errorMessage) => {
           alertify.error(errorMessage);
@@ -70,7 +77,6 @@ export const AddNewItem = () => {
       }
     }
   };
-  
 
   const handleFileSelect = (event) => {
     setFormValues((prevValues) => ({
@@ -80,8 +86,7 @@ export const AddNewItem = () => {
   };
 
   const { t } = useTranslation();
-const isLoggedIn=checkIfLoggedIn();
-
+  const isLoggedIn = checkIfLoggedIn();
 
   return isLoggedIn ? (
     <div className="d-flex justify-content-center">
@@ -152,6 +157,21 @@ const isLoggedIn=checkIfLoggedIn();
               <option value={7}>{t("products.Pets")}</option>
             </Form.Select>
             <br />
+            
+            <Form.Select
+              value={formValues.company_id}
+              onChange={handleChange}
+              name="company_id"
+            >
+              <option value="">Select Company</option>
+              {companies.map((company) => (
+                <option key={company.id} value={company.id}>
+                  {company.name}
+                </option>
+              ))}
+            </Form.Select>
+            <br />
+
             <Form.Select
               value={formValues.type}
               onChange={handleChange}
@@ -176,7 +196,7 @@ const isLoggedIn=checkIfLoggedIn();
               {t("products.File added")} {formValues.imageURL}
             </span>
             <br />
-              
+
             <br />
             <Button type="submit" variant="primary">
               {t("signIn.Submit")}
@@ -185,7 +205,7 @@ const isLoggedIn=checkIfLoggedIn();
         </div>
       </div>
     </div>
-  ):(
-    <NotAllowed/>
-  )
+  ) : (
+    <NotAllowed />
+  );
 };

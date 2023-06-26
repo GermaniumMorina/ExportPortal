@@ -1,0 +1,152 @@
+.summary-main-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  
+}
+
+.personal-info-left {
+  grid-column: 1; 
+}
+
+.company-info-right {
+    height: 100vh;
+  grid-column: 2; 
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.company-info-right::-webkit-scrollbar {
+    width: 0; /* Safari and Chrome */
+  }
+/* Styles for personal-info-left section */
+.personal-information {
+  border: 2px solid black;
+  border-radius: 15px;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.personal-notifications{
+    border: 2px solid black;
+    border-radius: 15px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+  
+  }
+
+/* Styles for comapny-info-right section */
+.company-information,
+.company-status {
+  border: 2px solid black;
+  margin: 20px;
+  border-radius: 15px;
+    padding: 10px;
+}
+.user-avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px;
+    }
+    .user-details{
+        margin: 20px;
+    }
+
+ 
+.notification{
+    border: 1px solid rgba(80, 80, 80, 0.679);
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.notification-icon{
+    padding: 5px;
+   background-color: lightblue;
+   border-radius: 15px 15px 0px 0px ;
+}
+
+.notification-title{
+    font-size: large;
+    font-weight: bold;
+}
+
+.notification-subject{
+    font-size: medium;
+    font-weight: bold;
+}
+
+.notification-text{
+    font-style: oblique;
+}
+
+
+/* Approved */
+.is-approved {
+    background-color: green;
+    color: white;
+  }
+  
+  .is-approved span {
+    color: inherit;
+    margin-left: 10px;
+  }
+  
+  /* Under Review */
+  .is-under-review {
+    background-color: orange;
+    color: white;
+  }
+  
+  .is-under-review span {
+    color: inherit;
+    margin-left: 10px;
+  }
+  
+  /* Disapproved */
+  .is-disapproved {
+    background-color: red;
+    color: white;
+  }
+  
+  .is-disapproved span {
+    color: inherit;
+    margin-left: 10px;
+  }
+  
+  /* Preparing */
+  .is-preparing {
+    background-color: blue;
+    color: white;
+  }
+  
+  .is-preparing span {
+    color: inherit;
+    margin-left: 10px;
+  }
+  
+
+  @media screen and (max-width: 950px) {
+    .summary-main-div {
+      grid-template-columns: 1fr; /* Switch to a single column layout */
+    }
+    .personal-info-left {
+        grid-column: 1; 
+      }
+      
+      .company-info-right {
+    
+        grid-column: 1; 
+      
+      }
+    .company-info-right {
+      height: auto; /* Remove fixed height to allow content to expand vertically */
+      overflow-y: visible; /* Show scrollbar if necessary */
+    }
+  }
