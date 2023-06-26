@@ -18,6 +18,9 @@ const Admin = () => {
   const handleExport = () => {
     window.location.href = "/admin/success";
   };
+  const handleAnnouncements = () => {
+    window.location.href = "/admin/announcements";
+  };
   return (
     <div>
       <button onClick={handleAdmin} className="admin-button">
@@ -34,6 +37,11 @@ const Admin = () => {
 
       <button onClick={handleExport} className="admin-button">
         Write success stories
+      </button>
+      <br />
+
+      <button onClick={handleAnnouncements} className="admin-button">
+        Write an Announcement
       </button>
       <br />
     </div>
