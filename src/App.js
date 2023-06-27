@@ -13,7 +13,6 @@ import Export from "./components/Products/Export/Export";
 import ExportItem from "./components/Products/Export/ExportItem";
 import Companies from "./components/Company/Companies";
 import Company from "./components/Company/Company";
-import { ProductSellTest } from "./components/Products/ProductSellTest";
 import { Error400 } from "./components/Error/400";
 import { Error401 } from "./components/Error/401";
 import { Error403 } from "./components/Error/403";
@@ -39,6 +38,8 @@ import ImageComponent from './components/Products/NewProductForm/ImageComponent'
 import axios from "axios";
 import Summary from "./components/Summary/Summary";
 import CreateAnnouncements from "./components/Admin/CreateAnnouncements";
+import FindCompanies from "./components/Admin/FindCompanies";
+import ManageCompanies from "./components/Admin/ManageCompanies";
 axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
@@ -95,10 +96,6 @@ const routes = [
   {
     path: "/Companies/:id",
     element: <Company />,
-  },
-  {
-    path: "/Buy",
-    element: <ProductSellTest />,
   },
   {
     path: "/error/400",
@@ -201,6 +198,14 @@ const routes = [
   {
     path:"/admin/announcements",
     element:<CreateAnnouncements/>
+  },
+  {
+    path:"/admin/search-company",
+    element:<FindCompanies/>
+  },
+  {
+    path: "/managecompany/:id",
+    element: <ManageCompanies />,
   }
 ];
 

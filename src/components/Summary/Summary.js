@@ -78,43 +78,47 @@ const Summary = () => {
           </div>
         </div>
         <div className="company-info-right">
-          {companies.length > 0 && (
-            <>
-              <div className="company-information">
-                {companies.map((company) => (
-                  <div
-                    className={`company-status is-${company.status.toLowerCase()}`}
-                    key={company.id}
-                  >
-                    {company.status === "Approved" && <MdOutlineDoneOutline />}
-                    {company.status === "Under Review" && (
-                      <BsFillFileEarmarkBreakFill />
-                    )}
-                    {company.status === "Disapproved" && <ImNotification />}
-                    {company.status === "Preparing" && <SiQuicklook />}
-                    <span>{company.status}</span>
-                  </div>
-                ))}
-                <div className="personal-information">
-                  {companies.map((company) => (
-                    <div className="user-details" key={company.id}>
-                      <h2>Name: {company.name}</h2>
-                      <p>Keywords: {company.keywords}</p>
-                      <p>Country: {company.country}</p>
-                      <p>Web Address: {company.web_address}</p>
-                      <p>More Info: {company.more_info}</p>
-                      <p>Budget: {company.budged}</p>
-                      <p>Type: {company.type}</p>
-                      <p>Category ID: {company.category_id}</p>
-                      <p>Subcategory ID: {company.subcategory_id}</p>
-                      <p>Membership: {company.membership}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </>
-          )}
-        </div>
+  {companies.length > 0 && (
+    <>
+      <div className="company-information">
+        {companies.map((company) => (
+          <div key={company.id}>
+            <div
+              className={`company-status is-${company.status.toLowerCase()}`}
+            >
+              {company.status === "Approved" && <MdOutlineDoneOutline />}
+              {company.status === "Under Reviewal" && (
+                <BsFillFileEarmarkBreakFill />
+              )}
+              {company.status === "Disapproved" && <ImNotification />}
+              {company.status === "Preparing" && <SiQuicklook />}
+              <span>{company.status}</span>
+            </div>
+
+            <div className="company-details">
+              <h2>Name: {company.name}</h2>
+              <br/>
+              <br/>
+              <br/>
+
+
+              <p>Keywords: {company.keywords}</p>
+              <p>Country: {company.country}</p>
+              <p>Web Address: {company.web_address}</p>
+              <p>More Info: {company.more_info}</p>
+              <p>Budget: {company.budget}</p>
+              <p>Type: {company.type}</p>
+              <p>Category ID: {company.category_id}</p>
+              <p>Subcategory ID: {company.subcategory_id}</p>
+              <p>Membership: {company.membership}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+</div>
+
       </div>
     </div>
   );

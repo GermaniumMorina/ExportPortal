@@ -44,6 +44,7 @@
   margin: 20px;
   border-radius: 15px;
     padding: 10px;
+    
 }
 .user-avatar{
     width: 100px;
@@ -51,8 +52,11 @@
     border-radius: 50%;
     margin: 20px;
     }
-    .user-details{
-        margin: 20px;
+    .company-details{
+      border: 2px solid black;
+      margin: 20px;
+      border-radius: 15px;
+        padding: 10px;
     }
 
  
@@ -99,12 +103,13 @@
   }
   
   /* Under Review */
-  .is-under-review {
+  .is-under {
     background-color: orange;
     color: white;
+    
   }
   
-  .is-under-review span {
+  .is-under span {
     color: inherit;
     margin-left: 10px;
   }
