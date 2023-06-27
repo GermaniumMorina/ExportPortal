@@ -12,6 +12,10 @@ const Slideshow = ({ images }) => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
+  if (!images || images.length === 0) {
+    return null; // Return null if images are not defined or empty
+  }
+
   return (
     <div className="slideshow-container">
       <div>
@@ -22,15 +26,15 @@ const Slideshow = ({ images }) => {
         />
       </div>
       <div className="slideshow">
-      <div className="slideshow-buttons">
-        <button className="prev-button" onClick={handlePrev}>
-          Previous
-        </button>
-        <button className="next-button" onClick={handleNext}>
-          Next
-        </button>
+        <div className="slideshow-buttons">
+          <button className="prev-button" onClick={handlePrev}>
+            Previous
+          </button>
+          <button className="next-button" onClick={handleNext}>
+            Next
+          </button>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

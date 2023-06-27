@@ -88,7 +88,7 @@ const ImageComponent = () => {
     }
 
     axios
-    .post("http://localhost:8000/api/addFile", formData, {
+    .post(`http://localhost:8000/api/addFile`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -130,9 +130,9 @@ const ImageComponent = () => {
           )}
         </div>
         <div>
-          <Button htmlFor="images" className="file-label">
+          <label htmlFor="images" className="file-label">
             Additional Images:
-          </Button>
+          </label>
           <input
             type="file"
             name="images"
@@ -155,9 +155,9 @@ const ImageComponent = () => {
           )}
         </div>
         <div>
-          <Button htmlFor="pdf" className="file-label">
+          <label htmlFor="pdf" className="file-label">
             PDF File:
-          </Button>
+          </label >
           <input
             type="file"
             name="pdf"

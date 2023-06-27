@@ -11,9 +11,6 @@ import NotAllowed from "../../Authentication/NotAllowed";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 
-
-
-
 export const AddNewItem = () => {
   const navigate = useNavigate();
 
@@ -23,7 +20,6 @@ export const AddNewItem = () => {
     price: "",
     category_id: "",
     type: "",
-    imageURL: "",
     subcategory_id: "",
   });
 
@@ -71,13 +67,6 @@ export const AddNewItem = () => {
     }
   };
   
-
-  const handleFileSelect = (event) => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      imageURL: event.target.files[0].name,
-    }));
-  };
 
   const { t } = useTranslation();
 const isLoggedIn=checkIfLoggedIn();
@@ -162,21 +151,7 @@ const isLoggedIn=checkIfLoggedIn();
               <option value="export">{t("products.Export Item")}</option>
             </Form.Select>
             <br />
-            <input
-              type="file"
-              id="myfile"
-              name="myfile"
-              onChange={handleFileSelect}
-            />
-            <label htmlFor="myfile" className="custom-file-input">
-              {t("products.Choose a file")}
-            </label>
-            <br />
-            <span className="file-name">
-              {t("products.File added")} {formValues.imageURL}
-            </span>
-            <br />
-              
+
             <br />
             <Button type="submit" variant="primary">
               {t("signIn.Submit")}

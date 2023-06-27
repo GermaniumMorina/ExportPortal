@@ -16,11 +16,11 @@ const ImportItem = () => {
   const [importProduct, setImportProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [tokens, setTokens] = useState(localStorage.getItem("tokens") || 0);
-  //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const chatPrice = tokens - 10;
   const userId = localStorage.getItem("userId");
   const [slideshowImages, setSlideshowImages] = useState([]);
+  const [mainImage, setmainImage] = useState([]);
 
   useEffect(() => {
     const getImportProduct = async () => {
@@ -46,10 +46,9 @@ const ImportItem = () => {
   useEffect(() => {
     const getSlideshowImages = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/api/showFiles/${id}/1`
-        );
+        const response = await axios.get(`http://localhost:8000/api/showFiles/${id}/1`);
         setSlideshowImages(response.data);
+        console.log(response.data);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching slideshow images:", error);
@@ -59,7 +58,20 @@ const ImportItem = () => {
     getSlideshowImages();
   }, [id]);
 
-
+  useEffect(() => {
+    const getMainImages = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/showFiles/${id}/2`);
+        setmainImage(response.data);
+        console.log(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching main image:", error);
+      }
+    };
+  
+    getMainImages();
+  }, [id]);
 
   const handleBack = () => {
     navigate("/Import");
@@ -101,9 +113,7 @@ const ImportItem = () => {
           console.error("Error updating token:", error);
         }
         try {
-          const response = await axios.get(
-            `http://localhost:8000/api/token/${userId}`
-          );
+          const response = await axios.get(`http://localhost:8000/api/token/${userId}`);
           setTokens(response.data.amount);
         } catch (error) {
           console.error("Error fetching token:", error);
@@ -118,13 +128,18 @@ const ImportItem = () => {
 
   return (
     <div>
-      <div className="d-flex justify-content-center  mt-4 text-primary">
+      <div className="d-flex justify-content-center mt-4 text-primary">
         <h1>{t("import.Import Details")}</h1>
       </div>
       <div>
-        <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto   mb-4 p-5 border rounded  border-dark ">
+        <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto mb-4 p-5 border rounded border-dark">
           <div key={importProduct.id}>
             <div>
+            <div style={{ marginBottom: "20px" }}>
+                    {mainImage && mainImage.length > 0 ? (
+                      <img src={mainImage[0].url} alt="Main Image" style={{ width: "100%" }} />
+                    ) : null}
+                  </div>
               <p>
                 {t("companies.Name")} {importProduct.name}
               </p>
@@ -149,19 +164,23 @@ const ImportItem = () => {
                 {t("company.Category")} {importProduct.category_name}
               </p>
               <div>
-                {slideshowImages && slideshowImages.length > 0 && (
-                 <Slideshow images={slideshowImages} />
-                )}
+              <div style={{ marginBottom: "20px" }}>
+                {slideshowImages && slideshowImages.length > 0 ? (
+                  <Slideshow images={slideshowImages} />
+                ) : null}
+              </div>  
+                </div>
+              <div className="d-flex justify-content-center">
+                <a href="https://www.facebook.com/" className="m-2">
+                  <FaFacebook />
+                </a>
+                <a href="https://www.instagram.com/" className="m-2">
+                  <FaInstagram />
+                </a>
+                <a href="https://www.twitter.com/" className="m-2">
+                  <FaTwitter />
+                </a>
               </div>
-              <a href="https://www.facebook.com/" className="m-2">
-                <FaFacebook />
-              </a>
-              <a href="https://www.instagram.com/" className="m-2">
-                <FaInstagram />
-              </a>
-              <a href="https://www.twitter.com/" className="m-2">
-                <FaTwitter />
-              </a>
             </div>
             <div className="d-flex justify-content-center btn-lg">
               <Button className="mx-3" onClick={handleBack}>
@@ -174,7 +193,6 @@ const ImportItem = () => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };
