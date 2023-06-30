@@ -12,6 +12,9 @@ const Admin = () => {
     alertify.error("You are now in User Mode");
   };
 
+  const handleCompanies = () => {
+    window.location.href = "/admin/search-company";
+  };
   const handleNewsletter = () => {
     window.location.href = "/admin/newsletter";
   };
@@ -42,6 +45,11 @@ const Admin = () => {
 
       <button onClick={handleAnnouncements} className="admin-button">
         Write an Announcement
+      </button>
+      <br />
+
+      <button onClick={handleCompanies} className="admin-button">
+        Edit a company{" "}
       </button>
       <br />
     </div>

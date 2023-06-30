@@ -29,6 +29,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import avatar from "./avatar.jpg";
+import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import { BsCurrencyExchange, BsBell } from "react-icons/bs";
 import axios from "axios";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -391,6 +392,22 @@ export default function LoggedInNavBarMobile() {
               </ListItemIcon>
               <ListItemText>
                 <h5>Companies</h5>
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              handleDrawerClose();
+              navigate("/summary");
+            }}
+          >
+            {" "}
+            <ListItemButton>
+              <ListItemIcon>
+                <DocumentScannerIcon />
+              </ListItemIcon>
+              <ListItemText>
+                <h5>Your Company</h5>
               </ListItemText>
             </ListItemButton>
           </ListItem>

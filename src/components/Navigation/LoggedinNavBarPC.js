@@ -153,6 +153,11 @@ function ComputerNavBar() {
               <NavDropdown.Item href="/AddNewCompany">
                 {t("navbar.Add new company")}
               </NavDropdown.Item>
+              <NavDropdown.Divider />
+
+              <NavDropdown.Item href="/summary">
+                Summary
+              </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
               title={<span className="ms-2">{t("navbar.Product")}</span>}

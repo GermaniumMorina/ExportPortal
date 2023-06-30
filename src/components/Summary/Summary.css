@@ -44,6 +44,7 @@
   margin: 20px;
   border-radius: 15px;
     padding: 10px;
+    
 }
 .user-avatar{
     width: 100px;
@@ -51,8 +52,11 @@
     border-radius: 50%;
     margin: 20px;
     }
-    .user-details{
-        margin: 20px;
+    .company-details{
+      border: 2px solid black;
+      margin: 20px;
+      border-radius: 15px;
+        padding: 10px;
     }
 
  
@@ -86,51 +90,70 @@
     font-style: oblique;
 }
 
-
 /* Approved */
 .is-approved {
-    background-color: green;
-    color: white;
-  }
-  
-  .is-approved span {
-    color: inherit;
-    margin-left: 10px;
-  }
-  
-  /* Under Review */
-  .is-under-review {
-    background-color: orange;
-    color: white;
-  }
-  
-  .is-under-review span {
-    color: inherit;
-    margin-left: 10px;
-  }
-  
-  /* Disapproved */
-  .is-disapproved {
-    background-color: red;
-    color: white;
-  }
-  
-  .is-disapproved span {
-    color: inherit;
-    margin-left: 10px;
-  }
-  
-  /* Preparing */
-  .is-preparing {
-    background-color: blue;
-    color: white;
-  }
-  
-  .is-preparing span {
-    color: inherit;
-    margin-left: 10px;
-  }
-  
+  background-color: green;
+  color: white;
+  cursor: pointer; /* Add cursor style */
+}
+
+.is-approved span {
+  color: inherit;
+  margin-left: 10px;
+}
+
+.is-approved:hover {
+  background-color: darkgreen; /* Add hover effect */
+}
+
+/* Under Review */
+.is-under {
+  background-color: orange;
+  color: white;
+  cursor: pointer; /* Add cursor style */
+}
+
+.is-under span {
+  color: inherit;
+  margin-left: 10px;
+}
+
+.is-under:hover {
+  background-color: darkorange; /* Add hover effect */
+}
+
+/* Disapproved */
+.is-disapproved {
+  background-color: red;
+  color: white;
+  cursor: pointer; /* Add cursor style */
+}
+
+.is-disapproved span {
+  color: inherit;
+  margin-left: 10px;
+}
+
+.is-disapproved:hover {
+  background-color: darkred; /* Add hover effect */
+}
+
+/* Preparing */
+.is-preparing {
+  background-color: blue;
+  color: white;
+  cursor: pointer; /* Add cursor style */
+}
+
+.is-preparing span {
+  color: inherit;
+  margin-left: 10px;
+}
+
+.is-preparing:hover {
+  background-color: darkblue; /* Add hover effect */
+}
+
 
   @media screen and (max-width: 950px) {
     .summary-main-div {
