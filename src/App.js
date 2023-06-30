@@ -40,6 +40,7 @@ import Summary from "./components/Summary/Summary";
 import CreateAnnouncements from "./components/Admin/CreateAnnouncements";
 import FindCompanies from "./components/Admin/FindCompanies";
 import ManageCompanies from "./components/Admin/ManageCompanies";
+import UserSearch from "./components/Admin/UserSearch";
 axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
@@ -178,6 +179,10 @@ const routes = [
   {
     path: "/admin/success",
     element: <SuccesStories />,
+  },
+  {
+    path: "/admin/search-user",
+    element: <UserSearch />,
   },
   {
     path: "/contact",
