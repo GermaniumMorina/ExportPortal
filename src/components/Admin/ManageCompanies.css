@@ -2,11 +2,18 @@
     display: flex;
     flex-wrap: wrap;
   }
-  
   .mc-left-column {
-    flex-basis: 100%;
-    flex-grow: 1;
-    order: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .mc-edit-form {
+    margin: 20px auto;
+    border: 2px solid rgba(0, 0, 0, 0.112);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
   }
   
   .mc-right-column {
@@ -15,13 +22,61 @@
     order: 2;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
-  
+
   .mc-row {
     flex-basis: 100%;
     flex-grow: 1;
-    border: 1px solid black;
+    height: 200px;
+    border: 2px solid rgba(0, 0, 0, 0.112);
+    margin: 20px;
     padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+  }
+  .mc-row-2 {
+    flex-basis: 100%;
+    flex-grow: 1;
+    max-width: 300px;
+    height: 300px;
+    border: 2px solid rgba(0, 0, 0, 0.112);
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    padding-top: 110px;
+    background-color: red;
+    color: black;
+    transition: 0.5s;
+    position: relative; /* Add position relative */
+  }
+  
+  .mc-row-2::after {
+    content: "This deletes the company";
+    display: none; /* Hide by default */
+    padding: 5px;
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .mc-row-2:hover {
+    padding-top: 70px;
+    background-color: rgb(192, 28, 28);
+    cursor: pointer;
+  }
+  
+  .mc-row-2:hover::after {
+    display: block; /* Show on hover */
+  }
+  
+
+.mc-text{
+  font-size: 40px
+
   }
   
   @media (min-width: 1000px) {
@@ -39,4 +94,7 @@
       order: 2;
     }
   }
+  
+    
+
   
