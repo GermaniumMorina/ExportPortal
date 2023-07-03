@@ -41,6 +41,7 @@ import CreateAnnouncements from "./components/Admin/CreateAnnouncements";
 import FindCompanies from "./components/Admin/FindCompanies";
 import ManageCompanies from "./components/Admin/ManageCompanies";
 import UserSearch from "./components/Admin/UserSearch";
+import ManageUser from "./components/Admin/ManageUser";
 axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
@@ -211,6 +212,10 @@ const routes = [
   {
     path: "/managecompany/:id",
     element: <ManageCompanies />,
+  },
+  {
+    path: "/manageuser/:id",
+    element: <ManageUser />,
   }
 ];
 

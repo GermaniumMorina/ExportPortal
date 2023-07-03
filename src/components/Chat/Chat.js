@@ -12,9 +12,9 @@ function Chat() {
 
     if (talkLoaded) {
       const currentUser = new Talk.User({
-        id: '1',
-        name: 'Henry Mill',
-        email: 'henrymill@example.com',
+        id: '23',
+        name: 'Rrezon Krasniqi',
+        email: 'rrezon@admin.com',
         photoUrl: 'henry.jpeg',
         welcomeMessage: 'Hello!',
         role: 'default',

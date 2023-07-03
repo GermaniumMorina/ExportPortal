@@ -76,9 +76,7 @@ const isLoggedIn = checkIfLoggedIn();
           localStorage.setItem("userEmail", formValues.email);
           localStorage.setItem("userPhone", formValues.phone_number);
           localStorage.setItem("userGender", formValues.gender);
-
           localStorage.setItem("userId", response.data.id);
-       
           localStorage.setItem(
             "userCompany",
             response.data.company_id

@@ -18,12 +18,15 @@ const UserSearch = () => {
   const debouncedSearch = useRef(
     debounce((searchValue) => {
       axios
-        .post("http://127.0.0.1:8000/api/searchCompany", {
+        .post("http://127.0.0.1:8000/api/searchUsers", {
           search: searchValue,
         })
         .then((response) => {
-          const data = response.data.exportProducts.data;
+  
+          const data = response.data.Search.data;
           setUserList(data);
+          console.log(data)
+
         })
         .catch((err) => {
           console.error(err);
@@ -43,7 +46,7 @@ const UserSearch = () => {
   };
 
   const navigateToCompany = (id) => {
-    navigate(`/usermanger/${id}`);
+    navigate(`/manageuser/${id}`);
   };
 
   return (
@@ -66,9 +69,9 @@ const UserSearch = () => {
           <TableHead sx={{ minWidth: 650, background: "lightgray" }}>
             <TableRow >
               <TableCell>Name</TableCell>
-              <TableCell align="right">ID</TableCell>
-              <TableCell align="right">Country</TableCell>
-              <TableCell align="right">Category</TableCell>
+              <TableCell align="center">ID</TableCell>
+              <TableCell align="center">Email</TableCell>
+              <TableCell align="center">Phone</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,11 +85,11 @@ const UserSearch = () => {
             }}
               >
                 <TableCell component="th" scope="row">
-                  {user.name}
+                  {user.name} {user.surname}
                 </TableCell>
-                <TableCell align="right">{user.id}</TableCell>
-                <TableCell align="right">{user.country}</TableCell>
-                <TableCell align="right">{user.category}</TableCell>
+                <TableCell align="center">{user.id}</TableCell>
+                <TableCell align="center">{user.email}</TableCell>
+                <TableCell align="center">{user.phone_number}</TableCell>
               </TableRow>
             ))}
           </TableBody>
