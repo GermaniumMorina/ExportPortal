@@ -1,7 +1,6 @@
 import alertify from "alertifyjs";
 import "./Admin.css";
 import React from "react";
-import Chat from "../Chat/Chat";
 
 const Admin = () => {
   const handleAdmin = () => {
@@ -61,7 +60,6 @@ const Admin = () => {
       </button>
       <br />
 
-      <Chat/>
     </div>
   );
 };
