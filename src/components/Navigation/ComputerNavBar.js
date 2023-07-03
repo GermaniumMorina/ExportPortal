@@ -61,8 +61,8 @@ function ComputerNavBar() {
             </NavDropdown>
 
             <Nav.Link href="/stories">{t("navbar.Succes Stories")}</Nav.Link>
-            <Nav.Link href="/signin">Sign In</Nav.Link>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
+            <Nav.Link href="/signin">{t("navbar.Sign In")}</Nav.Link>
+            <Nav.Link href="/signup">{t("navbar.Sign Up")}</Nav.Link>
           </Nav>
         </Navbar.Collapse>
 

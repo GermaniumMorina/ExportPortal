@@ -34,25 +34,36 @@ function ComputerNavBar() {
   const [unreadCount, setUnreadCount] = useState(0);
 
   const [message, setMessage] = useState("");
-
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
+  const [notificationsActive, setNotificationsActive] = useState(true);
+  const { i18n, t } = useTranslation();
   const RemoveInfo = useMediaQuery({ query: "(max-width: 1000px)" });
 
   useEffect(() => {
-    const fetchNotifications = async () => {
+    const fetchNotifications = async (language) => {
       try {
-        const language = localStorage.getItem("language") || "en";
-        let languageNumber = 1; // Default language number to 1 (English)
+        let languageId;
 
-        // Convert language code to number
-        if (language === "es") {
-          languageNumber = 2;
-        } else if (language === "al") {
-          languageNumber = 3;
+        switch (language) {
+          case "en":
+            languageId = 1;
+            break;
+          case "es":
+            languageId = 2;
+            break;
+          case "al":
+            languageId = 3;
+            break;
+          default:
+            languageId = 1;
+            break;
         }
-
         const response = await axios.get(
-          `http://localhost:8000/api/Notify/${userId}/${languageNumber}`
+          `http://localhost:8000/api/showAllNotify/${userId}/${languageId}`
         );
+        console.log(response.data);
         if (response.data.original && response.data.original.length > 0) {
           const userNotifications = response.data.original.filter(
             (notification) => {
@@ -115,20 +126,76 @@ function ComputerNavBar() {
     };
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { i18n, t } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("language") || "en"
-  );
-  const handleLanguageChange = (languageCode) => {
-    setSelectedLanguage(languageCode);
-    localStorage.setItem("language", languageCode); // Save language code to local storage
-    i18n.changeLanguage(languageCode); // Change language using react-i18next
-    window.location.reload(); // Reload the page to apply the new language
+
+  const handleLanguageChange = async (language) => {
+    let languageId;
+
+    switch (language) {
+      case "en":
+        languageId = 1;
+        break;
+      case "es":
+        languageId = 2;
+        break;
+      case "al":
+        languageId = 3;
+        break;
+      default:
+        languageId = 1;
+        break;
+    }
+
+    setSelectedLanguage(language);
+    localStorage.setItem("language", language);
+    console.log("Selected language:", language);
+    try {
+      const userId = localStorage.getItem("userId");
+
+      const response = await axios.get(
+        `http://localhost:8000/api/updateLanguage/${userId}/${languageId}`
+      );
+      console.log(
+        "Language updated successfully on the server:",
+        response.data
+      );
+
+      const userData = localStorage.getItem("user");
+      const user = userData ? JSON.parse(userData) : {};
+      user.languageId = languageId;
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      console.error("Failed to update language on the server:", error);
+    }
   };
   useEffect(() => {
-    localStorage.setItem("language", selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
   }, [i18n, selectedLanguage]);
+  const toggleNotifications = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/notificatiOnOff/${userId}`
+      );
+
+      setNotificationsActive(
+        (prevNotificationsActive) => !prevNotificationsActive
+      );
+
+      if (response.data.success) {
+        const newUnreadCount = notificationsActive
+          ? unreadCount + 1
+          : unreadCount - 1;
+        setUnreadCount(newUnreadCount);
+      }
+
+      console.log(
+        "Notifications toggled successfully for user:",
+        response.data
+      );
+    } catch (error) {
+      console.error("Failed to toggle notifications:", error);
+      // Handle the error
+    }
+  };
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -152,11 +219,6 @@ function ComputerNavBar() {
               <NavDropdown.Divider />
               <NavDropdown.Item href="/AddNewCompany">
                 {t("navbar.Add new company")}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-
-              <NavDropdown.Item href="/summary">
-                Summary
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
@@ -199,14 +261,30 @@ function ComputerNavBar() {
                   <span role="img" aria-label="bell">
                     <BsBell />
                   </span>
-                  {unreadCount > 0 && <span>{unreadCount}</span>}
+                  {unreadCount > 0 && (
+                    <span className="unread-count">{unreadCount}</span>
+                  )}
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu className="message1">
+                  <div className="notification-header">
+                    <h5>Notifications</h5>
+                    {user && (
+                      <label className="switch">
+                        <input
+                          type="checkbox"
+                          className="checkbox"
+                          checked={notificationsActive}
+                          onChange={toggleNotifications}
+                        />
+                        <div className="slider"></div>
+                      </label>
+                    )}
+                  </div>
                   <p>{message}</p>
                   {notifications.map((notification, index) => {
                     const notificationData = JSON.parse(notification.data);
                     return (
-                      <DropdownItem key={index}>
+                      <DropdownItem className="new-message" key={index}>
                         <p>{`${notificationData["Full Name"]} is interested in your product: ${notificationData["Product"]}`}</p>
                       </DropdownItem>
                     );

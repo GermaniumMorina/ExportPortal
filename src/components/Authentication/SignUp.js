@@ -68,7 +68,6 @@ const isLoggedIn = checkIfLoggedIn();
         console.log(response.data);
         console.log(response.status);
 
-
         if (response.status === 201) {
           localStorage.setItem("userLoggedIn", true);
           localStorage.setItem("userName", formValues.name);

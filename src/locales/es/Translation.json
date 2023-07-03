@@ -20,7 +20,10 @@
     "Sign In": "Iniciar sesión",
     "Corporate": "Corporativo",
     "Succes Stories": "Historias de éxito",
-    "Products": "Productos"
+    "Products": "Productos",
+    "Register Company": "Registrar Empresa",
+    "Stories": "Historias",
+    "Log In": "Iniciar sesión"
   },
   "main": {
     "You are Logged in": "Estás conectado"
@@ -101,7 +104,9 @@
     "Back": "Atrás",
     "Import Details": "Importar detalles",
     "Export Details": "Detalles de exportación",
-    "Chat with owner": "Chatear con el propietario"
+    "Chat with owner": "Chatear con el propietario",
+    "Import Product": "Importar Producto",
+    "Export Product": "Exportar Producto"
   },
   "notAllowed": {
     "You are not allowed to view this page": "No tienes permiso para ver esta página"

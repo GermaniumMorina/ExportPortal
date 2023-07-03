@@ -15,7 +15,7 @@ export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const token = document.cookie;
-
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
 
   const handleSubmit = (ev) => {
@@ -31,27 +31,48 @@ export const SignIn = () => {
           //set response in local storage
           //  localStorage.setItem('user', JSON.stringify(response.data))
           if (response.status === 200) {
-            localStorage.setItem('userName', response.data.user.name)
-            localStorage.setItem('userEmail', response.data.user.email)
-            localStorage.setItem('userLoggedIn', true)
-            localStorage.setItem('userId', response.data.user.id)
-            localStorage.setItem('userRole', response.data.user.role)
-            localStorage.setItem('token' , token)
-            localStorage.setItem('userGender', response.data.user.gender)
-            localStorage.setItem('userSurname', response.data.user.surname)
-            localStorage.setItem('userPhone', response.data.user.phone_number)
-            alertify.success("Welcome Back!")
+            localStorage.setItem("userName", response.data.user.name);
+            localStorage.setItem("userEmail", response.data.user.email);
+            localStorage.setItem("userLoggedIn", true);
+            localStorage.setItem("userId", response.data.user.id);
+            localStorage.setItem("userRole", response.data.user.role);
+            localStorage.setItem("token", token);
+            localStorage.setItem("userGender", response.data.user.gender);
+            localStorage.setItem("userSurname", response.data.user.surname);
+            localStorage.setItem("userPhone", response.data.user.phone_number);
+            const language_Id = response.data.language_id;
+
+            let language;
+
+            switch (language_Id) {
+              case 1:
+                language = "en";
+                break;
+              case 2:
+                language = "es";
+                break;
+              case 3:
+                language = "al";
+                break;
+              default:
+                language = "en";
+                break;
+            }
+
+            localStorage.setItem("language_Id", language_Id);
+            localStorage.setItem("language", language);
+            i18n.changeLanguage(language);
+            alertify.success("Welcome Back!");
             navigate("/dashboard");
           }
         })
         .catch(function (error) {
           console.error(error);
           alertify.warning("Authentication Failed");
-
         });
     });
   };
-  const { t } = useTranslation();
+
   return (
     <div className="d-flex justify-content-center">
       <div className="form-div" id="base">
