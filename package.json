@@ -39,6 +39,7 @@
     "react-tag-input-component": "^2.0.2",
     "reactstrap": "^9.1.10",
     "styled-components": "^5.3.10",
+    "talkjs": "^0.16.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

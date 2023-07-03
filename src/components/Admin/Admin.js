@@ -1,6 +1,7 @@
 import alertify from "alertifyjs";
 import "./Admin.css";
 import React from "react";
+import Chat from "../Chat/Chat";
 
 const Admin = () => {
   const handleAdmin = () => {
@@ -10,6 +11,9 @@ const Admin = () => {
   const handleUser = () => {
     localStorage.removeItem("isAdmin");
     alertify.error("You are now in User Mode");
+  };
+  const handleUserManager = () => {
+    window.location.href = "/admin/search-user";
   };
 
   const handleCompanies = () => {
@@ -49,9 +53,15 @@ const Admin = () => {
       <br />
 
       <button onClick={handleCompanies} className="admin-button">
-        Edit a company{" "}
+        Edit a company
       </button>
       <br />
+      <button onClick={handleUserManager} className="admin-button">
+        Edit a User
+      </button>
+      <br />
+
+      <Chat/>
     </div>
   );
 };

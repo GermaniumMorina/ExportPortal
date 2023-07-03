@@ -31,24 +31,23 @@ const Summary = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [apiCompanies, apiNotifications, apiCategories, apiSubCategories] =
-          await Promise.all([
-            axios.get(`http://127.0.0.1:8000/api/companyData/${UserId}`),
-            axios.get(`http://127.0.0.1:8000/api/showAllNotify/${UserId}/1`),
-            axios.get("http://127.0.0.1:8000/api/category"),
-            axios.get("http://127.0.0.1:8000/api/subcategory"),
-
-          ]);
+        const [
+          apiCompanies,
+          apiNotifications,
+          apiCategories,
+          apiSubCategories,
+        ] = await Promise.all([
+          axios.get(`http://127.0.0.1:8000/api/companyData/${UserId}`),
+          axios.get(`http://127.0.0.1:8000/api/showAllNotify/${UserId}/1`),
+          axios.get("http://127.0.0.1:8000/api/category"),
+          axios.get("http://127.0.0.1:8000/api/subcategory"),
+        ]);
         setCompanies(apiCompanies.data);
-        console.log(apiCompanies.data);
 
         setNotifications(apiNotifications.data.original);
-        console.log(apiNotifications.data.original);
 
         setCategories(apiCategories.data);
-        console.log(apiCategories.data);
-
-        setSubcategories(apiSubCategories.data)
+        setSubcategories(apiSubCategories.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -66,17 +65,20 @@ const Summary = () => {
   const handleSubmit = async () => {
     try {
       // Assuming you have the COMPANY_ID available
-      const COMPANY_ID =(companies[0].id) ; // Replace with the actual company ID
-      console.log(COMPANY_ID)
+      const COMPANY_ID = companies[0].id; // Replace with the actual company ID
+      console.log(COMPANY_ID);
       console.log({
         category: selectedCategory,
         subcategory: selectedSubcategory,
-      })
-      // Perform the PUT request to update the category and subcategory
-      await axios.put(`http://127.0.0.1:8000/api/updateCategory/${COMPANY_ID}`, {
-        category_id: selectedCategory,
-        subcategory_id: selectedSubcategory,
       });
+      // Perform the PUT request to update the category and subcategory
+      await axios.put(
+        `http://127.0.0.1:8000/api/updateCategory/${COMPANY_ID}`,
+        {
+          category_id: selectedCategory,
+          subcategory_id: selectedSubcategory,
+        }
+      );
 
       setEditMode(false);
     } catch (error) {
@@ -146,9 +148,7 @@ const Summary = () => {
                         {company.status === "Under Reviewal" && (
                           <BsFillFileEarmarkBreakFill />
                         )}
-                        {company.status === "Disapproved" && (
-                          <ImNotification />
-                        )}
+                        {company.status === "Disapproved" && <ImNotification />}
                         {company.status === "Preparing" && <SiQuicklook />}
                         <span>{company.status}</span>
                       </div>
@@ -193,7 +193,7 @@ const Summary = () => {
                           </>
                         ) : (
                           <>
-                            <h2>Name: {company.name}</h2>
+                            <h2>Name: {company.company_name}</h2>
                             <br />
                             <br />
                             <br />
@@ -203,8 +203,8 @@ const Summary = () => {
                             <p>Web Address: {company.web_address}</p>
                             <p>More Info: {company.more_info}</p>
                             <p>Type: {company.type}</p>
-                            <p>Category ID: {company.category_id}</p>
-                            <p>Subcategory ID: {company.subcategory_id}</p>
+                            <p>Category ID: {company.category_name}</p>
+                            <p>Subcategory ID: {company.subcategory_name}</p>
                             <button onClick={handleEditClick}>Edit</button>
                           </>
                         )}
