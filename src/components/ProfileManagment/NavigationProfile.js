@@ -9,6 +9,7 @@ import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import PasswordIcon from '@mui/icons-material/Password';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import Chat from '../Chat/Chat';
 
 const NavigationProfile = () => {
   const [selectedComponent, setSelectedComponent] = useState(<ProfileViewer />);
@@ -56,6 +57,12 @@ const NavigationProfile = () => {
           <i className="fa fa-clone" aria-hidden="true"></i>
           Security
         </p>
+        <br />
+        <br />
+        <p onClick={() => handleItemClick(<Chat />)}>
+          <i className="fa fa-clone" aria-hidden="true"></i>
+          Security
+        </p>
       </aside>
       <div className="profile-content">{selectedComponent}</div>
     </div>
@@ -90,6 +97,7 @@ const NavigationProfile = () => {
           <PasswordIcon sx={{ mr: 0.5 }} fontSize="inherit" />
           Security
         </Link>
+        
       </Breadcrumbs>
       {selectedComponent}
     </div>

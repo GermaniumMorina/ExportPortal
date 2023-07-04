@@ -1,33 +1,49 @@
 import Talk from 'talkjs';
 import { useEffect, useState, useRef } from 'react';
 import "./Chat.css"
+
 function Chat() {
   const chatboxEl = useRef();
 
-  // wait for TalkJS to load
   const [talkLoaded, markTalkLoaded] = useState(false);
+  const [selectedUser, setSelectedUser] = useState('Jessica');
+
+  const UserName = localStorage.getItem("userName");
+  const UserEmail = localStorage.getItem("userEmail");
+  const UserId = localStorage.getItem("userId");
 
   useEffect(() => {
     Talk.ready.then(() => markTalkLoaded(true));
 
     if (talkLoaded) {
       const currentUser = new Talk.User({
-        id: '23',
-        name: 'Rrezon Krasniqi',
-        email: 'rrezon@admin.com',
+        id: UserId,
+        name: UserName,
+        email: UserEmail,
         photoUrl: 'henry.jpeg',
         welcomeMessage: 'Hello!',
         role: 'default',
       });
 
-      const otherUser = new Talk.User({
+      const otherUserJessica = new Talk.User({
         id: '2',
-        name: 'Jessica Wells',
-        email: 'jessicawells@example.com',
+        name: 'Rrezon 2',
+        email: 'rrezonkrasniqi21@gmail.com',
         photoUrl: 'jessica.jpeg',
         welcomeMessage: 'Hello!',
         role: 'default',
       });
+
+      const otherUserJohn = new Talk.User({
+        id: '3',
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        photoUrl: 'john.jpeg',
+        welcomeMessage: 'Hello!',
+        role: 'default',
+      });
+
+      const otherUser = selectedUser === 'Jessica' ? otherUserJessica : otherUserJohn;
 
       const session = new Talk.Session({
         appId: 'tQeKx0VK',
@@ -45,9 +61,24 @@ function Chat() {
 
       return () => session.destroy();
     }
-  }, [talkLoaded]);
+  }, [UserEmail, UserName, talkLoaded, selectedUser]);
 
-  return <div className="chat" ref={chatboxEl} />;
+  const handleUserChange = (event) => {
+    setSelectedUser(event.target.value);
+  };
+
+  return (
+    <div>
+      <div className="user-dropdown">
+        <label htmlFor="user-select">Select User:</label>
+        <select id="user-select" value={selectedUser} onChange={handleUserChange}>
+          <option value="Jessica">Jessica Wells</option>
+          <option value="John">John Doe</option>
+        </select>
+      </div>
+      <div ref={chatboxEl}  className="chat"/>
+    </div>
+  );
 }
 
 export default Chat;
