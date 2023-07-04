@@ -44,7 +44,7 @@ const ManageUser = () => {
     console.log(formValues);
     axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
       axios
-        .put(`http://localhost:8000/api/updateUser/${id}/1`, {
+        .put(`http://localhost:8000/api/updateUserByAdmin/${id}/1`, {
           name: formValues.name,
           surname: formValues.surname,
           email: formValues.email,
