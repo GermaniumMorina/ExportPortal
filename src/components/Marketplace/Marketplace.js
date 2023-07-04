@@ -29,6 +29,7 @@ export const Marketplace = () => {
 
         setBuyProductList(buyProductsResponse.data);
         setSellProductList(sellProductsResponse.data);
+        console.log(buyProductList);
         setIsLoading(false); // Set isLoading to false after fetching data
       } catch (error) {
         console.log(error);
@@ -37,14 +38,15 @@ export const Marketplace = () => {
     };
 
     fetchData();
-    //eslint-disable-next-line 
+    //eslint-disable-next-line
   }, []);
-  
-  const confirmBuy = async (productId) => { // Pass productId as an argument
+
+  const confirmBuy = async (productId) => {
+    console.log({ userId: userId, productId: productId, confirmation: true });
     try {
       await axios.post(`http://localhost:8000/api/buyConfirmed`, {
-        userId: userId,
-        productId: productId,
+        user_id: userId,
+        product_id: productId,
         confirmation: true,
       });
     } catch (error) {
@@ -52,11 +54,11 @@ export const Marketplace = () => {
     }
   };
 
-  const denyBuy = async (productId) => { // Pass productId as an argument
+  const denyBuy = async (productId) => {
     try {
       await axios.post(`http://localhost:8000/api/buyConfirmed`, {
-        userId: userId,
-        productId: productId,
+        user_id: userId,
+        product_id: productId,
         confirmation: false,
       });
     } catch (error) {
@@ -64,6 +66,31 @@ export const Marketplace = () => {
     }
   };
 
+
+  const confirmSell = async (productId) => {
+    console.log({ userId: userId, productId: productId, confirmation: true });
+    try {
+      await axios.post(`http://localhost:8000/api/sellConfirm`, {
+        user_id: userId,
+        product_id: productId,
+        confirmation: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const denySell = async (productId) => {
+    try {
+      await axios.post(`http://localhost:8000/api/sellConfirm`, {
+        user_id: userId,
+        product_id: productId,
+        confirmation: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const { t } = useTranslation();
 
   const handleSwipeRight = () => {
@@ -109,7 +136,7 @@ export const Marketplace = () => {
                 <h3>{t("marketplace.Did you buy this")}</h3>
               </div>
               {buyProductList.map((product, index) => (
-                  <div className="product" key={index}>
+                <div className="product" key={index}>
                   <p>
                     {t("marketplace.Product name")} {product.name}
                   </p>
@@ -143,7 +170,7 @@ export const Marketplace = () => {
                 <h3>{t("marketplace.Did you sell this product")}</h3>
               </div>
               {sellProductList.map((product, index) => (
-                  <div className="product" key={index}>
+                <div className="product" key={index}>
                   <p>
                     {t("marketplace.Product name")} {product.name}
                   </p>
@@ -153,10 +180,16 @@ export const Marketplace = () => {
                   <p>
                     {t("marketplace.Product description")} {product.description}
                   </p>
-                  <button className="yes-button">
+                  <button
+                    className="yes-button"
+                    onClick={() => confirmSell(product.id)} // Pass productId
+                  >
                     {t("marketplace.Yes")}
                   </button>
-                  <button className="no-button">
+                  <button
+                    className="no-button"
+                    onClick={() => denySell(product.id)} // Pass productId
+                  >
                     {t("marketplace.No")}
                   </button>
                 </div>
@@ -175,7 +208,7 @@ export const Marketplace = () => {
               <h3>{t("marketplace.Did you buy this")}</h3>
             </div>
             {buyProductList.map((product, index) => (
-                  <div className="product" key={index}>
+              <div className="product" key={index}>
                 <p>
                   {t("marketplace.Product name")} {product.name}
                 </p>
@@ -187,13 +220,13 @@ export const Marketplace = () => {
                 </p>
                 <button
                   className="yes-button"
-                  onClick={() => confirmBuy(product.id)} // Pass productId
+                  onClick={() => confirmSell(product.id)} // Pass productId
                 >
                   {t("marketplace.Yes")}
                 </button>
                 <button
                   className="no-button"
-                  onClick={() => denyBuy(product.id)} // Pass productId
+                  onClick={() => denySell(product.id)} // Pass productId
                 >
                   {t("marketplace.No")}
                 </button>
@@ -207,7 +240,7 @@ export const Marketplace = () => {
               <h3>{t("marketplace.Did you sell this product")}</h3>
             </div>
             {sellProductList.map((product, index) => (
-                  <div className="product" key={index}>
+              <div className="product" key={index}>
                 <p>
                   {t("marketplace.Product name")} {product.name}
                 </p>
