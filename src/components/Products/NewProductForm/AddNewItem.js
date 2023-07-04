@@ -27,9 +27,8 @@ const userId=localStorage.getItem("userId")
   });
   const getCompaniesId = async () => {
     try {
-
       const response = await axios.get(`http://127.0.0.1:8000/api/userCompany/${userId}`);
-      console.log(response);
+      
       setCompanies(response.data);
     } catch (error) {
       console.error("Error fetching companies:", error);
@@ -47,7 +46,6 @@ const userId=localStorage.getItem("userId")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues)
 
     try {
       const response = await axios.post(

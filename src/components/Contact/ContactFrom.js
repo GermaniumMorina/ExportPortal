@@ -43,8 +43,7 @@ const Uid=localStorage.getItem("userId")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(Uid)
-
+    
     if (!productData) return; // Return if no product data is available
   
     const { Owner_id: Oid, Product_ID: Pid } = productData; // Extract Oid and Pid from productData
@@ -66,7 +65,7 @@ const Uid=localStorage.getItem("userId")
   
     axios
       .all([
-        axios.get(`http://localhost:8000/api/Notify/${Oid}/${id}/${Pid}/${languageNumber}`, {
+        axios.get(`http://localhost:8000/api/addNotify/${Oid}/${id}/${Pid}/${languageNumber}`, {
           params: formValues,
         }),
         axios.post("http://localhost:8000/api/buyerList", buyerListData),
@@ -123,7 +122,7 @@ const Uid=localStorage.getItem("userId")
           />
         </InputGroup>
         <div className="d-flex justify-content-center">
-          <Button variant="outline-secondary" id="button-addon2" type="submit">
+          <Button variant="outline-secondary" id="button-addon2" type="submit" onClick={handleSubmit}>
             {t("support.Send")}
           </Button>
         </div>
