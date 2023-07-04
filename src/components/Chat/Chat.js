@@ -61,7 +61,7 @@ function Chat() {
 
       return () => session.destroy();
     }
-  }, [UserEmail, UserName, talkLoaded, selectedUser]);
+  }, [UserEmail, UserName, talkLoaded, selectedUser, UserId]);
 
   const handleUserChange = (event) => {
     setSelectedUser(event.target.value);
