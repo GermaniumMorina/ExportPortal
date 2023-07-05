@@ -100,7 +100,10 @@ export default function LoggedInNavBarMobile() {
   const navigate = useNavigate();
 
   const [notifications, setNotifications] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(0);
+  const [unreadCounts, setUnreadCount] = useState({
+    notifications: [],
+    unread_count: 0,
+  });
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [message, setMessage] = useState("");
@@ -138,37 +141,35 @@ export default function LoggedInNavBarMobile() {
           `http://localhost:8000/api/showUnReadNotify/${userId}/${languageId}`
         );
         console.log(response.data);
-        if (response.data.original.notifications?.length >= 0) {
-          console.log("test");
-          const userNotifications = response.data.original.notifications.filter(
-            (notification) => {
-              return notification.notifiable_id === parseInt(userId, 10);
-            }
-          );
-
-          setNotifications(userNotifications);
-
-          let unread = 0;
-          userNotifications.forEach((notification) => {
-            if (!notification.read_at) {
-              unread++;
-            }
+        const { notifications, unread_count } = response.data.original;
+        if (notifications && notifications.length > 0) {
+          const userNotifications = notifications.filter((notification) => {
+            return notification.notifiable_id === parseInt(userId, 10);
           });
-          setUnreadCount(unread);
-
-          setMessage("");
-        } else {
+          setNotifications(userNotifications);
+        }
+        setUnreadCount({
+          notifications: notifications,
+          unread_count: unread_count,
+        });
+        if (
+          response.data.original &&
+          response.data.original.error === "Not found"
+        ) {
           console.log("No notifications found.");
           setNotifications([]);
-          setUnreadCount(0);
-
+          setUnreadCount({
+            notifications: [],
+            unread_count: 0,
+          });
           setMessage("No new notifications.");
+        } else {
+          setMessage("");
         }
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchNotifications();
   }, []);
   const [openLanguageMenu, setOpenLanguageMenu] = useState(false);
@@ -271,18 +272,43 @@ export default function LoggedInNavBarMobile() {
         (prevNotificationsActive) => !prevNotificationsActive
       );
 
-      if (response.data.success) {
-        const newUnreadCount = notificationsActive
-          ? unreadCount + 1
-          : unreadCount - 1;
-        setUnreadCount(newUnreadCount);
-      }
-
       console.log("Notifications toggled successfully for user:", response);
     } catch (error) {
       console.error("Failed to toggle notifications:", error);
       // Handle the error
     }
+  };
+  const markAsReadNotifications = async (language) => {
+    let languageId;
+
+    switch (language) {
+      case "en":
+        languageId = 1;
+        break;
+      case "es":
+        languageId = 2;
+        break;
+      case "al":
+        languageId = 3;
+        break;
+      default:
+        languageId = 1;
+        break;
+    }
+
+    try {
+      await axios.get(
+        `http://localhost:8000/api/MarkAsReadNotify/${userId}/${languageId}`
+      );
+
+      setUnreadCount({ ...unreadCounts, unread_count: 0 });
+    } catch (error) {
+      console.error("Failed to mark notifications as read:", error);
+      // Handle the error
+    }
+  };
+  const handleBellIconClick = () => {
+    markAsReadNotifications(selectedLanguage);
   };
   return (
     <Box>
@@ -308,14 +334,15 @@ export default function LoggedInNavBarMobile() {
               className="bell-icon"
               isOpen={dropdownOpen}
               toggle={toggle}
+              onClick={handleBellIconClick}
             >
               <DropdownToggle caret tag="span">
                 <span role="img" aria-label="bell">
                   <BsBell style={{ color: "black" }} />
                 </span>
-                {unreadCount > 0 && (
-                  <span className="unread-count">{unreadCount}</span>
-                )}
+                <span className="unread-count">
+                  {unreadCounts.unread_count}
+                </span>
               </DropdownToggle>
               <DropdownMenu className="message1">
                 <div className="notification-header">
@@ -334,12 +361,40 @@ export default function LoggedInNavBarMobile() {
                 </div>
                 <p>{message}</p>
                 {notifications.map((notification, index) => {
-                  const notificationData = JSON.parse(notification.data);
-                  return (
-                    <DropdownItem key={index}>
-                      <p>{`${notificationData["Full Name"]} is interested in your product: ${notificationData["Product"]}`}</p>
-                    </DropdownItem>
-                  );
+                  const hasFullNameAndProduct =
+                    notification.hasOwnProperty("Full Name") &&
+                    notification.hasOwnProperty("Product");
+                  const hasCompanyAndProduct =
+                    notification.hasOwnProperty("Company") &&
+                    notification.hasOwnProperty("Product");
+                  const hasOnlyName = notification.hasOwnProperty("Full Name");
+                  if (hasFullNameAndProduct) {
+                    return (
+                      <DropdownItem className="new-message" key={index}>
+                        <p>{`${notification["Full Name"]} is interested in your product: ${notification["Product"]}`}</p>
+                      </DropdownItem>
+                    );
+                  } else if (hasCompanyAndProduct) {
+                    if (notification["Product"] === "N/A") {
+                      return (
+                        <DropdownItem className="new-message" key={index}>
+                          <p>{`Admin has deleted your Company: ${notification["Company"]}`}</p>
+                        </DropdownItem>
+                      );
+                    } else if (notification["Company"] !== "N/A") {
+                      return (
+                        <DropdownItem className="new-message" key={index}>
+                          <p>{`Admin has deleted your Product: ${notification["Product"]}, from your Company: ${notification["Company"]}`}</p>
+                        </DropdownItem>
+                      );
+                    }
+                  } else if (hasOnlyName) {
+                    return (
+                      <DropdownItem className="new-message" key={index}>
+                        <p>{`Admin has updated your Profile: ${notification["Full Name"]}`}</p>
+                      </DropdownItem>
+                    );
+                  }
                 })}
               </DropdownMenu>
             </Dropdown>

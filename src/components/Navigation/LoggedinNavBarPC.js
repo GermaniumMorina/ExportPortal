@@ -68,7 +68,7 @@ function ComputerNavBar() {
         );
         console.log(response.data);
         const { notifications, unread_count } = response.data.original;
-        if (notifications.length > 0) {
+        if (notifications && notifications.length > 0) {
           const userNotifications = notifications.filter((notification) => {
             return notification.notifiable_id === parseInt(userId, 10);
           });
@@ -78,7 +78,10 @@ function ComputerNavBar() {
           notifications: notifications,
           unread_count: unread_count,
         });
-        if (notifications.length === 0) {
+        if (
+          response.data.original &&
+          response.data.original.error === "Not found"
+        ) {
           console.log("No notifications found.");
           setNotifications([]);
           setUnreadCount({
@@ -188,6 +191,38 @@ function ComputerNavBar() {
       // Handle the error
     }
   };
+  const markAsReadNotifications = async (language) => {
+    let languageId;
+
+    switch (language) {
+      case "en":
+        languageId = 1;
+        break;
+      case "es":
+        languageId = 2;
+        break;
+      case "al":
+        languageId = 3;
+        break;
+      default:
+        languageId = 1;
+        break;
+    }
+
+    try {
+      await axios.get(
+        `http://localhost:8000/api/MarkAsReadNotify/${userId}/${languageId}`
+      );
+
+      setUnreadCount({ ...unreadCounts, unread_count: 0 });
+    } catch (error) {
+      console.error("Failed to mark notifications as read:", error);
+      // Handle the error
+    }
+  };
+  const handleBellIconClick = () => {
+    markAsReadNotifications(selectedLanguage);
+  };
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -248,6 +283,7 @@ function ComputerNavBar() {
                 className="bell-icon"
                 isOpen={dropdownOpen}
                 toggle={toggle}
+                onClick={handleBellIconClick}
               >
                 <DropdownToggle caret tag="span">
                   <span role="img" aria-label="bell">
