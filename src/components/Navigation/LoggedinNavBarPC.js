@@ -31,7 +31,10 @@ function ComputerNavBar() {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const [notifications, setNotifications] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(0);
+  const [unreadCounts, setUnreadCount] = useState({
+    notifications: [],
+    unread_count: 0,
+  });
 
   const [message, setMessage] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -61,34 +64,30 @@ function ComputerNavBar() {
             break;
         }
         const response = await axios.get(
-          `http://localhost:8000/api/showAllNotify/${userId}/${languageId}`
+          `http://localhost:8000/api/showUnReadNotify/${userId}/${languageId}`
         );
         console.log(response.data);
-        if (response.data.original && response.data.original.length > 0) {
-          const userNotifications = response.data.original.filter(
-            (notification) => {
-              const notificationData = JSON.parse(notification.data);
-              return notificationData.notifiable_id === parseInt(userId, 10);
-            }
-          );
-
-          setNotifications(userNotifications);
-
-          let unread = 0;
-          userNotifications.forEach((notification) => {
-            if (!notification.read_at) {
-              unread++;
-            }
+        const { notifications, unread_count } = response.data.original;
+        if (notifications.length > 0) {
+          const userNotifications = notifications.filter((notification) => {
+            return notification.notifiable_id === parseInt(userId, 10);
           });
-          setUnreadCount(unread);
-
-          setMessage("");
-        } else {
+          setNotifications(userNotifications);
+        }
+        setUnreadCount({
+          notifications: notifications,
+          unread_count: unread_count,
+        });
+        if (notifications.length === 0) {
           console.log("No notifications found.");
           setNotifications([]);
-          setUnreadCount(0);
-
+          setUnreadCount({
+            notifications: [],
+            unread_count: 0,
+          });
           setMessage("No new notifications.");
+        } else {
+          setMessage("");
         }
       } catch (error) {
         console.error(error);
@@ -180,13 +179,6 @@ function ComputerNavBar() {
         (prevNotificationsActive) => !prevNotificationsActive
       );
 
-      if (response.data.success) {
-        const newUnreadCount = notificationsActive
-          ? unreadCount + 1
-          : unreadCount - 1;
-        setUnreadCount(newUnreadCount);
-      }
-
       console.log(
         "Notifications toggled successfully for user:",
         response.data
@@ -247,7 +239,7 @@ function ComputerNavBar() {
             <Nav.Link href="/stories">{t("navbar.Succes Stories")}</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Announcments/>
+        <Announcments />
 
         {!RemoveInfo && isLoggedIn && (
           <div>
@@ -261,9 +253,9 @@ function ComputerNavBar() {
                   <span role="img" aria-label="bell">
                     <BsBell />
                   </span>
-                  {unreadCount > 0 && (
-                    <span className="unread-count">{unreadCount}</span>
-                  )}
+                  <span className="unread-count">
+                    {unreadCounts.unread_count}
+                  </span>
                 </DropdownToggle>
                 <DropdownMenu className="message1">
                   <div className="notification-header">
@@ -282,12 +274,41 @@ function ComputerNavBar() {
                   </div>
                   <p>{message}</p>
                   {notifications.map((notification, index) => {
-                    const notificationData = JSON.parse(notification.data);
-                    return (
-                      <DropdownItem className="new-message" key={index}>
-                        <p>{`${notificationData["Full Name"]} is interested in your product: ${notificationData["Product"]}`}</p>
-                      </DropdownItem>
-                    );
+                    const hasFullNameAndProduct =
+                      notification.hasOwnProperty("Full Name") &&
+                      notification.hasOwnProperty("Product");
+                    const hasCompanyAndProduct =
+                      notification.hasOwnProperty("Company") &&
+                      notification.hasOwnProperty("Product");
+                    const hasOnlyName =
+                      notification.hasOwnProperty("Full Name");
+                    if (hasFullNameAndProduct) {
+                      return (
+                        <DropdownItem className="new-message" key={index}>
+                          <p>{`${notification["Full Name"]} is interested in your product: ${notification["Product"]}`}</p>
+                        </DropdownItem>
+                      );
+                    } else if (hasCompanyAndProduct) {
+                      if (notification["Product"] === "N/A") {
+                        return (
+                          <DropdownItem className="new-message" key={index}>
+                            <p>{`Admin has deleted your Company: ${notification["Company"]}`}</p>
+                          </DropdownItem>
+                        );
+                      } else if (notification["Company"] !== "N/A") {
+                        return (
+                          <DropdownItem className="new-message" key={index}>
+                            <p>{`Admin has deleted your Product: ${notification["Product"]}, from your Company: ${notification["Company"]}`}</p>
+                          </DropdownItem>
+                        );
+                      }
+                    } else if (hasOnlyName) {
+                      return (
+                        <DropdownItem className="new-message" key={index}>
+                          <p>{`Admin has updated your Profile: ${notification["Full Name"]}`}</p>
+                        </DropdownItem>
+                      );
+                    }
                   })}
                 </DropdownMenu>
               </Dropdown>
