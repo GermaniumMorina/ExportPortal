@@ -1,13 +1,13 @@
 import Talk from 'talkjs';
 import { useEffect, useState, useRef } from 'react';
 import "./Chat.css"
+import avatar from "../Navigation/avatar.jpg"
+;
 
 function Chat() {
   const chatboxEl = useRef();
 
   const [talkLoaded, markTalkLoaded] = useState(false);
-  const [selectedUser, setSelectedUser] = useState('Jessica');
-
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
   const UserId = localStorage.getItem("userId");
@@ -20,30 +20,19 @@ function Chat() {
         id: UserId,
         name: UserName,
         email: UserEmail,
-        photoUrl: 'henry.jpeg',
+        photoUrl: avatar,
         welcomeMessage: 'Hello!',
         role: 'default',
       });
 
-      const otherUserJessica = new Talk.User({
-        id: '2',
-        name: 'Rrezon 2',
-        email: 'rrezonkrasniqi21@gmail.com',
-        photoUrl: 'jessica.jpeg',
+      const otherUser = new Talk.User({
+        id: '13',
+        name: 'Jovani',
+        email: 'jovani58@example.com',
+        photoUrl: avatar,
         welcomeMessage: 'Hello!',
         role: 'default',
       });
-
-      const otherUserJohn = new Talk.User({
-        id: '3',
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        photoUrl: 'john.jpeg',
-        welcomeMessage: 'Hello!',
-        role: 'default',
-      });
-
-      const otherUser = selectedUser === 'Jessica' ? otherUserJessica : otherUserJohn;
 
       const session = new Talk.Session({
         appId: 'tQeKx0VK',
@@ -55,30 +44,15 @@ function Chat() {
       conversation.setParticipant(currentUser);
       conversation.setParticipant(otherUser);
 
-      const chatbox = session.createChatbox();
+      const chatbox = session.createInbox();
       chatbox.select(conversation);
       chatbox.mount(chatboxEl.current);
 
       return () => session.destroy();
     }
-  }, [UserEmail, UserName, talkLoaded, selectedUser, UserId]);
+  }, [UserEmail, UserId, UserName, talkLoaded]);
 
-  const handleUserChange = (event) => {
-    setSelectedUser(event.target.value);
-  };
-
-  return (
-    <div>
-      <div className="user-dropdown">
-        <label htmlFor="user-select">Select User:</label>
-        <select id="user-select" value={selectedUser} onChange={handleUserChange}>
-          <option value="Jessica">Jessica Wells</option>
-          <option value="John">John Doe</option>
-        </select>
-      </div>
-      <div ref={chatboxEl}  className="chat"/>
-    </div>
-  );
+  return <div className="chat" ref={chatboxEl} />;
 }
 
 export default Chat;

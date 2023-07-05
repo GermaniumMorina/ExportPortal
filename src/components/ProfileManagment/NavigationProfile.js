@@ -9,7 +9,7 @@ import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import PasswordIcon from '@mui/icons-material/Password';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import Chat from '../Chat/Chat';
+import Chatbox from '../Chat/Chat';
 
 const NavigationProfile = () => {
   const [selectedComponent, setSelectedComponent] = useState(<ProfileViewer />);
@@ -59,7 +59,7 @@ const NavigationProfile = () => {
         </p>
         <br />
         <br />
-        <p onClick={() => handleItemClick(<Chat />)}>
+        <p onClick={() => handleItemClick(<Chatbox />)}>
           <i className="fa fa-clone" aria-hidden="true"></i>
           Security
         </p>

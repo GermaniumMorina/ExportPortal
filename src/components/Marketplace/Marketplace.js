@@ -24,7 +24,7 @@ export const Marketplace = () => {
 
         const [buyProductsResponse, sellProductsResponse] = await Promise.all([
           axios.get(`http://localhost:8000/api/buyerList/${userId}`),
-          axios.get(`http://localhost:8000/api/sellerList`),
+          axios.get(`http://localhost:8000/api/sellerList/${userId}`),
         ]);
 
         setBuyProductList(buyProductsResponse.data);
