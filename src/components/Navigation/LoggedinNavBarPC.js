@@ -282,6 +282,7 @@ function ComputerNavBar() {
                       notification.hasOwnProperty("Product");
                     const hasOnlyName =
                       notification.hasOwnProperty("Full Name");
+
                     if (hasFullNameAndProduct) {
                       return (
                         <DropdownItem className="new-message" key={index}>
@@ -309,6 +310,8 @@ function ComputerNavBar() {
                         </DropdownItem>
                       );
                     }
+
+                    return null; 
                   })}
                 </DropdownMenu>
               </Dropdown>
