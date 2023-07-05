@@ -1,30 +1,35 @@
 import Talk from 'talkjs';
 import { useEffect, useState, useRef } from 'react';
 import "./Chat.css"
+import avatar from "../Navigation/avatar.jpg"
+;
+
 function Chat() {
   const chatboxEl = useRef();
 
-  // wait for TalkJS to load
   const [talkLoaded, markTalkLoaded] = useState(false);
+  const UserName = localStorage.getItem("userName");
+  const UserEmail = localStorage.getItem("userEmail");
+  const UserId = localStorage.getItem("userId");
 
   useEffect(() => {
     Talk.ready.then(() => markTalkLoaded(true));
 
     if (talkLoaded) {
       const currentUser = new Talk.User({
-        id: '23',
-        name: 'Rrezon Krasniqi',
-        email: 'rrezon@admin.com',
-        photoUrl: 'henry.jpeg',
+        id: UserId,
+        name: UserName,
+        email: UserEmail,
+        photoUrl: avatar,
         welcomeMessage: 'Hello!',
         role: 'default',
       });
 
       const otherUser = new Talk.User({
-        id: '2',
-        name: 'Jessica Wells',
-        email: 'jessicawells@example.com',
-        photoUrl: 'jessica.jpeg',
+        id: '13',
+        name: 'Jovani',
+        email: 'jovani58@example.com',
+        photoUrl: avatar,
         welcomeMessage: 'Hello!',
         role: 'default',
       });
@@ -39,13 +44,13 @@ function Chat() {
       conversation.setParticipant(currentUser);
       conversation.setParticipant(otherUser);
 
-      const chatbox = session.createChatbox();
+      const chatbox = session.createInbox();
       chatbox.select(conversation);
       chatbox.mount(chatboxEl.current);
 
       return () => session.destroy();
     }
-  }, [talkLoaded]);
+  }, [UserEmail, UserId, UserName, talkLoaded]);
 
   return <div className="chat" ref={chatboxEl} />;
 }
