@@ -47,21 +47,13 @@ export const SignUp = () => {
         // Request the CSRF cookie first
         await axios.get("http://localhost:8000/sanctum/csrf-cookie");
 
-        // Get the CSRF token from the cookie
-        const csrfToken = document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("XSRF-TOKEN"))
-          .split("=")[1];
-
-        // Include the CSRF token in the headers
         const response = await axios.post(
           "http://127.0.0.1:8000/api/register",
           data,
           {
             headers: {
               "Content-Type": "application/json",
-              Accept: "application/json",
-              "X-XSRF-TOKEN": csrfToken, // Add this line
+              Accept: "application/json"
             },
           }
         );

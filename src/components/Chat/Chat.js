@@ -1,16 +1,22 @@
-import Talk from 'talkjs';
-import { useEffect, useState, useRef } from 'react';
-import "./Chat.css"
-import avatar from "../Navigation/avatar.jpg"
-;
+import Talk from "talkjs";
+import { useEffect, useState, useRef } from "react";
+import "./Chat.css";
+import avatar from "../Navigation/avatar.jpg";
 
 function Chat() {
+
+  
   const chatboxEl = useRef();
 
   const [talkLoaded, markTalkLoaded] = useState(false);
   const UserName = localStorage.getItem("userName");
   const UserEmail = localStorage.getItem("userEmail");
   const UserId = localStorage.getItem("userId");
+
+  const otherUserName = localStorage.getItem("otherUserName");
+  const otherUserEmail = localStorage.getItem("otherUserEmail");
+  const otherUserId = localStorage.getItem("otherUserId");
+
 
   useEffect(() => {
     Talk.ready.then(() => markTalkLoaded(true));
@@ -21,21 +27,21 @@ function Chat() {
         name: UserName,
         email: UserEmail,
         photoUrl: avatar,
-        welcomeMessage: 'Hello!',
-        role: 'default',
+        welcomeMessage: "Hello!",
+        role: "default",
       });
 
       const otherUser = new Talk.User({
-        id: '13',
-        name: 'Jovani',
-        email: 'jovani58@example.com',
+        id:otherUserId,
+        name: otherUserName,
+        email: otherUserEmail,
         photoUrl: avatar,
-        welcomeMessage: 'Hello!',
-        role: 'default',
+        welcomeMessage: "Hello!",
+        role: "default",
       });
 
       const session = new Talk.Session({
-        appId: 'tQeKx0VK',
+        appId: "tQeKx0VK",
         me: currentUser,
       });
 
@@ -50,9 +56,10 @@ function Chat() {
 
       return () => session.destroy();
     }
-  }, [UserEmail, UserId, UserName, talkLoaded]);
+  }, [UserEmail, UserId, UserName, otherUserEmail, otherUserId, otherUserName, talkLoaded]);
 
   return <div className="chat" ref={chatboxEl} />;
+  
 }
 
 export default Chat;

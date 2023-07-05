@@ -61,7 +61,7 @@ const NavigationProfile = () => {
         <br />
         <p onClick={() => handleItemClick(<Chatbox />)}>
           <i className="fa fa-clone" aria-hidden="true"></i>
-          Security
+          Chat
         </p>
       </aside>
       <div className="profile-content">{selectedComponent}</div>

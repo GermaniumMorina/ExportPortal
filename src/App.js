@@ -42,6 +42,8 @@ import FindCompanies from "./components/Admin/FindCompanies";
 import ManageCompanies from "./components/Admin/ManageCompanies";
 import UserSearch from "./components/Admin/UserSearch";
 import ManageUser from "./components/Admin/ManageUser";
+import SelectChat from "./components/Chat/SelectChat";
+import ChatIcon from "./components/Chat/ChatIcon";
 axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
@@ -216,6 +218,10 @@ const routes = [
   {
     path: "/manageuser/:id",
     element: <ManageUser />,
+  },
+  {
+    path:"/test-chat",
+    element:<SelectChat/>
   }
 ];
 
@@ -225,7 +231,7 @@ function App() {
     <div className="App">
       <NavBar />
       {routing}
-
+      <ChatIcon/>
       <Footer />
     </div>
   );
