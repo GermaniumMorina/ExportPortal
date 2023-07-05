@@ -28,7 +28,7 @@ export const SignUp = () => {
   });
   const [countryList, setCountryList] = useState([]);
   const [errors, setErrors] = useState({});
-const isLoggedIn = checkIfLoggedIn();
+  const isLoggedIn = checkIfLoggedIn();
   const handleCaptchaChange = (value) => {
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -76,14 +76,8 @@ const isLoggedIn = checkIfLoggedIn();
           localStorage.setItem("userPhone", formValues.phone_number);
           localStorage.setItem("userGender", formValues.gender);
           localStorage.setItem("userId", response.data.id);
-          localStorage.setItem(
-            "userCompany",
-            response.data.company_id
-          );
-          localStorage.setItem(
-            "userCountry",
-            response.data.country_id
-          );
+          localStorage.setItem("userCompany", response.data.company_id);
+          localStorage.setItem("userCountry", response.data.country_id);
 
           navigate("/AddNewCompany");
           alertify.success("Welcome!");
@@ -177,7 +171,7 @@ const isLoggedIn = checkIfLoggedIn();
     return errors;
   };
   const { t } = useTranslation();
-  return !isLoggedIn ?(
+  return !isLoggedIn ? (
     <div className="sign-up-main-div">
       <Form
         onSubmit={handleRegister}
@@ -356,9 +350,7 @@ const isLoggedIn = checkIfLoggedIn();
         </div>
       </Form>
     </div>
-  ):(
-    <div>
-      You are already logged in
-      </div>
-  )
+  ) : (
+    <div>You are already logged in</div>
+  );
 };

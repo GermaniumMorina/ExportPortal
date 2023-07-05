@@ -14,7 +14,7 @@ import "alertifyjs/build/css/alertify.css";
 export const AddNewItem = () => {
   const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
-const userId=localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
@@ -27,8 +27,10 @@ const userId=localStorage.getItem("userId")
   });
   const getCompaniesId = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/userCompany/${userId}`);
-      
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/userCompany/${userId}`
+      );
+
       setCompanies(response.data);
     } catch (error) {
       console.error("Error fetching companies:", error);
@@ -155,7 +157,7 @@ const userId=localStorage.getItem("userId")
               <option value={7}>{t("products.Pets")}</option>
             </Form.Select>
             <br />
-            
+
             <Form.Select
               value={formValues.company_id}
               onChange={handleChange}

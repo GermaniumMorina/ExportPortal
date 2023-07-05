@@ -29,7 +29,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import avatar from "./avatar.jpg";
-import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
+import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import { BsCurrencyExchange, BsBell } from "react-icons/bs";
 import axios from "axios";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -135,13 +135,14 @@ export default function LoggedInNavBarMobile() {
             break;
         }
         const response = await axios.get(
-          `http://localhost:8000/api/Notify/${userId}/${languageId}`
+          `http://localhost:8000/api/showUnReadNotify/${userId}/${languageId}`
         );
-        if (response.data.original && response.data.original.length > 0) {
-          const userNotifications = response.data.original.filter(
+        console.log(response.data);
+        if (response.data.original.notifications?.length >= 0) {
+          console.log("test");
+          const userNotifications = response.data.original.notifications.filter(
             (notification) => {
-              const notificationData = JSON.parse(notification.data);
-              return notificationData.notifiable_id === parseInt(userId, 10);
+              return notification.notifiable_id === parseInt(userId, 10);
             }
           );
 
