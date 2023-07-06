@@ -9,7 +9,7 @@ window.location.href="/SignIn";
   }
 
   return  (
-    <div className="main-not-allowed-div">
+    <div className="main-not-allowed-div" data-testid="not-allowed-admin">
       <img src={admin} alt={admin} className="stop-image" />
       <h1>Administration page you are not allowed!</h1>
         

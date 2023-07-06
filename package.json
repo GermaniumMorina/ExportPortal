@@ -46,10 +46,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "aws s3 sync build/ s3://rrezon-test-app ",
-    "prod": "npm run build && npm run deploy"
+    "prod": "npm run build && npm run deploy",
+    "test": "jest --transform='babel-jest'"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +70,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.22.6",
+    "@babel/plugin-transform-runtime": "^7.22.6",
+    "@babel/preset-env": "^7.22.6",
+    "@babel/preset-react": "^7.22.5",
+    "babel-jest": "^29.6.0",
+    "css-loader": "^6.8.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.5.1",
+    "style-loader": "^3.3.3",
     "tailwindcss": "^3.3.2"
   }
 }

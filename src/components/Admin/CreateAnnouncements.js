@@ -23,13 +23,17 @@ const CreateAnnouncements = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-  const response= await axios.post(`http://127.0.0.1:8000/api/announcements`,formValues);
-  console.log(response);
-
-  alertify.success(response.statusText);
-
+  
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/announcements', formValues);
+      console.log(response);
+  
+      alertify.success(response.statusText);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
   const { t } = useTranslation();
   return isAdmin?(
     <div>
