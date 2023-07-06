@@ -395,6 +395,7 @@ export default function LoggedInNavBarMobile() {
                       </DropdownItem>
                     );
                   }
+                  return null;
                 })}
               </DropdownMenu>
             </Dropdown>
