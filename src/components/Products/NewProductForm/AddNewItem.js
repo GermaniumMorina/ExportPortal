@@ -59,10 +59,10 @@ export const AddNewItem = () => {
 
       if (response.status === 200 && formValues.type === "export") {
         alertify.success("Item added successfully");
-        navigate("/ImageComponent");
+        navigate("/UploadFile");
       } else if (response.status === 200 && formValues.type === "import") {
         alertify.success("Item added successfully");
-        navigate("/ImageComponent");
+        navigate("/UploadFile");
       }
     } catch (error) {
       if (error.response && error.response.status === 422) {
