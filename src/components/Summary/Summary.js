@@ -20,7 +20,7 @@ const Summary = () => {
   const { t } = useTranslation();
 
   const [companies, setCompanies] = useState([]);
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState([] || null);
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -38,7 +38,7 @@ const Summary = () => {
           apiSubCategories,
         ] = await Promise.all([
           axios.get(`http://127.0.0.1:8000/api/companyData/${UserId}`),
-          axios.get(`http://127.0.0.1:8000/api/showAllNotify/${UserId}/1`),
+          axios.get(`http://127.0.0.1:8000/api/showUnReadNotify/${UserId}/1`),
           axios.get("http://127.0.0.1:8000/api/category"),
           axios.get("http://127.0.0.1:8000/api/subcategory"),
         ]);
@@ -125,12 +125,15 @@ const Summary = () => {
               <div className="notification-icon">
                 <NotificationsIcon />
               </div>
-
-              {notifications.map((notification, index) => (
-                <div className="notification" key={index}>
-                  <p>{`${notification["Full Name"]} is interested in your product: ${notification["Product"]}`}</p>
-                </div>
-              ))}
+              {notifications.length > 0 ? (
+                notifications.map((notification, index) => (
+                  <div className="notification" key={index}>
+                    <p>{`${notification["Full Name"]} is interested in your product: ${notification["Product"]}`}|| {notification.message}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No notifications</p>
+              )}
             </div>
           </div>
           <div className="company-info-right">

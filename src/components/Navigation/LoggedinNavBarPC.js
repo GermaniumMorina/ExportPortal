@@ -272,6 +272,7 @@ function ComputerNavBar() {
               {t("marketplace.Marketplace")}
             </Nav.Link>
             <Nav.Link href="/stories">{t("navbar.Succes Stories")}</Nav.Link>
+            <Nav.Link href="/Summary">My Company</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Announcments />
@@ -347,7 +348,7 @@ function ComputerNavBar() {
                       );
                     }
 
-                    return null; 
+                    return null;
                   })}
                 </DropdownMenu>
               </Dropdown>
