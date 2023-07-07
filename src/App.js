@@ -34,7 +34,7 @@ import SuccesStories from "./components/Admin/SuccesStories";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Stories from "./components/SuccesStories/Stories";
 import Account from "./components/ProfileManagment/Account";
-import ImageComponent from './components/Products/NewProductForm/ImageComponent';
+import UploadFile from "./components/Products/NewProductForm/UploadFile";
 import axios from "axios";
 import Summary from "./components/Summary/Summary";
 import CreateAnnouncements from "./components/Admin/CreateAnnouncements";
@@ -196,20 +196,20 @@ const routes = [
     element: <Stories />,
   },
   {
-    path: "/ImageComponent",
-    element: <ImageComponent/>,
+    path: "/UploadFile",
+    element: <UploadFile />,
   },
   {
-    path:"/summary",
-    element: <Summary/>,
+    path: "/summary",
+    element: <Summary />,
   },
   {
-    path:"/admin/announcements",
-    element:<CreateAnnouncements/>
+    path: "/admin/announcements",
+    element: <CreateAnnouncements />,
   },
   {
-    path:"/admin/search-company",
-    element:<FindCompanies/>
+    path: "/admin/search-company",
+    element: <FindCompanies />,
   },
   {
     path: "/managecompany/:id",
@@ -220,9 +220,9 @@ const routes = [
     element: <ManageUser />,
   },
   {
-    path:"/test-chat",
-    element:<SelectChat/>
-  }
+    path: "/test-chat",
+    element: <SelectChat />,
+  },
 ];
 
 function App() {
@@ -231,7 +231,7 @@ function App() {
     <div className="App">
       <NavBar />
       {routing}
-      <ChatIcon/>
+      <ChatIcon />
       <Footer />
     </div>
   );

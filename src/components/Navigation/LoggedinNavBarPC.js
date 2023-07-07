@@ -347,7 +347,7 @@ function ComputerNavBar() {
                       );
                     }
 
-                    return null; 
+                    return null;
                   })}
                 </DropdownMenu>
               </Dropdown>
