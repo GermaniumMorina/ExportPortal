@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 import "./UploadFile.css";
+import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const UploadFile = () => {
   const [coverImage, setCoverImage] = useState(null);
