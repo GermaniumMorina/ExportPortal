@@ -37,12 +37,14 @@ export const SignIn = () => {
             localStorage.setItem("userId", response.data.user.id);
             localStorage.setItem("userRole", response.data.user.role);
             localStorage.setItem("token", token);
+            localStorage.setItem("Bearer", response.data.token);
             localStorage.setItem("userGender", response.data.user.gender);
             localStorage.setItem("userSurname", response.data.user.surname);
             localStorage.setItem("userPhone", response.data.user.phone_number);
             localStorage.setItem("otherUserId", response.data.user.id); // Update userId in localStorage
             localStorage.setItem("otherUserName", response.data.user.name); // Update userName in localStorage
             localStorage.setItem("otherUserEmail",response.data.user.email); // Update userEmail in localStorage
+
             const language_Id = response.data.language_id;
 
             let language;
