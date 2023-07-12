@@ -104,6 +104,7 @@ export default function LoggedInNavBarMobile() {
     notifications: [],
     unread_count: 0,
   });
+  const BearerToken=localStorage.getItem("Bearer")
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [message, setMessage] = useState("");
@@ -112,11 +113,36 @@ export default function LoggedInNavBarMobile() {
   );
   const [notificationsActive, setNotificationsActive] = useState(true);
   const { i18n, t } = useTranslation();
+
   const handleLogout = (ev) => {
     ev.preventDefault();
     localStorage.clear();
-    window.location.href = "/";
+  
+    axios.post('http://127.0.0.1:8000/api/logout/1', {
+      // Add any necessary request body parameters, if required by the API
+      // Example: key: 'value'
+    }, {
+      headers: {
+        // Add any required headers, such as authentication tokens or content type
+       'Authorization': 'Bearer '+BearerToken,
+        // Example: 'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        console.log(response)
+        // Handle the API response here
+        // Example: check response.status for success or failure
+        // Example: redirect to another page based on the response
+  
+        // Assuming you want to redirect to the home page
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        // Handle any error that occurred during the API call
+        console.error('Error:', error);
+      });
   };
+  
 
   useEffect(() => {
     const fetchNotifications = async (language) => {
