@@ -16,7 +16,7 @@
     "Spanish": "Spanish",
     "Logout": "Logout",
     "Company List": "Company List",
-    "Sign Up": "Sign Up",
+    "Create an account": " Create an account",
     "Sign In": "Sign In",
     "Corporate": "Corporate",
     "Succes Stories": "Succes Stories",
@@ -112,13 +112,13 @@
     "You are not allowed to view this page": "You are not allowed to view this page"
   },
   "signIn": {
-    "Welcome": "Welcome",
+    "Log In": "Log In",
     "Forgot Password?": "Forgot Password?",
-    "If you dont have a membership yet": " If you dont have a membership yet,",
+    "Don’t have an account?": " Don’t have an account? ",
     "Activate": "Activate",
-    "Enter email or username": "Enter email or username",
+    "Email@domain.com": "Email@domain.com",
     "Submit": "Submit",
-    "Password": "Password"
+    "Enter Password": "Enter Password"
   },
   "signUp": {
     "Sign Up For Free": "Sign Up For Free",

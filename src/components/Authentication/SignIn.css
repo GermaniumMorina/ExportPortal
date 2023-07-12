@@ -1,94 +1,195 @@
-.form-div {
-  border: 2px solid rgba(0, 0, 0, 0.282);
-  border-radius: 20px;
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-top: 40px;
-  margin-top: 70px;
-  padding-bottom: 70px;
-  text-align: center;
-  margin-bottom: 100px;
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+body {
+  background: var(--background-light, #f3f6fb) !important;
 }
 
-h2 {
-  padding-bottom: 20px;
-  float: left;
-}
-.forgot-password {
-  float: right;
-  padding: 5px;
-  font-size: 12px !important;
-}
-.sign-up-prompt {
-  text-align: center;
-  padding: 5px;
-  margin-top: 15px;
-  font-size: 13px !important;
-}
-
-.sign-in-button {
-  margin-top: 20px;
-  border-radius: 50px !important;
+.loginContainer {
+  display: grid;
+  place-items: center;
   width: 100%;
 }
-
-.activate-button {
-  margin-top: 10px;
-  border-radius: 50px !important;
-  width: 70%;
+.innerContainer {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 162px;
+  padding-bottom: 163.63px;
+  grid-gap: 32px;
 }
-
-@media only screen and (max-width: 650px) {
-  .form-div {
-    width: fit-content;
-    border: 2px solid rgba(0, 0, 0, 0.282);
-    border-radius: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 40px;
-    margin-top: 120px;
-    padding-bottom: 70px;
-    text-align: center;
-  }
+.brochure {
+  border-radius: 4px;
+  background: var(--export-portal-colors-prim, #0041f5);
+  width: 544.135px;
+  height: 522.514px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
 }
-
-@media only screen and (max-width: 650px) {
-  .form-div {
-    width: fit-content;
-    border: 2px solid rgba(0, 0, 0, 0.282);
-    border-radius: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 40px;
-    margin-top: 120px;
-    padding-bottom: 70px;
-    text-align: center;
-  }
+.innerBrochure {
+  padding-left: 40.14px;
+  padding-top: 31.99px;
+  padding-right: 59.99px;
 }
-@media only screen and (max-width: 400px) {
-  .form-div {
-    width: 90%;
-    border: 2px solid rgba(0, 0, 0, 0.282);
-    border-radius: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 40px;
-    margin-top: 120px;
-    padding-bottom: 70px;
-    text-align: center;
-  }
+.brochureLogo {
+  width: 235.762px;
+  height: 32.016px;
+  flex-shrink: 0;
 }
-
-@media only screen and (max-width: 300px) {
-  .form-div {
-    width: 95%;
-    border: 2px solid rgba(0, 0, 0, 0.282);
-    border-radius: 20px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 40px;
-    margin-top: 90px;
-    padding-bottom: 70px;
-    text-align: center;
-  }
+.brochureHeader {
+  display: flex;
+  width: 444px;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 52.06px;
+}
+.brochureHeader h1 {
+  color: var(--export-portal-colors-white, #fefefe);
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px;
+}
+.brochureParagraph {
+  display: flex;
+  width: 444px;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 16px;
+}
+.brochureParagraph p {
+  color: var(--export-portal-colors-white, #fefefe);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+.brochureMask {
+  width: 544.135px;
+  height: 224.576px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 86%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.brochureMask img {
+  width: 544.135px;
+  height: 185.234px;
+  flex-shrink: 0;
+}
+.loginForm {
+  width: 544px;
+  height: 523px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--white, #fff);
+}
+.Login-title {
+  display: flex;
+  width: 544px;
+  padding: 16px 0px 16px 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border-bottom: 0.5px solid var(--export-portal-colors-black-1, #464b53);
+  padding-left: 32px;
+  padding-top: 16px;
+}
+.Login-title h1 {
+  color: var(--export-portal-colors-text, #212427);
+  font-family: Inter !important;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.24px;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.Login-title p {
+  color: var(--export-portal-colors-text, #212427);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0 !important;
+}
+.emailContainer {
+  padding-left: 32px;
+  padding-top: 8.86px;
+  display: flex;
+  flex-direction: column;
+}
+.emailContainer input {
+  display: flex;
+  width: 489.951px;
+  padding: 8px 56px 8px 12px;
+  margin-top: 8px;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  border: 1px solid var(--black-4, #a8adb4);
+  background: var(--export-portal-colors-white, #fefefe);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.emailContainer label {
+  color: var(--export-portal-colors-text, #212427);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+}
+.passwordContainer {
+  padding-left: 32px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  position: relative;
+}
+.passwordContainer label {
+  color: var(--export-portal-colors-text, #212427);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+}
+.passwordContainer input {
+  margin-top: 8px;
+  display: flex;
+  width: 490px;
+  padding: 8px 32px 8px 12px;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  border: 1px solid var(--black-4, #a8adb4);
+  background: var(--export-portal-colors-white, #fefefe);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.passwordContainer input:focus {
+  border-color: var(--export-portal-colors-prim, #7a9dff);
+  outline: none;
+}
+.passwordContainer span {
+  position: absolute;
+  top: 30px;
+  left: 89%;
 }
