@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 import "./UploadFile.css";
+import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const UploadFile = () => {
   const [coverImage, setCoverImage] = useState(null);
@@ -46,6 +49,7 @@ const UploadFile = () => {
     reader.onload = () => {
       setUploadedPdfFile(reader.result);
     };
+
     reader.readAsDataURL(file);
   };
 
@@ -87,6 +91,10 @@ const UploadFile = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handlePreviewPdf = () => {
+    window.open(uploadedPdfFile, "_blank");
   };
 
   return (
@@ -158,19 +166,15 @@ const UploadFile = () => {
         {uploadedPdfFile && (
           <div>
             <h4>Uploaded PDF File:</h4>
-            <object
-              data={uploadedPdfFile}
-              type="application/pdf"
-              width="100"
-              height="100"
-            >
-              <p>PDF cannot be displayed.</p>
-            </object>
+            <a href={uploadedPdfFile} target="_blank" rel="noopener noreferrer">
+              {" "}
+              View PDF
+            </a>
           </div>
         )}
       </div>
 
-      <button onClick={handleUpload}>Upload</button>
+      <Button onClick={handleUpload}>Upload</Button>
     </div>
   );
 };
