@@ -10,11 +10,11 @@ const ChatIcon = () => {
   };
   return (
     <div>
-      <div id="mybutton">
+      {/* <div id="mybutton">
         <button class="feedback" onClick={handleChat}>
           Test Chat
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

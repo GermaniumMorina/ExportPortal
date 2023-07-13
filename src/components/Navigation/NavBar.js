@@ -2,9 +2,7 @@ import ComputerNavBar from "./ComputerNavBar";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { checkIfLoggedIn } from "../Authentication/checkIfLoggedIn";
-import PhoneNavBar from "./PhoneNavBar";
-import LoggedInNavBarMobile from "./LoggedInNavBarMobile";
-import LoggedinNavBarPC from "./LoggedinNavBarPC";
+
 
 function NavBar() {
   const isLoogedIn = checkIfLoggedIn();
@@ -17,15 +15,13 @@ function NavBar() {
 
   return isLoogedIn ? (
     <div>
-      {isDesktopOrLaptop && <LoggedinNavBarPC />}
-      {!isMobile && isTabletOrMobile && <LoggedInNavBarMobile />}
-      {isPortrait && isMobile && <LoggedInNavBarMobile />}
+  
     </div>
   ) : (
     <div>
       {isDesktopOrLaptop && <ComputerNavBar />}
-      {!isMobile && isTabletOrMobile && <PhoneNavBar />}
-      {isPortrait && isMobile && <PhoneNavBar />}
+      {!isMobile && isTabletOrMobile && <ComputerNavBar />}
+      {isPortrait && isMobile && <ComputerNavBar />}
     </div>
   );
 }

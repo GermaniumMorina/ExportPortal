@@ -44,6 +44,7 @@ import UserSearch from "./components/Admin/UserSearch";
 import ManageUser from "./components/Admin/ManageUser";
 import SelectChat from "./components/Chat/SelectChat";
 import ChatIcon from "./components/Chat/ChatIcon";
+import SignUpAs from "./components/Authentication/SignUpAs";
 axios.defaults.withCredentials = true;
 console.log(document.cookie);
 
@@ -63,6 +64,11 @@ const routes = [
 
   {
     path: "/SignUp",
+    element: <SignUpAs />,
+  },
+  
+  {
+    path: "/SignUp/:type",
     element: <SignUp />,
   },
   {

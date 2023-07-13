@@ -1,0 +1,164 @@
+.main-join-div {
+  display: flex;
+  max-width: 631px;
+  padding: 40px 64px;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: 32px 56px;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 25%);
+  border: 0.5px solid var(--export-portal-colors-black-1, #464b53);
+  background: var(--export-portal-colors-white, #fefefe);
+}
+
+.root-div {
+  position: relative;
+}
+.join-text {
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.6px;
+}
+
+.join-import {
+  display: flex;
+  padding: 20px 48px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 182px;
+  cursor: pointer;
+  border: 0.5px solid var(--export-portal-colors-black-1, #464b53);
+  background: var(--export-portal-colors-white, #fefefe);
+}
+
+.join-clicked {
+  display: flex;
+  padding: 20px 46.5px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+
+  width: 182px;
+  border: 2px solid var(--export-portal-colors-prim, #0041f5);
+  background: var(--export-portal-colors-prim-3, #ebf0ff);
+}
+
+.join-export {
+  display: flex;
+  padding: 20px 48px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+
+  width: 182px;
+  border: 0.5px solid var(--export-portal-colors-black-1, #464b53);
+  background: var(--export-portal-colors-white, #fefefe);
+}
+.create-account-button {
+  width: 522px;
+  height: 40px;
+  color: var(--export-portal-colors-black-3, #767f8a);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background-color: #d1d2e0;
+  padding: 10px;
+}
+
+.create-account {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 19px;
+  color: #212427;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.join-option-text {
+  color: var(--export-portal-colors-text, #212427);
+  text-align: center;
+  font-family: Inter;
+  
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.4px;
+}
+
+.create-account-button-clicked {
+  width: 522px;
+  height: 40px;
+  background-color: #0041f5;
+  color: var(--export-portal-colors-white, #fefefe);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+  .main-join-div {
+    text-align: center;
+
+    width: 398px;
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 3%);
+    flex-direction: column;
+    border-radius: 8px;
+    background: var(--white, #fff);
+    border: 0;
+    /* Shadow/md */
+    box-shadow: 0px 2px 4px -2px rgba(16, 24, 40, 0.06),
+      0px 4px 8px -2px rgba(16, 24, 40, 0.1);
+  }
+  .create-account-button {
+    width: 214px;
+    height: 40px;
+    color: var(--export-portal-colors-black-3, #767f8a);
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background-color: #d1d2e0;
+  }
+
+  .create-account-button-clicked {
+    width: 214px;
+    height: 40px;
+    background-color: #0041f5;
+    color: var(--export-portal-colors-white, #fefefe);
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}
