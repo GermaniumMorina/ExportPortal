@@ -13,6 +13,7 @@ const UploadFile = () => {
   const [uploadedCoverImage, setUploadedCoverImage] = useState(null);
   const [uploadedSlideImages, setUploadedSlideImages] = useState([]);
   const [uploadedPdfFile, setUploadedPdfFile] = useState(null);
+  const [uploadedPdfFileName, setUploadedPdfFileName] = useState(null);
 
   const handleCoverImageChange = (event) => {
     const file = event.target.files[0];
@@ -48,6 +49,7 @@ const UploadFile = () => {
     const reader = new FileReader();
     reader.onload = () => {
       setUploadedPdfFile(reader.result);
+      setUploadedPdfFileName(file.name);
     };
 
     reader.readAsDataURL(file);
@@ -85,16 +87,13 @@ const UploadFile = () => {
             ]);
           } else if (file.typeId === 3) {
             setUploadedPdfFile(file);
+            setUploadedPdfFileName(file.filename);
           }
         });
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const handlePreviewPdf = () => {
-    window.open(uploadedPdfFile, "_blank");
   };
 
   return (
@@ -166,9 +165,12 @@ const UploadFile = () => {
         {uploadedPdfFile && (
           <div>
             <h4>Uploaded PDF File:</h4>
-            <a href={uploadedPdfFile} target="_blank" rel="noopener noreferrer">
-              {" "}
-              View PDF
+            <a
+              href={uploadedPdfFile}
+              target={uploadedPdfFile}
+              rel="noopener noreferrer"
+            >
+              {uploadedPdfFileName}
             </a>
           </div>
         )}
